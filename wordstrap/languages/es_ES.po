@@ -1,0 +1,719 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wordstrap 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-28 22:55+0100\n"
+"PO-Revision-Date: 2012-04-28 23:25+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../author.php:47
+#, php-format
+msgid "registered %s ago"
+msgstr "registrado hace %s"
+
+#: ../author.php:70
+#, php-format
+msgid "Posts published by %s"
+msgstr "Entradas publicadas por %s"
+
+#: ../author.php:77
+msgid "Sorry, but there are no posts by this author."
+msgstr "No hay entradas publicadas por este autor."
+
+#: ../comments.php:13
+#, php-format
+msgid "There are %d comments for this post"
+msgstr "Hay %d comentarios en esta entrada."
+
+#: ../comments.php:59
+#: ../comments.php:94
+msgid "Comments for this post are closed."
+msgstr "Los comentarios est&aacute;n cerrados."
+
+#: ../comments.php:63
+msgid "There are no comments yet. Don't you want to be the first ?"
+msgstr "No hay comentarios todav&iacute;a. ¿No quieres ser el primero?"
+
+#: ../comments.php:69
+msgid "Leave a comment"
+msgstr "Deja un comentario"
+
+#: ../comments.php:77
+msgid "Commenting as "
+msgstr "Comentando como"
+
+#: ../comments.php:87
+msgid "Post comment"
+msgstr "Publicar comentario"
+
+#: ../comments.php:103
+#: ../functions.php:177
+msgid "Only registered users can comment. Please "
+msgstr "Solo los usuarios registrados pueden comentar. Por favor "
+
+#: ../comments.php:104
+#: ../functions.php:178
+msgid "login"
+msgstr "identif&iacute;cate"
+
+#: ../comments.php:105
+#: ../functions.php:179
+msgid " or "
+msgstr "o"
+
+#: ../comments.php:106
+#: ../functions.php:180
+msgid "register"
+msgstr "reg&iacute;strate"
+
+#: ../footer.php:28
+msgid "About"
+msgstr "Acerca de"
+
+#: ../footer.php:44
+msgid "Follow us"
+msgstr "S&iacute;guenos"
+
+#: ../footer.php:49
+msgid "Follow us in Facebook"
+msgstr "S&iacute;guenos en Facebook"
+
+#: ../footer.php:52
+msgid "Follow us in Google+"
+msgstr "S&iacute;guenos en Google+"
+
+#: ../footer.php:55
+msgid "Follow us in Twitter"
+msgstr "S&iacute;guenos en Twitter"
+
+#: ../functions.php:69
+#: ../functions.php:81
+msgid "Wordstrap widgetized area"
+msgstr ""
+
+#: ../functions.php:122
+#, php-format
+msgid "%1$s on %2$s <span class=\"says\">said:</span>"
+msgstr "%1$s on %2$s <span class=\"says\">dice:</span>"
+
+#: ../functions.php:127
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s en %2$s"
+
+#: ../functions.php:134
+#: ../functions.php:165
+msgid "Reply"
+msgstr "Responder"
+
+#: ../functions.php:137
+msgid "Your comment is awaiting moderation."
+msgstr "Tu comentario est&aacute; esperando moderaci&oacute;n."
+
+#: ../functions.php:155
+msgid "Replying comment as "
+msgstr "Respondiendo como"
+
+#: ../functions.php:165
+msgid "Or press ESC to cancel"
+msgstr "O presiona ESC para cancelar"
+
+#: ../functions.php:221
+msgid "Read the rest..."
+msgstr "Leer el resto..."
+
+#: ../functions.php:221
+msgid "...continue reading..."
+msgstr "...continuar leyendo..."
+
+#: ../functions.php:236
+msgid "<i class=\"icon-arrow-left\"></i> Older posts"
+msgstr "<i class=\"icon-arrow-left\"></i> Anteriores"
+
+#: ../functions.php:237
+msgid "Newer posts <i class=\"icon-arrow-right\"></i>"
+msgstr "Siguientes <i class=\"icon-arrow-right\"></i>"
+
+#: ../functions.php:254
+msgid "Nothing Found !"
+msgstr "No se ha encontrado nada!"
+
+#: ../functions.php:258
+msgid "Sorry, but no results were found for the requested query. Try another search."
+msgstr ""
+
+#: ../functions.php:284
+msgid "Your account has been created. We have sent you an email with the password."
+msgstr ""
+
+#: ../functions.php:294
+msgid "Reset password error."
+msgstr ""
+
+#: ../functions.php:296
+msgid "Password succesfully changed."
+msgstr ""
+
+#: ../functions.php:306
+msgid "There is no user with that username or email."
+msgstr ""
+
+#: ../functions.php:308
+msgid "We have sent you an email to complete reseting your password."
+msgstr "Te hemos enviado un email para completar el proceso de cambio de contrase&ntilde;a."
+
+#: ../functions.php:335
+msgid "Incorrect login!"
+msgstr "Login incorrecto!"
+
+#: ../functions.php:364
+msgid "<strong>ERROR</strong>: Please enter a username."
+msgstr ""
+
+#: ../functions.php:366
+msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
+msgstr ""
+
+#: ../functions.php:369
+msgid "<strong>ERROR</strong>: This username is already registered, please choose another one."
+msgstr ""
+
+#: ../functions.php:374
+msgid "<strong>ERROR</strong>: Please type your e-mail address."
+msgstr ""
+
+#: ../functions.php:376
+msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
+msgstr ""
+
+#: ../functions.php:379
+msgid "<strong>ERROR</strong>: This email is already registered, please choose another one."
+msgstr ""
+
+#: ../functions.php:392
+#, php-format
+msgid "<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href=\"mailto:%s\">webmaster</a> !"
+msgstr ""
+
+#: ../functions.php:412
+msgid "<strong>ERROR</strong>: Enter a username or e-mail address."
+msgstr ""
+
+#: ../functions.php:416
+msgid "<strong>ERROR</strong>: There is no user registered with that email address."
+msgstr ""
+
+#: ../functions.php:428
+msgid "<strong>ERROR</strong>: Invalid username or e-mail."
+msgstr ""
+
+#: ../functions.php:442
+msgid "Password reset is not allowed for this user"
+msgstr ""
+
+#: ../functions.php:454
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+
+#: ../functions.php:456
+#, php-format
+msgid "Username: %s"
+msgstr ""
+
+#: ../functions.php:457
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+
+#: ../functions.php:458
+msgid "To reset your password, visit the following address:"
+msgstr ""
+
+#: ../functions.php:468
+#, php-format
+msgid "[%s] Password Reset"
+msgstr ""
+
+#: ../functions.php:474
+msgid "The e-mail could not be sent."
+msgstr ""
+
+#: ../functions.php:474
+msgid "Possible reason: your host may have disabled the mail() function..."
+msgstr ""
+
+#: ../functions.php:494
+msgid "The passwords do not match."
+msgstr "Las contrase&ntilde;as no coinciden."
+
+#: ../functions.php:533
+#: ../functions.php:536
+#: ../functions.php:541
+msgid "Invalid key"
+msgstr ""
+
+#: ../header.php:36
+#, php-format
+msgid "Page %s"
+msgstr "P&aacute;gina %s"
+
+#: ../search.php:24
+msgid "Search results"
+msgstr "Resultados de la b&uacute;squeda"
+
+#: ../search.php:25
+#, php-format
+msgid "Term <em>&quot;%s&quot;</em>"
+msgstr ""
+
+#: ../search.php:25
+#, php-format
+msgid "%d result(s) found:"
+msgstr ""
+
+#: ../searchform.php:15
+msgid "Search"
+msgstr "Buscar"
+
+#: ../inc/theme-options.php:44
+msgid "Theme Options"
+msgstr ""
+
+#: ../inc/theme-options.php:109
+#, php-format
+msgid "%s Theme Options"
+msgstr ""
+
+#: ../inc/theme-options.php:120
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: ../inc/theme-options.php:121
+msgid "Articles"
+msgstr "Art&iacute;culos"
+
+#: ../inc/theme-options.php:122
+msgid "Auth and Security"
+msgstr "Auth y seguridad"
+
+#: ../inc/theme-options.php:123
+msgid "Footer Elements"
+msgstr "Elementos del Pie de p&aacute;gina"
+
+#: ../inc/theme-options.php:124
+msgid "Homepage Elements"
+msgstr "Elementos de la Homepage"
+
+#: ../inc/theme-options.php:125
+msgid "Navigation"
+msgstr "Navegaci&oacute;n"
+
+#: ../inc/theme-options.php:131
+msgid "Appearance settings"
+msgstr "Opciones de apariencia"
+
+#: ../inc/theme-options.php:132
+msgid "Customize the layout and colors"
+msgstr "Selecciona el layout y los colores"
+
+#: ../inc/theme-options.php:137
+msgid "Site Layout"
+msgstr "Layout del sitio"
+
+#: ../inc/theme-options.php:143
+msgid "Full width"
+msgstr "Sin sidebars"
+
+#: ../inc/theme-options.php:150
+msgid "2 cols left"
+msgstr "2 cols izq."
+
+#: ../inc/theme-options.php:157
+msgid "2 cols right"
+msgstr "2 cols dcha."
+
+#: ../inc/theme-options.php:164
+msgid "3 cols"
+msgstr "3 cols"
+
+#: ../inc/theme-options.php:170
+msgid "Intro container background"
+msgstr ""
+
+#: ../inc/theme-options.php:174
+msgid "Background"
+msgstr "Fondo"
+
+#: ../inc/theme-options.php:180
+msgid "Color"
+msgstr "Texto"
+
+#: ../inc/theme-options.php:186
+msgid "Widget headers background"
+msgstr ""
+
+#: ../inc/theme-options.php:190
+msgid "Start Color"
+msgstr "Color Inicio"
+
+#: ../inc/theme-options.php:197
+msgid "Ending Color"
+msgstr "Color final"
+
+#: ../inc/theme-options.php:208
+msgid "Article settings"
+msgstr "Opciones de los art&iacute;culos"
+
+#: ../inc/theme-options.php:209
+msgid "Select how to display posts and article loops"
+msgstr ""
+
+#: ../inc/theme-options.php:212
+msgid "Excerpt length in loops (number of words)"
+msgstr ""
+
+#: ../inc/theme-options.php:217
+msgid "Display social buttons in posts ?"
+msgstr ""
+
+#: ../inc/theme-options.php:218
+msgid "Display Facebook, Google+ and Twitter like buttons"
+msgstr ""
+
+#: ../inc/theme-options.php:223
+msgid "Auth and Security settings"
+msgstr ""
+
+#: ../inc/theme-options.php:224
+msgid "Login, Register, Forgot password and security features"
+msgstr ""
+
+#: ../inc/theme-options.php:227
+msgid "Use Wordstrap Auth system"
+msgstr ""
+
+#: ../inc/theme-options.php:229
+msgid "Use a custom auth system to login, register and forget/reset pass procedures"
+msgstr ""
+
+#: ../inc/theme-options.php:232
+msgid "Display login form in:"
+msgstr ""
+
+#: ../inc/theme-options.php:234
+msgid "Select an area..."
+msgstr ""
+
+#: ../inc/theme-options.php:240
+msgid "Secure wp-admin and wp-login"
+msgstr ""
+
+#: ../inc/theme-options.php:242
+msgid "Disable access to wp-admin and wp-login to all users until they are logged in"
+msgstr ""
+
+#: ../inc/theme-options.php:248
+msgid "Footer Elements settings"
+msgstr ""
+
+#: ../inc/theme-options.php:249
+msgid "Customize the footer of your site"
+msgstr ""
+
+#: ../inc/theme-options.php:255
+msgid "Display social buttons"
+msgstr ""
+
+#: ../inc/theme-options.php:258
+msgid "Display Facebook Button"
+msgstr ""
+
+#: ../inc/theme-options.php:262
+msgid "Display Google+ Button"
+msgstr ""
+
+#: ../inc/theme-options.php:266
+msgid "Display Twitter Button"
+msgstr ""
+
+#: ../inc/theme-options.php:270
+msgid "Display Creative Commons logo"
+msgstr ""
+
+#: ../inc/theme-options.php:277
+msgid "Footer text"
+msgstr ""
+
+#: ../inc/theme-options.php:290
+msgid "Homepage Elements settings"
+msgstr ""
+
+#: ../inc/theme-options.php:291
+msgid "Select which elements will be displayed in the landing page."
+msgstr ""
+
+#: ../inc/theme-options.php:295
+msgid "Display Intro"
+msgstr ""
+
+#: ../inc/theme-options.php:298
+msgid "Display Slideshow"
+msgstr ""
+
+#: ../inc/theme-options.php:301
+msgid "Display Featured content"
+msgstr ""
+
+#: ../inc/theme-options.php:306
+msgid "Number of items"
+msgstr ""
+
+#: ../inc/theme-options.php:310
+msgid "Select category:"
+msgstr ""
+
+#: ../inc/theme-options.php:312
+msgid "Select a category..."
+msgstr ""
+
+#: ../inc/theme-options.php:326
+msgid "Display Tabs"
+msgstr ""
+
+#: ../inc/theme-options.php:329
+msgid "Display Blog loop"
+msgstr ""
+
+#: ../inc/theme-options.php:334
+msgid "Navigation settings"
+msgstr ""
+
+#: ../inc/theme-options.php:335
+msgid "Select the navigation elements"
+msgstr ""
+
+#: ../inc/theme-options.php:338
+msgid "Hide Wordpress admin bar"
+msgstr ""
+
+#: ../inc/theme-options.php:340
+msgid "Completely remove wordpress admin bar"
+msgstr ""
+
+#: ../inc/theme-options.php:343
+msgid "Hide Wordstrap nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:345
+msgid "Do not display wordstrap nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:348
+msgid "Show Site title in nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:350
+msgid "Display title in wordstrap nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:353
+msgid "Show Site logo in nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:355
+msgid "Display logo in wordstrap nav bar"
+msgstr ""
+
+#: ../inc/theme-options.php:366
+msgid "Save Changes"
+msgstr ""
+
+#: ../inc/theme-options.php:368
+msgid "Theme options have been succesfully updated."
+msgstr ""
+
+#: ../partials/part_about.php:15
+msgid "Bootstrap ready"
+msgstr ""
+
+#: ../partials/part_about.php:16
+msgid "Bootstrap is already packed for you, including the jQuery plugins and all the CSS and JS required."
+msgstr ""
+
+#: ../partials/part_about.php:23
+msgid "Minimalistic"
+msgstr ""
+
+#: ../partials/part_about.php:24
+msgid "An attractive and minimalistic design, using the default bootstrap markup."
+msgstr ""
+
+#: ../partials/part_about.php:31
+msgid "Customizable"
+msgstr ""
+
+#: ../partials/part_about.php:32
+msgid "Wordstrap is fully customizable to begin with the exact elements you need in your theme."
+msgstr ""
+
+#: ../partials/part_article.php:61
+msgid "by"
+msgstr "por"
+
+#: ../partials/part_article.php:78
+#, php-format
+msgid "in %s"
+msgstr "en %s"
+
+#: ../partials/part_article.php:84
+msgid "no"
+msgstr ""
+
+#: ../partials/part_article.php:85
+#, php-format
+msgid "%s comments"
+msgstr "%s comentarios"
+
+#: ../partials/part_article.php:102
+msgid "Pages:"
+msgstr ""
+
+#: ../partials/part_auth.php:29
+#: ../partials/part_auth.php:47
+msgid "Sign in"
+msgstr "Entrar"
+
+#: ../partials/part_auth.php:33
+#: ../partials/part_auth.php:88
+msgid "Username"
+msgstr "Usuario"
+
+#: ../partials/part_auth.php:35
+msgid "Password"
+msgstr "Contrase&ntilde;a"
+
+#: ../partials/part_auth.php:41
+msgid "Remember me"
+msgstr "Recu&eacute;rdame"
+
+#: ../partials/part_auth.php:51
+msgid "Lost your password ?"
+msgstr "Olvidaste la contrase&ntilde;a?"
+
+#: ../partials/part_auth.php:53
+msgid "Create a new account"
+msgstr "Crear una nueva cuenta"
+
+#: ../partials/part_auth.php:61
+msgid "Lost pass"
+msgstr "Recordar"
+
+#: ../partials/part_auth.php:65
+msgid "Username or email"
+msgstr "Usuario o email"
+
+#: ../partials/part_auth.php:70
+msgid "Send reminder"
+msgstr "Enviar"
+
+#: ../partials/part_auth.php:75
+#: ../partials/part_auth.php:103
+msgid "Back to login"
+msgstr "Volver a login"
+
+#: ../partials/part_auth.php:84
+msgid "Register"
+msgstr "Registrarse"
+
+#: ../partials/part_auth.php:93
+msgid "Email"
+msgstr ""
+
+#: ../partials/part_auth.php:98
+msgid "Create account"
+msgstr "Crear cuenta"
+
+#: ../partials/part_auth.php:113
+msgid "Reset pass"
+msgstr "Resetear contrase&ntilde;a"
+
+#: ../partials/part_auth.php:117
+msgid "New password"
+msgstr "Nueva contrase&ntilde;a"
+
+#: ../partials/part_auth.php:119
+msgid "Confirm new password"
+msgstr "Confirmar nueva contrase&ntilde;a"
+
+#: ../partials/part_auth.php:124
+msgid "Update password"
+msgstr "Actualizar contrase&ntilde;a"
+
+#: ../partials/part_auth.php:131
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../partials/part_auth.php:166
+msgid "About you"
+msgstr "Sobre t&iacute;"
+
+#: ../partials/part_breadcrumb.php:15
+#: ../partials/part_navigation.php:42
+msgid "Home"
+msgstr "Inicio"
+
+#: ../partials/part_breadcrumb.php:36
+msgid "About the author"
+msgstr "Sobre el autor"
+
+#: ../partials/part_breadcrumb.php:44
+msgid "Posts in category:"
+msgstr "Entradas de la categor&iacute;a:"
+
+#: ../partials/part_breadcrumb.php:48
+msgid "Browsing archived posts"
+msgstr "Navegando por el archivo"
+
+#: ../partials/part_featured.php:57
+msgid "Read article"
+msgstr "Leer el art&iacute;culo"
+
+#: ../partials/part_navigation.php:76
+msgid "Wordpress Dashboard"
+msgstr "Escritorio de Wordpress"
+
+#: ../partials/part_navigation.php:77
+msgid "Dashboard"
+msgstr "Escritorio"
+
+#: ../partials/part_tabs.php:12
+msgid "Popular posts"
+msgstr "Populares"
+
+#: ../partials/part_tabs.php:13
+msgid "Latest posts"
+msgstr "&Uacute;ltimas entradas"
+
+#: ../partials/part_widgets-left.php:14
+msgid "Widgets area #left"
+msgstr ""
+
+#: ../partials/part_widgets-left.php:18
+msgid "add widgets here"
+msgstr ""
+
+#: ../partials/part_widgets-right.php:14
+msgid "Widgets area #right"
+msgstr ""
+
+#~ msgid "About Wordstrap"
+#~ msgstr "Sobre Wordstrap"
