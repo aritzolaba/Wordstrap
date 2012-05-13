@@ -30,6 +30,6 @@ $frames = array (
 
         <?php endforeach; ?>
     </div>
-    <a class="left carousel-control" href="#slideshow" data-slide="prev">‹</a>
-    <a class="right carousel-control" href="#slideshow" data-slide="next">›</a>
+    <a class="left carousel-control" href="#slideshow" data-slide="prev">&laquo;</a>
+    <a class="right carousel-control" href="#slideshow" data-slide="next">&raquo;</a>
 </div>

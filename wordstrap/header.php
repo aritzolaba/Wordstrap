@@ -49,7 +49,7 @@
         <script src="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo get_template_directory_uri(); ?>/inc/js/wordstrap.js"></script>
         <link href="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />        
         <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/inc/imgs/favicon.ico">
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
         <?php wp_head(); ?>

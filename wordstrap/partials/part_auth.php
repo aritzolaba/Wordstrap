@@ -56,7 +56,7 @@ if (empty($login)) $login = wp_kses($_GET['login'], NULL);
 
         </form>
 
-        <form name="lostpasswordform" id="lostpasswordform" class="ws-form-common <?php if ($action!='lostpassword') { echo 'inactive'; } ?>" action="" method="post">
+        <form name="lostpasswordform" id="lostpasswordform" class="ws-form-common <?php if ($action!='lostpassword') { echo 'inactive'; } ?>" action="<?php echo get_site_url(). '/index.php'; ?>" method="post">
             <legend>
                 <h1><?php _e('Lost pass', 'wordstrap'); ?></h1>
             </legend>

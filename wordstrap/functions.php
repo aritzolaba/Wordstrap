@@ -33,6 +33,12 @@ else {
     define('WS_SPANCOL_CENTER', 'span12');
 }
 
+/**
+ * Set the content width based on the theme's design and stylesheet.
+ */
+if (!isset($content_width))
+    $content_width = 960;
+
 /*******************************************************************************
 * Setup Theme
 */
@@ -45,12 +51,16 @@ if (!function_exists('wordstrap_setup')) :
         $locale = get_locale();
         $locale_file = TEMPLATEPATH."/languages/{$locale}.php";
         if(is_readable($locale_file)) { require_once($locale_file); }
+        
+        // This theme styles the visual editor with editor-style.css to match the theme style.
+	add_editor_style();
 
         // Load up our theme options page and related code.
         require( get_template_directory() . '/inc/theme-options.php' );
 
         // Add thumbnail support for posts
         add_theme_support( 'post-thumbnails', array( 'post', 'ws_products' ) );
+        add_theme_support( 'automatic-feed-links' );
     }
 
 endif;
@@ -223,6 +233,14 @@ function ws_excerpt_more($more) {
 add_filter('excerpt_more', 'ws_excerpt_more');
 
 /*******************************************************************************
+* Excerpt for titles
+*/
+function ws_title_excerpt ($title) {
+    if (strlen($title)>=45) $title=substr($title,0,40).'<i>[...]</i>';
+    return $title;
+}
+
+/*******************************************************************************
 * Posts navigation (next and prev buttons)
 */
 function ws_posts_navigation ($nav_id) {
@@ -305,7 +323,7 @@ function ws_auth() {
             if (is_wp_error($ret)) {
                 define('login_message', __('There is no user with that username or email.','wordstrap'));
             } else {
-                define('login_message', __('We have sent you an email to complete reseting your password.','wordstrap'));
+                define('login_success', __('We have sent you an email to complete reseting your password.','wordstrap'));
             }
 
             return;
@@ -478,8 +496,8 @@ function ws_retrieve_password() {
 
 /**
  * Inits reset password procedure
- * 
- * @return type 
+ *
+ * @return type
  */
 function ws_init_reset_password () {
 
@@ -551,12 +569,11 @@ function ws_check_password_reset_key($key, $login) {
 /*******************************************************************************
 * SECURITY FUNCTIONS
 */
-
 if ($wordstrap_theme_options['secure_wp'] == 1) :
 
     /**
      * wordstrap_wpadmin_restrict ()
-     * 
+     *
      */
     function wordstrap_wpadmin_restrict () {
         if (!current_user_can('publish_pages') AND !current_user_can('manage_options')) {
@@ -570,7 +587,7 @@ if ($wordstrap_theme_options['secure_wp'] == 1) :
 
     /**
      * wordstrap_wplogin_restrict ()
-     * 
+     *
      */
     function wordstrap_wplogin_restrict () {
 
@@ -604,4 +621,47 @@ if ($wordstrap_theme_options['secure_wp'] == 1) :
     add_action ('login_init','wordstrap_wplogin_restrict',10);
 
 endif;
+?>
+
+<?php
+/*******************************************************************************
+* AJAX IN FRONT-END AREA
+*/
+function WsAjaxFunction() {
+    //get the data from ajax() call
+    $AJAXPost1 = $_POST['AJAXPost1'];
+    $AJAXPost2 = $_POST['AJAXPost2'];
+    $AJAXNonce = $_POST['AJAXNonce'];
+
+    if (!wp_verify_nonce( $AJAXNonce, 'ws-secure-nonce' ))
+        die ('<div class="alert alert-danger ws-alert">Nonces are invalid.</div>');
+
+    //$results = "<h2>".$AJAXPost1." | ".$AJAXPost2." | ".$AJAXNonce."</h2>";
+    //$results .= '<div class="alert alert-success ws-alert">Nonces are valid.</div>';
+    //wp_print_scripts('ws-ajax');
+    include ('partials/part_featured.php');
+    die();
+    }
+// Hook to wp_ajax_nopriv_WsAjaxFunction (for non logged users)
+// and to wp_ajax_WsAjaxFunction (for logged users)
+add_action( 'wp_ajax_nopriv_WsAjaxFunction', 'WsAjaxFunction' );
+add_action( 'wp_ajax_WsAjaxFunction', 'WsAjaxFunction' );
+
+// Add .js file inc/js/ws-ajax.js
+function add_ws_ajax_script() {
+    wp_enqueue_script( 'ws-ajax', get_template_directory_uri() ."/inc/js/ws-ajax.js", NULL );
+
+    // Con esta funcion tenemos variables JS globales
+    // para usar dentro del script ws-ajax, llamandolas WsAjax.ajaxurl, etc.
+    wp_localize_script( 'ws-ajax', 'WsAjax', array(
+        // URL to wp-admin/admin-ajax.php to process the request
+        'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+        // generate a nonce with a unique ID
+        // so that you can check it later when an AJAX request is sent
+        'AJAXNonce' => wp_create_nonce( 'ws-secure-nonce' )
+        )
+    );
+
+    }
+add_action( 'init', 'add_ws_ajax_script' );
 ?>

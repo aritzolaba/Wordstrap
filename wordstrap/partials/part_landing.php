@@ -35,7 +35,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
                             );
                         // Override $wp_query with custom queries
                         $wp_query = new WP_Query( $args );
-                        the_post();                        
+                        the_post();
                         ?>
 
                         <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) : ?>
@@ -48,7 +48,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
                     </div>
                 </div>
             </div>
-            
+
         <?php endif; ?>
 
         <?php // Slideshow ?>
@@ -67,8 +67,8 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
         <?php // Featured ?>
         <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
 
-            <!-- Featured content 1 -->
-            <?php get_template_part('partials/part_featured'); ?>
+            <!-- Featured content 1 -->            
+            <div id="ws-ajax-result-div-1"><?php get_template_part ('partials/part_featured'); ?></div> <!-- #ws-ajax-result-div -->
 
         <?php endif; ?>
 
@@ -89,7 +89,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
         <?php // Blog ?>
         <?php if ($wordstrap_theme_options['landing_page_blog'] == 1) : ?>
 
-            <div class="row-fluid">
+            <div class="row-fluid" id="ws-blog">
                 <div class="span12">
                     <div class="well">
                         <?php get_template_part('partials/part_article-loop'); ?>

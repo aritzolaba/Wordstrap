@@ -90,9 +90,11 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['footer_show_fb'] = wp_kses($_POST['footer_show_fb'], NULL);
             $wordstrap_theme_options['footer_show_gp'] = wp_kses($_POST['footer_show_gp'], NULL);
             $wordstrap_theme_options['footer_show_tw'] = wp_kses($_POST['footer_show_tw'], NULL);
+            $wordstrap_theme_options['footer_show_git'] = wp_kses($_POST['footer_show_git'], NULL);            
             $wordstrap_theme_options['footer_fb_url'] = wp_kses($_POST['footer_fb_url'], NULL);
             $wordstrap_theme_options['footer_gp_url'] = wp_kses($_POST['footer_gp_url'], NULL);
             $wordstrap_theme_options['footer_tw_url'] = wp_kses($_POST['footer_tw_url'], NULL);
+            $wordstrap_theme_options['footer_git_url'] = wp_kses($_POST['footer_git_url'], NULL);
             $wordstrap_theme_options['footer_text'] = wp_kses($_POST['footer_text'], $allowedhtml);
             $wordstrap_theme_options['footer_displaycc'] = wp_kses($_POST['footer_displaycc'], NULL);
             $wordstrap_theme_options['ws_layout'] = wp_kses($_POST['ws_layout'], NULL);
@@ -270,6 +272,10 @@ class wordstrap_theme_options_page {
                                         <input type="checkbox" name="footer_show_tw" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Twitter Button','wordstrap'); ?><br />
                                         <input type="text" name="footer_tw_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_tw_url']; ?>">
                                     </p><br />
+                                    <p class="help-block">
+                                        <input type="checkbox" name="footer_show_git" <?php if ($wordstrap_theme_options['footer_show_git'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Github Button','wordstrap'); ?><br />
+                                        <input type="text" name="footer_git_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_git_url']; ?>">
+                                    </p><br />
                                     <p>
                                         <label for="footer_displaycc"><?php _e('Display Creative Commons logo','wordstrap'); ?>
                                         <input type="checkbox" name="footer_displaycc" <?php if ($wordstrap_theme_options['footer_displaycc'] == 1) echo 'checked="checked"'; ?> value="1">
@@ -446,6 +452,7 @@ function wordstrap_style_options () {
         }
         .well.well-intro {
             background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise1.png\') repeat;
+            color: '.$wordstrap_theme_options['intro_h1'].';
         }
         .well.well-intro h1 {
             color: '.$wordstrap_theme_options['intro_h1'].';

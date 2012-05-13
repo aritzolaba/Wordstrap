@@ -62,7 +62,7 @@ else $att = $post->guid;
 
                     <?php
                     // Get author first_name and last_name. If empty, get the nickname
-                    $author_id = get_the_author_ID();
+                    $author_id = get_the_author_meta('ID');
                     $author_name = trim(get_the_author_meta('first_name', $author_id) . ' ' . get_the_author_meta('last_name', $author_id));
                     if (empty($author_name))
                         $author_name = get_the_author_meta('nickname', $author_id);
@@ -87,6 +87,14 @@ else $att = $post->guid;
 
             </small>
         </h2>
+        
+        <?php
+        // Post tags
+        if (is_single() && get_the_tag_list()) :            
+            echo '<i class="icon-tag"></i> ';
+            the_tags();
+        endif;
+        ?>
 
     </header><!-- .entry-header -->
 

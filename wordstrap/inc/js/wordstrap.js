@@ -6,8 +6,8 @@
         $('.pop-bottom').popover({placement:'bottom'});
         $('.pop-bottom-show').popover({trigger:'manual', placement:'bottom'});
         $('.pop-left').popover({placement:'left'});
-        $('.pop-right').popover({placement:'right'});
-        $('.tip').tooltip();
+        $('.pop-right').popover({placement:'right'});                
+        $('.tip').live("mouseenter", function () {$('.tip').tooltip();});
         $('.carousel').carousel(
             {interval: 10000}
         );
@@ -138,11 +138,11 @@
             return false;
 
         });
-        
+
         /* Login Nav Bar Stop Propagation in Dropdown */
         $('.dropdown-menu form').click(function(event) {
             event.stopPropagation();
-        });        
+        });
 
     });
 })(jQuery);
