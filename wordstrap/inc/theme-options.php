@@ -7,16 +7,19 @@
  * @since Wordstrap 1.5
  */
 
-class wordstrap_theme_options_page {
+class wordstrap_theme_options_page {        
 
     function init() {
-        add_action('admin_menu', array('wordstrap_theme_options_page', 'add_options_page'));
+        
+        add_action('admin_menu', array('wordstrap_theme_options_page', 'add_wordstrap_options_page'));
 
         // If we have no options in the database, let's add them now.
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
 	if ( !$wordstrap_theme_options ) {
 
             // Default Options
+            $wordstrap_theme_options['use_googlefonts'] = 0;
+            $wordstrap_theme_options['google_font'] = 'Oxygen';
             $wordstrap_theme_options['landing_page_slideshow'] = 1;
             $wordstrap_theme_options['landing_page_intro'] = 0;
             $wordstrap_theme_options['landing_page_featured'] = 0;
@@ -27,7 +30,7 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['widget_header_bg1'] = '#62A49B';
             $wordstrap_theme_options['widget_header_bg2'] = '#0A7466';
             $wordstrap_theme_options['intro_bg'] = '#FFFFFF';
-            $wordstrap_theme_options['intro_h1'] = '#000';
+            $wordstrap_theme_options['intro_color'] = '#000';
             $wordstrap_theme_options['show_wslogo'] = 1;
             $wordstrap_theme_options['show_wstitle'] = 1;
             $wordstrap_theme_options['footer_show_social'] = 1;
@@ -40,8 +43,8 @@ class wordstrap_theme_options_page {
 
         }
     }
-
-    function add_options_page() {
+    
+    function add_wordstrap_options_page() {
         add_theme_page(__('Theme Options', 'wordstrap'), __('Theme Options', 'wordstrap'), 8, 'theme-options-page', array('wordstrap_theme_options_page', 'page'));
     }
 
@@ -56,6 +59,17 @@ class wordstrap_theme_options_page {
         wp_enqueue_script( 'farbtastic' );
 
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
+
+        /* GOOGLE FONT LIST */
+        $googlefonts = array (
+            'Averia Libre'  => 'Averia+Libre',
+            'Days One'      => 'Days+One',
+            'Iceberg'       => 'Iceberg',
+            'Metamorphous'  => 'Metamorphous',
+            'Oxygen'        => 'Oxygen',
+            'Russo One'     => 'Russo+One',
+            'Nova Square'   => 'Nova+Square',
+        );
 
         /* SAVE OPTIONS */
         if (isset($_POST['submit'])) :
@@ -86,11 +100,13 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['widget_header_bg1'] = wp_kses($_POST['widget_header_bg1'], NULL);
             $wordstrap_theme_options['widget_header_bg2'] = wp_kses($_POST['widget_header_bg2'], NULL);
             $wordstrap_theme_options['intro_bg'] = wp_kses($_POST['intro_bg'], NULL);
-            $wordstrap_theme_options['intro_h1'] = wp_kses($_POST['intro_h1'], NULL);
+            $wordstrap_theme_options['intro_color'] = wp_kses($_POST['intro_color'], NULL);
+            $wordstrap_theme_options['use_googlefonts'] = wp_kses($_POST['use_googlefonts'], NULL);
+            $wordstrap_theme_options['google_font'] = wp_kses($_POST['google_font'], NULL);
             $wordstrap_theme_options['footer_show_fb'] = wp_kses($_POST['footer_show_fb'], NULL);
             $wordstrap_theme_options['footer_show_gp'] = wp_kses($_POST['footer_show_gp'], NULL);
             $wordstrap_theme_options['footer_show_tw'] = wp_kses($_POST['footer_show_tw'], NULL);
-            $wordstrap_theme_options['footer_show_git'] = wp_kses($_POST['footer_show_git'], NULL);            
+            $wordstrap_theme_options['footer_show_git'] = wp_kses($_POST['footer_show_git'], NULL);
             $wordstrap_theme_options['footer_fb_url'] = wp_kses($_POST['footer_fb_url'], NULL);
             $wordstrap_theme_options['footer_gp_url'] = wp_kses($_POST['footer_gp_url'], NULL);
             $wordstrap_theme_options['footer_tw_url'] = wp_kses($_POST['footer_tw_url'], NULL);
@@ -173,7 +189,7 @@ class wordstrap_theme_options_page {
 
                                 </div>
                                 <div class="span6">
-                                    <label for="IntroContainer"><?php _e('Intro container background','wordstrap'); ?></label>
+                                    <label for="IntroContainer"><?php _e('Intro container','wordstrap'); ?></label>
                                     <div class="row-fluid">
                                         <div class="span3">
                                             <p class="help-block">
@@ -183,9 +199,9 @@ class wordstrap_theme_options_page {
                                         </div>
                                         <div class="span3">
                                             <p class="help-block">
-                                                <?php _e('Color','wordstrap'); ?>
+                                                <?php _e('Text','wordstrap'); ?>
                                             </p>
-                                            <input type="text" name="intro_h1" id="color-4" value="<?php if ($wordstrap_theme_options['intro_h1']) echo $wordstrap_theme_options['intro_h1']; else echo '#dadada'; ?>" style="width: 80px;" /><div style="position: absolute;" id="colorpicker-4"></div>
+                                            <input type="text" name="intro_color" id="color-4" value="<?php if ($wordstrap_theme_options['intro_color']) echo $wordstrap_theme_options['intro_color']; else echo '#dadada'; ?>" style="width: 80px;" /><div style="position: absolute;" id="colorpicker-4"></div>
                                         </div>
                                     </div>
                                     <br />
@@ -203,6 +219,24 @@ class wordstrap_theme_options_page {
                                                 <?php _e('Ending Color','wordstrap'); ?>
                                             </p>
                                             <input type="text" name="widget_header_bg2" id="color-2" value="<?php if ($wordstrap_theme_options['widget_header_bg2']) echo $wordstrap_theme_options['widget_header_bg2']; else echo '#eeeeee'; ?>" style="width: 80px;" /><div style="position: absolute;" id="colorpicker-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <p class="help-block">
+                                                <input id="googlefonts_check" type="checkbox" name="use_googlefonts" <?php if ($wordstrap_theme_options['use_googlefonts'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                <?php _e('Use Google API Fonts in widget titles ?','wordstrap'); ?>
+                                            </p>
+                                            <p <?php if ($wordstrap_theme_options['use_googlefonts'] != 1) echo 'style="display: none;"'; ?> id="googlefonts_box" class="help-block"><?php _e('Choose a font','wordstrap'); ?>
+                                                <select name="google_font">
+                                                    <?php foreach ($googlefonts as $font_name => $font_val) : ?>
+                                                        <?php $sel= '';
+                                                        if ($font_val == $wordstrap_theme_options['google_font']) $sel='selected="selected"';
+                                                        echo '<option value="'.$font_val.'" '.$sel.'>'.$font_name.'</option>';
+                                                        ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +305,7 @@ class wordstrap_theme_options_page {
                                     <p class="help-block">
                                         <input type="checkbox" name="footer_show_tw" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Twitter Button','wordstrap'); ?><br />
                                         <input type="text" name="footer_tw_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_tw_url']; ?>">
-                                    </p><br />
+                                    </p>
                                     <p class="help-block">
                                         <input type="checkbox" name="footer_show_git" <?php if ($wordstrap_theme_options['footer_show_git'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Github Button','wordstrap'); ?><br />
                                         <input type="text" name="footer_git_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_git_url']; ?>">
@@ -299,7 +333,7 @@ class wordstrap_theme_options_page {
                         <div id="lE" class="tab-pane">
                             <h3><?php _e('Homepage Elements settings','wordstrap'); ?></h3>
                             <h3><small><?php _e('Select which elements will be displayed in the landing page.','wordstrap'); ?></small></h3>
-                            <hr>                            
+                            <hr>
 
                             <p>
                                 <input id="landing_page_intro_check" type="checkbox" name="landing_page_intro" <?php if ($wordstrap_theme_options['landing_page_intro'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Intro container','wordstrap'); ?>
@@ -322,7 +356,7 @@ class wordstrap_theme_options_page {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <p>
                                 <input type="checkbox" name="landing_page_slideshow" <?php if ($wordstrap_theme_options['landing_page_slideshow'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Slideshow','wordstrap'); ?>
                             </p>
@@ -401,7 +435,7 @@ class wordstrap_theme_options_page {
                 <br />
 
                 <button type="submit" class="btn btn-primary btn-large pull-left rightspace-normal" id="submit" name="submit"><i class="icon-ok-sign icon-white"></i> <?php _e('Save Changes','wordstrap'); ?></button>
-                <?php if ($updated==1) : ?>
+                <?php if (isset($updated) && $updated==1) : ?>
                     <div class="pull-left alert alert-success" style="margin-left: 20px; margin-top: 2px;"><a class="close" data-dismiss="alert">&times;</a><i class="icon-ok-sign"></i> <strong><?php _e('Theme options have been succesfully updated.', 'wordstrap'); ?></strong></div>
                 <?php endif; ?>
 
@@ -409,34 +443,7 @@ class wordstrap_theme_options_page {
 
             </form>
 
-        </div><!-- .wrap -->
-
-        <script type="text/javascript">
-            jQuery(document).ready( function($) {
-
-                $('#landing_page_featured_check').click(function(){
-                    if ($(this).attr('checked')== 'checked')
-                        $('#landing_page_featured_box').fadeIn();
-                    else
-                        $('#landing_page_featured_box').fadeOut();
-                });
-
-                $('#landing_page_intro_check').click(function(){
-                    if ($(this).attr('checked')== 'checked')
-                        $('#landing_page_intro_box').fadeIn();
-                    else
-                        $('#landing_page_intro_box').fadeOut();
-                });
-
-                $('#auth_system_check').click(function(){
-                    if ($(this).attr('checked')== 'checked')
-                        $('#auth_system_box').fadeIn();
-                    else
-                        $('#auth_system_box').fadeOut();
-                });
-
-            });
-        </script>
+        </div><!-- .wrap -->        
     <?php }
 }
 
@@ -444,7 +451,8 @@ add_action('init', array('wordstrap_theme_options_page', 'init'));
 
 function wordstrap_style_options () {
     $wordstrap_theme_options = get_option('wordstrap_theme_options');
-    echo '<style>
+
+    $addstyle .= '<style>
         .well-widgets .ws-widget-title {
             background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
             background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
@@ -452,11 +460,17 @@ function wordstrap_style_options () {
         }
         .well.well-intro {
             background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise1.png\') repeat;
-            color: '.$wordstrap_theme_options['intro_h1'].';
+            color: '.$wordstrap_theme_options['intro_color'].';
         }
-        .well.well-intro h1 {
-            color: '.$wordstrap_theme_options['intro_h1'].';
-        }
-    </style>';
+        .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {            
+            color: '.$wordstrap_theme_options['intro_color'].';
+        }';
+
+    if ($wordstrap_theme_options['use_googlefonts']==1) :
+        $addstyle .= '.ws-widget-title { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+        </style>';
+    endif;
+
+    echo $addstyle;
 }
 add_action ('wp_head', 'wordstrap_style_options');

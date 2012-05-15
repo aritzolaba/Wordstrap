@@ -9,6 +9,11 @@
 ?>
 
 <?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+?>
+
+<?php
 // Get Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 $page = wp_kses($_POST['page'], NULL);

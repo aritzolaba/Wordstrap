@@ -7,7 +7,7 @@ Description: A wordpress theme using the popular Bootstrap CSS Framework.
 Version: 1.5
 License: GNU General Public License
 License URI: license.txt
-Tags: two-columns, three-columns
+Tags: two-columns, three-columns, theme-options
 */
 
 /* BOOTSTRAP OVERRIDES */
@@ -544,6 +544,39 @@ table#wp-calendar td#next { text-align: right; font-size: 1.2em; }
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/* comments */
+.form-allowed-tags code {
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.8em;
+    display: block;
+    color: #555;
+}
+textarea#comment {
+    width: 70%;
+    height: 80px;
+}
+div#ws-comment-list p.logged-in-as {
+    font-size: 0.8em;
+    margin-top: 10px;
+    padding:6px;margin-bottom:12px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#fcf8e3;border:1px solid #fbeed5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;    
+}
+div#respond {
+    padding: 10px;
+    background: #eaeaea;
+    border-radius: 4px;
+}
+h3#reply-title {
+    padding-bottom: 5px;
+    border-bottom: 2px dotted #cacaca;
+}
+#ws-comment-submit {
+    margin-top: 10px;
+    color: #fff;
+    padding:9px 14px;font-size:15px;line-height:normal;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
+    background-color:#006dcc;background-image:-moz-linear-gradient(top, #0088cc, #0044cc);background-image:-ms-linear-gradient(top, #0088cc, #0044cc);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));background-image:-webkit-linear-gradient(top, #0088cc, #0044cc);background-image:-o-linear-gradient(top, #0088cc, #0044cc);background-image:linear-gradient(top, #0088cc, #0044cc);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0044cc', GradientType=0);border-color:#0044cc #0044cc #002a80;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);   
 }
 /* END wordpress theme required */
 

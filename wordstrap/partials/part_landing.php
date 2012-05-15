@@ -68,7 +68,9 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
         <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
 
             <!-- Featured content 1 -->            
-            <div id="ws-ajax-result-div-1"><?php get_template_part ('partials/part_featured'); ?></div> <!-- #ws-ajax-result-div -->
+            <div id="ws-ajax-featured">
+                <?php get_template_part('partials/part_featured'); ?>
+            </div> <!-- #ws-ajax-featured -->
 
         <?php endif; ?>
 

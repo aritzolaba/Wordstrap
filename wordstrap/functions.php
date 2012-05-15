@@ -51,7 +51,7 @@ if (!function_exists('wordstrap_setup')) :
         $locale = get_locale();
         $locale_file = TEMPLATEPATH."/languages/{$locale}.php";
         if(is_readable($locale_file)) { require_once($locale_file); }
-        
+
         // This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
 
@@ -114,86 +114,99 @@ if (!function_exists('wordstrap_commentlist')) :
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
+        $defaults = array('walker' => null, 'max_depth' => '', 'style' => 'ul', 'callback' => null, 'end-callback' => null, 'type' => 'all',
+		'page' => '', 'per_page' => '', 'avatar_size' => 32, 'reverse_top_level' => null, 'reverse_children' => '');
+
+	$args = wp_parse_args( $args, $defaults );
         ?>
-        <article id="comment-<?php comment_ID(); ?>" class="comment ws-article">
-            <header class="entry-header">
-                <?php
-                $avatar_size = 32;
-                if ('0' != $comment->comment_parent) $avatar_size = 24;
-                ?>
-
-                <div class="comment-avatar">
-                    <?php echo get_avatar($comment, $avatar_size); ?>
-                </div>
-
-                <div class="comment-details">
+        <div <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+            <article id="comment-<?php comment_ID(); ?>" class="comment ws-article">
+                <header class="entry-header">
                     <?php
-                    /* translators: 1: comment author, 2: date and time */
-                    printf(__('%1$s on %2$s <span class="says">said:</span>', 'wordstrap'),
-                    sprintf('<span class="label label-info fn">%s</span>', get_comment_author_link()),
-                    sprintf('<time pubdate datetime="%2$s">%3$s</time>',
-                        esc_url(get_comment_link($comment->comment_ID)),
-                        get_comment_time('c'),
-                        sprintf(__('%1$s at %2$s', 'wordstrap'),
-                            get_comment_date(),
-                            get_comment_time()
-                        )
-                    ));
+                    $avatar_size = 32;
+                    if ('0' != $comment->comment_parent) $avatar_size = 24;
                     ?>
 
-                    <a href="<?php echo $comment->comment_ID; ?>" class="ws-reply-link"><?php _e('Reply', 'wordstrap'); ?></a>
-
-                    <?php if ($comment->comment_approved == '0') : ?>
-                        <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'wordstrap'); ?></em>
-                        <br />
-                    <?php endif; ?>
-
-                </div><!-- .comment-details -->
-
-            </header>
-
-            <div class="entry-content">
-                <?php comment_text(); ?>
-            </div>
-
-            <?php if (is_user_logged_in()) : ?>
-
-                <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
-
-                    <div class="alert alert-message loggedas pull-left">
-                        <i class="icon-info-sign"></i>
-                        <?php _e('Replying comment as ','wordstrap'); ?>
-                        <?php $userdata = get_userdata(get_current_user_id()); ?>
-                        <strong><?php echo $userdata->display_name; ?></strong>
+                    <div class="comment-avatar">
+                        <?php echo get_avatar($comment, $avatar_size); ?>
                     </div>
 
-                    <div class="clearfix"></div>
+                    <div class="comment-details">
+                        <?php
+                        /* translators: 1: comment author, 2: date and time */
+                        printf(__('%1$s on %2$s <span class="says">said:</span>', 'wordstrap'),
+                        sprintf('<span class="label label-info fn">%s</span>', get_comment_author_link()),
+                        sprintf('<time pubdate datetime="%2$s">%3$s</time>',
+                            esc_url(get_comment_link($comment->comment_ID)),
+                            get_comment_time('c'),
+                            sprintf(__('%1$s at %2$s', 'wordstrap'),
+                                get_comment_date(),
+                                get_comment_time()
+                            )
+                        ));
+                        ?>
 
-                    <form id="replyform-<?php echo $comment->comment_ID; ?>" class="ws-form-common" method="post" action="<?php echo get_site_url(); ?>/wp-comments-post.php">
-                        <textarea class="ws-comment-textarea" id="reply-<?php echo $comment->comment_ID; ?>" name="comment" no-resize></textarea>
-                        <p class="form-submit">
-                            <button class="btn btn-primary btn-small" id="submit" name="submit" type="submit"><?php _e('Reply', 'wordstrap'); ?></button><span class="ws-comment-help"><?php _e('Or press ESC to cancel','wordstrap'); ?></span>
-                            <input type="hidden" id="comment_post_ID" value="<?php echo get_the_ID(); ?>" name="comment_post_ID">
-                            <input type="hidden" id="comment_parent" value="<?php echo $comment->comment_ID; ?>" name="comment_parent">
-                        </p>
-                    </form>
-                </div><!-- .ws-reply -->
+                        <?php
+                        /*
+                        <a href="<?php echo $comment->comment_ID; ?>" class="ws-reply-link"><?php _e('Reply', 'wordstrap'); ?></a>
+                        */ ?>
 
-            <?php else : ?>
+                        <?php if ($comment->comment_approved == '0') : ?>
+                            <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'wordstrap'); ?></em>
+                            <br />
+                        <?php endif; ?>
 
-                <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
-                    <div class="alert alert-message span5" style="padding: 10px;">
-                        <i class="icon-exclamation-sign rightspace-icon"></i>
-                        <?php _e('Only registered users can comment. Please ', 'wordstrap'); ?>
-                        <a href="<?php echo get_site_url(); ?>/wp-login.php"><?php _e('login', 'wordstrap'); ?></a>
-                        <?php _e(' or ', 'wordstrap'); ?>
-                        <a href="<?php echo get_site_url(); ?>/wp-login.php?action=register"><?php _e('register', 'wordstrap'); ?></a>
-                    </div>
+                    </div><!-- .comment-details -->
+
+                </header>
+
+                <div class="entry-content">
+                    <?php comment_text(); ?>
                 </div>
 
-            <?php endif; ?>
+                <div class="reply">
+                    <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'wordstrap' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+                </div>
 
-        </article><!-- #comment-## -->
+                <?php if (is_user_logged_in()) : ?>
+
+                    <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
+
+                        <div class="alert alert-message loggedas pull-left">
+                            <i class="icon-info-sign"></i>
+                            <?php _e('Replying comment as ','wordstrap'); ?>
+                            <?php $userdata = get_userdata(get_current_user_id()); ?>
+                            <strong><?php echo $userdata->display_name; ?></strong>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <form id="replyform-<?php echo $comment->comment_ID; ?>" class="ws-form-common" method="post" action="<?php echo get_site_url(); ?>/wp-comments-post.php">
+                            <textarea class="ws-comment-textarea" id="reply-<?php echo $comment->comment_ID; ?>" name="comment" no-resize></textarea>
+                            <p class="form-submit">
+                                <button class="btn btn-primary btn-small" id="submit" name="submit" type="submit"><?php _e('Reply', 'wordstrap'); ?></button><span class="ws-comment-help"><?php _e('Or press ESC to cancel','wordstrap'); ?></span>
+                                <input type="hidden" id="comment_post_ID" value="<?php echo get_the_ID(); ?>" name="comment_post_ID">
+                                <input type="hidden" id="comment_parent" value="<?php echo $comment->comment_ID; ?>" name="comment_parent">
+                            </p>
+                        </form>
+                    </div><!-- .ws-reply -->
+
+                <?php else : ?>
+
+                    <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
+                        <div class="alert alert-message span5" style="padding: 10px;">
+                            <i class="icon-exclamation-sign rightspace-icon"></i>
+                            <?php _e('Only registered users can comment. Please ', 'wordstrap'); ?>
+                            <a href="<?php echo get_site_url(); ?>/wp-login.php"><?php _e('login', 'wordstrap'); ?></a>
+                            <?php _e(' or ', 'wordstrap'); ?>
+                            <a href="<?php echo get_site_url(); ?>/wp-login.php?action=register"><?php _e('register', 'wordstrap'); ?></a>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+
+            </article><!-- #comment-## -->
+        </div>
     <?php }
 
 endif; // ends check for wordstrap_comment()
@@ -379,22 +392,22 @@ function ws_register_new_user( $user_login, $user_email ) {
 
 	// Check the username
 	if ( $sanitized_user_login == '' ) {
-		$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.' ) );
+		$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.', 'wordstrap' ) );
 	} elseif ( ! validate_username( $user_login ) ) {
-		$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.' ) );
+		$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.', 'wordstrap' ) );
 		$sanitized_user_login = '';
 	} elseif ( username_exists( $sanitized_user_login ) ) {
-		$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.' ) );
+		$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.', 'wordstrap' ) );
 	}
 
 	// Check the e-mail address
 	if ( $user_email == '' ) {
-		$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.' ) );
+		$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.', 'wordstrap' ) );
 	} elseif ( ! is_email( $user_email ) ) {
-		$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.' ) );
+		$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.', 'wordstrap' ) );
 		$user_email = '';
 	} elseif ( email_exists( $user_email ) ) {
-		$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.' ) );
+		$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.', 'wordstrap' ) );
 	}
 
 	do_action( 'register_post', $sanitized_user_login, $user_email, $errors );
@@ -407,7 +420,7 @@ function ws_register_new_user( $user_login, $user_email ) {
 	$user_pass = wp_generate_password( 12, false);
 	$user_id = wp_create_user( $sanitized_user_login, $user_pass, $user_email );
 	if ( ! $user_id ) {
-		$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !' ), get_option( 'admin_email' ) ) );
+		$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !', 'wordstrap' ), get_option( 'admin_email' ) ) );
 		return $errors;
 	}
 
@@ -427,11 +440,11 @@ function ws_retrieve_password() {
 	$errors = new WP_Error();
 
 	if ( empty( $_POST['user_login'] ) ) {
-		$errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or e-mail address.'));
+		$errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or e-mail address.', 'wordstrap'));
 	} else if ( strpos( $_POST['user_login'], '@' ) ) {
 		$user_data = get_user_by( 'email', trim( $_POST['user_login'] ) );
 		if ( empty( $user_data ) )
-			$errors->add('invalid_email', __('<strong>ERROR</strong>: There is no user registered with that email address.'));
+			$errors->add('invalid_email', __('<strong>ERROR</strong>: There is no user registered with that email address.', 'wordstrap'));
 	} else {
 		$login = trim($_POST['user_login']);
 		$user_data = get_user_by('login', $login);
@@ -443,7 +456,7 @@ function ws_retrieve_password() {
 		return $errors;
 
 	if ( !$user_data ) {
-		$errors->add('invalidcombo', __('<strong>ERROR</strong>: Invalid username or e-mail.'));
+		$errors->add('invalidcombo', __('<strong>ERROR</strong>: Invalid username or e-mail.', 'wordstrap'));
 		return $errors;
 	}
 
@@ -457,7 +470,7 @@ function ws_retrieve_password() {
 	$allow = apply_filters('allow_password_reset', true, $user_data->ID);
 
 	if ( ! $allow )
-		return new WP_Error('no_password_reset', __('Password reset is not allowed for this user'));
+		return new WP_Error('no_password_reset', __('Password reset is not allowed for this user', 'wordstrap'));
 	else if ( is_wp_error($allow) )
 		return $allow;
 
@@ -469,11 +482,11 @@ function ws_retrieve_password() {
 		// Now insert the new md5 key into the db
 		$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 	}
-	$message = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
+	$message = __('Someone requested that the password be reset for the following account:', 'wordstrap') . "\r\n\r\n";
 	$message .= network_site_url() . "\r\n\r\n";
-	$message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
-	$message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-	$message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
+	$message .= sprintf(__('Username: %s', 'wordstrap'), $user_login) . "\r\n\r\n";
+	$message .= __('If this was a mistake, just ignore this email and nothing will happen.', 'wordstrap') . "\r\n\r\n";
+	$message .= __('To reset your password, visit the following address:', 'wordstrap') . "\r\n\r\n";
 	$message .= '' . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n";
 
 	if ( is_multisite() )
@@ -483,13 +496,13 @@ function ws_retrieve_password() {
 		// we want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
-	$title = sprintf( __('[%s] Password Reset'), $blogname );
+	$title = sprintf( __('[%s] Password Reset', 'wordstrap'), $blogname );
 
 	$title = apply_filters('retrieve_password_title', $title);
 	$message = apply_filters('retrieve_password_message', $message, $key);
 
 	if ( $message && !wp_mail($user_email, $title, $message) )
-		wp_die( __('The e-mail could not be sent.') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function...') );
+		wp_die( __('The e-mail could not be sent.', 'wordstrap') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function...', 'wordstrap') );
 
 	return true;
 }
@@ -511,7 +524,7 @@ function ws_init_reset_password () {
     $errors = '';
 
     if ( isset($_POST['pass1']) && $_POST['pass1'] != $_POST['pass2'] ) {
-            $errors = new WP_Error('password_reset_mismatch', __('The passwords do not match.'));
+            $errors = new WP_Error('password_reset_mismatch', __('The passwords do not match.', 'wordstrap'));
     } elseif ( isset($_POST['pass1']) && !empty($_POST['pass1']) ) {
             $ret = ws_reset_password($user, $_POST['pass1']);
     }
@@ -550,15 +563,15 @@ function ws_check_password_reset_key($key, $login) {
 	$key = preg_replace('/[^a-z0-9]/i', '', $key);
 
 	if ( empty( $key ) || !is_string( $key ) )
-		return new WP_Error('invalid_key', __('Invalid key'));
+		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
 
 	if ( empty($login) || !is_string($login) )
-		return new WP_Error('invalid_key', __('Invalid key'));
+		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
 
 	$user = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $login));
 
 	if ( empty( $user ) )
-		return new WP_Error('invalid_key', __('Invalid key'));
+		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
 
 	return $user;
 }
@@ -627,25 +640,20 @@ endif;
 /*******************************************************************************
 * AJAX IN FRONT-END AREA
 */
-function WsAjaxFunction() {
-    //get the data from ajax() call
-    $AJAXPost1 = $_POST['AJAXPost1'];
-    $AJAXPost2 = $_POST['AJAXPost2'];
+function WsAjaxFeatured() {
+    //get the data from ajax() call    
     $AJAXNonce = $_POST['AJAXNonce'];
 
     if (!wp_verify_nonce( $AJAXNonce, 'ws-secure-nonce' ))
         die ('<div class="alert alert-danger ws-alert">Nonces are invalid.</div>');
-
-    //$results = "<h2>".$AJAXPost1." | ".$AJAXPost2." | ".$AJAXNonce."</h2>";
-    //$results .= '<div class="alert alert-success ws-alert">Nonces are valid.</div>';
-    //wp_print_scripts('ws-ajax');
+    
     include ('partials/part_featured.php');
     die();
     }
 // Hook to wp_ajax_nopriv_WsAjaxFunction (for non logged users)
 // and to wp_ajax_WsAjaxFunction (for logged users)
-add_action( 'wp_ajax_nopriv_WsAjaxFunction', 'WsAjaxFunction' );
-add_action( 'wp_ajax_WsAjaxFunction', 'WsAjaxFunction' );
+add_action( 'wp_ajax_nopriv_WsAjaxFeatured', 'WsAjaxFeatured' );
+add_action( 'wp_ajax_WsAjaxFeatured', 'WsAjaxFeatured' );
 
 // Add .js file inc/js/ws-ajax.js
 function add_ws_ajax_script() {

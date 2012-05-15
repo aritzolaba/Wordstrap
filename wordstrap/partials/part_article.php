@@ -83,7 +83,7 @@ else $att = $post->guid;
                 <?php if (!is_single() AND !is_page()) : ?>
                     <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
                     <i class="icon-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
-                <?php endif; ?>
+                <?php endif; ?>                                    
 
             </small>
         </h2>

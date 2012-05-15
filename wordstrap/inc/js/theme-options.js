@@ -6,7 +6,7 @@
         $('.tip').tooltip();
         $('.carousel').carousel(
             {interval: 12500}
-        );        
+        );
         
         /* Color pickers */
         $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4').hide();
@@ -37,7 +37,38 @@
                 if ( display == 'block' )
                     $(this).fadeOut();
             });
-        });                
+        });
+        /* END Color pickers */
+        
+        /* Theme Options Controls */
+        $('#googlefonts_check').click(function() {
+            if ($(this).attr('checked')== 'checked')
+                $('#googlefonts_box').fadeIn();
+            else
+                $('#googlefonts_box').fadeOut();
+        });
+
+        $('#landing_page_featured_check').click(function(){
+            if ($(this).attr('checked')== 'checked')
+                $('#landing_page_featured_box').fadeIn();
+            else
+                $('#landing_page_featured_box').fadeOut();
+        });
+
+        $('#landing_page_intro_check').click(function(){
+            if ($(this).attr('checked')== 'checked')
+                $('#landing_page_intro_box').fadeIn();
+            else
+                $('#landing_page_intro_box').fadeOut();
+        });
+
+        $('#auth_system_check').click(function(){
+            if ($(this).attr('checked')== 'checked')
+                $('#auth_system_box').fadeIn();
+            else
+                $('#auth_system_box').fadeOut();
+        });
+        /* END Theme Options Controls */
 
     });
 })(jQuery);

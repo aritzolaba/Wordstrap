@@ -2,38 +2,38 @@
     $(document).ready( function() {
 
         /* Initialize bootstrap elements */
-        $('.pop-top').popover({placement:'top'});
-        $('.pop-bottom').popover({placement:'bottom'});
-        $('.pop-bottom-show').popover({trigger:'manual', placement:'bottom'});
-        $('.pop-left').popover({placement:'left'});
-        $('.pop-right').popover({placement:'right'});                
-        $('.tip').live("mouseenter", function () {$('.tip').tooltip();});
+        /* This one initialises tooltips with live:true so that
+         * they still work after ajax calls */
+        $('body').tooltip({
+            selector: '[rel=tooltip]'
+        });
+        $('.pop-top').popover({
+            placement:'top'
+        });
+        $('.pop-bottom').popover({
+            placement:'bottom'
+        });
+        $('.pop-bottom-show').popover({
+            trigger:'manual',
+            placement:'bottom'
+        });
+        $('.pop-left').popover({
+            placement:'left'
+        });
+        $('.pop-right').popover({
+            placement:'right'
+        });
+
         $('.carousel').carousel(
-            {interval: 10000}
+        {
+            interval: 10000
+        }
         );
 
-        /* Comments reply functionalities */
-
-        // Reply link click
-        $('a.ws-reply-link').click(function(event){
-            event.preventDefault();
-            var parent = $(this).attr('href');
-            $('.ws-reply').slideUp('fast');
-
-            $('#ws-reply-'+parent).slideDown('normal', function () {
-                $('#ws-reply-'+parent+' textarea').focus();
-            });
-
-        });
-
-        // ESC key press
-        $(document).keypress(function(event){
-           if (event.keyCode == '27') {
-               $('.ws-reply').slideUp('fast');
-           }
-        });
-
-        /* END Comments reply functionalities */
+        /* Login Nav Bar Stop Propagation in Dropdown */
+        $('.dropdown-menu form').click(function(event) {
+            event.stopPropagation();
+        });        
 
         /* User Box form footer mouseover/out opacity */
         if ($("#ws-user-box .ws-form-common-footer").length>0) {
@@ -79,27 +79,7 @@
                 event.preventDefault();
             }
 
-        });
-
-        /* CommentForm submit, prevent empty fields */
-        $('#commentform').submit(function (event) {
-
-            if ($('#comment').val()=='') {
-                $('#comment').focus();
-                event.preventDefault();
-            }
-
-        });
-
-        /* ReplyForm submit, prevent empty fields */
-        $('#replyform-*').submit(function (event) {
-
-            if ($('#reply-*').val()=='') {
-                $('#reply-*').focus();
-                event.preventDefault();
-            }
-
-        });
+        });        
 
         /* Login,Register and Forget pass screens toggle */
         $('.ws-toggle').click(function (event) {
@@ -137,11 +117,6 @@
 
             return false;
 
-        });
-
-        /* Login Nav Bar Stop Propagation in Dropdown */
-        $('.dropdown-menu form').click(function(event) {
-            event.stopPropagation();
         });
 
     });
