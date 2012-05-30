@@ -11,13 +11,15 @@
 <?php get_header(); ?>
 
 <div class="row-fluid">
-    
+
     <?php get_sidebar('left'); ?>
-    
+
     <div class="<?php echo WS_SPANCOL_CENTER; ?>">
         <div class="well well-breadcrumb">
 
             <?php get_template_part('partials/part_breadcrumb'); ?>
+
+            <?php ws_category_pills(); ?>
 
             <?php while (have_posts()) : the_post(); ?>
 

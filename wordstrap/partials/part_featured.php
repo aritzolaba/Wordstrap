@@ -16,8 +16,12 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 <?php
 // Get Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
-$page = wp_kses($_POST['page'], NULL);
-if ($page == 0) $page=1;
+?>
+
+<?php
+// Init of the pagination vars
+if (isset($_POST['page']) && $_POST['page']!=0) $page = wp_kses($_POST['page'], NULL);
+else $page=1;
 $prev_class = '';
 $prev_attr = '';
 $next_class = '';

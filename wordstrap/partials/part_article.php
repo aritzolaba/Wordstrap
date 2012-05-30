@@ -90,9 +90,11 @@ else $att = $post->guid;
         
         <?php
         // Post tags
-        if (is_single() && get_the_tag_list()) :            
+        if (is_single() && get_the_tag_list()) :
+            echo '<div class="ws-tag-container">';
             echo '<i class="icon-tag"></i> ';
             the_tags();
+            echo '</div>';
         endif;
         ?>
 

@@ -2,33 +2,20 @@
     $(document).ready( function() {
 
         /* Initialize bootstrap elements */
-        /* This one initialises tooltips with live:true so that
+        /* This one delegates the function so
          * they still work after ajax calls */
         $('body').tooltip({
             selector: '[rel=tooltip]'
         });
-        $('.pop-top').popover({
+        $('body').popover({
+            selector: '[rel=popover]',
             placement:'top'
         });
-        $('.pop-bottom').popover({
-            placement:'bottom'
-        });
-        $('.pop-bottom-show').popover({
-            trigger:'manual',
-            placement:'bottom'
-        });
-        $('.pop-left').popover({
-            placement:'left'
-        });
-        $('.pop-right').popover({
-            placement:'right'
-        });
 
-        $('.carousel').carousel(
-        {
+        $('.carousel').carousel({
             interval: 10000
-        }
-        );
+        });
+        /* END Initialize elements */
 
         /* Login Nav Bar Stop Propagation in Dropdown */
         $('.dropdown-menu form').click(function(event) {

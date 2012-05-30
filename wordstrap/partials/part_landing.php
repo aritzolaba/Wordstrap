@@ -67,7 +67,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
         <?php // Featured ?>
         <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
 
-            <!-- Featured content 1 -->            
+            <!-- Featured content -->
             <div id="ws-ajax-featured">
                 <?php get_template_part('partials/part_featured'); ?>
             </div> <!-- #ws-ajax-featured -->
@@ -77,7 +77,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
         <?php // Tabs ?>
         <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) : ?>
 
-            <!-- Tabs content 2 -->
+            <!-- Tabs content -->
             <div class="row-fluid">
                 <div class="span12 ws-home-tabs">
 

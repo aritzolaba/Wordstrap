@@ -59,7 +59,8 @@
         <script src="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo get_template_directory_uri(); ?>/inc/js/wordstrap.js"></script>
         <link href="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />        
+        <link href="<?php echo get_template_directory_uri(); ?>/inc/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="all">
         <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/inc/imgs/favicon.ico">
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
@@ -67,9 +68,9 @@
         <?php if ($wordstrap_theme_options['use_googlefonts'] == 1) : ?>
             <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo $wordstrap_theme_options['google_font']; ?>">
         <?php endif; ?>
-        
+
         <?php
-        if ( is_singular() ) wp_enqueue_script( 'comment-reply' );            
+        if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
         ?>
 
         <?php wp_head(); ?>
@@ -79,12 +80,24 @@
 
         <div id="ws-main">
 
-            <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) : ?>
-                <style>div#ws-wrapper{ padding-top: 20px; }</style>
-            <?php else : ?>
-                <header id="ws-header">
-                    <?php get_template_part('partials/part_navigation'); ?>
-                </header>
+            <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) : ?>
+                <style>div#ws-wrapper{ padding-top: 1em; }</style>
+                <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+                <style>div#ws-wrapper{ padding-top: 5em; }</style>
+                <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+                <style>div#ws-wrapper{ padding-top: 4.45em; }</style>
+                <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+                <style>div#ws-wrapper{ padding-top: 8.5em; }</style>
+                <?php else : ?>
+                <style>div#ws-wrapper{ padding-top: 0em; }</style>
+            <?php endif; ?>
+
+            <?php if ($wordstrap_theme_options['hide_wsheader'] != 1) : ?>
+                <?php get_template_part('partials/part_header'); ?>
+            <?php endif; ?>
+
+            <?php if ($wordstrap_theme_options['hide_wsnavbar'] != 1) : ?>
+                <?php get_template_part('partials/part_navigation'); ?>
             <?php endif; ?>
 
             <div id="ws-wrapper" class="container">

@@ -9,15 +9,25 @@
 ?>
 
 <?php
-$user_login = wp_kses($_POST['user_login'], NULL);
-$user_email = wp_kses($_POST['user_email'], NULL);
-$action = wp_kses($_POST['action'], NULL);
-$key = wp_kses($_POST['key'], NULL);
-$login = wp_kses($_POST['login'], NULL);
-// Vars for password reset
-if (empty($action)) $action = wp_kses($_GET['action'], NULL);
-if (empty($key)) $key = wp_kses($_GET['key'], NULL);
-if (empty($login)) $login = wp_kses($_GET['login'], NULL);
+if (isset($_GET['user_login'])) $user_login = wp_kses($_GET['user_login'], NULL);
+if (isset($_POST['user_login'])) $user_login = wp_kses($_POST['user_login'], NULL);
+if (!isset($user_login)) $user_login = '';
+
+if (isset($_GET['user_email'])) $user_email = wp_kses($_GET['user_email'], NULL);
+if (isset($_POST['user_email'])) $user_email = wp_kses($_POST['user_email'], NULL);
+if (!isset($user_email)) $user_email = '';
+
+if (isset($_GET['action'])) $action = wp_kses($_GET['action'], NULL);
+if (isset($_POST['action'])) $action = wp_kses($_POST['action'], NULL);
+if (!isset($action)) $action = '';
+
+if (isset($_GET['key'])) $key = wp_kses($_GET['key'], NULL);
+if (isset($_POST['key'])) $key = wp_kses($_POST['key'], NULL);
+if (!isset($key)) $key = '';
+
+if (isset($_GET['login'])) $login = wp_kses($_GET['login'], NULL);
+if (isset($_POST['login'])) $login = wp_kses($_POST['login'], NULL);
+if (!isset($login)) $login = '';
 ?>
 
 <div <?php if (is_user_logged_in()) echo 'id="ws-user-box"'; ?> class="well well-login<?php if (is_user_logged_in()) echo ' well-padding-small'; ?>">

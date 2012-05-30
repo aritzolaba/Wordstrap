@@ -2,34 +2,34 @@
     $(document).ready( function() {
 
         /* FEATURED AjaxRequest */
-        function sendRequest (newpage) {
+        function sendRequestFeatured (action, container, newpage) {
 
             jQuery.post(
                 WsAjax.ajaxurl,
                 {
-                    action:     'WsAjaxFeatured',                    
-                    page:       newpage,
+                    action:     action,
+                    page:       newpage,                    
                     AJAXNonce:  WsAjax.AJAXNonce
                 },
                 function(response) {
-                    $('#ws-ajax-featured').html('');
-                    $('#ws-ajax-featured').append(response);
+                    $(container).html('');
+                    $(container).append(response);
                 }
             );
         }
-
+        
         $('#ws-featured-next').live("click", function (event) {
             event.preventDefault();
             var newpage = parseInt($(this).val());
-            sendRequest (newpage);
+            sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
 
         $('#ws-featured-prev').live("click", function (event) {
             event.preventDefault();
             var newpage = parseInt($(this).val());
-            sendRequest (newpage);
+            sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
-        /* FEATURED AjaxRequest */
+        /* END FEATURED AjaxRequest */                
 
     });
 })(jQuery);

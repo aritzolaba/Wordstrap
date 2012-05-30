@@ -24,9 +24,7 @@ if ($show_social == 1) $span='span6'; else $span='span12';
     <div class="container">
         <div class="row-fluid">
             <div class="<?php echo $span; ?>">
-                <h2>
-                    <?php _e('About', 'wordstrap'); ?> <?php bloginfo('site_name'); ?>
-                </h2>
+                <h2><?php echo sprintf (__('%s', 'wordstrap'), $wordstrap_theme_options['footer_title1']); ?></h2>
                 <hr>
                 <?php echo $wordstrap_theme_options['footer_text']; ?>
 
@@ -41,7 +39,7 @@ if ($show_social == 1) $span='span6'; else $span='span12';
 
             <?php if ($show_social == 1) : ?>
                 <div class="span6">
-                    <h2><?php _e('Follow us', 'wordstrap'); ?></h2>
+                    <h2><?php echo sprintf (__('%s', 'wordstrap'), $wordstrap_theme_options['footer_title2']); ?></h2>
                     <hr>
 
                     <div class="social_buttons_container_footer">

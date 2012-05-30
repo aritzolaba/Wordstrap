@@ -119,8 +119,8 @@ if (!function_exists('wordstrap_commentlist')) :
 
 	$args = wp_parse_args( $args, $defaults );
         ?>
-        <div <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-            <article id="comment-<?php comment_ID(); ?>" class="comment ws-article">
+        <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>" style="list-style: none;">
+            <article id="div-comment-<?php comment_ID(); ?>" class="comment ws-article">
                 <header class="entry-header">
                     <?php
                     $avatar_size = 32;
@@ -146,11 +146,6 @@ if (!function_exists('wordstrap_commentlist')) :
                         ));
                         ?>
 
-                        <?php
-                        /*
-                        <a href="<?php echo $comment->comment_ID; ?>" class="ws-reply-link"><?php _e('Reply', 'wordstrap'); ?></a>
-                        */ ?>
-
                         <?php if ($comment->comment_approved == '0') : ?>
                             <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'wordstrap'); ?></em>
                             <br />
@@ -168,45 +163,8 @@ if (!function_exists('wordstrap_commentlist')) :
                     <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'wordstrap' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
                 </div>
 
-                <?php if (is_user_logged_in()) : ?>
-
-                    <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
-
-                        <div class="alert alert-message loggedas pull-left">
-                            <i class="icon-info-sign"></i>
-                            <?php _e('Replying comment as ','wordstrap'); ?>
-                            <?php $userdata = get_userdata(get_current_user_id()); ?>
-                            <strong><?php echo $userdata->display_name; ?></strong>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <form id="replyform-<?php echo $comment->comment_ID; ?>" class="ws-form-common" method="post" action="<?php echo get_site_url(); ?>/wp-comments-post.php">
-                            <textarea class="ws-comment-textarea" id="reply-<?php echo $comment->comment_ID; ?>" name="comment" no-resize></textarea>
-                            <p class="form-submit">
-                                <button class="btn btn-primary btn-small" id="submit" name="submit" type="submit"><?php _e('Reply', 'wordstrap'); ?></button><span class="ws-comment-help"><?php _e('Or press ESC to cancel','wordstrap'); ?></span>
-                                <input type="hidden" id="comment_post_ID" value="<?php echo get_the_ID(); ?>" name="comment_post_ID">
-                                <input type="hidden" id="comment_parent" value="<?php echo $comment->comment_ID; ?>" name="comment_parent">
-                            </p>
-                        </form>
-                    </div><!-- .ws-reply -->
-
-                <?php else : ?>
-
-                    <div id="ws-reply-<?php echo $comment->comment_ID; ?>" class="ws-reply">
-                        <div class="alert alert-message span5" style="padding: 10px;">
-                            <i class="icon-exclamation-sign rightspace-icon"></i>
-                            <?php _e('Only registered users can comment. Please ', 'wordstrap'); ?>
-                            <a href="<?php echo get_site_url(); ?>/wp-login.php"><?php _e('login', 'wordstrap'); ?></a>
-                            <?php _e(' or ', 'wordstrap'); ?>
-                            <a href="<?php echo get_site_url(); ?>/wp-login.php?action=register"><?php _e('register', 'wordstrap'); ?></a>
-                        </div>
-                    </div>
-
-                <?php endif; ?>
-
             </article><!-- #comment-## -->
-        </div>
+        </li>
     <?php }
 
 endif; // ends check for wordstrap_comment()
@@ -275,6 +233,57 @@ function ws_posts_navigation ($nav_id) {
 
     <?php endif;
 }
+
+/*******************************************************************************
+* Products navigation (next and prev buttons)
+*/
+function ws_products_navigation ($nav_id, $wp_query) {
+
+    if ($wp_query->max_num_pages > 1) :
+
+        $xtra='btn-large';
+        if (is_author()) $xtra = '';
+
+        $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-arrow-left"></i> Older posts', 'wordstrap')));
+        $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('Newer posts <i class="icon-arrow-right"></i>', 'wordstrap')));
+        ?>
+
+        <nav id="<?php echo $nav_id; ?>" class="post-nav-pagination">
+            <div class="post-nav-previous"><?php echo $next_posts_link; ?></div>
+            <div class="post-nav-next"><?php echo $prev_posts_link; ?></div>
+        </nav><!-- #nav-above -->
+
+    <?php endif;
+}
+
+/*******************************************************************************
+* Category pills
+*/
+function ws_category_pills ($taxonomy=NULL) {
+    $args = array();
+    $query_object = get_queried_object();
+    $tax = get_taxonomy($query_object->taxonomy);
+    $tax_slug = $tax->rewrite['slug'];
+    $taxonomy = $query_object->taxonomy;    
+
+    if (!is_null($taxonomy)) {
+        $args = array ('taxonomy' => $taxonomy, 'parent' => 0);
+        if (!$tax_slug) $tax_slug = 'category';
+    }
+
+    $cat_list = get_categories($args);
+    if (sizeof($cat_list)>0) : ?>
+        <ul class="nav nav-pills">
+            <?php foreach ($cat_list as $cat) :
+
+                if ($cat->name == $query_object->name) $active='class="active"'; else $active='';
+                ?>
+                <li <?php echo $active; ?>><a href="<?php echo site_url().'/'.$tax_slug.'/'.$cat->slug; ?>"><?php echo $cat->name; ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+        <hr>
+    <?php endif; ?>
+<?php }
 
 /**
 * Function for displaying a "Nothing found" partial
@@ -392,22 +401,22 @@ function ws_register_new_user( $user_login, $user_email ) {
 
 	// Check the username
 	if ( $sanitized_user_login == '' ) {
-		$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.', 'wordstrap' ) );
+		$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.' ) );
 	} elseif ( ! validate_username( $user_login ) ) {
-		$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.', 'wordstrap' ) );
+		$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.' ) );
 		$sanitized_user_login = '';
 	} elseif ( username_exists( $sanitized_user_login ) ) {
-		$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.', 'wordstrap' ) );
+		$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.' ) );
 	}
 
 	// Check the e-mail address
 	if ( $user_email == '' ) {
-		$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.', 'wordstrap' ) );
+		$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.' ) );
 	} elseif ( ! is_email( $user_email ) ) {
-		$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.', 'wordstrap' ) );
+		$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.' ) );
 		$user_email = '';
 	} elseif ( email_exists( $user_email ) ) {
-		$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.', 'wordstrap' ) );
+		$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.' ) );
 	}
 
 	do_action( 'register_post', $sanitized_user_login, $user_email, $errors );
@@ -420,7 +429,7 @@ function ws_register_new_user( $user_login, $user_email ) {
 	$user_pass = wp_generate_password( 12, false);
 	$user_id = wp_create_user( $sanitized_user_login, $user_pass, $user_email );
 	if ( ! $user_id ) {
-		$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !', 'wordstrap' ), get_option( 'admin_email' ) ) );
+		$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !' ), get_option( 'admin_email' ) ) );
 		return $errors;
 	}
 
@@ -440,11 +449,11 @@ function ws_retrieve_password() {
 	$errors = new WP_Error();
 
 	if ( empty( $_POST['user_login'] ) ) {
-		$errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or e-mail address.', 'wordstrap'));
+		$errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or e-mail address.'));
 	} else if ( strpos( $_POST['user_login'], '@' ) ) {
 		$user_data = get_user_by( 'email', trim( $_POST['user_login'] ) );
 		if ( empty( $user_data ) )
-			$errors->add('invalid_email', __('<strong>ERROR</strong>: There is no user registered with that email address.', 'wordstrap'));
+			$errors->add('invalid_email', __('<strong>ERROR</strong>: There is no user registered with that email address.'));
 	} else {
 		$login = trim($_POST['user_login']);
 		$user_data = get_user_by('login', $login);
@@ -456,7 +465,7 @@ function ws_retrieve_password() {
 		return $errors;
 
 	if ( !$user_data ) {
-		$errors->add('invalidcombo', __('<strong>ERROR</strong>: Invalid username or e-mail.', 'wordstrap'));
+		$errors->add('invalidcombo', __('<strong>ERROR</strong>: Invalid username or e-mail.'));
 		return $errors;
 	}
 
@@ -470,7 +479,7 @@ function ws_retrieve_password() {
 	$allow = apply_filters('allow_password_reset', true, $user_data->ID);
 
 	if ( ! $allow )
-		return new WP_Error('no_password_reset', __('Password reset is not allowed for this user', 'wordstrap'));
+		return new WP_Error('no_password_reset', __('Password reset is not allowed for this user'));
 	else if ( is_wp_error($allow) )
 		return $allow;
 
@@ -482,11 +491,11 @@ function ws_retrieve_password() {
 		// Now insert the new md5 key into the db
 		$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 	}
-	$message = __('Someone requested that the password be reset for the following account:', 'wordstrap') . "\r\n\r\n";
+	$message = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
 	$message .= network_site_url() . "\r\n\r\n";
-	$message .= sprintf(__('Username: %s', 'wordstrap'), $user_login) . "\r\n\r\n";
-	$message .= __('If this was a mistake, just ignore this email and nothing will happen.', 'wordstrap') . "\r\n\r\n";
-	$message .= __('To reset your password, visit the following address:', 'wordstrap') . "\r\n\r\n";
+	$message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
+	$message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
+	$message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
 	$message .= '' . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n";
 
 	if ( is_multisite() )
@@ -496,13 +505,13 @@ function ws_retrieve_password() {
 		// we want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
-	$title = sprintf( __('[%s] Password Reset', 'wordstrap'), $blogname );
+	$title = sprintf( __('[%s] Password Reset'), $blogname );
 
 	$title = apply_filters('retrieve_password_title', $title);
 	$message = apply_filters('retrieve_password_message', $message, $key);
 
 	if ( $message && !wp_mail($user_email, $title, $message) )
-		wp_die( __('The e-mail could not be sent.', 'wordstrap') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function...', 'wordstrap') );
+		wp_die( __('The e-mail could not be sent.') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function...') );
 
 	return true;
 }
@@ -524,7 +533,7 @@ function ws_init_reset_password () {
     $errors = '';
 
     if ( isset($_POST['pass1']) && $_POST['pass1'] != $_POST['pass2'] ) {
-            $errors = new WP_Error('password_reset_mismatch', __('The passwords do not match.', 'wordstrap'));
+            $errors = new WP_Error('password_reset_mismatch', __('The passwords do not match.'));
     } elseif ( isset($_POST['pass1']) && !empty($_POST['pass1']) ) {
             $ret = ws_reset_password($user, $_POST['pass1']);
     }
@@ -563,15 +572,15 @@ function ws_check_password_reset_key($key, $login) {
 	$key = preg_replace('/[^a-z0-9]/i', '', $key);
 
 	if ( empty( $key ) || !is_string( $key ) )
-		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
+		return new WP_Error('invalid_key', __('Invalid key'));
 
 	if ( empty($login) || !is_string($login) )
-		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
+		return new WP_Error('invalid_key', __('Invalid key'));
 
 	$user = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $login));
 
 	if ( empty( $user ) )
-		return new WP_Error('invalid_key', __('Invalid key', 'wordstrap'));
+		return new WP_Error('invalid_key', __('Invalid key'));
 
 	return $user;
 }
@@ -641,12 +650,12 @@ endif;
 * AJAX IN FRONT-END AREA
 */
 function WsAjaxFeatured() {
-    //get the data from ajax() call    
+    //get the data from ajax() call
     $AJAXNonce = $_POST['AJAXNonce'];
 
     if (!wp_verify_nonce( $AJAXNonce, 'ws-secure-nonce' ))
         die ('<div class="alert alert-danger ws-alert">Nonces are invalid.</div>');
-    
+
     include ('partials/part_featured.php');
     die();
     }

@@ -41,7 +41,7 @@
                 </li>
             <?php elseif (is_category()) : ?>
                 <li>
-                    <?php _e('Posts in category:', 'wordstrap'); ?> <?php $category = get_the_category(); echo $category[0]->name; ?>
+                    <?php _e('Posts in category:', 'wordstrap'); ?> <?php $category = get_queried_object(); echo $category->name; ?>
                 </li>
             <?php elseif (is_archive()) : ?>
                 <li>

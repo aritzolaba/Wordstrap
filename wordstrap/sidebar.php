@@ -27,7 +27,7 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
                 </div>
             </div>
 
-        <?php endif; ?>
+        <?php endif; ?>                        
 
         <!-- Widgetized Content -->
         <div class="row-fluid">

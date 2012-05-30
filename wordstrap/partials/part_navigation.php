@@ -25,7 +25,7 @@ endif;
 $navigation = get_pages('parent=0&title_li=&depth=1' . $add_args);
 ?>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar<?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo ' navbar-fixed-top'; ?>" <?php if ($wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) echo 'style="top: 52px; position: fixed;"'; ?>>
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".first-nav">
@@ -33,12 +33,12 @@ $navigation = get_pages('parent=0&title_li=&depth=1' . $add_args);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <?php if ($wordstrap_theme_options['show_wslogo'] == 1) : ?>
+            <?php if ($wordstrap_theme_options['show_wslogo_nav'] == 1) : ?>
                 <a href="<?php echo get_site_url(); ?>">
                     <img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/imgs/ws-logo.png" class="pull-left ws-logo">
                 </a>
             <?php endif; ?>
-            <?php if ($wordstrap_theme_options['show_wstitle'] == 1) : ?>
+            <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) : ?>
                 <a class="brand" href="<?php echo get_site_url(); ?>"><?php echo bloginfo('site_name'); ?></a>
             <?php endif; ?>
             <div class="nav-collapse first-nav">
