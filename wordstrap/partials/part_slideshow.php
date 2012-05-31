@@ -4,15 +4,16 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.5
+ * @since Wordstrap 1.6
  */
 ?>
 
 <?php
 $frames = array (
-    '&quot;The Shell&quot; by Garry' => array (get_stylesheet_directory_uri().'/inc/slide/01.jpg', 'active', 'This is the content for frame 1'),
-    '&quot;Skyline&quot; by Wolfgang Staudt' => array (get_stylesheet_directory_uri().'/inc/slide/02.jpg', '', 'This is the content for frame 2'),
-    '&quot;Where Troubles Melt Like Lemondrops&quot; by Thomas Hawk' => array (get_stylesheet_directory_uri().'/inc/slide/03.jpg', '', 'This is the content for frame 3')
+    'Theme options page' => array (get_stylesheet_directory_uri().'/inc/slide/ws_1.png', 'active', 'Customize every element of your site, select the layout, customize your home page, etc.'),
+    'In-theme auth system' => array (get_stylesheet_directory_uri().'/inc/slide/ws_2.png', '', 'You can display all auth features right in the navbar, or in the right or left sidebars if you prefer so.'),
+    'Detailed post headers' => array (get_stylesheet_directory_uri().'/inc/slide/ws_3.png', '', 'Post headers display detailed info about every post in the blog. Also, social share buttons are included at the bottom of every post. Of course, you can disable this feature.'),
+    'A neat comment system' => array (get_stylesheet_directory_uri().'/inc/slide/ws_4.png', '', 'The comment template is located at the functions.php file, so you can customize it at your needs.')
 );
 ?>
 

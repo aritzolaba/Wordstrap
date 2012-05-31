@@ -11,7 +11,6 @@
             selector: '[rel=popover]',
             placement:'top'
         });
-
         $('.carousel').carousel({
             interval: 10000
         });
@@ -20,7 +19,7 @@
         /* Login Nav Bar Stop Propagation in Dropdown */
         $('.dropdown-menu form').click(function(event) {
             event.stopPropagation();
-        });        
+        });
 
         /* User Box form footer mouseover/out opacity */
         if ($("#ws-user-box .ws-form-common-footer").length>0) {
@@ -66,7 +65,7 @@
                 event.preventDefault();
             }
 
-        });        
+        });
 
         /* Login,Register and Forget pass screens toggle */
         $('.ws-toggle').click(function (event) {
@@ -105,6 +104,7 @@
             return false;
 
         });
+        /* END Login,Register and Forget pass screens toggle */
 
     });
 })(jQuery);

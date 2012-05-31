@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main Pages
- * @since Wordstrap 1.5
+ * @since Wordstrap 1.6
  */
 
 // Exit if accessed directly
@@ -110,7 +110,7 @@ if (!function_exists('wordstrap_commentlist')) :
      *
      * Used as a callback by wp_list_comments() for displaying the comments.
      *
-     * @since Wordstrap 1.5
+     * @since Wordstrap 1.6
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;

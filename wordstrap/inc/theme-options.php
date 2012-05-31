@@ -4,35 +4,36 @@
  *
  * @package WordStrap
  * @subpackage Wordstrap
- * @since Wordstrap 1.5
+ * @since Wordstrap 1.6
  */
 
-class wordstrap_theme_options_page {        
+class wordstrap_theme_options_page {
 
     function init() {
-        
+
         add_action('admin_menu', array('wordstrap_theme_options_page', 'add_wordstrap_options_page'));
 
         // If we have no options in the database, let's add them now.
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
 	if ( !$wordstrap_theme_options ) {
 
-            // Default Options            
+            // Default Options
             $wordstrap_theme_options['hide_wsheader'] = 0;
             $wordstrap_theme_options['hide_wsnavbar'] = 0;
             $wordstrap_theme_options['nav_fixed'] = 0;
             $wordstrap_theme_options['use_googlefonts'] = 1;
+            $wordstrap_theme_options['google_analytics'] = '';
             $wordstrap_theme_options['google_font'] = 'Oxygen';
             $wordstrap_theme_options['landing_page_slideshow'] = 1;
             $wordstrap_theme_options['landing_page_intro'] = 0;
             $wordstrap_theme_options['landing_page_featured'] = 0;
-            $wordstrap_theme_options['auth_system_display'] = 'nav';
+            $wordstrap_theme_options['auth_system_display'] = 'right';
             $wordstrap_theme_options['featured_num'] = 3;
             $wordstrap_theme_options['article_social'] = 1;
             $wordstrap_theme_options['excerpt_length'] = 40;
             $wordstrap_theme_options['widget_header_bg1'] = '#62A49B';
             $wordstrap_theme_options['widget_header_bg2'] = '#0A7466';
-            $wordstrap_theme_options['intro_bg'] = '#FFFFFF';
+            $wordstrap_theme_options['intro_bg'] = '#eee';
             $wordstrap_theme_options['intro_color'] = '#000';
             $wordstrap_theme_options['show_wslogo'] = 1;
             $wordstrap_theme_options['show_wstitle'] = 1;
@@ -42,15 +43,15 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['footer_displaycc'] = 1;
             $wordstrap_theme_options['footer_title1'] = 'About';
             $wordstrap_theme_options['footer_title2'] = 'Follow us';
-            $wordstrap_theme_options['footer_text'] = 'Powered by Wordstrap';           
+            $wordstrap_theme_options['footer_text'] = 'Powered by Wordstrap';
             $wordstrap_theme_options['ws_layout'] = '2cols-right';
-            $wordstrap_theme_options['nav_excludelist'] = '';
+            $wordstrap_theme_options['nav_excludelist'] = serialize(array());
 
             // Update
             add_option('wordstrap_theme_options', $wordstrap_theme_options);
         }
     }
-    
+
     function add_wordstrap_options_page() {
         add_theme_page(__('Theme Options', 'wordstrap'), __('Theme Options', 'wordstrap'), 8, 'theme-options-page', array('wordstrap_theme_options_page', 'page'));
     }
@@ -88,7 +89,7 @@ class wordstrap_theme_options_page {
             // The options
             $wordstrap_theme_options['hide_adminbar'] = wp_kses($_POST['hide_adminbar'], NULL);
             $wordstrap_theme_options['hide_wsnavbar'] = wp_kses($_POST['hide_wsnavbar'], NULL);
-            $wordstrap_theme_options['hide_wsheader'] = wp_kses($_POST['hide_wsheader'], NULL);            
+            $wordstrap_theme_options['hide_wsheader'] = wp_kses($_POST['hide_wsheader'], NULL);
             $wordstrap_theme_options['show_wstitle'] = wp_kses($_POST['show_wstitle'], NULL);
             $wordstrap_theme_options['show_wslogo'] = wp_kses($_POST['show_wslogo'], NULL);
             $wordstrap_theme_options['show_wstitle_nav'] = wp_kses($_POST['show_wstitle_nav'], NULL);
@@ -113,6 +114,7 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['intro_color'] = wp_kses($_POST['intro_color'], NULL);
             $wordstrap_theme_options['use_googlefonts'] = wp_kses($_POST['use_googlefonts'], NULL);
             $wordstrap_theme_options['google_font'] = wp_kses($_POST['google_font'], NULL);
+            $wordstrap_theme_options['google_analytics'] = urlencode($_POST['google_analytics']);            
             $wordstrap_theme_options['footer_show_fb'] = wp_kses($_POST['footer_show_fb'], NULL);
             $wordstrap_theme_options['footer_show_gp'] = wp_kses($_POST['footer_show_gp'], NULL);
             $wordstrap_theme_options['footer_show_tw'] = wp_kses($_POST['footer_show_tw'], NULL);
@@ -127,7 +129,7 @@ class wordstrap_theme_options_page {
             $wordstrap_theme_options['footer_displaycc'] = wp_kses($_POST['footer_displaycc'], NULL);
             $wordstrap_theme_options['ws_layout'] = wp_kses($_POST['ws_layout'], NULL);
             $wordstrap_theme_options['nav_fixed'] = wp_kses($_POST['nav_fixed'], NULL);
-            $wordstrap_theme_options['nav_excludelist'] = serialize(wp_kses($_POST['nav_excludelist'], NULL));            
+            $wordstrap_theme_options['nav_excludelist'] = serialize(wp_kses($_POST['nav_excludelist'], NULL));
 
             // Update
             $ret=update_option('wordstrap_theme_options', $wordstrap_theme_options);
@@ -237,8 +239,8 @@ class wordstrap_theme_options_page {
                                     <div class="row-fluid">
                                         <div class="span6">
                                             <p class="help-block">
+                                                <label for="googlefonts_check"><?php _e('Use Google API Fonts in widget titles ?','wordstrap'); ?></label>
                                                 <input id="googlefonts_check" type="checkbox" name="use_googlefonts" <?php if ($wordstrap_theme_options['use_googlefonts'] == 1) echo 'checked="checked"'; ?> value="1">
-                                                <?php _e('Use Google API Fonts in widget titles ?','wordstrap'); ?>
                                             </p>
                                             <p <?php if ($wordstrap_theme_options['use_googlefonts'] != 1) echo 'style="display: none;"'; ?> id="googlefonts_box" class="help-block"><?php _e('Choose a font','wordstrap'); ?>
                                                 <select name="google_font">
@@ -277,7 +279,7 @@ class wordstrap_theme_options_page {
                             <h3><small><?php _e('Login, Register, Forgot password and security features','wordstrap'); ?></small></h3>
                             <hr>
 
-                            <label for="BackgroundColor"><?php _e('Use Wordstrap Auth system','wordstrap'); ?></label>
+                            <label for="auth_system_check"><?php _e('Use Wordstrap Auth system','wordstrap'); ?></label>
                             <p class="help-block" style="margin-bottom: 10px;">
                                 <input id="auth_system_check" type="checkbox" name="auth_system" <?php if ($wordstrap_theme_options['auth_system'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Use a custom auth system to login, register and forget/reset pass procedures','wordstrap'); ?>
                             </p>
@@ -290,10 +292,13 @@ class wordstrap_theme_options_page {
                                     <option value="right" <?php if ($wordstrap_theme_options['auth_system_display']=='right') echo 'selected="selected"'; ?>>Right sidebar</option>
                                 </select>
                             </div>
-                            <label for="BackgroundColor"><?php _e('Secure wp-admin and wp-login','wordstrap'); ?></label>
+                            <label for="secure_wp"><?php _e('Secure wp-admin and wp-login','wordstrap'); ?></label>
                             <p class="help-block">
-                                <input type="checkbox" name="secure_wp" <?php if ($wordstrap_theme_options['secure_wp'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Disable access to wp-admin and wp-login to all users until they are logged in','wordstrap'); ?>
+                                <input type="checkbox" id="secure_wp" name="secure_wp" <?php if ($wordstrap_theme_options['secure_wp'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Disable access to wp-admin and wp-login to all users until they are logged in','wordstrap'); ?>
                             </p>
+                            <br />
+                            <label for="google_analytics"><?php _e('Google Analytics code','wordstrap'); ?></label>
+                            <textarea name="google_analytics" style="width: 350px; height: 100px;"><?php if ($wordstrap_theme_options['google_analytics'] != '') echo str_replace('\\','',urldecode($wordstrap_theme_options['google_analytics'])); ?></textarea>                            
                             <br />
                         </div>
 
@@ -313,7 +318,7 @@ class wordstrap_theme_options_page {
                                     </p>
                                     <p class="help-block">
                                         <input type="checkbox" name="footer_show_gp" <?php if ($wordstrap_theme_options['footer_show_gp'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Google+ Button','wordstrap'); ?><br />
-                                        <input type="text" name="footer_gb_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_gp_url']; ?>">
+                                        <input type="text" name="footer_gp_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_gp_url']; ?>">
                                     </p>
                                     <p class="help-block">
                                         <input type="checkbox" name="footer_show_tw" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Twitter Button','wordstrap'); ?><br />
@@ -488,7 +493,7 @@ class wordstrap_theme_options_page {
 
             </form>
 
-        </div><!-- .wrap -->        
+        </div><!-- .wrap -->
     <?php }
 }
 add_action('init', array('wordstrap_theme_options_page', 'init'));
@@ -506,7 +511,7 @@ function wordstrap_style_options () {
             background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise1.png\') repeat;
             color: '.$wordstrap_theme_options['intro_color'].';
         }
-        .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {            
+        .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
             color: '.$wordstrap_theme_options['intro_color'].';
         }';
 

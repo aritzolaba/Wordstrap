@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.5
+ * @since Wordstrap 1.6
  */
 ?>
 
@@ -36,7 +36,7 @@ $args = array(
     'term' => $wordstrap_theme_options['featured_cat'],
     'posts_per_page' => $wordstrap_theme_options['featured_num']
 );
-$featured = new WP_Query( $args );
+$featured = new WP_Query($args);
 ?>
 
 <?php

@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.5
+ * @since Wordstrap 1.6
  */
 ?>
 
