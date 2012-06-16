@@ -3,15 +3,14 @@
  * The page template file.
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
+
+get_header();
 ?>
-
-<?php get_header(); ?>
-
 <div class="row-fluid">
-    
+
     <?php get_sidebar('left'); ?>
 
     <div class="<?php echo WS_SPANCOL_CENTER; ?>">

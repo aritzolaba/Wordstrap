@@ -6,13 +6,13 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
 // Get Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 ?>
-
 <div id="ws-header" class="ws-header-container" <?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo 'style="position: fixed;"'; ?>>
     <div class="container">
         <div class="row-fluid">

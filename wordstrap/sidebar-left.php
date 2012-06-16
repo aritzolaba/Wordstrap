@@ -3,12 +3,10 @@
  * The sidebar-left template file.
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
 // Get Theme Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 ?>
@@ -17,17 +15,6 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
     <!-- Sidebar Content -->
     <div class="<?php echo WS_SPANCOL_LEFT; ?>">
-
-        <?php if ($wordstrap_theme_options['auth_system'] == 1 && $wordstrap_theme_options['auth_system_display'] == 'left') : ?>
-
-            <!-- WS Login -->
-            <div class="row-fluid">
-                <div class="span12">
-                    <?php get_template_part('partials/part_auth'); ?>
-                </div>
-            </div>
-
-        <?php endif; ?>
 
         <!-- Widgetized Content -->
         <div class="row-fluid">

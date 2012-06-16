@@ -6,9 +6,10 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
 // Get Theme Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
@@ -49,7 +50,7 @@ else $att = $post->guid;
             <?php if (is_single() OR is_page()) : ?>
                 <?php the_title(); ?>
             <?php else : ?>
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <a href="<?php the_permalink(); ?>"><?php if (get_the_title()) the_title(); else echo __('Untitled','wordstrap') ?></a>
             <?php endif; ?>
         </h1>
 
@@ -83,11 +84,11 @@ else $att = $post->guid;
                 <?php if (!is_single() AND !is_page()) : ?>
                     <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
                     <i class="icon-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
-                <?php endif; ?>                                    
+                <?php endif; ?>
 
             </small>
         </h2>
-        
+
         <?php
         // Post tags
         if (is_single() && get_the_tag_list()) :
@@ -102,14 +103,14 @@ else $att = $post->guid;
 
     <?php if (!is_search() && !is_author()) : ?>
 
-        <div class="entry-content <?php if (is_page()) echo 'ws-ispage'; ?>">
+        <div class="entry-content clearfix <?php if (is_page()) echo 'ws-ispage'; ?>">
 
             <?php
             if (is_single() OR is_page()) the_content();
             else the_excerpt();
             ?>
 
-            <?php wp_link_pages(array('before' => '<div class="page-link"><span>' . __('Pages:', 'wordstrap') . '</span>', 'after' => '</div>')); ?>
+            <?php wp_link_pages(array('before' => '<div class="clearfix"></div><br /><div class="page-link"><span>' . __('Pages:', 'wordstrap') . '</span>', 'after' => '</div>')); ?>
 
         </div><!-- .entry-content -->
 

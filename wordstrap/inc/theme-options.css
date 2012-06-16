@@ -10,6 +10,7 @@ input[type="text"] { height: 24px; }
 select option { margin: 2px; padding: 4px; }
 
 label { font-weight: bold; font-size: 1em; }
+label.checkbox { background: transparent; }
 .nav-tabs a { font-weight: bold; font-size: 1.1em; }
 
 /* fix for admin menu in wp dashboard */
@@ -25,3 +26,7 @@ div.wp-submenu-wrap ul,div.wp-submenu-wrap ol {
 .tabs-left .nav-tabs li a:hover { border-right: 1px solid #fff; }
 .tabs-left .tab-content { background: #fff; padding: 2px 20px; border-right: 1px solid #ddd; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; min-height: 350px; }
 .tabs-left hr { margin: 0px; margin-bottom: 15px; }
+
+.buttons_container {
+    float: left; opacity: 0.2; margin-right: 5px;    
+}

@@ -3,12 +3,11 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
 
 <div class="row-fluid">
     <div class="span12">

@@ -6,9 +6,11 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
+// Slideshow frames
 $frames = array (
     'Theme options page' => array (get_stylesheet_directory_uri().'/inc/slide/ws_1.png', 'active', 'Customize every element of your site, select the layout, customize your home page, etc.'),
     'In-theme auth system' => array (get_stylesheet_directory_uri().'/inc/slide/ws_2.png', '', 'You can display all auth features right in the navbar, or in the right or left sidebars if you prefer so.'),

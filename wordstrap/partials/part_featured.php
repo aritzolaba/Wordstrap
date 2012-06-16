@@ -6,14 +6,10 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
 // Exit if accessed directly
 if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
-?>
 
-<?php
 // Get Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 ?>
@@ -67,21 +63,11 @@ if ($page == $maxpages) {
         <div class="span4">
             <div class="well ws-featured">
 
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <a class="tip" data-original-title="<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>" rel="tooltip">
-                        <div class="entry-thumbnail">
-                            <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
-                        </div>
-                    </a>
-                <?php else : ?>
+                <a class="tip" rel="tooltip" title="<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>">
                     <div class="entry-thumbnail">
-                        <a class="tip" data-original-title="<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>" rel="tooltip">
-                            <div class="ws-nothumb">
-                                no thumbnail
-                            </div>
-                        </a>
+                        <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
                     </div>
-                <?php endif; ?>
+                </a>
 
                 <h4 class="entry-title">
                     <a href="<?php the_permalink(); ?>"><?php echo ws_title_excerpt(strip_tags(get_the_title())); ?></a>
@@ -117,4 +103,4 @@ if ($page == $maxpages) {
     </p>
 <?php endif; ?>
 
-</div>
+</div><br />

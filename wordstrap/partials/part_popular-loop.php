@@ -6,16 +6,17 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
+// wp_query args
 $args = array(
     'post_type' => 'post',
     'orderby' => 'comment_count',
     'order' => 'DESC',
     'posts_per_page' => 4
 );
-// Override $wp_query with custom queries
 $popular = new WP_Query( $args );
 ?>
 

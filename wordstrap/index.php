@@ -3,20 +3,25 @@
  * The index template file.
  *
  * @package WordStrap
- * @subpackage Partials
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
+
+get_header();
 ?>
+<div class="row-fluid">
 
-<?php
-// Get Theme Options
-$wordstrap_theme_options = get_option('wordstrap_theme_options');
-// Check the use of ws-auth
-if ($wordstrap_theme_options['auth_system'] == 1) ws_auth();
-?>
+    <?php get_sidebar('left'); ?>
 
-<?php get_header(); ?>
+    <!-- Main Content -->
+    <div class="<?php echo WS_SPANCOL_CENTER; ?>">
 
-<?php get_template_part( 'partials/part_landing' ); ?>
+        <?php get_template_part('partials/part_landing'); ?>
+
+    </div><!-- .<?php echo WS_SPANCOL_CENTER; ?> -->
+
+    <?php get_sidebar(); ?>
+
+</div><!-- .row-fluid -->
 
 <?php get_footer(); ?>

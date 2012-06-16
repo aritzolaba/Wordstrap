@@ -1,14 +1,16 @@
 <?php
 /**
- * The widgets template partial.
+ * The widgets-right template partial.
  *
  * @package WordStrap
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('ws-sidebar-right')) : ?>
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
+if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('ws-sidebar-right')) : ?>
     <div class="ws-widget-container well well-widgets">
         <div class="ws-widget-title">
             <?php echo __ ('Widgets area #right', 'wordstrap'); ?>

@@ -3,12 +3,11 @@
  * The author template file.
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -24,8 +23,8 @@
                         global $wp_query;
                         $curauth = $wp_query->get_queried_object();
                         $author = $curauth->data;
-                        
-                        // Get authordata                        
+
+                        // Get authordata
                         $author_registered = strtotime($author->user_registered);
                         $author_name = trim(get_the_author_meta('first_name', $author->ID) . ' ' . get_the_author_meta('last_name', $author->ID));
                         $author_bio = get_the_author_meta('description', $author->ID);
@@ -70,7 +69,7 @@
                     <h3><?php echo sprintf ( __('Posts published by %s','wordstrap'), $author_name); ?></h3>
                     <br />
                     <?php rewind_posts(); ?>
-                    <?php if (have_posts()) : the_post; ?>
+                    <?php if (have_posts()) : the_post(); ?>
                         <?php get_template_part('partials/part_article-loop'); ?>
                     <?php else: ?>
                         <div class="alert alert-message">

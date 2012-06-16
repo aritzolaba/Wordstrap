@@ -3,69 +3,97 @@
  * The theme options page in wp-admin
  *
  * @package WordStrap
- * @subpackage Wordstrap
+ * @subpackage ThemeOptions
  * @since Wordstrap 1.6
  */
-
 class wordstrap_theme_options_page {
 
     function init() {
 
+        // Add menu
         add_action('admin_menu', array('wordstrap_theme_options_page', 'add_wordstrap_options_page'));
 
-        // If we have no options in the database, let's add them now.
+        // Initialize default options
+        $def_theme_options = array();
+        $def_theme_options['secure_wp'] = 0;
+        $def_theme_options['auth_system'] = 0;
+        $def_theme_options['hide_wsheader'] = 0;
+        $def_theme_options['hide_wsnavbar'] = 0;
+        $def_theme_options['nav_fixed'] = 0;
+        $def_theme_options['use_wpnavmenu'] = 0;
+        $def_theme_options['use_googlefonts'] = 1;
+        $def_theme_options['google_analytics'] = '';
+        $def_theme_options['google_font'] = 'Oxygen';
+        $def_theme_options['landing_page_slideshow'] = 1;
+        $def_theme_options['landing_page_intro'] = 0;
+        $def_theme_options['landing_page_featured'] = 0;
+        $def_theme_options['landing_page_featured_showtitle'] = 1;
+        $def_theme_options['auth_system_display'] = 'right';
+        $def_theme_options['featured_num'] = 3;
+        $def_theme_options['article_social'] = 1;
+        $def_theme_options['excerpt_length'] = 40;
+        $def_theme_options['widget_header_bg1'] = '#62A49B';
+        $def_theme_options['widget_header_bg2'] = '#0A7466';
+        $def_theme_options['intro_bg'] = '#eee';
+        $def_theme_options['intro_color'] = '#000';
+        $def_theme_options['show_wslogo'] = 1;
+        $def_theme_options['show_wstitle'] = 1;
+        $def_theme_options['show_wslogo_nav'] = 0;
+        $def_theme_options['show_wstitle_nav'] = 0;
+        $def_theme_options['footer_show_social'] = 1;
+        $def_theme_options['footer_displaycc'] = 1;
+        $def_theme_options['footer_title1'] = 'About';
+        $def_theme_options['footer_title2'] = 'Follow us';
+        $def_theme_options['footer_show_fb'] = 0;
+        $def_theme_options['footer_show_tw'] = 0;
+        $def_theme_options['footer_show_gp'] = 0;
+        $def_theme_options['footer_show_git'] = 0;
+        $def_theme_options['footer_show_yt'] = 0;
+        $def_theme_options['footer_fb_url'] = '';
+        $def_theme_options['footer_tw_url'] = '';
+        $def_theme_options['footer_gp_url'] = '';
+        $def_theme_options['footer_git_url'] = '';
+        $def_theme_options['footer_yt_url'] = '';
+        $def_theme_options['landing_page_intro_id'] = NULL;
+        $def_theme_options['landing_page_intro_title'] = NULL;
+        $def_theme_options['landing_page_tabs'] = 0;
+        $def_theme_options['landing_page_blog'] = 0;
+        $def_theme_options['featured_cat'] = NULL;
+        $def_theme_options['footer_text'] = 'Powered by Wordstrap';
+        $def_theme_options['ws_layout'] = '2cols-right';
+        $def_theme_options['nav_excludelist'] = serialize(array());
+
+        // Get current Options
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
-	if ( !$wordstrap_theme_options ) {
 
-            // Default Options
-            $wordstrap_theme_options['hide_wsheader'] = 0;
-            $wordstrap_theme_options['hide_wsnavbar'] = 0;
-            $wordstrap_theme_options['nav_fixed'] = 0;
-            $wordstrap_theme_options['use_googlefonts'] = 1;
-            $wordstrap_theme_options['google_analytics'] = '';
-            $wordstrap_theme_options['google_font'] = 'Oxygen';
-            $wordstrap_theme_options['landing_page_slideshow'] = 1;
-            $wordstrap_theme_options['landing_page_intro'] = 0;
-            $wordstrap_theme_options['landing_page_featured'] = 0;
-            $wordstrap_theme_options['auth_system_display'] = 'right';
-            $wordstrap_theme_options['featured_num'] = 3;
-            $wordstrap_theme_options['article_social'] = 1;
-            $wordstrap_theme_options['excerpt_length'] = 40;
-            $wordstrap_theme_options['widget_header_bg1'] = '#62A49B';
-            $wordstrap_theme_options['widget_header_bg2'] = '#0A7466';
-            $wordstrap_theme_options['intro_bg'] = '#eee';
-            $wordstrap_theme_options['intro_color'] = '#000';
-            $wordstrap_theme_options['show_wslogo'] = 1;
-            $wordstrap_theme_options['show_wstitle'] = 1;
-            $wordstrap_theme_options['show_wslogo_nav'] = 0;
-            $wordstrap_theme_options['show_wstitle_nav'] = 0;
-            $wordstrap_theme_options['footer_show_social'] = 1;
-            $wordstrap_theme_options['footer_displaycc'] = 1;
-            $wordstrap_theme_options['footer_title1'] = 'About';
-            $wordstrap_theme_options['footer_title2'] = 'Follow us';
-            $wordstrap_theme_options['footer_text'] = 'Powered by Wordstrap';
-            $wordstrap_theme_options['ws_layout'] = '2cols-right';
-            $wordstrap_theme_options['nav_excludelist'] = serialize(array());
-
-            // Update
-            add_option('wordstrap_theme_options', $wordstrap_theme_options);
-        }
+        // If there are options already
+        if ( $wordstrap_theme_options ) {
+            // Check array sizes, to detect if new options have been updated
+            // or removed and if so, delete options first and set defaults
+            $cur_size = sizeof($wordstrap_theme_options);
+            $def_size = sizeof($def_theme_options);
+            if ($def_size!=$cur_size) {
+                delete_option('wordstrap_theme_options');
+                add_option('wordstrap_theme_options', $def_theme_options);
+            }
+        } else
+            // Add default options
+            add_option('wordstrap_theme_options', $def_theme_options);
     }
 
     function add_wordstrap_options_page() {
-        add_theme_page(__('Theme Options', 'wordstrap'), __('Theme Options', 'wordstrap'), 8, 'theme-options-page', array('wordstrap_theme_options_page', 'page'));
+        add_theme_page(__('Theme Options', 'wordstrap'), __('Theme Options', 'wordstrap'), 'edit_theme_options', 'theme-options-page', array('wordstrap_theme_options_page', 'page'));
     }
 
     function page() {
-
         wp_enqueue_style ('bootstrap-css', get_stylesheet_directory_uri().'/inc/bootstrap/css/bootstrap.min.css');
         wp_enqueue_style ('theme-options-css', get_stylesheet_directory_uri().'/inc/theme-options.css');
         wp_enqueue_script ('theme-options-js', get_stylesheet_directory_uri().'/inc/js/theme-options.js');
         wp_enqueue_script ('bootstrap-js', get_stylesheet_directory_uri().'/inc/bootstrap/js/bootstrap.min.js');
-
         wp_enqueue_style( 'farbtastic' );
         wp_enqueue_script( 'farbtastic' );
 
+        // Get options
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
         /* GOOGLE FONT LIST */
@@ -86,50 +114,30 @@ class wordstrap_theme_options_page {
 
             $allowedhtml = array('a' => array('href' => array(),'title' => array()),'br' => array(),'i' => array(),'ul' => array('style'=>array()),'ol' => array('style'=>array()),'li' => array('style'=>array()),'em' => array(),'p' => array('style'=>array()),'strong' => array());
 
-            // The options
-            $wordstrap_theme_options['hide_adminbar'] = wp_kses($_POST['hide_adminbar'], NULL);
-            $wordstrap_theme_options['hide_wsnavbar'] = wp_kses($_POST['hide_wsnavbar'], NULL);
-            $wordstrap_theme_options['hide_wsheader'] = wp_kses($_POST['hide_wsheader'], NULL);
-            $wordstrap_theme_options['show_wstitle'] = wp_kses($_POST['show_wstitle'], NULL);
-            $wordstrap_theme_options['show_wslogo'] = wp_kses($_POST['show_wslogo'], NULL);
-            $wordstrap_theme_options['show_wstitle_nav'] = wp_kses($_POST['show_wstitle_nav'], NULL);
-            $wordstrap_theme_options['show_wslogo_nav'] = wp_kses($_POST['show_wslogo_nav'], NULL);
-            $wordstrap_theme_options['auth_system'] = wp_kses($_POST['auth_system'], NULL);
-            $wordstrap_theme_options['auth_system_display'] = wp_kses($_POST['auth_system_display'], NULL);
-            $wordstrap_theme_options['secure_wp'] = wp_kses($_POST['secure_wp'], NULL);
-            $wordstrap_theme_options['landing_page_slideshow'] = wp_kses($_POST['landing_page_slideshow'], NULL);
-            $wordstrap_theme_options['landing_page_intro'] = wp_kses($_POST['landing_page_intro'], NULL);
-            $wordstrap_theme_options['landing_page_intro_id'] = wp_kses($_POST['landing_page_intro_id'], NULL);
-            $wordstrap_theme_options['landing_page_intro_title'] = wp_kses($_POST['landing_page_intro_title'], NULL);
-            $wordstrap_theme_options['landing_page_blog'] = wp_kses($_POST['landing_page_blog'], NULL);
-            $wordstrap_theme_options['landing_page_featured'] = wp_kses($_POST['landing_page_featured'], NULL);
-            $wordstrap_theme_options['landing_page_tabs'] = wp_kses($_POST['landing_page_tabs'], NULL);
-            $wordstrap_theme_options['featured_cat'] = wp_kses($_POST['featured_cat'], NULL);
-            $wordstrap_theme_options['featured_num'] = wp_kses($_POST['featured_num'], NULL);
-            $wordstrap_theme_options['article_social'] = wp_kses($_POST['article_social'], NULL);
-            $wordstrap_theme_options['excerpt_length'] = wp_kses($_POST['excerpt_length'], NULL);
-            $wordstrap_theme_options['widget_header_bg1'] = wp_kses($_POST['widget_header_bg1'], NULL);
-            $wordstrap_theme_options['widget_header_bg2'] = wp_kses($_POST['widget_header_bg2'], NULL);
-            $wordstrap_theme_options['intro_bg'] = wp_kses($_POST['intro_bg'], NULL);
-            $wordstrap_theme_options['intro_color'] = wp_kses($_POST['intro_color'], NULL);
-            $wordstrap_theme_options['use_googlefonts'] = wp_kses($_POST['use_googlefonts'], NULL);
-            $wordstrap_theme_options['google_font'] = wp_kses($_POST['google_font'], NULL);
-            $wordstrap_theme_options['google_analytics'] = urlencode($_POST['google_analytics']);            
-            $wordstrap_theme_options['footer_show_fb'] = wp_kses($_POST['footer_show_fb'], NULL);
-            $wordstrap_theme_options['footer_show_gp'] = wp_kses($_POST['footer_show_gp'], NULL);
-            $wordstrap_theme_options['footer_show_tw'] = wp_kses($_POST['footer_show_tw'], NULL);
-            $wordstrap_theme_options['footer_show_git'] = wp_kses($_POST['footer_show_git'], NULL);
-            $wordstrap_theme_options['footer_fb_url'] = wp_kses($_POST['footer_fb_url'], NULL);
-            $wordstrap_theme_options['footer_gp_url'] = wp_kses($_POST['footer_gp_url'], NULL);
-            $wordstrap_theme_options['footer_tw_url'] = wp_kses($_POST['footer_tw_url'], NULL);
-            $wordstrap_theme_options['footer_git_url'] = wp_kses($_POST['footer_git_url'], NULL);
-            $wordstrap_theme_options['footer_title1'] = wp_kses($_POST['footer_title1'], NULL);
-            $wordstrap_theme_options['footer_title2'] = wp_kses($_POST['footer_title2'], NULL);
-            $wordstrap_theme_options['footer_text'] = wp_kses($_POST['footer_text'], $allowedhtml);
-            $wordstrap_theme_options['footer_displaycc'] = wp_kses($_POST['footer_displaycc'], NULL);
-            $wordstrap_theme_options['ws_layout'] = wp_kses($_POST['ws_layout'], NULL);
-            $wordstrap_theme_options['nav_fixed'] = wp_kses($_POST['nav_fixed'], NULL);
-            $wordstrap_theme_options['nav_excludelist'] = serialize(wp_kses($_POST['nav_excludelist'], NULL));
+            //var_dump($wordstrap_theme_options);
+
+            // Obtain all $_POST values and make sure unchecked options are
+            // saved with a 0 value. Also check nav_excludelist is serialized and
+            // footer_text has allowed html.
+            foreach ($wordstrap_theme_options as $k => $v) {
+                if (isset($_POST[$k])) {
+                    if ($k == 'nav_excludelist')
+                        $wordstrap_theme_options[$k] = serialize(wp_kses($_POST[$k], NULL));
+                    elseif ($k == 'footer_text')
+                        $wordstrap_theme_options[$k] = wp_kses($_POST[$k], $allowedhtml);
+                    elseif ($k == 'google_analytics' && wp_kses($_POST[$k], NULL) != '') {
+                        $wordstrap_theme_options[$k] = '<script>' . wp_kses($_POST[$k], NULL) .'</script>';
+                    }
+                    else
+                        $wordstrap_theme_options[$k] = wp_kses($_POST[$k], NULL);
+                }
+                else {
+                    if ($k == 'nav_excludelist')
+                        $wordstrap_theme_options[$k] = serialize(array());
+                    else
+                        $wordstrap_theme_options[$k] = 0;
+                }
+            }
 
             // Update
             $ret=update_option('wordstrap_theme_options', $wordstrap_theme_options);
@@ -143,12 +151,12 @@ class wordstrap_theme_options_page {
             <?php screen_icon(); ?>
 
             <h2>
-                <?php printf(__('%s Theme Options', 'wordstrap'), get_current_theme()); ?>
+                <?php printf(__('%s Theme Options', 'wordstrap'), wp_get_theme()); ?>
             </h2>
 
             <?php settings_errors(); ?>
 
-            <hr>
+            <br />
 
             <form method="post" action="">
 
@@ -170,38 +178,48 @@ class wordstrap_theme_options_page {
                             <hr>
 
                             <div class="row-fluid">
-                                <div class="span6">
+                                <div class="span4">
                                     <label for="WsLayout"><?php _e('Site Layout','wordstrap'); ?></label>
                                     <div class="clearfix">
-                                        <div style="text-align: center; width: 100px; float: left;">
-                                            <p style="text-align: center; margin-bottom: 0px;">
-                                                <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/full-width.png'; ?>" >
-                                            </p>
-                                            <input type="radio" name="ws_layout" value="full-width" <?php if ($wordstrap_theme_options['ws_layout'] == 'full-width') echo 'checked="checked"'; ?>> <?php _e('Full width','wordstrap'); ?>
+                                        <div class="row-fluid">
+                                        <div class="span6">
+                                            <label for="ws_layout_1" class="checkbox" style="padding: 0px; text-align: left;">
+                                                <p style="text-align: center; margin-bottom: 0px;">
+                                                    <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/full-width.png'; ?>" >
+                                                </p>
+                                                <input style="float: left; margin-right: 4px;" id="ws_layout_1" type="radio" name="ws_layout" value="full-width" <?php if ($wordstrap_theme_options['ws_layout'] == 'full-width') echo 'checked="checked"'; ?>> <?php _e('Full width','wordstrap'); ?>
+                                            </label>
                                         </div>
 
-                                        <div style="text-align: center; width: 100px; float: left;">
-                                            <p style="text-align: center; margin-bottom: 0px;">
-                                                <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-left.png'; ?>" >
-                                            </p>
-                                            <input type="radio" name="ws_layout" value="2cols-left" <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-left') echo 'checked="checked"'; ?>> <?php _e('2 cols left','wordstrap'); ?>
+                                        <div class="span6">
+                                            <label for="ws_layout_2" class="checkbox" style="padding: 0px; text-align: left;">
+                                                <p style="text-align: center; margin-bottom: 0px;">
+                                                    <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-left.png'; ?>" >
+                                                </p>
+                                                <input style="float: left; margin-right: 4px;" id="ws_layout_2" type="radio" name="ws_layout" value="2cols-left" <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-left') echo 'checked="checked"'; ?>> <?php _e('2 cols left','wordstrap'); ?>
+                                            </label>
+                                        </div>
+                                        </div>
+                                        <div class="row-fluid" style="margin-top: 10px;">
+                                        <div class="span6">
+                                            <label for="ws_layout_3" class="checkbox" style="padding: 0px; text-align: left;">
+                                                <p style="text-align: center; margin-bottom: 0px;">
+                                                    <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-right.png'; ?>" >
+                                                </p>
+                                                <input style="float: left; margin-right: 4px;" id="ws_layout_3" type="radio" name="ws_layout" value="2cols-right" <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-right') echo 'checked="checked"'; ?>> <?php _e('2 cols right','wordstrap'); ?>
+                                            </label>
                                         </div>
 
-                                        <div style="text-align: center; width: 100px; float: left;">
-                                            <p style="text-align: center; margin-bottom: 0px;">
-                                                <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-right.png'; ?>" >
-                                            </p>
-                                            <input type="radio" name="ws_layout" value="2cols-right" <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-right') echo 'checked="checked"'; ?>> <?php _e('2 cols right','wordstrap'); ?>
+                                        <div class="span6">
+                                            <label for="ws_layout_4" class="checkbox" style="padding: 0px; text-align: left;">
+                                                <p style="text-align: center; margin-bottom: 0px;">
+                                                    <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/3cols.png'; ?>" >
+                                                </p>
+                                                <input style="float: left; margin-right: 4px;" id="ws_layout_4" type="radio" name="ws_layout" value="3cols" <?php if ($wordstrap_theme_options['ws_layout'] == '3cols') echo 'checked="checked"'; ?>> <?php _e('3 cols','wordstrap'); ?>
+                                            </label>
                                         </div>
-
-                                        <div style="text-align: center; width: 100px; float: left;">
-                                            <p style="text-align: center; margin-bottom: 0px;">
-                                                <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/3cols.png'; ?>" >
-                                            </p>
-                                            <input type="radio" name="ws_layout" value="3cols" <?php if ($wordstrap_theme_options['ws_layout'] == '3cols') echo 'checked="checked"'; ?>> <?php _e('3 cols','wordstrap'); ?>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="span6">
                                     <label for="IntroContainer"><?php _e('Intro container','wordstrap'); ?></label>
@@ -269,8 +287,8 @@ class wordstrap_theme_options_page {
                             </p>
 
                             <p class="help-block">
-                                <label for="ArticleSocial"><?php _e('Display social buttons in posts ?','wordstrap'); ?></label>
-                                <input type="checkbox" name="article_social" <?php if ($wordstrap_theme_options['article_social'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Facebook, Google+ and Twitter like buttons','wordstrap'); ?>
+                                <label for="article_social"><?php _e('Display social buttons in posts ?','wordstrap'); ?></label>
+                                <input type="checkbox" id="article_social" name="article_social" <?php if ($wordstrap_theme_options['article_social'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Facebook, Google+ and Twitter like buttons','wordstrap'); ?>
                             </p>
                         </div>
 
@@ -298,7 +316,7 @@ class wordstrap_theme_options_page {
                             </p>
                             <br />
                             <label for="google_analytics"><?php _e('Google Analytics code','wordstrap'); ?></label>
-                            <textarea name="google_analytics" style="width: 350px; height: 100px;"><?php if ($wordstrap_theme_options['google_analytics'] != '') echo str_replace('\\','',urldecode($wordstrap_theme_options['google_analytics'])); ?></textarea>                            
+                            <textarea name="google_analytics" style="width: 350px; height: 100px;"><?php if ($wordstrap_theme_options['google_analytics'] != '') echo str_replace('\\','',$wordstrap_theme_options['google_analytics']); ?></textarea>
                             <br />
                         </div>
 
@@ -308,39 +326,13 @@ class wordstrap_theme_options_page {
                             <hr>
 
                             <div class="row-fluid">
-                                <div class="span4">
-                                    <p>
-                                        <label for="footer_show_social"><?php _e('Display social buttons','wordstrap'); ?></label>
-                                    </p>
-                                    <p class="help-block">
-                                        <input type="checkbox" name="footer_show_fb" <?php if ($wordstrap_theme_options['footer_show_fb'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Facebook Button','wordstrap'); ?><br />
-                                        <input type="text" name="footer_fb_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_fb_url']; ?>">
-                                    </p>
-                                    <p class="help-block">
-                                        <input type="checkbox" name="footer_show_gp" <?php if ($wordstrap_theme_options['footer_show_gp'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Google+ Button','wordstrap'); ?><br />
-                                        <input type="text" name="footer_gp_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_gp_url']; ?>">
-                                    </p>
-                                    <p class="help-block">
-                                        <input type="checkbox" name="footer_show_tw" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Twitter Button','wordstrap'); ?><br />
-                                        <input type="text" name="footer_tw_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_tw_url']; ?>">
-                                    </p>
-                                    <p class="help-block">
-                                        <input type="checkbox" name="footer_show_git" <?php if ($wordstrap_theme_options['footer_show_git'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Github Button','wordstrap'); ?><br />
-                                        <input type="text" name="footer_git_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_git_url']; ?>">
-                                    </p><br />
-                                    <p>
-                                        <label for="footer_displaycc"><?php _e('Display Creative Commons logo','wordstrap'); ?>
-                                        <input type="checkbox" name="footer_displaycc" <?php if ($wordstrap_theme_options['footer_displaycc'] == 1) echo 'checked="checked"'; ?> value="1">
-                                        </label>
-                                    </p>
-                                </div>
                                 <div class="span8">
 
-                                    <label for="FooterTitle" style="float: left;"><?php _e('Footer Title', 'wordstrap'); ?></label>
-                                    <input type="text" class="span7" name="footer_title1" value="<?php if (isset($wordstrap_theme_options['footer_title1'])) echo $wordstrap_theme_options['footer_title1']; ?>">
+                                    <label for="FooterTitle"><?php _e('Footer Title', 'wordstrap'); ?></label>
+                                    <input type="text" class="span5" name="footer_title1" value="<?php if (isset($wordstrap_theme_options['footer_title1'])) echo $wordstrap_theme_options['footer_title1']; ?>">
                                     <br />
-                                    <label for="FooterTitleSocial" style="float: left;"><?php _e('Footer Title Social', 'wordstrap'); ?></label>
-                                    <input type="text" class="span7" name="footer_title2" value="<?php if (isset($wordstrap_theme_options['footer_title2'])) echo $wordstrap_theme_options['footer_title2']; ?>">
+                                    <label for="FooterTitleSocial"><?php _e('Footer Title Social', 'wordstrap'); ?></label>
+                                    <input type="text" class="span5" name="footer_title2" value="<?php if (isset($wordstrap_theme_options['footer_title2'])) echo $wordstrap_theme_options['footer_title2']; ?>">
                                     <br />
                                     <label for="FooterText" style="float: left;"><?php _e('Footer text', 'wordstrap'); ?></label>
                                     <?php
@@ -348,6 +340,36 @@ class wordstrap_theme_options_page {
                                     wp_editor($wordstrap_theme_options['footer_text'],'footer_text', $editorsettings);
                                     ?>
                                     <br />
+
+                                    <p style="margin-top: 10px;">
+                                        <label class="checkbox" for="footer_displaycc"><?php _e('Display Creative Commons logo','wordstrap'); ?>
+                                        <input type="checkbox" id="footer_displaycc" name="footer_displaycc" <?php if ($wordstrap_theme_options['footer_displaycc'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="span4">
+
+                                    <p><strong><?php _e('Social buttons','wordstrap'); ?></strong></p>
+
+                                        <div class="buttons_container fb_button" <?php if ($wordstrap_theme_options['footer_show_fb'] == 1) echo 'style="opacity: 1;"'; ?>><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_fb.png'; ?>" title="Facebook" alt="Facebook" /></div>
+                                        <label for="footer_show_fb" class="checkbox" style="margin-bottom: 5px;"><input style="visibility: hidden;" rel="fb" type="checkbox" id="footer_show_fb" class="social_buttons_check" name="footer_show_fb" <?php if ($wordstrap_theme_options['footer_show_fb'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Show Facebook Button','wordstrap'); ?></label>
+                                        <input type="text" name="footer_fb_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_fb_url']; ?>"><br />
+
+                                        <div class="buttons_container gp_button" <?php if ($wordstrap_theme_options['footer_show_gp'] == 1) echo 'style="opacity: 1;"'; ?>><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_gp.png'; ?>" title="Google+" alt="Google+" /></div>
+                                        <label for="footer_show_gp" class="checkbox" style="margin-bottom: 5px;"><input style="visibility: hidden;" rel="gp" type="checkbox" id="footer_show_gp" class="social_buttons_check" name="footer_show_gp" <?php if ($wordstrap_theme_options['footer_show_gp'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Show Google+ Button','wordstrap'); ?></label>
+                                        <input type="text" name="footer_gp_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_gp_url']; ?>"><br />
+
+                                        <div class="buttons_container tw_button" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'style="opacity: 1;"'; ?>><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_tw.png'; ?>" title="Twitter" alt="Twitter" /></div>
+                                        <label for="footer_show_tw" class="checkbox" style="margin-bottom: 5px;"><input style="visibility: hidden;" rel="tw" type="checkbox" id="footer_show_tw" class="social_buttons_check" name="footer_show_tw" <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Show Twitter Button','wordstrap'); ?></label>
+                                        <input type="text" name="footer_tw_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_tw_url']; ?>"><br />
+
+                                        <div class="buttons_container git_button" <?php if ($wordstrap_theme_options['footer_show_git'] == 1) echo 'style="opacity: 1;"'; ?>><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_git.png'; ?>" title="GitHub" alt="GitHub" /></div>
+                                        <label for="footer_show_git" class="checkbox" style="margin-bottom: 5px;"><input style="visibility: hidden;" rel="git" type="checkbox" id="footer_show_git" class="social_buttons_check" name="footer_show_git" <?php if ($wordstrap_theme_options['footer_show_git'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Show GitHub Button','wordstrap'); ?></label>
+                                        <input type="text" name="footer_git_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_git_url']; ?>"><br />
+
+                                        <div class="buttons_container yt_button" <?php if ($wordstrap_theme_options['footer_show_yt'] == 1) echo 'style="opacity: 1;"'; ?>><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_yt.png'; ?>" title="YouTube" alt="YouTube" /></div>
+                                        <label for="footer_show_yt" class="checkbox" style="margin-bottom: 5px;"><input style="visibility: hidden;" rel="yt" type="checkbox" id="footer_show_yt" class="social_buttons_check" name="footer_show_yt" <?php if ($wordstrap_theme_options['footer_show_yt'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Show YouTube Button','wordstrap'); ?></label>
+                                        <input type="text" name="footer_yt_url" class="span2" placeholder="http://" value="<?php echo $wordstrap_theme_options['footer_yt_url']; ?>"><br />
 
                                 </div>
                             </div>
@@ -359,10 +381,10 @@ class wordstrap_theme_options_page {
                             <h3><small><?php _e('Select which elements will be displayed in the landing page.','wordstrap'); ?></small></h3>
                             <hr>
 
-                            <p>
+                            <label class="checkbox" for="landing_page_intro_check">
                                 <input id="landing_page_intro_check" type="checkbox" name="landing_page_intro" <?php if ($wordstrap_theme_options['landing_page_intro'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Intro container','wordstrap'); ?>
-                            </p>
-                            <div id="landing_page_intro_box" class="alert alert-message ws-alert" <?php if ($wordstrap_theme_options['landing_page_intro'] != 1) echo 'style="display: none;"'; ?>>
+                            </label>
+                            <div id="landing_page_intro_box" class="alert alert-message ws-alert" <?php if ($wordstrap_theme_options['landing_page_intro'] != 1) echo 'style="display: none; margin-top: 10px;"'; else echo 'style="margin-top: 10px;"'; ?>>
                                 <div class="row-fluid">
                                     <div class="span3">
                                         <label><?php _e('and use this page:','wordstrap'); ?></label>
@@ -375,20 +397,21 @@ class wordstrap_theme_options_page {
                                         </select>
                                     </div>
                                     <div class="span9">
-                                        <label><?php _e('Show page title','wordstrap'); ?></label>
-                                        <input type="checkbox" name="landing_page_intro_title" <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <label class="checkbox" for="landing_page_intro_title" ><?php _e('Show page title','wordstrap'); ?>
+                                            <input type="checkbox" id="landing_page_intro_title" name="landing_page_intro_title" <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <p>
-                                <input type="checkbox" name="landing_page_slideshow" <?php if ($wordstrap_theme_options['landing_page_slideshow'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Slideshow','wordstrap'); ?>
-                            </p>
+                            <label class="checkbox" for="landing_page_slideshow">
+                                <input type="checkbox" id="landing_page_slideshow" name="landing_page_slideshow" <?php if ($wordstrap_theme_options['landing_page_slideshow'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Slideshow','wordstrap'); ?>
+                            </label>
 
-                            <p>
-                                <input id="landing_page_featured_check" type="checkbox" name="landing_page_featured" <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Featured items container','wordstrap'); ?>
-                            </p>
-                            <div id="landing_page_featured_box" class="alert alert-message ws-alert" <?php if ($wordstrap_theme_options['landing_page_featured'] != 1) echo 'style="display: none;"'; ?>>
+                            <label class="checkbox" for="landing_page_featured_check">
+                                <input type="checkbox" id="landing_page_featured_check" name="landing_page_featured" <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Featured items container','wordstrap'); ?>
+                            </label>
+                            <div id="landing_page_featured_box" class="alert alert-message ws-alert" <?php if ($wordstrap_theme_options['landing_page_featured'] != 1) echo 'style="display: none; margin-top: 10px;"'; else echo 'style="margin-top: 10px;"'; ?>>
                                 <div class="row-fluid">
                                     <div class="span3">
                                         <label><?php _e('Number of items','wordstrap'); ?></label>
@@ -407,15 +430,19 @@ class wordstrap_theme_options_page {
                                             endforeach;
                                             ?>
                                         </select>
+                                        <br />
+                                        <label class="checkbox" for="landing_page_featured_showtitle"><?php _e('Display title ?','wordstrap'); ?>
+                                        <input type="checkbox" id="landing_page_featured_showtitle" name="landing_page_featured_showtitle" <?php if ($wordstrap_theme_options['landing_page_featured_showtitle'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
-                            <p>
-                                <input type="checkbox" name="landing_page_tabs" <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Tabs','wordstrap'); ?>
-                            </p>
-                            <p>
-                                <input type="checkbox" name="landing_page_blog" <?php if ($wordstrap_theme_options['landing_page_blog'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Blog loop','wordstrap'); ?>
-                            </p>
+                            <label class="checkbox" for="landing_page_tabs">
+                                <input type="checkbox" id="landing_page_tabs" name="landing_page_tabs" <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Tabs','wordstrap'); ?>
+                            </label>
+                            <label class="checkbox" for="landing_page_blog">
+                                <input type="checkbox" id="landing_page_blog" name="landing_page_blog" <?php if ($wordstrap_theme_options['landing_page_blog'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Blog loop','wordstrap'); ?>
+                            </label>
                         </div>
 
                         <div id="lF" class="tab-pane">
@@ -425,49 +452,58 @@ class wordstrap_theme_options_page {
 
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <label for="hide_adminbar"><?php _e('Hide Wordpress admin bar','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="hide_adminbar" name="hide_adminbar" <?php if ($wordstrap_theme_options['hide_adminbar'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Completely remove wordpress admin bar','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="hide_wsheader"><?php _e('Hide Wordstrap header','wordstrap'); ?>
+                                        <input type="checkbox" id="hide_wsheader" name="hide_wsheader" <?php if ($wordstrap_theme_options['hide_wsheader'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Do not display wordstrap header','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="hide_wsheader"><?php _e('Hide Wordstrap header','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="hide_wsheader" name="hide_wsheader" <?php if ($wordstrap_theme_options['hide_wsheader'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Do not display wordstrap header','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="hide_wsnavbar"><?php _e('Hide Wordstrap nav bar','wordstrap'); ?>
+                                        <input type="checkbox" id="hide_wsnavbar" name="hide_wsnavbar" <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Do not display wordstrap nav bar','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="hide_wsnavbar"><?php _e('Hide Wordstrap nav bar','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="hide_wsnavbar" name="hide_wsnavbar" <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Do not display wordstrap nav bar','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="nav_fixed"><?php _e('Navbar style','wordstrap'); ?>
+                                        <input type="checkbox" id="nav_fixed" name="nav_fixed" <?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                             <?php _e('Fixed top','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="nav_fixed"><?php _e('Navbar style','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="nav_fixed" name="nav_fixed" <?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Fixed top','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="show_wstitle"><?php _e('Show Site title in header','wordstrap'); ?>
+                                        <input type="checkbox" id="show_wstitle" name="show_wstitle" <?php if ($wordstrap_theme_options['show_wstitle'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Display title in wordstrap header','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="show_wstitle"><?php _e('Show Site title in header','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="show_wstitle" name="show_wstitle" <?php if ($wordstrap_theme_options['show_wstitle'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display title in wordstrap header','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="show_wslogo"><?php _e('Show Site logo in header','wordstrap'); ?>
+                                        <input type="checkbox" id="show_wslogo" name="show_wslogo" <?php if ($wordstrap_theme_options['show_wslogo'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Display logo in wordstrap header','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="show_wslogo"><?php _e('Show Site logo in header','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="show_wslogo" name="show_wslogo" <?php if ($wordstrap_theme_options['show_wslogo'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display logo in wordstrap header','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="show_wstitle_nav"><?php _e('Show Site title in nav bar','wordstrap'); ?>
+                                        <input type="checkbox" id="show_wstitle_nav" name="show_wstitle_nav" <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Display title in wordstrap nav bar','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
-                                    <label for="show_wstitle_nav"><?php _e('Show Site title in nav bar','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="show_wstitle_nav" name="show_wstitle_nav" <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display title in wordstrap nav bar','wordstrap'); ?>
-                                    </p>
-                                    <br />
-                                    <label for="show_wslogo_nav"><?php _e('Show Site logo in nav bar','wordstrap'); ?></label>
-                                    <p class="help-block">
-                                        <input type="checkbox" id="show_wslogo_nav" name="show_wslogo_nav" <?php if ($wordstrap_theme_options['show_wslogo_nav'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display logo in wordstrap nav bar','wordstrap'); ?>
-                                    </p>
+                                    <label class="checkbox" for="show_wslogo_nav"><?php _e('Show Site logo in nav bar','wordstrap'); ?>
+                                        <input type="checkbox" id="show_wslogo_nav" name="show_wslogo_nav" <?php if ($wordstrap_theme_options['show_wslogo_nav'] == 1) echo 'checked="checked"'; ?> value="1">
+                                        <p class="help-block">
+                                            <?php _e('Display logo in wordstrap nav bar','wordstrap'); ?>
+                                        </p>
+                                    </label>
                                     <br />
                                 </div>
                                 <div class="span6">
-                                    <label for="WsLogo"><?php _e('Exclude pages','wordstrap'); ?></label>
+                                    <label for="WsLogo"><?php _e('Exclude pages in nav','wordstrap'); ?></label>
                                     <?php $list_pages = get_pages(); ?>
                                     <select class="span2" name="nav_excludelist[]" multiple style="height: 160px;">
                                         <option value="0" style="font-style: italic;"><?php _e('None','wordstrap'); ?></option>
@@ -501,25 +537,24 @@ add_action('init', array('wordstrap_theme_options_page', 'init'));
 function wordstrap_style_options () {
     $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
-    $addstyle = '<style>
-        .well-widgets .ws-widget-title {
-            background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
-            background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
-        }
-        .well.well-intro {
-            background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise1.png\') repeat;
-            color: '.$wordstrap_theme_options['intro_color'].';
-        }
-        .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
-            color: '.$wordstrap_theme_options['intro_color'].';
-        }';
+    $addstyle = '
+    .well-widgets .ws-widget-title {
+        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
+        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
+    }
+    .well.well-intro {
+        background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise1.png\') repeat;
+        color: '.$wordstrap_theme_options['intro_color'].';
+    }
+    .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
+        color: '.$wordstrap_theme_options['intro_color'].';
+    }';
 
-    if ($wordstrap_theme_options['use_googlefonts']==1) :
-        $addstyle .= '.ws-widget-title, .well-intro h1 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
-        </style>';
+    if ($wordstrap_theme_options['use_googlefonts'] == 1) :
+        $addstyle .= '.ws-widget-title, .well-intro h1 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }';
     endif;
 
-    echo $addstyle;
+    echo '<style type="text/css">'.$addstyle.'</style>';
 }
 add_action ('wp_head', 'wordstrap_style_options');

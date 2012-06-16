@@ -6,9 +6,11 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php if (have_posts()) : ?>
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
+if (have_posts()) : ?>
 
     <?php while (have_posts()) : the_post(); ?>
 

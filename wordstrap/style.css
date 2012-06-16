@@ -1,8 +1,8 @@
 /*
 Theme Name: Wordstrap
-Theme URI: http://aritzolaba.github.com/Wordstrap/
+Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
-Author URI: http://aritzolaba.github.com
+Author URI: http://www.olabaworks.com
 Description: A wordpress theme using the popular Bootstrap CSS Framework.
 Version: 1.6
 License: GNU General Public License
@@ -43,6 +43,9 @@ label.checkbox { font-weight: normal; }
 .rightspace-large { margin-right: 1.0em; }
 .rightspace-icon { margin-right: 0.5em; }
 .space-none {margin:0px;padding:0px;}
+
+/* set thickbox z-index higher than fixed nav and header */
+div#TB_window { z-index: 2000; }
 
 /* ****************************************************************************/
 /* WORDSTRAP SKIN 1
@@ -129,6 +132,9 @@ img.ws-logo { margin: 10px; margin-top: 0.8em; margin-right: 0px; }
     background: #888;
     right: 10px;
 }
+.navbar .dropdown-menu {
+    border-radius: 8px;
+}
 .navbar .dropdown-menu:after {
     border-bottom: 6px solid #888;
 }
@@ -175,7 +181,7 @@ img.ws-logo { margin: 10px; margin-top: 0.8em; margin-right: 0px; }
 /* articles */
 .ws-article { margin-bottom: 10px; overflow: hidden; border-bottom: 1px solid #eeeeee; }
 .ws-article h1.entry-title { font-size: 2em; line-height: 1em; }
-.ws-article h2 small { font-size: 0.7em; line-height: 1em; }
+.ws-article h2 small { font-size: 0.6em; line-height: 1em; }
 .ws-article h1.entry-title a { color: #326897; }
 .ws-article h1.entry-title a:hover { color: #124877; text-decoration: none; }
 .ws-article .entry-header { overflow: hidden; padding: 0px; }
@@ -187,7 +193,7 @@ img.ws-logo { margin: 10px; margin-top: 0.8em; margin-right: 0px; }
 .entry-details h2 small { line-height: 1.4em; }
 .ws-article .entry-content { padding: 20px; }
 .ws-article .entry-content p { font-family: Verdana, Tahoma, Arial; font-size: 1.1em; text-align: justify; }
-.ws-article .entry-thumbnail { background: #fff; text-align: center; float: right; padding: 6px; border: 8px solid #eaeaea; -moz-border-radius: 6px; -webkit-border-radius: 6px; margin: 4px 0 10px 20px; overflow: hidden; }
+.ws-article .entry-thumbnail { background: #fff; text-align: center; float: right; padding: 5px; padding-bottom: 0px; border: 6px solid #eaeaea; border-radius: 12px; -moz-border-radius: 12px; -webkit-border-radius: 12px; margin: 4px 0 10px 20px; overflow: hidden; }
 .ws-article .entry-meta { padding: 10px; padding-right: 20px; text-align: right; border-top: 1px solid #ddd; overflow: hidden; }
 .ws-article .entry-author { float: left; margin-left: 6px; margin-top: 10px; }
 .ws-article .entry-author a { font-size: 16px; font-weight: bold; font-style: italic; }
@@ -197,11 +203,13 @@ div.ws-search h1.entry-title, div.ws-search h2.entry-details { margin-left: 10px
 .ws-social-buttons { display: none; }
 .ws-social-buttons-container { height: 24px; }
 .ws-tag-container { margin-left: 72px; margin-top: 2px; }
+.entry-content iframe { max-width: 100%; }
 
 /* Featured */
 .ws-featured .entry-thumbnail { overflow: hidden; height: 90px; margin-bottom: 10px; text-align: center; }
 .ws-featured.well { padding: 12px; }
-.ws-featured.well:hover { border: 4px solid #333; padding: 9px; border-radius: 3px; }
+.ws-featured.well:hover { border: 4px solid #333; padding: 9px; border-radius: 8px; }
+h1.ws-featured-title { margin: 0px; padding: 0px; margin-bottom: 10px; color: #fff; text-shadow: 1px 1px 1px #000; }
 
 /* Marketing partial */
 .ws-marketing .alert-heading { min-height: 125px; border: 1px solid #ddd; }
@@ -226,6 +234,7 @@ article .calendar {
     -webkit-border-radius: 5px 5px 5px 5px;
     -moz-box-shadow: 0px 0px 2px #333333;
     -webkit-box-shadow: 1px 1px 2px #333333;
+    border-radius: 5px;
     box-shadow: 1px 1px 2px #333333;
     float: left;
     font-size: 0.7em;
@@ -276,6 +285,7 @@ article .calendar.calendar-small .day { line-height: 1.4em; font-size: 1.6em; fo
 
 /* tabs */
 .ws-tab-trigger { font-size: 14px; font-weight: bold; }
+.ws-tab-icon { float: left; font-size: 1.8em; }
 .ws-home-tabs .nav-tabs { margin-bottom: 28px; }
 .ws-home-tabs h1.entry-title, .ws-loop h1.entry-title { font-size: 1.6em; line-height: 1.4em; margin-left: 40px; }
 .ws-home-tabs h2.entry-details small, .ws-loop h2.entry-details small { font-size: 0.6em; }
@@ -372,6 +382,24 @@ div#ws-comment-list p { word-wrap: break-word; font-size: 1.09em; }
 .ws-comment-textarea { width: 90%; height: 80px; resize: none; }
 #cancel-comment-reply-link { font-size: 0.8em; }
 p.must-log-in, p.comment-notes { padding-top: 10px; }
+a.comment-reply-link {
+    font-size: 0.8em;
+    float: left;
+    padding: 2px 6px;
+    background: #ccc;
+    border-radius: 5px;
+    color: #555;
+    text-decoration: none;
+    margin-top: 20px;
+}
+a.comment-reply-link:hover, a.comment-reply-link:focus, a.comment-reply-link:active{
+    box-shadow: 1px 1px 1px #111;
+    background: #ddd;
+    color: #111;
+}
+span.required {
+    display: none;
+}
 
 /* invisible anchor targets */
 .ws-anchor { visible: hidden; height: 1px; float: left; margin-top: -60px; }
@@ -390,9 +418,7 @@ p.must-log-in, p.comment-notes { padding-top: 10px; }
 /* footer social buttons */
 .social_buttons_container_footer { margin: 0px; margin-top: 10px; overflow: hidden; }
 .social_buttons_container_footer img { float: left; margin: 0px 10px; }
-.social_buttons_container_footer a.fb img:hover,
-.social_buttons_container_footer a.gplus img:hover,
-.social_buttons_container_footer a.tw img:hover { margin-top: 2px; }
+.social_buttons_container_footer a.social_btn img:hover { margin-top: 2px; }
 
 /* widgets */
 .ws-widget-content { margin-bottom: 0px; }
@@ -484,19 +510,7 @@ p.must-log-in, p.comment-notes { padding-top: 10px; }
 }
 
 .ws-nothumb {
-    padding: 10px; border: 2px dashed #ddd; margin: 2px; text-align: center; font-size: 1.2em; margin-bottom: 5px;
-}
-
-/* ajax loading */
-.ws-loading {
-    z-index: 3000;
-    float: left;
-    text-align: center;    
-    margin-top: -30px;
-    margin-left: 130px;
-    width: 100px;
-    height: 20px;
-    background: transparent url('inc/imgs/ajax-loader-fb.gif') no-repeat;
+    margin: 0px; text-align: center; font-size: 1.2em;
 }
 
 /* special tabs */
@@ -574,8 +588,8 @@ table#wp-calendar td#next { text-align: right; font-size: 1.2em; }
 
 /* Post author highlighting */
 .commentlist > li.bypostauthor {
-    background: #ddd;
-    border-color: #d3d3d3;
+    background: transparent;
+    border: 0px;
     color: #444;
 }
 .commentlist > li.bypostauthor .comment-meta {
@@ -586,8 +600,8 @@ table#wp-calendar td#next { text-align: right; font-size: 1.2em; }
 }
 /* Post Author threaded comments */
 .commentlist .children > li.bypostauthor {
-    background: #fff;
-    border-color: #ddd;
+    background: transparent;
+    border: 0px;
 }
 .commentlist .children > li.bypostauthor > article,
 .commentlist .children > li.bypostauthor > article .comment-meta {
@@ -638,32 +652,7 @@ h3#reply-title {
     padding-bottom: 5px;
     border-bottom: 2px dotted #cacaca;
 }
-#ws-comment-submit {
-    margin-top: 10px;
-    color: #fff;
-    padding:9px 14px;
-    font-size:15px;
-    line-height:normal;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    border-color:#0044cc #0044cc #002a80;
-    border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    background-color:#006dcc;
-    background-image:-moz-linear-gradient(top, #0088cc, #0044cc);
-    background-image:-ms-linear-gradient(top, #0088cc, #0044cc);
-    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-    background-image:-webkit-linear-gradient(top, #0088cc, #0044cc);
-    background-image:-o-linear-gradient(top, #0088cc, #0044cc);
-    background-image:linear-gradient(top, #0088cc, #0044cc);
-    background-repeat:repeat-x;
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0044cc', GradientType=0);
-    filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
 /* END wordpress theme required */
-
-/* set thickbox z-index higher than fixed nav and header */
-div#TB_window { z-index: 2000; }
 
 /* END SKIN 1 *****************************************************************/
 

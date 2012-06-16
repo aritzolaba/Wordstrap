@@ -20,15 +20,13 @@
 
         $('#ws-featured-next').live("click", function (event) {
             event.preventDefault();
-            var newpage = parseInt($(this).val());
-            $('#ws-ajax-featured').append('<div class="ws-loading"></div>');
+            var newpage = parseInt($(this).val());            
             sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
 
         $('#ws-featured-prev').live("click", function (event) {
             event.preventDefault();
-            var newpage = parseInt($(this).val());
-            $('#ws-ajax-featured').append('<div class="ws-loading"></div>');
+            var newpage = parseInt($(this).val());            
             sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
         /* END FEATURED AjaxRequest */

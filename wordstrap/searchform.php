@@ -3,11 +3,10 @@
  * The template for displaying search forms in Wordstrap
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
 ?>
-
 <div class="row-fluid">
     <div class="span12">
 

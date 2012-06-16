@@ -6,8 +6,10 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+?>
 <div class="row-fluid">
     <div class="span12">
         <ul class="breadcrumb">
@@ -16,21 +18,9 @@
             </li>
             <li class="separator">/</li>
             <?php if (is_single() OR is_page()) : ?>
-
-                <?php if ($section) : ?>
-                    <li>
-                        <a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a>
-                    </li>
-                    <li class="separator">/</li>
-                    <li>
-                        <?php echo ucwords($section); ?>
-                    </li>
-                <?php else : ?>
-                    <li>
-                        <?php echo get_the_title(); ?>
-                    </li>
-                <?php endif; ?>
-
+                <li>
+                    <?php echo get_the_title(); ?>
+                </li>
             <?php elseif (is_author()) : ?>
                 <li>
                     <?php _e('About the author', 'wordstrap'); ?>

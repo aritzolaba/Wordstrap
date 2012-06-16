@@ -3,12 +3,11 @@
  * The category template file.
  *
  * @package WordStrap
- * @subpackage Main Pages
+ * @subpackage Main
  * @since Wordstrap 1.6
  */
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
 
 <div class="row-fluid">
 

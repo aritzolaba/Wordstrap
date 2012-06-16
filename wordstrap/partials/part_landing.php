@@ -6,103 +6,92 @@
  * @subpackage Partials
  * @since Wordstrap 1.6
  */
-?>
 
-<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
+
 // Get Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
-?>
 
-<div class="row-fluid">
+// Intro
+if ($wordstrap_theme_options['landing_page_intro'] == 1) : ?>
 
-    <?php get_sidebar('left'); ?>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="well well-intro">
 
-    <!-- Main Content -->
-    <div class="<?php echo WS_SPANCOL_CENTER; ?>">
+                <?php
+                $args = array(
+                    'p'        => $wordstrap_theme_options['landing_page_intro_id'],
+                    'post_type'=> 'page'
+                    );
+                $intro_page = new WP_Query( $args );
+                $intro_page->the_post();
+                ?>
 
-        <?php // Intro ?>
+                <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) : ?>
+                    <h1><?php the_title(); ?></h1>
+                    <br />
+                <?php endif; ?>
 
-        <?php if ($wordstrap_theme_options['landing_page_intro'] == 1) : ?>
+                <p><?php the_content(); ?></p>
 
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="well well-intro">
-
-                        <?php
-                        $args = array(
-                            'p'        => $wordstrap_theme_options['landing_page_intro_id'],
-                            'post_type'=> 'page'
-                            );
-                        // Override $wp_query with custom queries
-                        $wp_query = new WP_Query( $args );
-                        the_post();
-                        ?>
-
-                        <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) : ?>
-                            <h1><?php the_title(); ?></h1>
-                            <br />
-                        <?php endif; ?>
-
-                        <p><?php the_content(); ?></p>
-
-                    </div>
-                </div>
             </div>
+        </div>
+    </div>
 
-        <?php endif; ?>
+<?php endif; ?>
 
-        <?php // Slideshow ?>
-        <?php if ($wordstrap_theme_options['landing_page_slideshow'] == 1) : ?>
+<?php // Slideshow
+if ($wordstrap_theme_options['landing_page_slideshow'] == 1) : ?>
 
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="well well-slide">
-                        <?php get_template_part('partials/part_slideshow'); ?>
-                    </div>
-                </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="well well-slide">
+                <?php get_template_part('partials/part_slideshow'); ?>
             </div>
+        </div>
+    </div>
 
-        <?php endif; ?>
+<?php endif; ?>
 
-        <?php // Featured ?>
-        <?php if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
+<?php // Featured
+if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
 
-            <!-- Featured content -->
-            <div id="ws-ajax-featured">
-                <?php get_template_part('partials/part_featured'); ?>
-            </div> <!-- #ws-ajax-featured -->
+    <?php if ($wordstrap_theme_options['landing_page_featured_showtitle'] == 1) : ?>
+        <h1 class="ws-featured-title"><?php _e('Featured posts', 'wordstrap'); ?></h1>
+    <?php endif; ?>
 
-        <?php endif; ?>
+    <!-- Featured content -->
+    <div id="ws-ajax-featured">
+        <?php get_template_part('partials/part_featured'); ?>
+    </div> <!-- #ws-ajax-featured -->
 
-        <?php // Tabs ?>
-        <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) : ?>
+<?php endif; ?>
 
-            <!-- Tabs content -->
-            <div class="row-fluid">
-                <div class="span12 ws-home-tabs">
+<?php // Tabs
+if ($wordstrap_theme_options['landing_page_tabs'] == 1) : ?>
 
-                    <?php get_template_part('partials/part_tabs'); ?>
+    <!-- Tabs content -->
+    <div class="row-fluid">
+        <div class="span12 ws-home-tabs">
 
-                </div>
+            <?php get_template_part('partials/part_tabs'); ?>
+
+        </div>
+    </div>
+
+<?php endif; ?>
+
+<?php // Blog
+if ($wordstrap_theme_options['landing_page_blog'] == 1) : ?>
+
+    <div class="row-fluid" id="ws-blog">
+        <div class="span12">
+            <div class="well">
+                <?php get_template_part('partials/part_article-loop'); ?>
             </div>
+        </div>
+    </div>
 
-        <?php endif; ?>
-
-        <?php // Blog ?>
-        <?php if ($wordstrap_theme_options['landing_page_blog'] == 1) : ?>
-
-            <div class="row-fluid" id="ws-blog">
-                <div class="span12">
-                    <div class="well">
-                        <?php get_template_part('partials/part_article-loop'); ?>
-                    </div>
-                </div>
-            </div>
-
-        <?php endif; ?>
-
-    </div><!-- .<?php echo WS_SPANCOL_CENTER; ?> -->
-
-    <?php get_sidebar(); ?>
-
-</div><!-- .row-fluid -->
+<?php endif; ?>

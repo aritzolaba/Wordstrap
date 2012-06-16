@@ -16,6 +16,9 @@
         });
         /* END Initialize elements */
 
+        /* Add some css classes dinamically */
+        $('#ws-comment-submit').addClass('btn btn-primary btn-large');
+
         /* Login Nav Bar Stop Propagation in Dropdown */
         $('.dropdown-menu form').click(function(event) {
             event.stopPropagation();
