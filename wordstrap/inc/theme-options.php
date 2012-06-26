@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage ThemeOptions
- * @since Wordstrap 1.6
+ * @since Wordstrap 1.6.1
  */
 class wordstrap_theme_options_page {
 

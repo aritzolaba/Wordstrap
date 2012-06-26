@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6
+ * @since Wordstrap 1.6.1
  */
 
 get_header(); ?>
