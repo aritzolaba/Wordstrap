@@ -7,7 +7,7 @@
         $('.carousel').carousel(
             {interval: 12500}
         );
-        
+
         /* Color pickers */
         $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4').hide();
         $('#colorpicker-1').farbtastic('#color-1');
@@ -18,15 +18,15 @@
         $('#color-1').click(function() {
             $('#colorpicker-1').fadeIn();
         });
-        
+
         $('#color-2').click(function() {
             $('#colorpicker-2').fadeIn();
         });
-        
+
         $('#color-3').click(function() {
             $('#colorpicker-3').fadeIn();
         });
-        
+
         $('#color-4').click(function() {
             $('#colorpicker-4').fadeIn();
         });
@@ -39,8 +39,13 @@
             });
         });
         /* END Color pickers */
-        
+
         /* Theme Options Controls */
+        $('.ws-check').click(function() {
+            $('.ws-check').removeClass('active');
+            $(this).addClass('active');
+        });
+
         $('#googlefonts_check').click(function() {
             if ($(this).attr('checked')== 'checked')
                 $('#googlefonts_box').fadeIn();
@@ -62,15 +67,8 @@
                 $('#landing_page_intro_box').fadeOut();
         });
 
-        $('#auth_system_check').click(function(){
-            if ($(this).attr('checked')== 'checked')
-                $('#auth_system_box').fadeIn();
-            else
-                $('#auth_system_box').fadeOut();
-        });
-        
         $('.social_buttons_check').click(function(){
-            var ele = $(this).attr('rel');            
+            var ele = $(this).attr('rel');
             if ($(this).attr('checked')== 'checked')
                 $('.'+ele+'_button').css('opacity','1');
             else

@@ -5,6 +5,9 @@
  * @package WordStrap
  * @subpackage Main
  * @since Wordstrap 1.6
+ *
+ * cojón
+ *
  */
 
 get_header();

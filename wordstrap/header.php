@@ -57,7 +57,6 @@
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/inc/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" media="all" href="<?php echo get_template_directory_uri(); ?>/style.css">
-        <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/inc/imgs/favicon.ico">
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
         <?php /* Use Google API Fonts */ ?>
         <?php if ($wordstrap_theme_options['use_googlefonts'] == 1) : ?>
@@ -66,13 +65,13 @@
         <style type="text/css">
         <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) : ?>
             <?php echo 'div#ws-wrapper{ padding-top: 1em; }'; ?>
-            <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
-            <?php echo 'div#ws-wrapper{ padding-top: 5em; }'; ?>
-            <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+            <?php $nav_top = intval($wordstrap_theme_options['header_height'])+40; echo 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }'; ?>
+        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
             <?php echo 'div#ws-wrapper{ padding-top: 4.45em; }'; ?>
-            <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
-            <?php echo 'div#ws-wrapper{ padding-top: 8.5em; }'; ?>
-            <?php else : ?>
+        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
+            <?php $nav_top = intval($wordstrap_theme_options['header_height'])+74; echo 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }'; ?>
+        <?php else : ?>
             <?php echo 'div#ws-wrapper{ padding-top: 0em; }'; ?>
         <?php endif; ?>
         </style>

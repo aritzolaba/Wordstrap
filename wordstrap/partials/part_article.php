@@ -26,7 +26,9 @@ else $att = $post->guid;
 
 <article class="ws-article <?php if (is_page()) echo 'ws-page'; ?> <?php if (is_search() OR is_author() OR is_category() OR is_archive()) echo 'ws-loop'; ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    <?php if ( !is_search() && !is_author() && has_post_thumbnail() ) : ?>
+    <?php
+    // Article featured Image
+    if ( !is_search() && !is_author() && has_post_thumbnail() ) : ?>
             <div class="entry-thumbnail">
                 <a class="thickbox" href="<?php echo $att; ?>">
                 <?php
@@ -38,7 +40,9 @@ else $att = $post->guid;
 
     <header class="entry-header">
 
-        <?php if (!is_page() && !is_search()) : ?>
+        <?php
+        // Article calendar
+        if (!is_page() && !is_search()) : ?>
             <div class="calendar event_date <?php if (!is_single() && !is_page() && !is_home()) echo 'calendar-small'; ?>">
                 <span class="month"><?php echo strtoupper(get_the_date('M')); ?></span>
                 <span class="day"><?php echo get_the_date('d'); ?></span>
@@ -57,16 +61,12 @@ else $att = $post->guid;
         <h2 class="entry-details">
             <small>
 
-                <?php if (!is_author() AND !is_page()) : ?>
+                <?php if (!is_author() AND !is_page()) :
 
-                    <?php _e('by', 'wordstrap'); ?>
+                    _e('by', 'wordstrap');
 
-                    <?php
                     // Get author first_name and last_name. If empty, get the nickname
-                    $author_id = get_the_author_meta('ID');
-                    $author_name = trim(get_the_author_meta('first_name', $author_id) . ' ' . get_the_author_meta('last_name', $author_id));
-                    if (empty($author_name))
-                        $author_name = get_the_author_meta('nickname', $author_id);
+                    $author_name = ws_get_authorfullname();
                     ?>
 
                     <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo $author_name; ?></a>
@@ -79,9 +79,8 @@ else $att = $post->guid;
                 if ($cats) echo ' '.sprintf (__('in %s','wordstrap'), $cats);
                 ?>
 
-                <?php
-                // Comment number ?>
-                <?php if (!is_single() AND !is_page()) : ?>
+                <?php // Comment number
+                if (!is_single() AND !is_page()) : ?>
                     <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
                     <i class="icon-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
                 <?php endif; ?>
@@ -106,11 +105,16 @@ else $att = $post->guid;
         <div class="entry-content clearfix <?php if (is_page()) echo 'ws-ispage'; ?>">
 
             <?php
+            // Display content or excerpt
             if (is_single() OR is_page()) the_content();
             else the_excerpt();
-            ?>
 
-            <?php wp_link_pages(array('before' => '<div class="clearfix"></div><br /><div class="page-link"><span>' . __('Pages:', 'wordstrap') . '</span>', 'after' => '</div>')); ?>
+            // Linked pages
+            wp_link_pages(array(
+                'before' => '<div class="clearfix"></div><br /><div class="page-link"><span>' . __('Pages:', 'wordstrap') . '</span>',
+                'after' => '</div>'
+                ));
+            ?>
 
         </div><!-- .entry-content -->
 

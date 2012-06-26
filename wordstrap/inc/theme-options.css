@@ -28,5 +28,18 @@ div.wp-submenu-wrap ul,div.wp-submenu-wrap ol {
 .tabs-left hr { margin: 0px; margin-bottom: 15px; }
 
 .buttons_container {
-    float: left; opacity: 0.2; margin-right: 5px;    
+    float: left; opacity: 0.2; margin-right: 5px;
+}
+
+/* special radio buttons */
+.ws-check-radio {
+    display: none; float: left; margin-right: 4px;
+}
+.ws-check {
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+.ws-check.active {
+    background: #F0DE7D;
 }

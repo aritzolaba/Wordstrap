@@ -17,14 +17,23 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
     <div class="container">
         <div class="row-fluid">
             <div class="span12">
-                <?php if ($wordstrap_theme_options['show_wslogo'] == 1) : ?>
-                    <a href="<?php echo get_site_url(); ?>">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/imgs/ws-logo.png" class="pull-left ws-logo">
+
+                <?php
+                // Display header image
+                if ( get_header_image() ) : ?>
+
+                    <a class="header_image" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo get_bloginfo('name'); ?>">
+                        <img src="<?php header_image(); ?>" alt="<?php echo get_bloginfo('name'); ?>" />
                     </a>
+
+                <?php else : ?>
+
+                    <a class="header_image" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo get_bloginfo('name'); ?>">
+                        <h1><?php echo get_bloginfo('name'); ?></h1>
+                    </a>
+
                 <?php endif; ?>
-                <?php if ($wordstrap_theme_options['show_wstitle'] == 1) : ?>
-                    <a class="brand" href="<?php echo get_site_url(); ?>"><?php echo bloginfo('site_name'); ?></a>
-                <?php endif; ?>
+
             </div>
         </div>
     </div>

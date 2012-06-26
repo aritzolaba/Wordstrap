@@ -62,6 +62,15 @@ if (!function_exists('wordstrap_setup')) :
         add_theme_support( 'post-thumbnails', array( 'post' ) );
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'menus' );
+        $defaults = array(
+            'height' => 80
+        );
+        add_theme_support( 'custom-header', $defaults );
+
+        $defaults = array(
+            'default-color' => '4E6C84'
+        );
+        add_theme_support( 'custom-background', $defaults );
     }
 
 endif;
@@ -174,8 +183,25 @@ if (!function_exists('wordstrap_commentlist')) :
 endif; // ends check for wordstrap_comment()
 
 /*******************************************************************************
-* BEGIN WORDSTRAP CUSTOM FUNCTIONS
+* Add hierarchy support to wp_nav_menu
 */
+add_filter('wp_nav_menu_objects', function ($items) {
+    $hasSub = function ($menu_item_id, &$items) {
+        foreach ($items as $item) {
+            if ($item->menu_item_parent && $item->menu_item_parent==$menu_item_id) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    foreach ($items as &$item) {
+        if ($hasSub($item->ID, &$items)) {
+            $item->classes[] = 'ws-dropdown'; // all elements of field "classes" of a menu item get join together and render to class attribute of <li> element in HTML
+        }
+    }
+    return $items;
+});
 
 /*******************************************************************************
 * Handle posts with no title
@@ -210,6 +236,21 @@ add_filter('excerpt_more', 'ws_excerpt_more');
 function ws_title_excerpt ($title) {
     if (strlen($title)>=45) $title=substr($title,0,40).'<i>[...]</i>';
     return $title;
+}
+
+/*******************************************************************************
+* Author full name display
+*
+* Get author first_name and last_name. If empty, get the nickname
+*/
+function ws_get_authorfullname ($author_id=NULL) {
+
+    if (is_null($author_id)) $author_id = get_the_author_meta('ID');
+    $author_name = trim(get_the_author_meta('first_name', $author_id) . ' ' . get_the_author_meta('last_name', $author_id));
+    if (empty($author_name))
+        $author_name = get_the_author_meta('nickname', $author_id);
+
+    return $author_name;
 }
 
 /*******************************************************************************
@@ -297,16 +338,9 @@ function ws_nothing_found() { ?>
 * AJAX IN FRONT-END AREA: Featured posts
 */
 function WsAjaxFeatured() {
-    //get the data from ajax() call
-    $AJAXNonce = $_POST['AJAXNonce'];
-
-    // Verify nonce
-    if (!wp_verify_nonce( $AJAXNonce, 'ws-secure-nonce' ))
-        die ('<div class="alert alert-danger ws-alert">Nonces are invalid.</div>');
-
     get_template_part('partials/part_featured');
     die();
-    }
+}
 // Hook to wp_ajax_nopriv_WsAjaxFunction (for non logged users)
 // and to wp_ajax_WsAjaxFunction (for logged users)
 add_action( 'wp_ajax_nopriv_WsAjaxFeatured', 'WsAjaxFeatured' );
@@ -320,12 +354,8 @@ function add_ws_ajax_script() {
     // in order to be used in the ws-ajax script, as "WsAjax.ajaxurl", etc.
     wp_localize_script( 'ws-ajax', 'WsAjax', array(
         // URL to wp-admin/admin-ajax.php to process the request
-        'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-        // generate a nonce with a unique ID
-        // so that you can check it later when an AJAX request is sent
-        'AJAXNonce' => wp_create_nonce( 'ws-secure-nonce' )
+        'ajaxurl'   => admin_url( 'admin-ajax.php' )
         )
     );
-
-    }
+}
 add_action( 'init', 'add_ws_ajax_script' );

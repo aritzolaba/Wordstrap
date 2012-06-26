@@ -42,24 +42,11 @@ if ($wordstrap_theme_options['landing_page_intro'] == 1) : ?>
 
 <?php endif; ?>
 
-<?php // Slideshow
-if ($wordstrap_theme_options['landing_page_slideshow'] == 1) : ?>
-
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="well well-slide">
-                <?php get_template_part('partials/part_slideshow'); ?>
-            </div>
-        </div>
-    </div>
-
-<?php endif; ?>
-
 <?php // Featured
 if ($wordstrap_theme_options['landing_page_featured'] == 1) : ?>
 
-    <?php if ($wordstrap_theme_options['landing_page_featured_showtitle'] == 1) : ?>
-        <h1 class="ws-featured-title"><?php _e('Featured posts', 'wordstrap'); ?></h1>
+    <?php if ($wordstrap_theme_options['landing_page_featured_title'] != '') : ?>
+        <h1 class="ws-featured-title"><?php echo $wordstrap_theme_options['landing_page_featured_title']; ?></h1>
     <?php endif; ?>
 
     <!-- Featured content -->

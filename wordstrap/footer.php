@@ -27,7 +27,7 @@ if ($show_social == 1) $span='span6'; else $span='span12';
 
                 <?php if ($wordstrap_theme_options['footer_displaycc'] == 1) : ?>
 
-                    <p>
+                    <p class="clearfix" style="margin-top: 0.5em;">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/imgs/cc88x31.png" title="Creative Commons Share-Alike 3.0" alt="Creative Commons Share-Alike 3.0" />
                     </p>
 
@@ -48,6 +48,9 @@ if ($show_social == 1) $span='span6'; else $span='span12';
                         <?php endif; ?>
                         <?php if ($wordstrap_theme_options['footer_show_tw'] == 1) : ?>
                             <a class="social_btn" href="<?php echo $wordstrap_theme_options['footer_tw_url']; ?>" title="<?php echo gettext('Twitter'); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_tw.png'; ?>" title="Twitter" alt="Twitter" /></a>
+                        <?php endif; ?>
+                        <?php if ($wordstrap_theme_options['footer_show_li'] == 1) : ?>
+                            <a class="social_btn" href="<?php echo $wordstrap_theme_options['footer_li_url']; ?>" title="<?php echo gettext('LinkedIn'); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_li.png'; ?>" title="LinkedIn" alt="LinkedIn" /></a>
                         <?php endif; ?>
                         <?php if ($wordstrap_theme_options['footer_show_git'] == 1) : ?>
                             <a class="social_btn" href="<?php echo $wordstrap_theme_options['footer_git_url']; ?>" title="<?php echo gettext('Github'); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/inc/imgs/social_git.png'; ?>" title="GitHub" alt="GitHub" /></a>

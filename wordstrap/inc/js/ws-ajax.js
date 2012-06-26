@@ -8,8 +8,7 @@
                 WsAjax.ajaxurl,
                 {
                     action:     action,
-                    page:       newpage,
-                    AJAXNonce:  WsAjax.AJAXNonce
+                    page:       newpage
                 },
                 function(response) {
                     $(container).html('');
@@ -20,13 +19,13 @@
 
         $('#ws-featured-next').live("click", function (event) {
             event.preventDefault();
-            var newpage = parseInt($(this).val());            
+            var newpage = parseInt($(this).val());
             sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
 
         $('#ws-featured-prev').live("click", function (event) {
             event.preventDefault();
-            var newpage = parseInt($(this).val());            
+            var newpage = parseInt($(this).val());
             sendRequestFeatured ('WsAjaxFeatured', '#ws-ajax-featured', newpage, null);
         });
         /* END FEATURED AjaxRequest */

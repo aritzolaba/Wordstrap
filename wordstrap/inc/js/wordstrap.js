@@ -17,97 +17,16 @@
         /* END Initialize elements */
 
         /* Add some css classes dinamically */
-        $('#ws-comment-submit').addClass('btn btn-primary btn-large');
+        // Adds bootstrap classes to the comment submit button
+        if ($('#ws-comment-submit').length>0)
+            $('#ws-comment-submit').addClass('btn btn-primary btn-large');
 
-        /* Login Nav Bar Stop Propagation in Dropdown */
-        $('.dropdown-menu form').click(function(event) {
-            event.stopPropagation();
-        });
-
-        /* User Box form footer mouseover/out opacity */
-        if ($("#ws-user-box .ws-form-common-footer").length>0) {
-            $("#ws-user-box .ws-form-common-footer").mouseover(function(){
-                $(this).css('opacity','1');
-            });
-            $("#ws-user-box .ws-form-common-footer").mouseout(function(){
-                $(this).css('opacity','0.5');
-            });
+        // Adds required classes for hierarchical navigation with wp_navmenu
+        if ($('li.ws-dropdown').length>0) {
+            $('li.ws-dropdown').addClass('dropdown');
+            $('ul.ws-nav li.ws-dropdown>a').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').append(' <b class="caret"></b>');
+            $('.ws-dropdown ul').addClass('dropdown-menu');
         }
-
-        /* Login submit, prevent empty fields */
-        $('#wp_login_form').submit(function (event) {
-
-            if ($('#log').val()=='') {
-                $('#log').focus();
-                event.preventDefault();
-            } else if ($('#pwd').val()=='') {
-                $('#pwd').focus();
-                event.preventDefault();
-            }
-
-        });
-
-        /* ForgotPassword submit, prevent empty fields */
-        $('#lostpasswordform').submit(function (event) {
-
-            if ($('#user_login').val()=='') {
-                $('#user_login').focus();
-                event.preventDefault();
-            }
-
-        });
-
-        /* Registerform submit, prevent empty fields */
-        $('#registerform').submit(function (event) {
-
-            if ($('#new_user_login').val()=='') {
-                $('#new_user_login').focus();
-                event.preventDefault();
-            } else if ($('#new_user_email').val()=='') {
-                $('#new_user_email').focus();
-                event.preventDefault();
-            }
-
-        });
-
-        /* Login,Register and Forget pass screens toggle */
-        $('.ws-toggle').click(function (event) {
-            event.preventDefault();
-
-            if ($(this).attr('href') == 'lostpassword') {
-                $('#wp_login_form').fadeOut('fast', function(){
-                    $('#lostpasswordform').fadeIn();
-                });
-            }
-            else if ($(this).attr('href') == 'register') {
-                $('#wp_login_form').fadeOut('fast', function(){
-                    $('#registerform').fadeIn();
-                });
-            }
-            else if ($(this).attr('href') == 'login') {
-                if ($('#lostpasswordform').is (':visible')) {
-                    $('#lostpasswordform').fadeOut('fast', function(){
-                        $('#wp_login_form').fadeIn();
-                    });
-                } else if ($('#registerform').is (':visible')) {
-                    $('#registerform').fadeOut('fast', function(){
-                        $('#wp_login_form').fadeIn();
-                    });
-                }
-            }
-
-            /* Reset values */
-            $('#user_login').val('');
-            $('#new_user_login').val('');
-            $('#new_user_email').val('');
-            $('#log').val('');
-            $('#pwd').val('');
-            $('.well-login .alert').fadeOut('fast');
-
-            return false;
-
-        });
-        /* END Login,Register and Forget pass screens toggle */
 
     });
 })(jQuery);
