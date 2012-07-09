@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 
 get_header(); ?>
@@ -47,7 +47,7 @@ get_header(); ?>
                             </p>
                             <?php if (!empty($author_url)) : ?>
                                 <p>
-                                    <i class="icon-share"></i> <a href="<?php echo $author_url; ?>" target="_blank"><?php echo $author_url; ?></a>
+                                    <i class="icon-awesome-share"></i> <a href="<?php echo $author_url; ?>" target="_blank"><?php echo $author_url; ?></a>
                                 </p>
                             <?php endif; ?>
                         </div>

@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 
 // Exit if accessed directly
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
             <li class="separator">/</li>
             <?php if (is_single() OR is_page()) : ?>
                 <li>
-                    <?php echo get_the_title(); ?>
+                    <?php echo ws_title_excerpt(strip_tags(get_the_title())); ?>
                 </li>
             <?php elseif (is_author()) : ?>
                 <li>
@@ -33,9 +33,13 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
                 <li>
                     <?php _e('Posts in category:', 'wordstrap'); ?> <?php $category = get_queried_object(); echo $category->name; ?>
                 </li>
+            <?php elseif (is_tag()) : ?>
+                <li>
+                    <?php _e('Browsing posts tagged:', 'wordstrap'); ?> <?php $tag = get_queried_object(); echo $tag->name; ?>
+                </li>
             <?php elseif (is_archive()) : ?>
                 <li>
-                    <?php _e('Browsing archived posts', 'wordstrap'); ?>
+                    <?php _e('Browsing archived posts:', 'wordstrap'); ?>
                 </li>
             <?php endif; ?>
         </ul>

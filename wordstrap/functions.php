@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 
 // Exit if accessed directly
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 // Get Theme Options
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
-// Set some CONSTANTS and wordpress $content_width required var
+// Set some CONSTANTS and WordPress $content_width required var
 if ($wordstrap_theme_options['ws_layout'] == 'full-width') {
     define('WS_SPANCOL_CENTER', 'span12');
     if (!isset($content_width)) $content_width = 870;
@@ -29,10 +29,10 @@ elseif ($wordstrap_theme_options['ws_layout'] == '2cols-right') {
     if (!isset($content_width)) $content_width = 770;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '3cols') {
-    define('WS_SPANCOL_LEFT', 'span2');
+    define('WS_SPANCOL_LEFT', 'span3');
     define('WS_SPANCOL_RIGHT', 'span3');
-    define('WS_SPANCOL_CENTER', 'span7');
-    if (!isset($content_width)) $content_width = 580;
+    define('WS_SPANCOL_CENTER', 'span6');
+    if (!isset($content_width)) $content_width = 520;
 }
 else {
     define('WS_SPANCOL_CENTER', 'span12');
@@ -123,7 +123,7 @@ if (!function_exists('wordstrap_commentlist')) :
      *
      * Used as a callback by wp_list_comments() for displaying the comments.
      *
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
@@ -234,7 +234,7 @@ add_filter('excerpt_more', 'ws_excerpt_more');
 * Excerpt for titles
 */
 function ws_title_excerpt ($title) {
-    if (strlen($title)>=45) $title=substr($title,0,40).'<i>[...]</i>';
+    if (strlen($title)>=45) $title=substr($title,0,40).'<i>...</i>';
     return $title;
 }
 
@@ -333,6 +333,105 @@ function ws_nothing_found() { ?>
         </div><!-- .entry-content -->
     </article><!-- #post-0 -->
 <?php }
+
+/*******************************************************************************
+* Add custom styles dinamically based on options using wp_head hook
+*/
+function ws_theme_styles () {
+    $gfontsstyle = '';
+    $wordstrap_theme_options = get_option('wordstrap_theme_options');
+
+    // Enqueue bootstrap and font-awesome styles
+    wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
+    wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.css', array() );
+    wp_enqueue_style( 'wordstrap-css', get_template_directory_uri() . '/style.css', array() );
+
+    // Enqueue wordstrap and bootstrap scripts
+    wp_enqueue_script( 'wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
+    wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
+
+    // Additional style override based in options
+    $addstyle = '
+    .well-widgets .ws-widget-title {
+        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
+        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
+    }
+    div.well.well-intro {
+        background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise.png\') repeat;
+        color: '.$wordstrap_theme_options['intro_color'].';
+    }
+    div.well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
+        color: '.$wordstrap_theme_options['intro_color'].';
+    }
+    #ws-header.ws-header-container { height: '.$wordstrap_theme_options['header_height'].'px; }
+    ';
+
+    if ($wordstrap_theme_options['use_googlefonts'] == 1) :
+
+        $gfontsstyle = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$wordstrap_theme_options['google_font'].'">';
+
+        if ($wordstrap_theme_options['use_googlefonts_widgets'] == 1) :
+            $addstyle .= '
+            .ws-widget-title, .well-intro h1, .well-intro h2, .well-intro h3, .well-intro h4, .well-intro h5 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            ';
+        endif;
+
+        if ($wordstrap_theme_options['use_googlefonts_posts'] == 1) :
+            $addstyle .= '
+            h1.entry-title { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            ';
+        endif;
+
+        if ($wordstrap_theme_options['use_googlefonts_pages'] == 1) :
+            $addstyle .= '
+            .ws-widget-title, .well-intro h1 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            ';
+        endif;
+
+    endif;
+
+    if ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) :
+        $addstyle .= 'div#ws-wrapper{ padding-top: 1em; }';
+    elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
+        $nav_top = intval($wordstrap_theme_options['header_height'])+40; $addstyle.= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
+    elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
+        //echo 'div#ws-wrapper{ padding-top: 4.5em; }';
+    elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
+        $nav_top = intval($wordstrap_theme_options['header_height'])+80; $addstyle .= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
+    else :
+        $addstyle .= 'div#ws-wrapper{ padding-top: 0em; }';
+    endif;
+
+    echo $gfontsstyle . '<style type="text/css">'.$addstyle.'</style>';
+}
+add_action ('wp_head', 'ws_theme_styles');
+
+/*******************************************************************************
+ * Hook into wp_title()
+ */
+function ws_wp_title( $title, $sep ) {
+	$title .= get_bloginfo( 'name' );
+
+	if ( is_front_page() ) $title .= " {$sep} " . get_bloginfo( 'description' );
+
+	return $title;
+}
+add_filter( 'wp_title', 'ws_wp_title', 1, 2 );
+
+/*******************************************************************************
+ * Hook into tiny_mce
+ */
+function cbnet_tinymce_config( $init ) {
+
+    $init['remove_linebreaks'] = false;
+    $init['convert_newlines_to_brs'] = false;
+    $init['force_p_newlines'] = false;
+
+    // Pass $init back to WordPress
+    return $init;
+}
+add_filter('tiny_mce_before_init', 'cbnet_tinymce_config');
 
 /*******************************************************************************
 * AJAX IN FRONT-END AREA: Featured posts

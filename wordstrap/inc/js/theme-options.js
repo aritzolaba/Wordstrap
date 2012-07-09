@@ -67,6 +67,13 @@
                 $('#landing_page_intro_box').fadeOut();
         });
 
+        $('#hide_wsheader').click(function(){
+            if ($(this).attr('checked')== 'checked')
+                $('#header_height_box').fadeOut();
+            else
+                $('#header_height_box').fadeIn();
+        });
+
         $('.social_buttons_check').click(function(){
             var ele = $(this).attr('rel');
             if ($(this).attr('checked')== 'checked')

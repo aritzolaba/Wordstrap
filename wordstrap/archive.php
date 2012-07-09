@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 
 get_header(); ?>
@@ -17,8 +17,6 @@ get_header(); ?>
         <div class="well well-breadcrumb">
 
             <?php get_template_part('partials/part_breadcrumb'); ?>
-
-            <?php ws_category_pills(); ?>
 
             <?php while (have_posts()) : the_post(); ?>
 

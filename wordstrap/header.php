@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 ?>
 <!DOCTYPE html>
@@ -26,12 +26,11 @@
         <meta name="description" content="<?php $site_description= get_bloginfo('description', 'display'); echo $site_description; ?>">
         <meta name="author" content="<?php echo get_bloginfo('name'); ?>">
         <title><?php
-        // Get Options
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
-
         global $page, $paged;
 
-        wp_title('|', true, 'right');
+        // Add wp_title ()
+        wp_title( '|', true, 'right' );
 
         // Add the blog name.
         bloginfo('name');
@@ -49,32 +48,10 @@
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <?php
-        wp_enqueue_script( 'wordstrap', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
-        wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
-        if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
-        ?>
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/inc/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/inc/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" media="all" href="<?php echo get_template_directory_uri(); ?>/style.css">
+
+        <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
+
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-        <?php /* Use Google API Fonts */ ?>
-        <?php if ($wordstrap_theme_options['use_googlefonts'] == 1) : ?>
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo $wordstrap_theme_options['google_font']; ?>">
-        <?php endif; ?>
-        <style type="text/css">
-        <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) : ?>
-            <?php echo 'div#ws-wrapper{ padding-top: 1em; }'; ?>
-        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
-            <?php $nav_top = intval($wordstrap_theme_options['header_height'])+40; echo 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }'; ?>
-        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
-            <?php echo 'div#ws-wrapper{ padding-top: 4.45em; }'; ?>
-        <?php elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) : ?>
-            <?php $nav_top = intval($wordstrap_theme_options['header_height'])+74; echo 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }'; ?>
-        <?php else : ?>
-            <?php echo 'div#ws-wrapper{ padding-top: 0em; }'; ?>
-        <?php endif; ?>
-        </style>
 
         <?php wp_head(); ?>
     </head>
@@ -88,11 +65,11 @@
 
     <div id="ws-main">
 
-        <?php if ($wordstrap_theme_options['hide_wsheader'] != 1) : ?>
+        <?php if ($wordstrap_theme_options['hide_wsheader'] == 0) : ?>
             <?php get_template_part('partials/part_header'); ?>
         <?php endif; ?>
 
-        <?php if ($wordstrap_theme_options['hide_wsnavbar'] != 1) : ?>
+        <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 0) : ?>
             <?php get_template_part('partials/part_navigation'); ?>
         <?php endif; ?>
 

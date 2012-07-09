@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage ThemeOptions
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 class wordstrap_theme_options_page {
 
@@ -20,14 +20,14 @@ class wordstrap_theme_options_page {
         $def_theme_options['hide_wsnavbar'] = 0;
         $def_theme_options['show_wstitle_nav'] = 1;
         $def_theme_options['nav_fixed'] = 0;
-        $def_theme_options['use_googlefonts'] = 1;
+        $def_theme_options['use_googlefonts'] = 0;
         $def_theme_options['use_googlefonts_widgets'] = 1;
         $def_theme_options['use_googlefonts_posts'] = 1;
         $def_theme_options['use_googlefonts_pages'] = 1;
         $def_theme_options['google_analytics'] = '';
         $def_theme_options['google_font'] = 'Oxygen';
         $def_theme_options['ws_layout'] = '2cols-right';
-        $def_theme_options['article_social'] = 1;
+        $def_theme_options['article_social'] = 0;
         $def_theme_options['excerpt_length'] = 40;
         $def_theme_options['widget_header_bg1'] = '#62A49B';
         $def_theme_options['widget_header_bg2'] = '#0A7466';
@@ -36,7 +36,7 @@ class wordstrap_theme_options_page {
         $def_theme_options['footer_title1'] = 'About';
         $def_theme_options['footer_title2'] = 'Follow us';
         $def_theme_options['footer_text'] = 'Powered by Wordstrap';
-        $def_theme_options['footer_displaycc'] = 1;
+        $def_theme_options['footer_displaycc'] = 0;
         $def_theme_options['footer_show_fb'] = 0;
         $def_theme_options['footer_show_tw'] = 0;
         $def_theme_options['footer_show_gp'] = 0;
@@ -51,11 +51,11 @@ class wordstrap_theme_options_page {
         $def_theme_options['footer_li_url'] = '';
         $def_theme_options['landing_page_intro'] = 0;
         $def_theme_options['landing_page_intro_id'] = NULL;
-        $def_theme_options['landing_page_intro_title'] = NULL;
+        $def_theme_options['landing_page_intro_title'] = 1;
         $def_theme_options['landing_page_tabs'] = 0;
         $def_theme_options['landing_page_blog'] = 1;
         $def_theme_options['landing_page_featured'] = 0;
-        $def_theme_options['landing_page_featured_title'] = 'Featured';
+        $def_theme_options['landing_page_featured_title'] = __('Featured'. 'wordstrap');
         $def_theme_options['featured_cat'] = NULL;
         $def_theme_options['featured_num'] = 3;
 
@@ -171,7 +171,7 @@ class wordstrap_theme_options_page {
                             <hr>
 
                             <div class="row-fluid">
-                                <div class="span4">
+                                <div class="span6">
                                     <div class="clearfix">
                                         <label for="WsLayout"><?php _e('Site Layout','wordstrap'); ?></label>
                                         <div class="row-fluid">
@@ -218,18 +218,19 @@ class wordstrap_theme_options_page {
                                         <div class="row-fluid">
                                             <div class="span12">
                                                 <label for="WsHeader"><?php _e('Header options','wordstrap'); ?></label>
-
-                                                <p class="help-block" style="font-weight: normal; color: #999; margin-bottom: 5px;"><?php _e('Header Height','wordstrap'); ?></p>
-                                                <input type="text" name="header_height" value="<?php echo $wordstrap_theme_options['header_height']; ?>" class="span1" maxlength="2">
-
-                                                <br />
-                                                <label class="checkbox" for="hide_wsheader" style="font-weight: normal; color: #999;"><?php _e('Hide Wordstrap header','wordstrap'); ?>
+                                                <label class="checkbox" for="hide_wsheader" style="font-weight: normal; color: #999;"><?php _e('Hide Header','wordstrap'); ?>
                                                     <input type="checkbox" id="hide_wsheader" name="hide_wsheader" <?php if ($wordstrap_theme_options['hide_wsheader'] == 1) echo 'checked="checked"'; ?> value="1">
                                                 </label>
+                                                <div id ="header_height_box" <?php if ($wordstrap_theme_options['hide_wsheader'] == 1) echo 'style="display: none;"'; ?>>
+                                                    <p class="help-block" style="font-weight: normal; color: #999;">
+                                                    <input type="text" name="header_height" value="<?php echo $wordstrap_theme_options['header_height']; ?>" class="span1" maxlength="2">
+                                                    <?php _e('Header Height','wordstrap'); ?>
+                                                    </p>
+                                                </div>
                                                 <br />
                                                 <label for="WsHeader"><?php _e('Navbar options','wordstrap'); ?></label>
 
-                                                <label class="checkbox" style="font-weight: normal; color: #999;" for="hide_wsnavbar"><?php _e('Hide Wordstrap nav bar','wordstrap'); ?>
+                                                <label class="checkbox" style="font-weight: normal; color: #999;" for="hide_wsnavbar"><?php _e('Hide Nav bar','wordstrap'); ?>
                                                     <input type="checkbox" id="hide_wsnavbar" name="hide_wsnavbar" <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) echo 'checked="checked"'; ?> value="1">
                                                 </label>
 
@@ -446,7 +447,7 @@ class wordstrap_theme_options_page {
                                         <label><?php _e('Number','wordstrap'); ?></label>
                                         <input type="text" name="featured_num" value="<?php echo $wordstrap_theme_options['featured_num']; ?>" class="span1" maxlength="2">
                                     </div>
-                                    <div class="span3">
+                                    <div class="span4">
                                         <label><?php _e('Select category:','wordstrap'); ?></label>
                                         <select name="featured_cat" class="span2">
                                             <option value="" style="font-style: italic;"><?php _e('Select a category...','wordstrap'); ?></option>
@@ -461,7 +462,7 @@ class wordstrap_theme_options_page {
                                         </select>
                                         <br />
                                     </div>
-                                    <div class="span7">
+                                    <div class="span6">
                                         <label for="landing_page_featured_title"><?php _e('Title','wordstrap'); ?></label>
                                         <input type="text" name="landing_page_featured_title" class="span3" value="<?php echo $wordstrap_theme_options['landing_page_featured_title']; ?>">
                                     </div>
@@ -493,49 +494,3 @@ class wordstrap_theme_options_page {
     <?php }
 }
 add_action('init', array('wordstrap_theme_options_page', 'init'));
-
-// Add custom styles dinamically based on options
-function wordstrap_style_options () {
-    $wordstrap_theme_options = get_option('wordstrap_theme_options');
-
-    $addstyle = '
-    .well-widgets .ws-widget-title {
-        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
-        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
-    }
-    .well.well-intro {
-        background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise.png\') repeat;
-        color: '.$wordstrap_theme_options['intro_color'].';
-    }
-    .well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
-        color: '.$wordstrap_theme_options['intro_color'].';
-    }
-    .ws-header-container { height: '.$wordstrap_theme_options['header_height'].'px; }
-    ';
-
-    if ($wordstrap_theme_options['use_googlefonts'] == 1) :
-
-        if ($wordstrap_theme_options['use_googlefonts_widgets'] == 1) :
-            $addstyle .= '
-            .ws-widget-title, .well-intro h1, .well-intro h2, .well-intro h3, .well-intro h4, .well-intro h5 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
-            ';
-        endif;
-
-        if ($wordstrap_theme_options['use_googlefonts_posts'] == 1) :
-            $addstyle .= '
-            h1.entry-title { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
-            ';
-        endif;
-
-        if ($wordstrap_theme_options['use_googlefonts_pages'] == 1) :
-            $addstyle .= '
-            .ws-widget-title, .well-intro h1 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
-            ';
-        endif;
-
-    endif;
-
-    echo '<style type="text/css">'.$addstyle.'</style>';
-}
-add_action ('wp_head', 'wordstrap_style_options');

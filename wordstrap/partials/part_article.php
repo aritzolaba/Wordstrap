@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.1
+ * @since Wordstrap 1.6.3
  */
 
 // Exit if accessed directly
@@ -54,7 +54,7 @@ else $att = $post->guid;
             <?php if (is_single() OR is_page()) : ?>
                 <?php the_title(); ?>
             <?php else : ?>
-                <a href="<?php the_permalink(); ?>"><?php if (get_the_title()) the_title(); else echo __('Untitled','wordstrap') ?></a>
+                <a href="<?php the_permalink(); ?>" title="<?php if (get_the_title()) the_title(); else echo __('Untitled','wordstrap'); ?>"><?php if (get_the_title()) echo get_the_title(); else echo __('Untitled','wordstrap'); ?></a>
             <?php endif; ?>
         </h1>
 
@@ -81,8 +81,10 @@ else $att = $post->guid;
 
                 <?php // Comment number
                 if (!is_single() AND !is_page()) : ?>
-                    <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
-                    <i class="icon-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
+                    <?php if (comments_open()) : ?>
+                        <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
+                        <br /><i class="icon-awesome-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
+                    <?php endif; ?>
                 <?php endif; ?>
 
             </small>
