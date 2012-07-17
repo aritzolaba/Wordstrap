@@ -20,6 +20,15 @@
         // Adds bootstrap classes to the comment submit button
         if ($('#ws-comment-submit').length>0)
             $('#ws-comment-submit').addClass('btn btn-primary btn-large');
+        // Adds bootstrap classes to tables
+        if ($('table').length>0)
+            $('table').addClass('table table-condensed table-striped table-bordered');
+        if ($('table#wp-calendar').length>0)
+            $('table#wp-calendar').removeClass('table-bordered');
+
+        if ($('div.navbar-inner div.container').length>0) {
+            $('div.navbar-inner div.container').show();
+        }
 
         // Adds required classes for hierarchical navigation with wp_navmenu
         if ($('li.ws-dropdown').length>0) {

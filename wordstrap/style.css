@@ -4,7 +4,7 @@ Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
 Author URI: http://www.olabaworks.com
 Description: A WordPress theme using the popular Bootstrap CSS Framework.
-Version: 1.6.3
+Version: 1.6.4
 License: GNU General Public License
 License URI: license.txt
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, custom-menu, custom-background, featured-images, threaded-comments, translation-ready, theme-options
@@ -30,6 +30,10 @@ legend { margin-bottom: 10px; padding-bottom: 8px; border-bottom-color: #ddd; }
 /* form labels */
 label { font-weight: bold; }
 label.checkbox { font-weight: normal; }
+/* label class in tables */
+table .label { background: none; }
+.comment .label a { color: #fff; }
+.comment .label a:hover { color: #fff; text-decoration: none; }
 
 /* extra size for buttons */
 .btn-xlarge { padding: 14px 20px; font-size: 20px; }
@@ -98,6 +102,11 @@ body {
 #ws-footer hr { border-color: #1d1d1d; margin: 0px; margin-bottom: 10px; }
 .footer-cc { margin-top: 0.5em; }
 
+/* site title and site-description */
+h1#site-title { font-size: 2em; line-height: 1.4em; }
+h1#site-title a:hover { text-decoration: none; }
+h2#site-description { font-size: 1.5em; line-height: 1em; font-style: italic; }
+
 /* header image */
 a.header_title {
     float: left;
@@ -130,6 +139,7 @@ a.header_title:hover {
 }
 
 /* dropdown menu */
+div.navbar-inner div.container { display:none; }
 .navbar .dropdown-menu {
     border-radius: 8px;
 }
@@ -158,7 +168,7 @@ a.header_title:hover {
 div#ws-blog .ws-article h1.entry-title { font-size: 1.3em; margin-left: 4.3em; }
 .ws-article h1.entry-title { margin-bottom: 0.15em; margin-top: 0.2em; margin-left: 3.8em; font-size: 1.5em; line-height: 1.2em; }
 .ws-article h2.entry-details { line-height: 1.2em; margin-left: 5em; }
-.ws-article h2 small { line-height: 1em; }
+.ws-article h2 small { line-height: 1.3em; }
 .ws-article h1.entry-title a { color: #326897; }
 .ws-article h1.entry-title a:hover { color: #124877; text-decoration: none; }
 .ws-article .entry-header { overflow: hidden; padding: 0px; }
@@ -183,6 +193,8 @@ div.ws-search h1.entry-title, div.ws-search h2.entry-details { margin-left: 10px
 .ws-social-buttons-container { height: 24px; }
 .ws-tag-container { margin-left: 6em; margin-top: 2px; }
 .entry-content iframe { max-width: 100%; }
+.ws-pages.btn-toolbar span.btn { background: #50BCF0; color: #fff; text-shadow: none; }
+.ws-pages.btn-toolbar a span.btn { background: inherit; color: inherit; }
 
 /* comments */
 .ws-article .ws-comment-num { margin-bottom: 6px; }
@@ -201,8 +213,7 @@ div.comment-avatar { background: #fff; border-radius: 3px 3px 3px 3px; box-shado
 div.comment-details { float: left; margin-top: 12px; }
 div#ws-comment-list { padding: 0em; }
 div#ws-comment-list p { word-wrap: break-word; font-size: 1.09em; }
-.label a { color: #fff; }
-.label a:hover { color: #fff; text-decoration: none; }
+
 #comment-nav-above, #comment-nav-below { padding: 6px 0px; overflow: hidden; margin: 20px 0px; overflow: hidden; }
 #comment-nav-above .page-numbers, #comment-nav-below .page-numbers {
     overflow: hidden; padding: 6px 8px; background: #fff; -moz-border-radius: 4px; border-radius: 4px; -webkit-border-radius: 4px; margin: 0px 2px; border: 1px solid #ccc;
@@ -263,9 +274,11 @@ article .calendar > span {
     display: block;
 }
 article .calendar > .month {
+    /*
     background-image: -moz-linear-gradient(center top , #66A69D, #097365);
     background: -webkit-gradient(linear, left top, left bottom, from(#66A69D), to(#097365));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66A69D', endColorstr='#097365');
+    */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     color: #fff;
@@ -423,9 +436,11 @@ div.well-widgets div.ws-widget-title {
     -moz-border-radius: 3px 3px 0px 0px;
     -webkit-border-radius: 3px 3px 0px 0px;
     border-radius: 3px 3px 0px 0px;
+    /*
     background-image: -moz-linear-gradient(center top , #66A69D, #097365);
     background: -webkit-gradient(linear, left top, left bottom, from(#66A69D), to(#097365));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66A69D', endColorstr='#097365');
+    */
 }
 div.well-widgets .ws-widget-content ul {
     list-style-type: square;
@@ -471,11 +486,14 @@ div.well-widgets .ws-widget-content ul li {
 table#wp-calendar { width: 96%; margin: 0px; margin: auto; padding: 0px; }
 table#wp-calendar caption { margin-bottom: 0.5em; font-size: 1.2em; font-weight: bold; }
 table#wp-calendar td { padding: 0.2em; font-size: 0.8em; text-align: center; }
-table#wp-calendar thead th { padding: 0.2em; background: #555; font-size: 0.8em; color: #fff; font-weight: bold; }
+table#wp-calendar thead th { text-align: center; padding: 0.2em; background: #555; font-size: 0.8em; color: #fff; font-weight: bold; }
 table#wp-calendar tbody td { vertical-align: middle; background: #dadada; color: #222; border: 1px solid #f0f0f0; }
 table#wp-calendar tbody td:hover { background: #eee; }
 table#wp-calendar tfoot td { background: none; }
 table#wp-calendar td a { font-weight: bold; font-size: 1em; }
+table tfoot td { background: none; }
+table tfoot td:hover { background: none; }
+table#wp-calendar tbody td.pad:hover { background: #dadada; }
 table#wp-calendar td#prev { padding: 0.4em; text-align: left; font-size: 1em; }
 table#wp-calendar td#next { padding: 0.4em; text-align: right; font-size: 1em; }
 

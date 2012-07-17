@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.3
+ * @since Wordstrap 1.6.4
  */
 
 // Exit if accessed directly
@@ -113,7 +113,13 @@ else $att = $post->guid;
 
             // Linked pages
             wp_link_pages(array(
-                'before' => '<div class="clearfix"></div><br /><div class="page-link"><span>' . __('Pages:', 'wordstrap') . '</span>',
+                'next_or_number'	=> 'number',
+		'nextpagelink'		=> __('Next page', 'wordstrap'),
+		'previouspagelink'	=> __('Previous page', 'wordstrap'),
+                'pagelink'  => '%',
+                'link_before' => '<span class="btn">',
+                'link_after' => '</span>',
+                'before' => '<div class="clearfix"></div><br />'. __('Pages:','wordstrap') .' <div class="ws-pages btn-toolbar">',
                 'after' => '</div>'
                 ));
             ?>

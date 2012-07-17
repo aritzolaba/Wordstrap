@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.3
+ * @since Wordstrap 1.6.4
  */
 
 // Exit if accessed directly
@@ -123,7 +123,7 @@ if (!function_exists('wordstrap_commentlist')) :
      *
      * Used as a callback by wp_list_comments() for displaying the comments.
      *
- * @since Wordstrap 1.6.3
+ * @since Wordstrap 1.6.4
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
@@ -352,7 +352,7 @@ function ws_theme_styles () {
 
     // Additional style override based in options
     $addstyle = '
-    .well-widgets .ws-widget-title {
+    .well-widgets .ws-widget-title, article .calendar > .month {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');

@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage ThemeOptions
- * @since Wordstrap 1.6.3
+ * @since Wordstrap 1.6.4
  */
 class wordstrap_theme_options_page {
 
@@ -55,7 +55,7 @@ class wordstrap_theme_options_page {
         $def_theme_options['landing_page_tabs'] = 0;
         $def_theme_options['landing_page_blog'] = 1;
         $def_theme_options['landing_page_featured'] = 0;
-        $def_theme_options['landing_page_featured_title'] = __('Featured'. 'wordstrap');
+        $def_theme_options['landing_page_featured_title'] = __('Featured', 'wordstrap');
         $def_theme_options['featured_cat'] = NULL;
         $def_theme_options['featured_num'] = 3;
 
