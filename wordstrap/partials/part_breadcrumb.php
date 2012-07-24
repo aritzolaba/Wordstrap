@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
     <div class="span12">
         <ul class="breadcrumb">
             <li>
-                <a href="<?php echo get_site_url(); ?>"><i class="icon-home rightspace-icon"></i><?php _e('Home', 'wordstrap'); ?></a>
+                <a href="<?php echo get_site_url(); ?>"><i class="icon-home" style="margin-right: 4px;"></i><?php _e('Home', 'wordstrap'); ?></a>
             </li>
             <li class="separator">/</li>
             <?php if (is_single() OR is_page()) : ?>

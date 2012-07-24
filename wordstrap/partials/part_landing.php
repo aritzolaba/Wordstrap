@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly

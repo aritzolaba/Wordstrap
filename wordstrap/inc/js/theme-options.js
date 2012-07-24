@@ -48,38 +48,42 @@
 
         $('#googlefonts_check').click(function() {
             if ($(this).attr('checked')== 'checked')
-                $('#googlefonts_box').fadeIn();
+                $('#googlefonts_box').slideDown('fast');
             else
-                $('#googlefonts_box').fadeOut();
+                $('#googlefonts_box').slideUp('fast');
         });
 
         $('#landing_page_featured_check').click(function(){
             if ($(this).attr('checked')== 'checked')
-                $('#landing_page_featured_box').fadeIn();
+                $('#landing_page_featured_box').slideDown('fast');
             else
-                $('#landing_page_featured_box').fadeOut();
+                $('#landing_page_featured_box').slideUp('fast');
         });
 
         $('#landing_page_intro_check').click(function(){
             if ($(this).attr('checked')== 'checked')
-                $('#landing_page_intro_box').fadeIn();
+                $('#landing_page_intro_box').slideDown('fast');
             else
-                $('#landing_page_intro_box').fadeOut();
+                $('#landing_page_intro_box').slideUp('fast');
         });
 
         $('#hide_wsheader').click(function(){
-            if ($(this).attr('checked')== 'checked')
-                $('#header_height_box').fadeOut();
+            if ($(this).attr('checked')!= 'checked')
+                $('#header_height_box').slideDown('fast');
             else
-                $('#header_height_box').fadeIn();
+                $('#header_height_box').slideUp('fast');
         });
 
         $('.social_buttons_check').click(function(){
             var ele = $(this).attr('rel');
-            if ($(this).attr('checked')== 'checked')
+            if ($(this).attr('checked')== 'checked') {
+                $('input.'+ele).fadeIn();
                 $('.'+ele+'_button').css('opacity','1');
-            else
+            }
+            else {
+                $('input.'+ele).fadeOut();
                 $('.'+ele+'_button').css('opacity','0.2');
+            }
         });
         /* END Theme Options Controls */
 

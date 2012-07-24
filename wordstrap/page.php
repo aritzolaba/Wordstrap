@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 get_header();
@@ -21,6 +21,12 @@ get_header();
             <?php while (have_posts()) : the_post(); ?>
 
                 <?php get_template_part('partials/part_article'); ?>
+
+                <div id="ws-comment-list">
+
+                    <?php comments_template( '', true ); ?>
+
+                </div>
 
             <?php endwhile; ?>
         </div>

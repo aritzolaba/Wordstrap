@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -16,17 +16,17 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
 // Set some CONSTANTS and WordPress $content_width required var
 if ($wordstrap_theme_options['ws_layout'] == 'full-width') {
     define('WS_SPANCOL_CENTER', 'span12');
-    if (!isset($content_width)) $content_width = 870;
+    if (!isset($content_width)) $content_width = 960;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '2cols-left') {
     define('WS_SPANCOL_LEFT', 'span3');
     define('WS_SPANCOL_CENTER', 'span9');
-    if (!isset($content_width)) $content_width = 770;
+    if (!isset($content_width)) $content_width = 860;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '2cols-right') {
     define('WS_SPANCOL_RIGHT', 'span3');
     define('WS_SPANCOL_CENTER', 'span9');
-    if (!isset($content_width)) $content_width = 770;
+    if (!isset($content_width)) $content_width = 860;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '3cols') {
     define('WS_SPANCOL_LEFT', 'span3');
@@ -36,7 +36,7 @@ elseif ($wordstrap_theme_options['ws_layout'] == '3cols') {
 }
 else {
     define('WS_SPANCOL_CENTER', 'span12');
-    if (!isset($content_width)) $content_width = 770;
+    if (!isset($content_width)) $content_width = 800;
 }
 
 /*******************************************************************************
@@ -110,6 +110,10 @@ if (function_exists('register_sidebar')) {
     register_nav_menu( 'primary', 'Wordstrap nav menu' );
 }
 
+if ( function_exists( 'add_image_size' ) ) {
+    add_image_size( 'loop-thumb', 80, 80, true );
+}
+
 /*******************************************************************************
 * Comment List Template
 */
@@ -123,7 +127,7 @@ if (!function_exists('wordstrap_commentlist')) :
      *
      * Used as a callback by wp_list_comments() for displaying the comments.
      *
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
@@ -341,12 +345,13 @@ function ws_theme_styles () {
     $gfontsstyle = '';
     $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
-    // Enqueue bootstrap and font-awesome styles
+    // Enqueue bootstrap and font-awesome css styles
     wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
+    wp_enqueue_style( 'bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
     wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.css', array() );
     wp_enqueue_style( 'wordstrap-css', get_template_directory_uri() . '/style.css', array() );
 
-    // Enqueue wordstrap and bootstrap scripts
+    // Enqueue wordstrap and bootstrap js scripts
     wp_enqueue_script( 'wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
     wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
 
@@ -396,7 +401,7 @@ function ws_theme_styles () {
     elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
         $nav_top = intval($wordstrap_theme_options['header_height'])+40; $addstyle.= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
     elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
-        //echo 'div#ws-wrapper{ padding-top: 4.5em; }';
+        $addstyle .= 'div#ws-wrapper{ padding-top: 4.5em; }';
     elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
         $nav_top = intval($wordstrap_theme_options['header_height'])+80; $addstyle .= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
     else :
@@ -418,20 +423,6 @@ function ws_wp_title( $title, $sep ) {
 	return $title;
 }
 add_filter( 'wp_title', 'ws_wp_title', 1, 2 );
-
-/*******************************************************************************
- * Hook into tiny_mce
- */
-function cbnet_tinymce_config( $init ) {
-
-    $init['remove_linebreaks'] = false;
-    $init['convert_newlines_to_brs'] = false;
-    $init['force_p_newlines'] = false;
-
-    // Pass $init back to WordPress
-    return $init;
-}
-add_filter('tiny_mce_before_init', 'cbnet_tinymce_config');
 
 /*******************************************************************************
 * AJAX IN FRONT-END AREA: Featured posts

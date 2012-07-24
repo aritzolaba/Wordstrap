@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 get_header();
@@ -20,8 +20,8 @@ get_header();
 
             <?php if (have_posts()) : ?>
 
-                <h1><?php _e('Search results', 'wordstrap'); ?></h1>
-                <h2><small><?php echo sprintf (__('Term <em>&quot;%s&quot;</em>', 'wordstrap'), get_search_query()); ?>,&nbsp;<?php echo sprintf (__('%d result(s) found:', 'wordstrap'), $wp_query->post_count); ?></small></h2>
+                <h1><i class="icon-awesome-search" style="font-size: 1.4em; float: left; margin-top: .3em; margin-right: .6em;"></i><?php _e('Search results', 'wordstrap'); ?></h1>
+                <h2><small><?php echo sprintf (__('%d result(s) found for the term', 'wordstrap'), $wp_query->post_count);?>&nbsp;<em>&QUOT;<?php echo get_search_query(); ?>&QUOT;</em></small></h2>
 
                 <hr style="margin: 5px 0px; margin-bottom: 20px;">
 

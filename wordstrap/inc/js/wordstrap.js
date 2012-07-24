@@ -26,16 +26,18 @@
         if ($('table#wp-calendar').length>0)
             $('table#wp-calendar').removeClass('table-bordered');
 
-        if ($('div.navbar-inner div.container').length>0) {
-            $('div.navbar-inner div.container').show();
-        }
-
         // Adds required classes for hierarchical navigation with wp_navmenu
         if ($('li.ws-dropdown').length>0) {
             $('li.ws-dropdown').addClass('dropdown');
             $('ul.ws-nav li.ws-dropdown>a').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').append(' <b class="caret"></b>');
             $('.ws-dropdown ul').addClass('dropdown-menu');
         }
+
+        // Prevent showing navbar unstyled
+        /*
+        if ($('div.navbar-inner div.container div.first-nav ').length>0) {
+            $('div.navbar-inner div.container div.first-nav ').css('visibility','visible');
+        }*/
 
     });
 })(jQuery);

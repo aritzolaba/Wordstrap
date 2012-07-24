@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 ?>
 
@@ -24,7 +24,7 @@
     <?php
     if (comments_open()) :
         $ncomments = get_comments_number();
-        echo '<h2 style="margin: 0px; margin-bottom: 10px; overflow: hidden;"><small><span style="font-size: 1.5em; float: left; margin-right: 5px; margin-top: 2px;"><i class="icon-awesome-comments"></i></span> ';
+        echo '<h2 style="margin: 0px; margin-bottom: 10px; overflow: hidden;"><small><i class="icon-awesome-comments ws-comments-icon"></i> ';
         if ($ncomments == 1)
             echo sprintf ( __('There is %d comment','wordstrap'), $ncomments);
         elseif ($ncomments > 1)

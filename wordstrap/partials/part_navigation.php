@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -17,7 +17,7 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
 
 <div id="ws-navbar" class="navbar<?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo ' navbar-fixed-top'; ?>" <?php if ($wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) echo 'style="top: '.$nav_top.'px; position: fixed;"'; ?>>
     <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".first-nav">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -33,7 +33,7 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
                 'theme_location' => 'primary',
                 'container_class' => 'nav-collapse first-nav',
                 'container' => false,
-                'items_wrap' => '<div class="nav-collapse first-nav"><ul class="nav ws-nav"><li class="divider-vertical"></li><li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> Home</a></li>%3$s</ul>',
+                'items_wrap' => '<div class="nav-collapse first-nav"><ul class="nav ws-nav"><li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> Home</a></li>%3$s</ul>',
                 'fallback_cb' => function () {
                     $link = '<b>custom menu</b> !';
                     echo '<div class="nav-collapse first-nav"><ul class="nav ws-nav"><li class="divider-vertical"></li><li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> Home</a></li><li class="divider-vertical"></li></ul>';

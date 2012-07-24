@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -98,8 +98,8 @@ if ($page == $maxpages) {
 
 <?php if ($maxpages>1) : ?>
     <p>
-        <button id="ws-featured-prev" class="btn<?php echo $prev_class; ?>" <?php echo $prev_attr; ?> value="<?php echo $prev; ?>">PREV</button>
-        <button id="ws-featured-next" class="btn<?php echo $next_class; ?>" <?php echo $next_attr; ?> value="<?php echo $next; ?>">NEXT</button>
+        <button id="ws-featured-prev" class="btn btn-small <?php echo $prev_class; ?>" <?php echo $prev_attr; ?> value="<?php echo $prev; ?>"><i class="icon-awesome-circle-arrow-left" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i> <span style="font-size: .9em; font-weight: bold;"><?php _e('PREV','wordstrap'); ?></span></button>
+        <button id="ws-featured-next" class="btn btn-small <?php echo $next_class; ?>" <?php echo $next_attr; ?> value="<?php echo $next; ?>"><span style="font-size: .9em; font-weight: bold;"><?php _e('NEXT','wordstrap'); ?></span> <i class="icon-awesome-circle-arrow-right" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i></button>
     </p>
 <?php endif; ?>
 

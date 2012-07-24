@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Main
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 ?>
 <!DOCTYPE html>
@@ -65,12 +65,16 @@
 
     <div id="ws-main">
 
-        <?php if ($wordstrap_theme_options['hide_wsheader'] == 0) : ?>
-            <?php get_template_part('partials/part_header'); ?>
-        <?php endif; ?>
+        <header id="branding" role="banner">
 
-        <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 0) : ?>
-            <?php get_template_part('partials/part_navigation'); ?>
-        <?php endif; ?>
+            <?php if ($wordstrap_theme_options['hide_wsheader'] == 0) : ?>
+                <?php get_template_part('partials/part_header'); ?>
+            <?php endif; ?>
 
-        <div id="ws-wrapper" class="container">
+            <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 0) : ?>
+                <?php get_template_part('partials/part_navigation'); ?>
+            <?php endif; ?>
+
+        </header>
+
+        <div id="ws-wrapper" class="container-fluid">

@@ -4,7 +4,7 @@
  *
  * @package WordStrap
  * @subpackage Partials
- * @since Wordstrap 1.6.4
+ * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -32,7 +32,7 @@ else $att = $post->guid;
             <div class="entry-thumbnail">
                 <a class="thickbox" href="<?php echo $att; ?>">
                 <?php
-                echo get_the_post_thumbnail(get_the_ID(), 'thumbnail');
+                echo get_the_post_thumbnail(get_the_ID(), 'loop-thumb');
                 ?>
                 </a>
             </div>
@@ -43,7 +43,7 @@ else $att = $post->guid;
         <?php
         // Article calendar
         if (!is_page() && !is_search()) : ?>
-            <div class="calendar event_date <?php if (!is_single() && !is_page() && !is_home()) echo 'calendar-small'; ?>">
+            <div class="calendar event_date">
                 <span class="month"><?php echo strtoupper(get_the_date('M')); ?></span>
                 <span class="day"><?php echo get_the_date('d'); ?></span>
                 <span class="year"><?php echo get_the_date('Y'); ?></span>
@@ -83,7 +83,7 @@ else $att = $post->guid;
                 if (!is_single() AND !is_page()) : ?>
                     <?php if (comments_open()) : ?>
                         <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
-                        <br /><i class="icon-awesome-comment" style="margin-top: 2px;"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
+                        <br /><i class="icon-awesome-comment"></i> <a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
                     <?php endif; ?>
                 <?php endif; ?>
 
