@@ -1,13 +1,6 @@
 <?php
 /**
  * The single template file.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
- *
- * cojón
- *
  */
 
 get_header();

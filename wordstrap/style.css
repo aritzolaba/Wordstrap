@@ -4,7 +4,7 @@ Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
 Author URI: http://www.olabaworks.com
 Description: A WordPress theme using the popular Bootstrap CSS Framework.
-Version: 1.6.5
+Version: 1.7
 License: GNU General Public License
 License URI: license.txt
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, custom-menu, custom-background, featured-images, threaded-comments, translation-ready, theme-options
@@ -52,7 +52,7 @@ legend {
     padding-bottom: 8px;
 }
 
-/* form labels */
+/* labels */
 label {
     font-weight: bold;
 }
@@ -89,7 +89,8 @@ div#TB_window {
 
 /* body */
 body {
-    background: #222; padding-top: 0px;
+    background: #222;
+    padding-top: 0px;
 }
 
 /* header */
@@ -205,7 +206,7 @@ a.header_title:hover {
     padding-right: 0;
     padding-left: 0;
     margin-left: 5px;
-    margin-right: 80px;
+    margin-right: 10px;
     float: left;
     font-weight: bold;
     text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
@@ -454,7 +455,7 @@ div.comment-avatar {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    padding: 5px 5px 2px 5px;
+    padding: 5px;
     float: left;
     margin: 2px 14px 4px 2px;
 }
@@ -507,6 +508,7 @@ div#ws-comment-list p {
 .nav-next {
     float: left;
 }
+
 .ws-commentform-container {
     margin-bottom: 20px;
     margin-top: 10px;
@@ -570,7 +572,7 @@ span.required {
 
 /* invisible anchor targets */
 .ws-anchor {
-    visible: hidden;
+    visibility: hidden;
     height: 1px;
     float: left;
     margin-top: -20px;
@@ -742,22 +744,6 @@ h1.ws-featured-title {
     margin-top: 2px;
 }
 
-/* widgets */
-.ws-widget-content {
-    margin-bottom: 0px;
-}
-.ws-widget-title {
-    margin-bottom: 15px;
-}
-.ws-widgets-empty {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #aaa;
-    padding: 4px 6px;
-    border: 2px dotted #aaa;
-    text-align: center;
-}
-
 /* breadcrumb */
 div.well.well-breadcrumb {
     padding-top: 0.6em;
@@ -794,39 +780,68 @@ ul.breadcrumb li {
 
 /* Search form */
 .form-search {
+    margin: 0px;
+    padding: 0px;
     text-align: center;
-    margin-bottom: 5px;
+}
+.ws-search-header {
+    float: right;
+    padding: .5em;
+}
+.ws-search-icon {
+    color: #555;
+    font-size: 1.4em;
+    font-weight: normal;
 }
 
-/* add box shadow to wells */
+/* widgets */
+.ws-widget-content {
+    margin-bottom: 0px;
+}
+.ws-widget-title {
+    margin-bottom: 15px;
+}
+.ws-widgets-empty {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #aaa;
+    padding: 4px 6px;
+    border: 2px dotted #aaa;
+    text-align: center;
+}
+
+/* well shadow */
 div.well, div.well-widgets {
     -moz-box-shadow: 0px 0px 2px #333;
     -webkit-box-shadow: 0px 0px 2px #333;
     box-shadow: 0px 0px 2px #333;
 }
+
 /* well noise */
 div.well,
 div.well-widgets {
-    padding: 1em;
     background: #fafafa url('inc/imgs/noise.png') repeat;
+    padding: 1em;
 }
+
 /* well intro */
 div.well-intro {
+    background: #333 url('inc/imgs/noise.png') repeat;
     overflow: hidden;
     padding: 1.2em;
-    background: #333 url('inc/imgs/noise.png') repeat;
 }
 div.well-intro h1 {
     color: #f0f0f0;
     text-shadow: none;
 }
 div.well-intro hr {
-    opacity: 0.3;
     margin: 5px 0px 15px 0px;
+    opacity: 0.3;
 }
 div.well-intro h2 {
     line-height: 1em;
 }
+
 /* well-widgets */
 div.well-widgets {
     border: 0px;
@@ -837,34 +852,36 @@ div.well-widgets div.ws-widget-content {
     padding: 0.5em;
 }
 div.well-widgets div.ws-widget-title {
-    word-wrap: break-word;
-    font-size: 1.2em;
-    color: #f2f2f2;
-    text-shadow: 1px 1px 1px #333;
-    margin-bottom: 0.1em;
     border-bottom: 1px solid #888;
     -moz-border-radius: 3px 3px 0px 0px;
     -webkit-border-radius: 3px 3px 0px 0px;
     border-radius: 3px 3px 0px 0px;
+    color: #f2f2f2;
+    font-size: 1.2em;
+    margin-bottom: 0.1em;
+    text-shadow: 1px 1px 1px #333;
+    word-wrap: break-word;
 }
 div.well-widgets .ws-widget-content ul {
+    font-size: 1.3em;
     list-style-type: square;
     margin: 0px;
     margin-left: 15px;
     padding: 0px;
-    font-size: 1.3em;
 }
 div.well-widgets .ws-widget-content ul li:first-child {
     margin: 0px;
     padding: 2px 0px;
 }
 div.well-widgets .ws-widget-content ul li {
-    font-size: 0.7em; font-weight: normal;
+    font-size: 0.7em;
+    font-weight: normal;
     margin: 0px;
     padding: 2px 0px;
 }
 .well-widgets .ws-widget-content ul li a {
-    font-size: 1em; font-weight: bold;
+    font-size: 1em;
+    font-weight: bold;
 }
 .well-widgets-header {
     padding: 10px;
@@ -886,8 +903,8 @@ div.well-widgets .ws-widget-content ul li {
     border-radius: 4px;
 }
 .tabs-left .nav-tabs {
-    margin-right: 0px;
     border-right: 0px;
+    margin-right: 0px;
 }
 .tabs-left .nav-tabs li a {
     border-radius: 0px;
@@ -897,11 +914,11 @@ div.well-widgets .ws-widget-content ul li {
 }
 .tabs-left .tab-content {
     background: #fff;
-    padding: 2px 20px;
     border-right: 1px solid #ddd;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     min-height: 200px;
+    padding: 2px 20px;
 }
 .tabs-left .nav-tabs > li > a {
     margin-right: 0px;
@@ -914,34 +931,34 @@ div.well-widgets .ws-widget-content ul li {
 
 /* default WordPress calendar widget */
 table#wp-calendar {
-    width: 96%;
     margin: 0px;
     margin: auto;
     padding: 0px;
+    width: 96%;
 }
 table#wp-calendar caption {
-    margin-bottom: .5em;
     font-size: 1.2em;
     font-weight: bold;
+    margin-bottom: .5em;
 }
 table#wp-calendar td {
-    padding: .2em;
     font-size: .8em;
+    padding: .2em;
     text-align: center;
 }
 table#wp-calendar thead th {
+    background: #555;
+    color: #fff;
+    font-size: .8em;
+    font-weight: bold;
     text-align: center;
     padding: .2em;
-    background: #555;
-    font-size: .8em;
-    color: #fff;
-    font-weight: bold;
 }
 table#wp-calendar tbody td {
-    vertical-align: middle;
     background: #dadada;
-    color: #222;
     border: 1px solid #f0f0f0;
+    color: #222;
+    vertical-align: middle;
 }
 table#wp-calendar tbody td:hover {
     background: #eee;
@@ -975,10 +992,10 @@ table#wp-calendar td#next {
 
 /* default WordPress recent comments widget */
 .well-widgets .ws-widget-content ul li.recentcomments {
-    padding: 2px;
     font-size: .7em;
     font-weight: normal;
     margin: 0px;
+    padding: 2px;
 }
 .well-widgets .ws-widget-content ul li.recentcomments a {
     font-size: 1em;
@@ -1018,9 +1035,9 @@ table#wp-calendar td#next {
     font-style: normal;
     font-weight: bold;
     margin-right: 5px;
-    position: absolute;
     left: 10px;
     top: 7px;
+    position: absolute;
 }
 .sticky {
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
@@ -1052,23 +1069,23 @@ table#wp-calendar td#next {
 
 /* Alignment */
 .alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1em;
-        margin-top: 0.5em;
+    display: inline;
+    float: left;
+    margin-right: 1em;
+    margin-top: 0.5em;
 }
 .alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.625em;
+    display: inline;
+    float: right;
+    margin-left: 1.625em;
 }
 .aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-        margin-top: 0.3em;
-        margin-bottom: 0.3em;
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
 }
 
 /* comments */
@@ -1084,25 +1101,25 @@ textarea#comment {
     height: 80px;
 }
 div#ws-comment-list p.logged-in-as {
-    font-size: .8em;
-    margin-top: 10px;
-    padding:6px;
-    margin-bottom:12px;
-    text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);
     background-color:#fcf8e3;
     border:1px solid #fbeed5;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
     border-radius:4px;
+    font-size: .8em;
+    margin-bottom:12px;
+    margin-top: 10px;
+    padding:6px;
+    text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);
 }
 div#respond {
-    padding: 10px;
     background: #eaeaea;
     border-radius: 4px;
+    padding: 10px;
 }
 h3#reply-title {
-    padding-bottom: 5px;
     border-bottom: 2px dotted #cacaca;
+    padding-bottom: 5px;
 }
 select.postform {
     width: 100%;
@@ -1118,25 +1135,3 @@ div.tagcloud a {
 /* END WordPress theme required */
 
 /* END SKIN 1 *****************************************************************/
-
-/* MEDIA QUERY SENTENCES ******************************************************/
-/*
-@media (max-width: 480px) {
-    div#ws-wrapper {
-        padding-top: .5em;
-    }
-}
-
-@media (min-width: 480px) and (max-width: 768px) {
-    div#ws-wrapper {
-        padding-top: .5em;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 980px) {
-    div#ws-wrapper {
-        padding-top: .5em;
-    }
-}
-*/
-/* END MEDIA QUERY SENTENCES **************************************************/

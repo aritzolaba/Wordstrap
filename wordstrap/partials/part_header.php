@@ -1,10 +1,6 @@
 <?php
 /**
  * The header template partial.
- *
- * @package WordStrap
- * @subpackage Partials
- * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
@@ -17,6 +13,15 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
+
+                <?php if ($wordstrap_theme_options['show_wssearch_header'] == 1) : ?>
+
+                    <div class="ws-search-header">
+                        <?php get_template_part('searchform'); ?>
+                    </div>
+
+                <?php endif; ?>
+
                 <?php if ( get_header_image() OR get_header_textcolor() != 'blank') : ?>
 
                     <?php if ( get_header_image() ) : ?>
@@ -34,9 +39,12 @@ $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
                 <?php else : ?>
 
-                    <h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
+                    <h1 id="site-title">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+                    </h1>
 
                 <?php endif; ?>
+
             </div>
         </div>
     </div>

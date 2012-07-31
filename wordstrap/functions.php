@@ -1,10 +1,6 @@
 <?php
 /**
  * The Wordstrap functions file.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly

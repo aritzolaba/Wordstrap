@@ -1,13 +1,8 @@
 <?php
 /**
  * The comments template file.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 ?>
-
 <div id="comments">
     <?php if ( post_password_required() ) : ?>
         <p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'wordstrap' ); ?></p>
@@ -57,7 +52,7 @@
     <?php
     $args = array (
         'id_submit' => 'ws-comment-submit',
-        'title_reply' => '<i class="icon-awesome-comment"></i> '. __('Leave a Reply','wordstrap')
+        'title_reply' => '<i class="icon-awesome-pencil" style="float: left; margin-top: .35em; margin-right: .5em;"></i> '. __('Leave a Reply','wordstrap')
     );
     comment_form($args);
     ?>

@@ -74,6 +74,13 @@
                 $('#header_height_box').slideUp('fast');
         });
 
+        $('#hide_wsnavbar').click(function(){
+            if ($(this).attr('checked')!= 'checked')
+                $('#nav_box').slideDown('fast');
+            else
+                $('#nav_box').slideUp('fast');
+        });
+
         $('.social_buttons_check').click(function(){
             var ele = $(this).attr('rel');
             if ($(this).attr('checked')== 'checked') {

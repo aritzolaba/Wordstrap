@@ -1,10 +1,6 @@
 <?php
 /**
  * The sidebar template file.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 
 // Get Theme Options

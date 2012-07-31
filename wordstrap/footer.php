@@ -1,10 +1,6 @@
 <?php
 /**
  * The template for displaying the footer.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 
 // Get Options

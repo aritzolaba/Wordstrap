@@ -1,10 +1,6 @@
 <?php
 /**
  * The Header for our theme.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 ?>
 <!DOCTYPE html>
@@ -31,13 +27,6 @@
 
         // Add wp_title ()
         wp_title( '|', true, 'right' );
-
-        // Add the blog name.
-        bloginfo('name');
-
-        // Add the blog description for the home/front page.
-        if ($site_description && ( is_home() || is_front_page() ))
-            echo " | $site_description";
 
         // Add a page number if necessary:
         if ($paged >= 2 || $page >= 2)

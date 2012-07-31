@@ -1,10 +1,6 @@
 <?php
 /**
  * The template for displaying 404 pages (Not Found).
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 
 get_header(); ?>

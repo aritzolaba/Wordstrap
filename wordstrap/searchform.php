@@ -1,10 +1,6 @@
 <?php
 /**
  * The template for displaying search forms in Wordstrap
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 ?>
 <div class="row-fluid">
@@ -13,7 +9,7 @@
         <form class="form-search" method="post" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
             <div class="input-append">
                 <input type="text" style="width: 65%;" name="s" id="s" placeholder="<?php _e('Search', 'wordstrap'); ?>" />
-                <button style="margin-left: -4px;" id="searchsubmit" type="submit" class="btn btn-primary"><i class="icon-awesome-search"></i></button>
+                <button style="margin-left: -4px;" id="searchsubmit" type="submit" class="btn"><i class="icon-awesome-search ws-search-icon"></i></button>
             </div>
         </form>
 

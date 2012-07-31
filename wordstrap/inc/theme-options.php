@@ -1,10 +1,6 @@
 <?php
 /**
  * The theme options page in wp-admin
- *
- * @package WordStrap
- * @subpackage ThemeOptions
- * @since Wordstrap 1.6.5
  */
 class wordstrap_theme_options_page {
 
@@ -18,7 +14,10 @@ class wordstrap_theme_options_page {
         $def_theme_options['header_height'] = 32;
         $def_theme_options['hide_wsheader'] = 0;
         $def_theme_options['hide_wsnavbar'] = 0;
-        $def_theme_options['show_wstitle_nav'] = 1;
+        $def_theme_options['show_wstitle_nav'] = 0;
+        $def_theme_options['show_wssearch_nav'] = 0;
+        $def_theme_options['show_home_nav'] = 0;
+        $def_theme_options['show_wssearch_header'] = 0;
         $def_theme_options['nav_fixed'] = 0;
         $def_theme_options['use_googlefonts'] = 0;
         $def_theme_options['use_googlefonts_widgets'] = 1;
@@ -249,6 +248,12 @@ class wordstrap_theme_options_page {
 
                                                 <div id="header_height_box" style="margin-top: 1em; <?php if ($wordstrap_theme_options['hide_wsheader'] == 1) echo 'display: none;'; ?>">
 
+                                                    <label class="checkbox" style="font-weight: normal;" for="show_wssearch_header"><?php _e('Show Search form in header','wordstrap'); ?>
+                                                        <input type="checkbox" id="show_wssearch_header" name="show_wssearch_header" <?php if ($wordstrap_theme_options['show_wssearch_header'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                    </label><br />
+
+                                                    <div class="clearfix"></div>
+
                                                     <input type="text" name="header_height" value="<?php echo $wordstrap_theme_options['header_height']; ?>" class="input-mini" style="float: left; margin-top: -.25em; margin-right: .5em;" maxlength="3">
                                                     <?php _e('Header Height','wordstrap'); ?><br />
 
@@ -256,15 +261,25 @@ class wordstrap_theme_options_page {
 
                                                 <br />
 
-                                                <label for="WsHeader"><h4><?php _e('Navbar options','wordstrap'); ?></h4></label>
+                                                <label for="WsNavbar"><h4><?php _e('Navbar options','wordstrap'); ?></h4></label>
 
                                                 <label class="checkbox" style="font-weight: normal;" for="hide_wsnavbar"><?php _e('Hide Nav bar','wordstrap'); ?>
                                                     <input type="checkbox" id="hide_wsnavbar" name="hide_wsnavbar" <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) echo 'checked="checked"'; ?> value="1">
                                                 </label>
 
-                                                <label class="checkbox" style="font-weight: normal;" for="show_wstitle_nav"><?php _e('Show Site title in nav bar','wordstrap'); ?>
-                                                    <input type="checkbox" id="show_wstitle_nav" name="show_wstitle_nav" <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) echo 'checked="checked"'; ?> value="1">
-                                                </label>
+                                                <div id="nav_box" style="margin-top: 1em; <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 1) echo 'display: none;'; ?>">
+                                                    <label class="checkbox" style="font-weight: normal;" for="show_wstitle_nav"><?php _e('Show Site title in nav bar','wordstrap'); ?>
+                                                        <input type="checkbox" id="show_wstitle_nav" name="show_wstitle_nav" <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                    </label>
+
+                                                    <label class="checkbox" style="font-weight: normal;" for="show_wssearch_nav"><?php _e('Show Search form in nav bar','wordstrap'); ?>
+                                                        <input type="checkbox" id="show_wssearch_nav" name="show_wssearch_nav" <?php if ($wordstrap_theme_options['show_wssearch_nav'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                    </label>
+
+                                                    <label class="checkbox" style="font-weight: normal;" for="show_home_nav"><?php _e('Show Home link in nav bar','wordstrap'); ?>
+                                                        <input type="checkbox" id="show_home_nav" name="show_home_nav" <?php if ($wordstrap_theme_options['show_home_nav'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                    </label>
+                                                </div>
 
                                                 <br />
 

@@ -1,10 +1,6 @@
 <?php
 /**
  * The index template file.
- *
- * @package WordStrap
- * @subpackage Main
- * @since Wordstrap 1.6.5
  */
 
 get_header();

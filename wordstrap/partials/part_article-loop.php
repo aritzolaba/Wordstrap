@@ -1,10 +1,6 @@
 <?php
 /**
  * The article-loop template partial.
- *
- * @package WordStrap
- * @subpackage Partials
- * @since Wordstrap 1.6.5
  */
 
 // Exit if accessed directly
