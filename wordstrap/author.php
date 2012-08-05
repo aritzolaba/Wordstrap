@@ -54,9 +54,6 @@ get_header(); ?>
                             </div>
                         <?php endif; ?>
 
-                        <div class="ws-user-stats">
-
-                        </div>
                     </div><!-- .author-container -->
                 </div><!-- .span4 -->
 

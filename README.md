@@ -1,4 +1,4 @@
-Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons.
+Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons. You can customize the layout in one, two or three columns, and choose the background colors of the header, navbar and widget headers and some other interesting features available in the theme options page.
 
 Features
 ======================================================================
@@ -15,6 +15,13 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.1
+
+- Added new options to choose background gradient of header and navbar
+- Fixed an error with category links. Now they display correctly despite the permalink configuration
+- Theme options are not overwritten when a new version of the theme is installed
+- Improved CSS style. Also improved page rendering to avoid showing non-styled elements during page loads
+- Updated spanish translation
 
 v: 1.7
 

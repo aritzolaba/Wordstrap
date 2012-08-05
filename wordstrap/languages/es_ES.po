@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wordstrap 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-31 20:41+0100\n"
-"PO-Revision-Date: 2012-07-31 20:41+0100\n"
+"POT-Creation-Date: 2012-08-05 21:08+0100\n"
+"PO-Revision-Date: 2012-08-05 21:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,12 +21,12 @@ msgstr ""
 msgid "registered %s ago"
 msgstr "registrado hace %s"
 
-#: ../author.php:65
+#: ../author.php:62
 #, php-format
 msgid "Posts published by %s"
 msgstr "Entradas publicadas por %s"
 
-#: ../author.php:72
+#: ../author.php:69
 msgid "Sorry, but there are no posts by this author."
 msgstr "No hay entradas publicadas por este autor."
 
@@ -121,344 +121,371 @@ msgstr "%d resultados encontrados para el término"
 msgid "Search"
 msgstr "Buscar"
 
-#: ../inc/theme-options.php:57
+#: ../inc/theme-options.php:39
+msgid "About"
+msgstr "Acerca de"
+
+#: ../inc/theme-options.php:40
+msgid "Follow us"
+msgstr "S&iacute;guenos"
+
+#: ../inc/theme-options.php:41
+msgid "Powered by Wordstrap"
+msgstr "Realizado con Wordstrap"
+
+#: ../inc/theme-options.php:61
 msgid "Featured"
 msgstr "Destacados"
 
-#: ../inc/theme-options.php:80
+#: ../inc/theme-options.php:106
 msgid "Theme Options"
 msgstr "Opciones del tema"
 
-#: ../inc/theme-options.php:147
+#: ../inc/theme-options.php:173
 #, php-format
 msgid "%s Theme Options"
 msgstr "%s, Opciones del tema"
 
-#: ../inc/theme-options.php:158
+#: ../inc/theme-options.php:184
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: ../inc/theme-options.php:159
+#: ../inc/theme-options.php:185
 msgid "Articles"
 msgstr "Art&iacute;culos"
 
-#: ../inc/theme-options.php:160
-#: ../inc/theme-options.php:318
+#: ../inc/theme-options.php:186
+#: ../inc/theme-options.php:382
 msgid "Extras"
 msgstr "Extras"
 
-#: ../inc/theme-options.php:161
+#: ../inc/theme-options.php:187
 msgid "Footer"
 msgstr "Pié"
 
-#: ../inc/theme-options.php:162
+#: ../inc/theme-options.php:188
 msgid "Front page"
 msgstr "Página frontal"
 
-#: ../inc/theme-options.php:167
+#: ../inc/theme-options.php:193
 msgid "Appearance settings"
 msgstr "Opciones de apariencia"
 
-#: ../inc/theme-options.php:168
+#: ../inc/theme-options.php:194
 msgid "Customize the layout and colors"
 msgstr "Selecciona el layout y los colores"
 
-#: ../inc/theme-options.php:174
+#: ../inc/theme-options.php:200
 msgid "Layout"
 msgstr "Estructura"
 
-#: ../inc/theme-options.php:181
+#: ../inc/theme-options.php:207
 msgid "Full width"
 msgstr "Sin sidebars"
 
-#: ../inc/theme-options.php:190
+#: ../inc/theme-options.php:216
 msgid "2 cols left"
 msgstr "2 cols izq."
 
-#: ../inc/theme-options.php:200
+#: ../inc/theme-options.php:226
 msgid "2 cols right"
 msgstr "2 cols dcha."
 
-#: ../inc/theme-options.php:209
+#: ../inc/theme-options.php:235
 msgid "3 cols"
 msgstr "3 cols"
 
-#: ../inc/theme-options.php:217
+#: ../inc/theme-options.php:243
 msgid "Background gradient for widget headers"
 msgstr "Fondo (degradado) para la cabecera de widgets"
 
-#: ../inc/theme-options.php:221
+#: ../inc/theme-options.php:247
+#: ../inc/theme-options.php:292
+#: ../inc/theme-options.php:334
 msgid "Start Color"
 msgstr "Color Inicio"
 
-#: ../inc/theme-options.php:228
+#: ../inc/theme-options.php:254
+#: ../inc/theme-options.php:299
+#: ../inc/theme-options.php:341
 msgid "Ending Color"
 msgstr "Color final"
 
-#: ../inc/theme-options.php:242
+#: ../inc/theme-options.php:268
 msgid "Header options"
 msgstr "Opciones de la cabecera"
 
-#: ../inc/theme-options.php:243
+#: ../inc/theme-options.php:269
 msgid "Hide Header"
 msgstr "Ocultar header"
 
-#: ../inc/theme-options.php:251
+#: ../inc/theme-options.php:277
 msgid "Show Search form in header"
 msgstr "Mostrar formulario de b&uacute;squeda en la cabecera"
 
-#: ../inc/theme-options.php:258
+#: ../inc/theme-options.php:284
 msgid "Header Height"
 msgstr "Altura de la cabecera"
 
-#: ../inc/theme-options.php:264
+#: ../inc/theme-options.php:288
+msgid "Header Background gradient"
+msgstr "Fondo (degradado) del Header"
+
+#: ../inc/theme-options.php:309
 msgid "Navbar options"
 msgstr "Navegación"
 
-#: ../inc/theme-options.php:266
+#: ../inc/theme-options.php:311
 msgid "Hide Nav bar"
 msgstr "Ocultar Navbar"
 
-#: ../inc/theme-options.php:271
+#: ../inc/theme-options.php:316
 msgid "Show Site title in nav bar"
 msgstr "Mostrar título del sitio en la navbar"
 
-#: ../inc/theme-options.php:275
+#: ../inc/theme-options.php:320
 msgid "Show Search form in nav bar"
 msgstr "Mostrar formulario de b&uacute;squeda en la navbar"
 
-#: ../inc/theme-options.php:279
+#: ../inc/theme-options.php:324
 msgid "Show Home link in nav bar"
 msgstr "Mostrar enlace a Home en la navbar"
 
-#: ../inc/theme-options.php:286
+#: ../inc/theme-options.php:330
+msgid "Navbar Background gradient"
+msgstr "Fondo (degradado) de la Navbar"
+
+#: ../inc/theme-options.php:350
 msgid "Misc."
 msgstr "Misc."
 
-#: ../inc/theme-options.php:287
+#: ../inc/theme-options.php:351
 msgid "Fixed Header/Nav bar"
 msgstr "Header/Navbar fijas"
 
-#: ../inc/theme-options.php:290
+#: ../inc/theme-options.php:354
 msgid "This will make the Header, Nav bar or both of them stick to the top."
 msgstr "Esto hará que el Header, la Nav bar o ambos se queden pegados en la parte superior."
 
-#: ../inc/theme-options.php:303
+#: ../inc/theme-options.php:367
 msgid "Article settings"
 msgstr "Opciones de los art&iacute;culos"
 
-#: ../inc/theme-options.php:304
+#: ../inc/theme-options.php:368
 msgid "Select how to display posts and article loops"
 msgstr "Escoge cómo mostrar los posts"
 
-#: ../inc/theme-options.php:307
+#: ../inc/theme-options.php:371
 msgid "Excerpt length in loops (number of words)"
 msgstr "Longitud del excerpt (num. de palabras)"
 
-#: ../inc/theme-options.php:312
+#: ../inc/theme-options.php:376
 msgid "Display social share buttons in posts ?"
 msgstr "Mostrar botones \"me gusta\" en los posts?"
 
-#: ../inc/theme-options.php:313
+#: ../inc/theme-options.php:377
 msgid "Display Facebook, Google+ and Twitter like buttons"
 msgstr "Mostrar los botones me gusta de Facebook, Google+ y Twitter"
 
-#: ../inc/theme-options.php:319
+#: ../inc/theme-options.php:383
 msgid "Some extra functionalities"
 msgstr "Algunas funcionalidades extra"
 
-#: ../inc/theme-options.php:325
+#: ../inc/theme-options.php:389
 msgid "Use Google API Fonts ?"
 msgstr "Utilizar Google API Fonts ?"
 
-#: ../inc/theme-options.php:334
+#: ../inc/theme-options.php:398
 msgid "Choose a font"
 msgstr "Elige una fuente"
 
-#: ../inc/theme-options.php:348
+#: ../inc/theme-options.php:412
 msgid "Use it in"
 msgstr "Usarlo en"
 
-#: ../inc/theme-options.php:350
+#: ../inc/theme-options.php:414
 msgid "Widget titles"
 msgstr "En los títulos de widgets"
 
-#: ../inc/theme-options.php:353
+#: ../inc/theme-options.php:417
 msgid "Post titles"
 msgstr "En los títulos de posts"
 
-#: ../inc/theme-options.php:356
+#: ../inc/theme-options.php:420
 msgid "Page titles"
 msgstr "En los títulos de páginas"
 
-#: ../inc/theme-options.php:363
+#: ../inc/theme-options.php:427
 msgid "Google Analytics code"
 msgstr "Código de Google Analytics"
 
-#: ../inc/theme-options.php:364
+#: ../inc/theme-options.php:428
 msgid "Here you can paste the full Google Analytics script for your site, including the <b>&lt;script&gt;</b> tags."
 msgstr "Aquí puedes pegar directamente el código de Google Analytics de tu sitio, incluyendo los tags <b>&lt;script&gt;</b>"
 
-#: ../inc/theme-options.php:370
+#: ../inc/theme-options.php:434
 msgid "Footer Elements settings"
 msgstr "Elementos del Pie de pagina"
 
-#: ../inc/theme-options.php:371
+#: ../inc/theme-options.php:435
 msgid "Customize the footer of your site"
 msgstr "Personaliza el pie de página de tu sitio"
 
-#: ../inc/theme-options.php:377
+#: ../inc/theme-options.php:441
 msgid "Footer Title"
 msgstr "Pie de p&aacute;gina"
 
-#: ../inc/theme-options.php:380
+#: ../inc/theme-options.php:444
 msgid "Footer Title Social"
 msgstr "Título pie (social)"
 
-#: ../inc/theme-options.php:385
+#: ../inc/theme-options.php:449
 msgid "Footer text"
 msgstr "Texto del pie"
 
-#: ../inc/theme-options.php:396
+#: ../inc/theme-options.php:460
 msgid "Social buttons"
 msgstr "Botones sociales"
 
-#: ../inc/theme-options.php:398
+#: ../inc/theme-options.php:462
 msgid "Facebook Button"
 msgstr "Botón Facebook"
 
-#: ../inc/theme-options.php:404
+#: ../inc/theme-options.php:468
 msgid "Google+ Button"
 msgstr "Botón Google+"
 
-#: ../inc/theme-options.php:410
+#: ../inc/theme-options.php:474
 msgid "Twitter Button"
 msgstr "Botón Twitter"
 
-#: ../inc/theme-options.php:416
+#: ../inc/theme-options.php:480
 msgid "Show Linkedin Button"
 msgstr "Mostrar botón Linkedin"
 
-#: ../inc/theme-options.php:422
+#: ../inc/theme-options.php:486
 msgid "Show GitHub Button"
 msgstr "Mostrar botón GitHub"
 
-#: ../inc/theme-options.php:428
+#: ../inc/theme-options.php:492
 msgid "Show YouTube Button"
 msgstr "Mostrar botón Youtube"
 
-#: ../inc/theme-options.php:435
+#: ../inc/theme-options.php:499
 msgid "Display Creative Commons logo"
 msgstr "Mostrar logo Creative Commons"
 
-#: ../inc/theme-options.php:446
+#: ../inc/theme-options.php:510
 msgid "Front page settings"
 msgstr "Opciones de la página frontal"
 
-#: ../inc/theme-options.php:447
+#: ../inc/theme-options.php:511
 msgid "Select which elements will be displayed in the front page."
 msgstr "Selecciona los elementos que se mostrarán en la página frontal."
 
-#: ../inc/theme-options.php:451
+#: ../inc/theme-options.php:515
 msgid "Display Intro container"
 msgstr "Mostrar Intro"
 
-#: ../inc/theme-options.php:456
+#: ../inc/theme-options.php:520
 msgid "Display page"
 msgstr "Mostrar página"
 
-#: ../inc/theme-options.php:459
+#: ../inc/theme-options.php:523
 msgid "Select an item..."
 msgstr "Elige un item..."
 
-#: ../inc/theme-options.php:467
+#: ../inc/theme-options.php:531
 msgid "Container colors"
 msgstr "Colores del contenedor"
 
-#: ../inc/theme-options.php:471
+#: ../inc/theme-options.php:535
 msgid "Background"
 msgstr "Fondo"
 
-#: ../inc/theme-options.php:477
+#: ../inc/theme-options.php:541
 msgid "Text"
 msgstr "Texto"
 
-#: ../inc/theme-options.php:486
+#: ../inc/theme-options.php:550
 msgid "Options"
 msgstr "Opciones"
 
-#: ../inc/theme-options.php:487
+#: ../inc/theme-options.php:551
 msgid "Show page title"
 msgstr "Mostrar título"
 
-#: ../inc/theme-options.php:495
+#: ../inc/theme-options.php:559
 msgid "Display Featured items container"
 msgstr "Mostrar Elementos Destacados"
 
-#: ../inc/theme-options.php:500
+#: ../inc/theme-options.php:564
 msgid "Select category:"
 msgstr "Selecciona una categoría:"
 
-#: ../inc/theme-options.php:502
+#: ../inc/theme-options.php:566
 msgid "Select a category..."
 msgstr "Selecciona una categoría..."
 
-#: ../inc/theme-options.php:515
+#: ../inc/theme-options.php:579
 msgid "Title"
 msgstr "Título"
 
-#: ../inc/theme-options.php:519
+#: ../inc/theme-options.php:583
 msgid "Number"
 msgstr "Número"
 
-#: ../inc/theme-options.php:525
+#: ../inc/theme-options.php:589
 msgid "Display Tabs"
 msgstr "Mostrar Tabs"
 
-#: ../inc/theme-options.php:528
+#: ../inc/theme-options.php:592
 msgid "Display Blog loop"
 msgstr "Mostrar Blog"
 
-#: ../inc/theme-options.php:537
+#: ../inc/theme-options.php:601
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: ../inc/theme-options.php:539
+#: ../inc/theme-options.php:603
 msgid "Theme options have been succesfully updated."
 msgstr "Las opciones se han guardado correctamente."
 
-#: ../partials/part_article.php:62
-msgid "by"
-msgstr "por"
+#: ../partials/part_article.php:67
+msgid "Author"
+msgstr "Autor"
 
-#: ../partials/part_article.php:75
-#, php-format
-msgid "in %s"
-msgstr "en %s"
+#: ../partials/part_article.php:74
+msgid "Categories"
+msgstr "Categor&iacute;as"
+
+#: ../partials/part_article.php:80
+msgid "no"
+msgstr "sin"
 
 #: ../partials/part_article.php:81
-msgid "no"
-msgstr "no"
-
-#: ../partials/part_article.php:82
 #, php-format
 msgid "%s comments"
 msgstr "%s comentarios"
 
-#: ../partials/part_article.php:113
+#: ../partials/part_article.php:92
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: ../partials/part_article.php:112
 msgid "Next page"
 msgstr "Siguiente"
 
-#: ../partials/part_article.php:114
+#: ../partials/part_article.php:113
 msgid "Previous page"
 msgstr "Anterior"
 
-#: ../partials/part_article.php:118
+#: ../partials/part_article.php:117
 msgid "Pages:"
 msgstr "Páginas:"
 
 #: ../partials/part_breadcrumb.php:13
-#: ../partials/part_navigation.php:30
+#: ../partials/part_navigation.php:33
 msgid "Home"
 msgstr "Inicio"
 
@@ -484,13 +511,13 @@ msgstr "Leer el art&iacute;culo"
 
 #: ../partials/part_featured.php:97
 msgid "PREV"
-msgstr "ANT"
+msgstr "ANTERIORES"
 
 #: ../partials/part_featured.php:98
 msgid "NEXT"
-msgstr "SIG"
+msgstr "SIGUIENTES"
 
-#: ../partials/part_navigation.php:42
+#: ../partials/part_navigation.php:45
 #, php-format
 msgid "You should customize a %s"
 msgstr "Deberías configurar un %s"
@@ -515,6 +542,12 @@ msgstr "Añade widgets aquí"
 #: ../partials/part_widgets-right.php:12
 msgid "Widgets area #right"
 msgstr "Area Widgets #derecha"
+
+#~ msgid "by"
+#~ msgstr "por"
+
+#~ msgid "in %s"
+#~ msgstr "en %s"
 
 #~ msgid "Term <em>&quot;%s&quot;</em>"
 #~ msgstr "El término <em>&quot;%s&quot;</em>"
@@ -563,12 +596,6 @@ msgstr "Area Widgets #derecha"
 
 #~ msgid "register"
 #~ msgstr "reg&iacute;strate"
-
-#~ msgid "About"
-#~ msgstr "Acerca de"
-
-#~ msgid "Follow us"
-#~ msgstr "S&iacute;guenos"
 
 #~ msgid "Follow us in Facebook"
 #~ msgstr "S&iacute;guenos en Facebook"
@@ -661,6 +688,3 @@ msgstr "Area Widgets #derecha"
 
 #~ msgid "Dashboard"
 #~ msgstr "Escritorio"
-
-#~ msgid "About Wordstrap"
-#~ msgstr "Sobre Wordstrap"

@@ -16,10 +16,10 @@ class wordstrap_theme_options_page {
         $def_theme_options['hide_wsnavbar'] = 0;
         $def_theme_options['show_wstitle_nav'] = 0;
         $def_theme_options['show_wssearch_nav'] = 0;
-        $def_theme_options['show_home_nav'] = 0;
-        $def_theme_options['show_wssearch_header'] = 0;
+        $def_theme_options['show_home_nav'] = 1;
+        $def_theme_options['show_wssearch_header'] = 1;
         $def_theme_options['nav_fixed'] = 0;
-        $def_theme_options['use_googlefonts'] = 0;
+        $def_theme_options['use_googlefonts'] = 1;
         $def_theme_options['use_googlefonts_widgets'] = 1;
         $def_theme_options['use_googlefonts_posts'] = 1;
         $def_theme_options['use_googlefonts_pages'] = 1;
@@ -28,14 +28,18 @@ class wordstrap_theme_options_page {
         $def_theme_options['ws_layout'] = '2cols-right';
         $def_theme_options['article_social'] = 0;
         $def_theme_options['excerpt_length'] = 40;
-        $def_theme_options['widget_header_bg1'] = '#62A49B';
-        $def_theme_options['widget_header_bg2'] = '#0A7466';
+        $def_theme_options['widget_header_bg1'] = '#333333';
+        $def_theme_options['widget_header_bg2'] = '#222222';
+        $def_theme_options['navbar_bg1'] = '#333333';
+        $def_theme_options['navbar_bg2'] = '#222222';
+        $def_theme_options['header_bg1'] = '#FAFAFA';
+        $def_theme_options['header_bg2'] = '#C0C0C0';
         $def_theme_options['intro_bg'] = '#eee';
         $def_theme_options['intro_color'] = '#000';
-        $def_theme_options['footer_title1'] = 'About';
-        $def_theme_options['footer_title2'] = 'Follow us';
-        $def_theme_options['footer_text'] = 'Powered by Wordstrap';
-        $def_theme_options['footer_displaycc'] = 0;
+        $def_theme_options['footer_title1'] = __('About','wordstrap');
+        $def_theme_options['footer_title2'] = __('Follow us','wordstrap');
+        $def_theme_options['footer_text'] = __('Powered by Wordstrap','wordstrap');
+        $def_theme_options['footer_displaycc'] = 1;
         $def_theme_options['footer_show_fb'] = 0;
         $def_theme_options['footer_show_tw'] = 0;
         $def_theme_options['footer_show_gp'] = 0;
@@ -49,31 +53,53 @@ class wordstrap_theme_options_page {
         $def_theme_options['footer_yt_url'] = '';
         $def_theme_options['footer_li_url'] = '';
         $def_theme_options['landing_page_intro'] = 0;
-        $def_theme_options['landing_page_intro_id'] = NULL;
+        $def_theme_options['landing_page_intro_id'] = '';
         $def_theme_options['landing_page_intro_title'] = 1;
         $def_theme_options['landing_page_tabs'] = 0;
         $def_theme_options['landing_page_blog'] = 1;
         $def_theme_options['landing_page_featured'] = 0;
         $def_theme_options['landing_page_featured_title'] = __('Featured', 'wordstrap');
-        $def_theme_options['featured_cat'] = NULL;
+        $def_theme_options['featured_cat'] = '';
         $def_theme_options['featured_num'] = 3;
 
         // Get current Options
         $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
-        // If there are options already
+        // This part is for theme updates, to ensure options are stored
+        // properly in wp-config.
+
+        // If there are options already, check if there are new options or
+        // if any option has been deleted in a theme update, updating
+        // the options array without loosing the current configuration
         if ( $wordstrap_theme_options ) {
-            // Check array sizes, to detect if new options have been updated
-            // or removed and if so, delete options first and set defaults
-            $cur_size = sizeof($wordstrap_theme_options);
-            $def_size = sizeof($def_theme_options);
+
+            $cur_size = count($wordstrap_theme_options);
+            $def_size = count($def_theme_options);
             if ($def_size!=$cur_size) {
+
+                var_dump($wordstrap_theme_options);
+
+                // Check for new options
+                foreach ($def_theme_options as $def_key => $def_value) :
+                    if (!isset($wordstrap_theme_options[$def_key])) {
+                        $wordstrap_theme_options[$def_key] = $def_value;
+                    }
+                endforeach;
+
+                // Check for deleted options
+                foreach ($wordstrap_theme_options as $cur_key => $cur_value) :
+                    if (!isset($def_theme_options[$cur_key])) {
+                        unset ($wordstrap_theme_options[$cur_key]);
+                    }
+                endforeach;
+
                 delete_option('wordstrap_theme_options');
-                add_option('wordstrap_theme_options', $def_theme_options);
+                add_option('wordstrap_theme_options', $wordstrap_theme_options);
             }
-        } else
+        } else {
             // Add default options
             add_option('wordstrap_theme_options', $def_theme_options);
+        }
     }
 
     function add_wordstrap_options_page() {
@@ -216,14 +242,14 @@ class wordstrap_theme_options_page {
 
                                         <label for="WidgetHeaders"><h4><?php _e('Background gradient for widget headers','wordstrap'); ?></h4></label>
                                         <div class="row-fluid">
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <p class="help-block">
                                                     <?php _e('Start Color','wordstrap'); ?>
                                                 </p>
                                                 <input class="input-mini" type="text" name="widget_header_bg1" id="color-1" value="<?php if ($wordstrap_theme_options['widget_header_bg1']) echo $wordstrap_theme_options['widget_header_bg1']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-1"></div>
                                             </div>
 
-                                            <div class="span9">
+                                            <div class="span8">
                                                 <p class="help-block">
                                                     <?php _e('Ending Color','wordstrap'); ?>
                                                 </p>
@@ -257,6 +283,25 @@ class wordstrap_theme_options_page {
                                                     <input type="text" name="header_height" value="<?php echo $wordstrap_theme_options['header_height']; ?>" class="input-mini" style="float: left; margin-top: -.25em; margin-right: .5em;" maxlength="3">
                                                     <?php _e('Header Height','wordstrap'); ?><br />
 
+                                                    <div class="clearfix"></div>
+
+                                                    <label for="HeaderBg"><?php _e('Header Background gradient','wordstrap'); ?></label>
+                                                    <div class="row-fluid">
+                                                        <div class="span4">
+                                                            <p class="help-block">
+                                                                <?php _e('Start Color','wordstrap'); ?>
+                                                            </p>
+                                                            <input class="input-mini" type="text" name="header_bg1" id="color-5" value="<?php if ($wordstrap_theme_options['header_bg1']) echo $wordstrap_theme_options['header_bg1']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-5"></div>
+                                                        </div>
+
+                                                        <div class="span8">
+                                                            <p class="help-block">
+                                                                <?php _e('Ending Color','wordstrap'); ?>
+                                                            </p>
+                                                            <input class="input-mini" type="text" name="header_bg2" id="color-6" value="<?php if ($wordstrap_theme_options['header_bg2']) echo $wordstrap_theme_options['header_bg2']; else echo '#eeeeee'; ?>" /><div style="position: absolute;" id="colorpicker-6"></div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <br />
@@ -279,6 +324,25 @@ class wordstrap_theme_options_page {
                                                     <label class="checkbox" style="font-weight: normal;" for="show_home_nav"><?php _e('Show Home link in nav bar','wordstrap'); ?>
                                                         <input type="checkbox" id="show_home_nav" name="show_home_nav" <?php if ($wordstrap_theme_options['show_home_nav'] == 1) echo 'checked="checked"'; ?> value="1">
                                                     </label>
+
+                                                    <div class="clearfix"></div>
+
+                                                    <label for="NavbarBg"><?php _e('Navbar Background gradient','wordstrap'); ?></label>
+                                                    <div class="row-fluid">
+                                                        <div class="span4">
+                                                            <p class="help-block">
+                                                                <?php _e('Start Color','wordstrap'); ?>
+                                                            </p>
+                                                            <input class="input-mini" type="text" name="navbar_bg1" id="color-7" value="<?php if ($wordstrap_theme_options['navbar_bg1']) echo $wordstrap_theme_options['navbar_bg1']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-7"></div>
+                                                        </div>
+
+                                                        <div class="span8">
+                                                            <p class="help-block">
+                                                                <?php _e('Ending Color','wordstrap'); ?>
+                                                            </p>
+                                                            <input class="input-mini" type="text" name="navbar_bg2" id="color-8" value="<?php if ($wordstrap_theme_options['navbar_bg2']) echo $wordstrap_theme_options['navbar_bg2']; else echo '#eeeeee'; ?>" /><div style="position: absolute;" id="colorpicker-8"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <br />

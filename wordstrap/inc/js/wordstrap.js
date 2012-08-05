@@ -34,10 +34,9 @@
         }
 
         // Prevent showing navbar unstyled
-        /*
-        if ($('div.navbar-inner div.container div.first-nav ').length>0) {
-            $('div.navbar-inner div.container div.first-nav ').css('visibility','visible');
-        }*/
+        if ($('div.navbar-inner div.container-fluid').length>0) {
+            $('div.navbar-inner div.container-fluid').css('display','block');
+        }
 
     });
 })(jQuery);

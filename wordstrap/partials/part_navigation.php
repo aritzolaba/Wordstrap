@@ -13,7 +13,7 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
 
 <div id="ws-navbar" class="navbar<?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo ' navbar-fixed-top'; ?>" <?php if ($wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) echo 'style="top: '.$nav_top.'px; position: fixed;"'; ?>>
     <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid" style="display: none; <?php if ($wordstrap_theme_options['nav_fixed'] != 1) echo 'padding: 0em;'; ?>">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".first-nav">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -21,6 +21,9 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
             </a>
             <?php if ($wordstrap_theme_options['show_wstitle_nav'] == 1) : ?>
                 <a class="brand" href="<?php echo get_site_url(); ?>"><?php echo bloginfo('site_name'); ?></a>
+                <ul class="pull-left nav-collapse first-nav nav ws-nav collapse" style="margin-right: 0px;">
+                    <li class="divider-vertical"></li>
+                </ul>
             <?php endif; ?>
 
             <?php
@@ -49,6 +52,9 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
 
         <?php if ($wordstrap_theme_options['show_wssearch_nav'] == 1) : ?>
 
+            <ul class="pull-left nav-collapse first-nav nav ws-nav collapse" style="margin-right: 0px;">
+                <li class="divider-vertical"></li>
+            </ul>
             <div class="nav-collapse first-nav pull-left">
                 <?php get_template_part('searchform'); ?>
             </div>

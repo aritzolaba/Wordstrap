@@ -310,7 +310,7 @@ function ws_category_pills ($taxonomy=NULL) {
 
                 if ($cat->name == $query_object->name) $active='class="active"'; else $active='';
                 ?>
-                <li <?php echo $active; ?>><a href="<?php echo site_url().'/'.$tax_slug.'/'.$cat->slug; ?>"><?php echo $cat->name; ?></a></li>
+            <li <?php echo $active; ?>><a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->name; ?></a></li>
             <?php endforeach; ?>
         </ul>
         <hr>
@@ -353,55 +353,93 @@ function ws_theme_styles () {
 
     // Additional style override based in options
     $addstyle = '
-    .well-widgets .ws-widget-title, article .calendar > .month {
+    .well-widgets .ws-widget-title,
+    article .calendar > .month {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
+    }
+    div#ws-header.ws-header-container {
+        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['header_bg1'].', '.$wordstrap_theme_options['header_bg2'].');
+        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['header_bg2'].'\');
+    }
+    div.navbar-inner,
+    div.navbar-inner div.divider-vertical,
+    .navbar a.btn-navbar {
+        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['navbar_bg1'].', '.$wordstrap_theme_options['navbar_bg2'].');
+        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['navbar_bg1'].'), to('.$wordstrap_theme_options['navbar_bg2'].'));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['navbar_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['navbar_bg2'].'\');
+    }
+    .navbar a.btn-navbar:hover {
+        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['navbar_bg1'].', '.$wordstrap_theme_options['navbar_bg2'].');
+        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['navbar_bg1'].'), to('.$wordstrap_theme_options['navbar_bg2'].'));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['navbar_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['navbar_bg2'].'\');
+        opacity: .5;
     }
     div.well.well-intro {
         background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise.png\') repeat;
         color: '.$wordstrap_theme_options['intro_color'].';
     }
-    div.well.well-intro h1, .well.well-intro h2, .well.well-intro h3 {
+    div.well.well-intro h1,
+    .well.well-intro h2,
+    .well.well-intro h3 {
         color: '.$wordstrap_theme_options['intro_color'].';
     }
-    #ws-header.ws-header-container { height: '.$wordstrap_theme_options['header_height'].'px; }
+    #ws-header.ws-header-container {
+        height: '.$wordstrap_theme_options['header_height'].'px;
+    }
     ';
 
+    // Google Fonts
     if ($wordstrap_theme_options['use_googlefonts'] == 1) :
 
         $gfontsstyle = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$wordstrap_theme_options['google_font'].'">';
 
         if ($wordstrap_theme_options['use_googlefonts_widgets'] == 1) :
             $addstyle .= '
-            .ws-widget-title, .well-intro h1, .well-intro h2, .well-intro h3, .well-intro h4, .well-intro h5 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            .ws-widget-title,
+            .well-intro h1,
+            .well-intro h2,
+            .well-intro h3,
+            .well-intro h4,
+            .well-intro h5 {
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+            }
             ';
         endif;
 
         if ($wordstrap_theme_options['use_googlefonts_posts'] == 1) :
             $addstyle .= '
-            h1.entry-title { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            h1.entry-title {
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+            }
             ';
         endif;
 
         if ($wordstrap_theme_options['use_googlefonts_pages'] == 1) :
             $addstyle .= '
-            .ws-widget-title, .well-intro h1 { font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em; }
+            .ws-widget-title,
+            .well-intro h1 {
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+            }
             ';
         endif;
 
     endif;
+    // End Google Fonts
 
-    if ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) :
-        $addstyle .= 'div#ws-wrapper{ padding-top: 1em; }';
+    // #ws-wrapper padding-top depending header/navbar and fixed/not fixed options
+    if ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
+        $addstyle .= 'div#ws-wrapper{ padding-top: 4.2em; }';
     elseif ($wordstrap_theme_options['hide_wsnavbar'] == 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
         $nav_top = intval($wordstrap_theme_options['header_height'])+40; $addstyle.= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
-    elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
-        $addstyle .= 'div#ws-wrapper{ padding-top: 4.5em; }';
+    elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] == 1 && $wordstrap_theme_options['nav_fixed'] != 1) :
+        $addstyle .= 'div#ws-wrapper{ padding-top: .25em; }';
     elseif ($wordstrap_theme_options['hide_wsnavbar'] != 1 && $wordstrap_theme_options['hide_wsheader'] != 1 && $wordstrap_theme_options['nav_fixed'] == 1) :
         $nav_top = intval($wordstrap_theme_options['header_height'])+80; $addstyle .= 'div#ws-wrapper{ padding-top: '.$nav_top.'px; }';
     else :
-        $addstyle .= 'div#ws-wrapper{ padding-top: 0em; }';
+        $addstyle .= 'div#ws-wrapper{ padding-top: .25em; }';
     endif;
 
     echo $gfontsstyle . '<style type="text/css">'.$addstyle.'</style>';

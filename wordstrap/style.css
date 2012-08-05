@@ -3,8 +3,8 @@ Theme Name: Wordstrap
 Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
 Author URI: http://www.olabaworks.com
-Description: A WordPress theme using the popular Bootstrap CSS Framework.
-Version: 1.7
+Description: Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons. You can customize the layout in one, two or three columns, and choose the background colors of the header, navbar and widget headers and some other interesting features available in the theme options page.
+Version: 1.7.1
 License: GNU General Public License
 License URI: license.txt
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, custom-menu, custom-background, featured-images, threaded-comments, translation-ready, theme-options
@@ -19,6 +19,7 @@ Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, cust
     text-align: left;
     text-shadow: 0px 0px 1px #ddd;
 }
+
 /* alert padding */
 .alert {
     padding: 20px;
@@ -74,16 +75,10 @@ table .label {
 
 /* END OF BOOTSTRAP OVERRIDES */
 
-/* set thickbox z-index higher than fixed nav and header */
-div#TB_window {
-    z-index: 2000;
-}
-
 /* ****************************************************************************/
 /* WORDSTRAP SKIN 1
 /*
-/* This is the default skin for wordstrap, a minimun styling of the default
-/* Bootstrap design theme.
+/* This is the default skin for wordstrap.
 /*
 /* ****************************************************************************/
 
@@ -96,12 +91,11 @@ body {
 /* header */
 #ws-header {
     background: #fff;
-    z-index: 1050;
     background: -moz-linear-gradient(center top , #fff, #aaa);
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#aaa));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#aaaaaa');
+    z-index: 1050;
 }
-
 #ws-header h1,
 #ws-header h2,
 #ws-header h3,
@@ -110,17 +104,16 @@ body {
 #ws-header h6 {
     color: #000;
 }
-
 .ws-header-container {
-    width: 100%;
     min-height: 32px;
     padding: 10px 0px;
+    width: 100%;
 }
 
 /* wrapper */
 #ws-wrapper {
-    padding-top: 4.5em;
     min-height: 400px;
+    padding-top: 4.5em;
 }
 
 /* footer */
@@ -152,26 +145,33 @@ body {
 }
 
 /* word-wrap in headers */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     word-wrap: break-word;
 }
 
 /* site title and site-description */
 .ws-site-title {
-    padding: 0em .5em;
+    margin: 0em .6em;
 }
 h1#site-title {
     font-size: 2em;
     line-height: 1.2em;
     margin-bottom: 0.2em;
+    text-shadow: 1px 1px 1px #333;
 }
 h1#site-title a:hover {
     text-decoration: none;
+    text-shadow: 1px 1px 2px #222;
 }
 h2#site-description {
     font-size: 1.5em;
-    line-height: 1em;
     font-style: italic;
+    line-height: 1em;
 }
 
 /* header image */
@@ -183,36 +183,31 @@ a.header_title:hover {
 }
 
 /* Header and Navbar brand */
-#ws-header a.brand {
-    padding-top: 0.3em;
-    font-size: 2em;
-    color: #111;
+.navbar a.brand {
+    color: #000;
+    float: left;
+    font-size: 1.55em;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-right: 10px;
+    padding: .4em .2em;
+    transition: all .2s linear;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
 }
-#ws-header .navbar a.brand {
-    font-size: 1.65em;
-}
-.navbar a.brand,
-#ws-header a.brand {
-    text-shadow: 0px 0px 1px #000;
-}
-.navbar a.brand:hover,
-#ws-header a.brand:hover {
+.navbar a.brand:hover {
     color: #4798ED;
     text-decoration: none;
+    text-shadow: none;
+    text-shadow: 1px 1px 2px #000;
 }
 
-#ws-header a.brand,
-.navbar a.brand {
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 5px;
-    margin-right: 10px;
+/* no custommenu message in nav */
+.ws-nav-nocustommenu {
+    color: #666;
     float: left;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    transition: all .1s linear;
+    font-style: italic;
+    margin-top: 10px;
 }
 
 /* pills padding */
@@ -228,16 +223,9 @@ a.header_title:hover {
     border-bottom: 6px solid #888;
 }
 .dropdown-menu a.btn {
-    margin-top: 0px;
     clear: none;
     display: inline;
-}
-
-/* ws-alert */
-.ws-alert {
-    margin: 0px;
-    margin-top: 10px;
-    padding: 5px 10px;
+    margin-top: 0px;
 }
 
 /* author details */
@@ -246,29 +234,29 @@ a.header_title:hover {
 }
 .ws-author-avatar {
     background: #fff;
+    border-radius: 3px 3px 3px 3px;
     -webkit-border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    padding: 5px 5px 2px 5px;
     float: left;
     margin: 2px 14px 4px 2px;
-    text-align: center;
-    width: 60px;
-    height: 60px;
     margin-top: 4px;
     margin-bottom: 10px;
     overflow: hidden;
+    padding: 5px 5px 2px 5px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
 }
 .ws-user-details {
     float: left;
-    padding: 0px;
     margin: 0px;
-    padding-top: 2px;
     margin-bottom: 10px;
     overflow: hidden;
+    padding: 0px;
+    padding-top: 2px;
 }
 .ws-user-details h1 {
     line-height: 0.6em;
@@ -278,36 +266,36 @@ a.header_title:hover {
 }
 .ws-author h2.author-title {
     margin: 0px;
-    padding: 0px;
     line-height: 24px;
+    padding: 0px;
 }
 .ws-user-bio {
     clear: both;
     margin-bottom: 20px;
 }
 .ws-user-bio h2 {
-    line-height: 1.4em;
     font-size: 1.0em;
+    line-height: 1.4em;
     text-align: center;
     padding-top: 10px;
 }
 
 /* articles */
 .ws-article {
+    border-bottom: 1px solid #eeeeee;
     margin-bottom: 10px;
     overflow: hidden;
-    border-bottom: 1px solid #eeeeee;
 }
 div#ws-blog .ws-article h1.entry-title {
     font-size: 1.3em;
-    margin-left: 4.3em;
+    margin-left: 4.45em;
 }
 .ws-article h1.entry-title {
+    font-size: 1.6em;
+    line-height: 1.2em;
     margin-bottom: 0.15em;
     margin-top: 0.2em;
-    margin-left: 3.8em;
-    font-size: 1.5em;
-    line-height: 1.2em;
+    margin-left: 3.6em;
 }
 .ws-article h2.entry-details {
     line-height: 1.2em;
@@ -358,9 +346,12 @@ div#ws-blog .ws-article h1.entry-title {
     padding: 1em;
 }
 .ws-article .entry-content p {
-    font-family: Verdana, Tahoma, Arial;
-    font-size: 1.1em;
     margin-bottom: 10px;
+    font-size: 1.1em;
+}
+#ws-blog .ws-article div.entry-content p,
+#ws-home-tabs .ws-article div.entry-content p {
+    font-size: 1em;
 }
 .ws-article .entry-thumbnail {
     background: #fff;
@@ -408,7 +399,7 @@ div.ws-search h2.entry-details {
     height: 24px;
 }
 .ws-tag-container {
-    margin-left: 6em;
+    margin-left: 5.7em;
     margin-top: 2px;
 }
 .entry-content iframe {
@@ -470,7 +461,6 @@ div#ws-comment-list p {
     word-wrap: break-word;
     font-size: 1.09em;
 }
-
 #comment-nav-above,
 #comment-nav-below {
     padding: 6px 0px;
@@ -538,7 +528,8 @@ div#ws-comment-list p {
 #cancel-comment-reply-link {
     font-size: .8em;
 }
-p.must-log-in, p.comment-notes {
+p.must-log-in,
+p.comment-notes {
     padding-top: 10px;
 }
 a.comment-reply-link {
@@ -559,23 +550,12 @@ a.comment-reply-link:active {
     background: #ddd;
     color: #111;
 }
-span.required {
-    display: none;
-}
 .ws-comments-icon {
     float: left;
     font-size: 1.6em;
     margin-left: 0.2em;
     margin-right: 0.6em;
     margin-top: 0.5em;
-}
-
-/* invisible anchor targets */
-.ws-anchor {
-    visibility: hidden;
-    height: 1px;
-    float: left;
-    margin-top: -20px;
 }
 
 /* article calendar */
@@ -599,8 +579,8 @@ article .calendar > .month {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     color: #fff;
-    font-size: 1.4em;
-    line-height: 1em;
+    font-size: 1.3em;
+    line-height: 1.2em;
     font-weight: bold;
     text-align: center;
     text-shadow: 0 1px #000000;
@@ -663,7 +643,7 @@ h1.ws-featured-title {
     float: right;
 }
 
-/* tabs */
+/* Front page tabs */
 .ws-tab-trigger {
     font-size: 14px;
     font-weight: bold;
@@ -688,7 +668,6 @@ h1.ws-featured-title {
     line-height: 1.2em;
     margin-left: 4.8em;
 }
-
 #ws-home-tabs {
     margin-bottom: 20px;
 }
@@ -778,20 +757,58 @@ ul.breadcrumb li {
     -webkit-text-shadow: 0px 0px 0px;
 }
 
+/* Remove navbar border-radius */
+div.navbar-inner {
+    border-radius: 0px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
 /* Search form */
 .form-search {
     margin: 0px;
     padding: 0px;
     text-align: center;
 }
+.form-search button.btn-inverse {
+    border: 1px solid #333;
+}
+.form-search input[type="text"] {
+    background: #222;
+    border-color: #333;
+    border-right: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    color: #aaa;
+}
+.form-search #searchsubmit {
+    margin: 0px;
+}
 .ws-search-header {
     float: right;
     padding: .5em;
 }
 .ws-search-icon {
-    color: #555;
+    color: #ddd;
     font-size: 1.4em;
     font-weight: normal;
+}
+/* Search form in widgets */
+.ws-widget-container .form-search {
+    margin: .5em
+}
+/* Search form in navbar */
+.navbar-inner form.form-search {
+    padding: 6px;
+    margin: 0px;
+}
+.navbar-inner form.form-search input[type="text"] {
+    border: 1px solid #111;
+    border-right: 0px;
+}
+.navbar-inner form.form-search button.btn-inverse {
+    border: 1px solid #111;
+    border-left: 1px solid #333;
 }
 
 /* widgets */
@@ -811,10 +828,11 @@ ul.breadcrumb li {
 }
 
 /* well shadow */
-div.well, div.well-widgets {
-    -moz-box-shadow: 0px 0px 2px #333;
-    -webkit-box-shadow: 0px 0px 2px #333;
-    box-shadow: 0px 0px 2px #333;
+div.well,
+div.well-widgets {
+    box-shadow: 1px 2px 2px #252525;
+    -moz-box-shadow: 1px 2px 2px #252525;
+    -webkit-box-shadow: 1px 2px 2px #252525;
 }
 
 /* well noise */
@@ -852,7 +870,7 @@ div.well-widgets div.ws-widget-content {
     padding: 0.5em;
 }
 div.well-widgets div.ws-widget-title {
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #555;
     -moz-border-radius: 3px 3px 0px 0px;
     -webkit-border-radius: 3px 3px 0px 0px;
     border-radius: 3px 3px 0px 0px;
@@ -891,43 +909,9 @@ div.well-widgets .ws-widget-content ul li {
     padding: 10px;
 }
 
-.ws-nothumb {
-    margin: 0px;
-    text-align: center;
-    font-size: 1.2em;
-}
+/* END SKIN 1 *****************************************************************/
 
-/* special tabs */
-.ws-special-tabs {
-    background: #ddd;
-    border-radius: 4px;
-}
-.tabs-left .nav-tabs {
-    border-right: 0px;
-    margin-right: 0px;
-}
-.tabs-left .nav-tabs li a {
-    border-radius: 0px;
-}
-.tabs-left .nav-tabs li a:hover {
-    border-right: 1px solid #fff;
-}
-.tabs-left .tab-content {
-    background: #fff;
-    border-right: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    min-height: 200px;
-    padding: 2px 20px;
-}
-.tabs-left .nav-tabs > li > a {
-    margin-right: 0px;
-    margin-bottom: 0px;
-}
-.tabs-left .nav-tabs > li,
-.tabs-left .nav-tabs > li > a:hover {
-    margin-bottom: 0px;
-}
+/* WORDPRESS DEFAULT **********************************************************/
 
 /* default WordPress calendar widget */
 table#wp-calendar {
@@ -980,14 +964,14 @@ table#wp-calendar tbody td.pad:hover {
     background: #dadada;
 }
 table#wp-calendar td#prev {
+    font-size: 1em;
     padding: .4em;
     text-align: left;
-    font-size: 1em;
 }
 table#wp-calendar td#next {
+    font-size: 1em;
     padding: .4em;
     text-align: right;
-    font-size: 1em;
 }
 
 /* default WordPress recent comments widget */
@@ -1002,7 +986,11 @@ table#wp-calendar td#next {
     font-weight: bold;
 }
 
-/* WordPress theme required styles */
+/* Thickbox: set thickbox z-index higher than fixed nav and header */
+div#TB_window {
+    z-index: 2000;
+}
+
 .wp-caption {
     margin-top: .4em;
 }
@@ -1061,10 +1049,6 @@ table#wp-calendar td#next {
 .commentlist .children > li.bypostauthor {
     background: transparent;
     border: 0px;
-}
-.commentlist .children > li.bypostauthor > article,
-.commentlist .children > li.bypostauthor > article .comment-meta {
-    color: #666;
 }
 
 /* Alignment */
@@ -1129,9 +1113,49 @@ select.postform option {
     padding: 2px;
     margin: 2px;
 }
+
+/* tagcloud */
 div.tagcloud a {
     word-wrap: break-word;
 }
-/* END WordPress theme required */
+/* END WORDPRESS DEFAULT ******************************************************/
 
-/* END SKIN 1 *****************************************************************/
+/* MEDIA QUERY SENTENCES ******************************************************/
+
+@media (max-width: 480px) {
+
+    /* Navbar adjustments */
+    div#ws-navbar div.navbar-inner {
+        padding: 0px 30px;
+    }
+    ul.ws-nav li.divider-vertical {
+        display: none;
+    }
+
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+
+    /* Navbar adjustments */
+    div#ws-navbar div.navbar-inner {
+        padding: 0px 30px;
+    }
+    ul.ws-nav li.divider-vertical {
+        display: none;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+
+    /* Navbar adjustments */
+    div#ws-navbar div.navbar-inner {
+        padding: 0px;
+    }
+    ul.ws-nav li.divider-vertical {
+        display: none;
+    }
+
+}
+
+/* END MEDIA QUERY SENTENCES **************************************************/
