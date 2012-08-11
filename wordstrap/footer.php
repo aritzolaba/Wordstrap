@@ -4,12 +4,16 @@
  */
 
 // Get Options
-$wordstrap_theme_options = get_option('wordstrap_theme_options');
+global $wordstrap_theme_options;
 $show_social = 0;
-if ($wordstrap_theme_options['footer_show_fb'] == 1 OR $wordstrap_theme_options['footer_show_gp'] == 1 OR $wordstrap_theme_options['footer_show_tw'] == 1 OR $wordstrap_theme_options['footer_show_git'] == 1 OR $wordstrap_theme_options['footer_show_li'] == 1 OR $wordstrap_theme_options['footer_show_yt'] == 1)
-    $show_social = 1;
 
-if ($show_social == 1) $span='span6'; else $span='span12';
+if ($wordstrap_theme_options['footer_show_fb'] == 1 OR $wordstrap_theme_options['footer_show_gp'] == 1 OR $wordstrap_theme_options['footer_show_tw'] == 1 OR $wordstrap_theme_options['footer_show_git'] == 1 OR $wordstrap_theme_options['footer_show_li'] == 1 OR $wordstrap_theme_options['footer_show_yt'] == 1) {
+    $show_social = 1;
+    $span='span6';
+}
+else {
+    $span='span12';
+}
 ?>
 </div><!-- #ws-wrapper (initiated at header -->
 

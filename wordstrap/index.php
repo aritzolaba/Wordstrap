@@ -12,7 +12,7 @@ get_header();
     <!-- Main Content -->
     <div class="<?php echo WS_SPANCOL_CENTER; ?>">
 
-        <?php get_template_part('partials/part_landing'); ?>
+        <?php get_template_part('partials/part_front'); ?>
 
     </div><!-- .<?php echo WS_SPANCOL_CENTER; ?> -->
 

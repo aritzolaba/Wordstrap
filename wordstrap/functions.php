@@ -67,6 +67,7 @@ if (!function_exists('wordstrap_setup')) :
             'default-color' => '4E6C84'
         );
         add_theme_support( 'custom-background', $defaults );
+        add_theme_support('post-formats', array( 'aside', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video', 'audio'));
     }
 
 endif;
@@ -216,7 +217,7 @@ add_filter('the_title', 'ws_title', 10, 1);
 * Excerpt length
 */
 function ws_excerpt_length( $length ) {
-    $wordstrap_theme_options = get_option('wordstrap_theme_options');
+    global $wordstrap_theme_options;
     return $wordstrap_theme_options['excerpt_length'];
 }
 add_filter( 'excerpt_length', 'ws_excerpt_length');
@@ -226,7 +227,7 @@ add_filter( 'excerpt_length', 'ws_excerpt_length');
 */
 function ws_excerpt_more($more) {
     global $post;
-    return '&nbsp;[...]<p class="ws-read-more"><a href="'. get_permalink($post->ID) .'" title="'.__('Read the rest...','wordstrap').'">'.__('...continue reading...','wordstrap').'</a></p>';
+    return '...<br /><span class="ws-read-more"><i class="icon-awesome-arrow-right"></i><a href="'. get_permalink($post->ID) .'" title="'.__('Read the rest...','wordstrap').'">'.__('Read the rest...','wordstrap').'</a></span>';
 }
 add_filter('excerpt_more', 'ws_excerpt_more');
 
@@ -234,7 +235,7 @@ add_filter('excerpt_more', 'ws_excerpt_more');
 * Excerpt for titles
 */
 function ws_title_excerpt ($title) {
-    if (strlen($title)>=45) $title=substr($title,0,40).'<i>...</i>';
+    if (strlen($title)>35) $title=substr($title,0,35).'<i>...</i>';
     return $title;
 }
 
@@ -273,11 +274,10 @@ function ws_posts_navigation ($nav_id) {
 
     if ($wp_query->max_num_pages > 1) :
 
-        $xtra='btn-large';
-        if (is_author()) $xtra = '';
+        $xtra='btn-small';
 
-        $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-arrow-left"></i> Older posts', 'wordstrap')));
-        $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('Newer posts <i class="icon-arrow-right"></i>', 'wordstrap')));
+        $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-awesome-circle-arrow-left" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i> <span style="font-size: .9em; font-weight: bold;">OLDER POSTS</span>', 'wordstrap')));
+        $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('<span style="font-size: .9em; font-weight: bold;">NEWER POSTS</span> <i class="icon-awesome-circle-arrow-right" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i>', 'wordstrap')));
         ?>
 
         <nav id="<?php echo $nav_id; ?>" class="post-nav-pagination">
@@ -334,13 +334,10 @@ function ws_nothing_found() { ?>
     </article><!-- #post-0 -->
 <?php }
 
-/*******************************************************************************
-* Add custom styles dinamically based on options using wp_head hook
+/*
+* Function called from header.php to load all theme scripts and styles
 */
-function ws_theme_styles () {
-    $gfontsstyle = '';
-    $wordstrap_theme_options = get_option('wordstrap_theme_options');
-
+function ws_load_theme_scripts () {
     // Enqueue bootstrap and font-awesome css styles
     wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
     wp_enqueue_style( 'bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
@@ -351,10 +348,23 @@ function ws_theme_styles () {
     wp_enqueue_script( 'wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
     wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
 
+    // Enqueue Wordpress Thickbox
+    wp_enqueue_script('thickbox');
+    wp_enqueue_style('thickbox');
+}
+
+/*******************************************************************************
+* Add custom styles dinamically based on options using wp_head hook
+*/
+function ws_theme_options_styles () {
+    $gfontsstyle = '';
+    global $wordstrap_theme_options;
+
     // Additional style override based in options
     $addstyle = '
-    .well-widgets .ws-widget-title,
+    div.well-widgets div.ws-widget-title,
     article .calendar > .month {
+        color: '.$wordstrap_theme_options['widget_header_color'].';
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
@@ -363,6 +373,16 @@ function ws_theme_styles () {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['header_bg1'].', '.$wordstrap_theme_options['header_bg2'].');
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['header_bg2'].'\');
+    }
+    div#ws-header h1,
+    div#ws-header h2 {
+        color: '.$wordstrap_theme_options['header_color'].';
+    }
+    .navbar ul.ws-nav.nav > li > a {
+        color: '.$wordstrap_theme_options['navbar_color'].';
+    }
+    .navbar ul.ws-nav.nav > li > a:hover {
+        color: #fafafa;
     }
     div.navbar-inner,
     div.navbar-inner div.divider-vertical,
@@ -388,6 +408,9 @@ function ws_theme_styles () {
     }
     #ws-header.ws-header-container {
         height: '.$wordstrap_theme_options['header_height'].'px;
+    }
+    .ws-featured-title {
+        color: '.$wordstrap_theme_options['landing_page_featured_title_color'].'
     }
     ';
 
@@ -444,7 +467,7 @@ function ws_theme_styles () {
 
     echo $gfontsstyle . '<style type="text/css">'.$addstyle.'</style>';
 }
-add_action ('wp_head', 'ws_theme_styles');
+add_action ('wp_head', 'ws_theme_options_styles');
 
 /*******************************************************************************
  * Hook into wp_title()

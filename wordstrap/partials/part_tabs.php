@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 
 <div id="ws-home-tabs" class="tab-content">
     <div class="tab-pane fade in active" id="tab-popular">
-        <?php get_template_part('partials/part_popular-loop'); ?>
+        <?php get_template_part('partials/part_loop_popular'); ?>
     </div>
     <div class="tab-pane fade" id="tab-latest">
-        <?php get_template_part('partials/part_latest-loop'); ?>
+        <?php get_template_part('partials/part_loop_latest'); ?>
     </div>
 </div>

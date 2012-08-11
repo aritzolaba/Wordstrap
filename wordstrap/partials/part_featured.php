@@ -7,10 +7,8 @@
 if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 
 // Get Options
-$wordstrap_theme_options = get_option('wordstrap_theme_options');
-?>
+global $wordstrap_theme_options;
 
-<?php
 // Init of the pagination vars
 if (isset($_POST['page']) && $_POST['page']!=0) $page = wp_kses($_POST['page'], NULL);
 else $page=1;
@@ -18,9 +16,8 @@ $prev_class = '';
 $prev_attr = '';
 $next_class = '';
 $next_attr = '';
-?>
 
-<?php
+// WP_Query
 $args = array(
     'paged' => $page,
     'post_type' => 'post',
@@ -29,9 +26,8 @@ $args = array(
     'posts_per_page' => $wordstrap_theme_options['featured_num']
 );
 $featured = new WP_Query($args);
-?>
 
-<?php
+// Pagination calcs
 $maxpages = $featured->max_num_pages;
 $i=0; $per_row=3;
 $next=$page+1;

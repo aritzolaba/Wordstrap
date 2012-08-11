@@ -3,16 +3,23 @@
  * The archive template file.
  */
 
-get_header(); ?>
+get_header();
 
+// Get theme options
+global $wordstrap_theme_options;
+?>
 <div class="row-fluid">
 
     <?php get_sidebar('left'); ?>
 
     <div class="<?php echo WS_SPANCOL_CENTER; ?>">
-        <div class="well well-breadcrumb">
+        <div class="well">
 
-            <?php get_template_part('partials/part_breadcrumb'); ?>
+            <?php
+            if ($wordstrap_theme_options['hide_wsbreadcrumb'] != 1) :
+                get_template_part('partials/part_breadcrumb');
+            endif;
+            ?>
 
             <?php while (have_posts()) : the_post(); ?>
 

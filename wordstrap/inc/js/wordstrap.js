@@ -26,16 +26,21 @@
         if ($('table#wp-calendar').length>0)
             $('table#wp-calendar').removeClass('table-bordered');
 
-        // Adds required classes for hierarchical navigation with wp_navmenu
+        // Adds required dropdown classes for hierarchical navigation with wp_navmenu
         if ($('li.ws-dropdown').length>0) {
             $('li.ws-dropdown').addClass('dropdown');
             $('ul.ws-nav li.ws-dropdown>a').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').append(' <b class="caret"></b>');
             $('.ws-dropdown ul').addClass('dropdown-menu');
         }
 
-        // Prevent showing navbar unstyled
+        // Display the navbar after dropdown classes have been set (element has "display: none;" in style)
         if ($('div.navbar-inner div.container-fluid').length>0) {
             $('div.navbar-inner div.container-fluid').css('display','block');
+        }
+
+        // Adds thickbox class to gallery images in gallery post-formats
+        if ($('div.gallery .gallery-icon a').length>0) {
+            $('div.gallery .gallery-icon a').addClass('thickbox');
         }
 
     });

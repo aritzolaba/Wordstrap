@@ -6,131 +6,44 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 
-// Get Theme Options
-$wordstrap_theme_options = get_option('wordstrap_theme_options');
-
-// Enqueue Wordpress Thickbox
-wp_enqueue_script('thickbox');
-wp_enqueue_style('thickbox');
-
-// Get attached file guid
-$att = get_post_meta(get_the_ID(),'_thumbnail_id',true);
-$thumb = get_post($att);
-if ($att) { $att = $thumb->guid; }
-else $att = $post->guid;
+// Get theme options
+global $wordstrap_theme_options;
 ?>
-
 <article class="ws-article <?php if (is_page()) echo 'ws-page'; ?> <?php if (is_search() OR is_author() OR is_category() OR is_archive()) echo 'ws-loop'; ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <?php
     // Article featured Image
-    if ( !is_search() && !is_author() && has_post_thumbnail() ) : ?>
-            <div class="entry-thumbnail">
-                <a class="thickbox" href="<?php echo $att; ?>">
-                <?php
-                echo get_the_post_thumbnail(get_the_ID(), 'loop-thumb');
-                ?>
-                </a>
-            </div>
-        <?php endif; ?>
-
-    <header class="entry-header">
+    if ( (!is_search() && !is_author() && has_post_thumbnail()) && function_exists('get_post_format') && get_post_format(get_the_ID()) != 'gallery') : ?>
 
         <?php
-        // Article calendar
-        if (!is_page() && !is_search()) : ?>
-            <div class="calendar event_date">
-                <span class="month"><?php echo strtoupper(get_the_date('M')); ?></span>
-                <span class="day"><?php echo get_the_date('d'); ?></span>
-                <span class="year"><?php echo get_the_date('Y'); ?></span>
-            </div>
-        <?php endif; ?>
-
-        <h1 class="entry-title">
-            <?php if (is_single() OR is_page()) : ?>
-                <?php the_title(); ?>
-            <?php else : ?>
-                <a href="<?php the_permalink(); ?>" title="<?php if (get_the_title()) the_title(); else echo __('Untitled','wordstrap'); ?>"><?php if (get_the_title()) echo get_the_title(); else echo __('Untitled','wordstrap'); ?></a>
-            <?php endif; ?>
-        </h1>
-
-        <h2 class="entry-details">
-            <small>
-                <?php
-                // Author name
-                if (!is_author() AND !is_page()) :
-
-                    // Get author first_name and last_name. If empty, get the nickname
-                    $author_name = ws_get_authorfullname();
-                    ?>
-
-                    <i class="icon-awesome-user" <?php echo 'title="'. __('Author','wordstrap') .'"'; ?>></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo $author_name; ?></a>
-
-                <?php endif; ?>
-
-                <?php
-                // Post categories
-                $cats = get_the_category_list( ', ' );
-                if ($cats) echo '<i title="'. __('Categories','wordstrap') .'" class="icon-awesome-bookmark"></i>'.$cats;
-                ?>
-
-                <?php // Comment number
-                if (!is_single() AND !is_page()) : ?>
-                    <?php if (comments_open()) : ?>
-                        <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
-                        <br /><i class="icon-awesome-comment"></i><a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
-                    <?php endif; ?>
-                <?php endif; ?>
-
-            </small>
-        </h2>
-
-        <?php
-        // Post tags
-        if (is_single() && get_the_tag_list()) :
-            echo '<div class="ws-tag-container">';
-            echo '<i title="'. __('Tags','wordstrap') .'" class="icon-awesome-tag" style="font-size: 1.3em; color: #888;"></i>';
-            the_tags();
-            echo '</div>';
-        endif;
+        // Get attached file guid
+        $att = get_post_meta(get_the_ID(),'_thumbnail_id',true);
+        $thumb = get_post($att);
+        if ($att) { $att = $thumb->guid; }
+        else $att = $post->guid;
         ?>
-
-    </header><!-- .entry-header -->
-
-    <?php if (!is_search() && !is_author()) : ?>
-
-        <div class="entry-content clearfix <?php if (is_page()) echo 'ws-ispage'; ?>">
-
+        <div class="entry-thumbnail">
+            <a class="thickbox" href="<?php echo $att; ?>">
             <?php
-            // Display content or excerpt
-            if (is_single() OR is_page()) the_content();
-            else the_excerpt();
-
-            // Linked pages
-            wp_link_pages(array(
-                'next_or_number'	=> 'number',
-		'nextpagelink'		=> __('Next page', 'wordstrap'),
-		'previouspagelink'	=> __('Previous page', 'wordstrap'),
-                'pagelink'  => '%',
-                'link_before' => '<span class="btn">',
-                'link_after' => '</span>',
-                'before' => '<div class="clearfix"></div><br />'. __('Pages:','wordstrap') .' <div class="ws-pages btn-toolbar">',
-                'after' => '</div>'
-                ));
+            echo get_the_post_thumbnail(get_the_ID(), 'loop-thumb');
             ?>
-
-        </div><!-- .entry-content -->
+            </a>
+        </div>
 
     <?php endif; ?>
 
-    <?php if (is_single() && $wordstrap_theme_options['article_social'] == 1) : ?>
+    <?php get_template_part('partials/part_article_header'); ?>
 
-        <footer class="entry-meta">
-            <div class="pull-left">
-                <?php get_template_part('partials/part_article-social-buttons'); ?>
-            </div>
-        </footer><!-- .entry-meta -->
+    <?php
+    // Post format: Gallery
+    if ((is_single() OR is_page()) && function_exists('get_post_format') && get_post_format(get_the_ID()) == 'gallery') :
+        get_template_part('partials/part_pf_gallery');
+    endif; ?>
 
+    <?php get_template_part('partials/part_article_content'); ?>
+
+    <?php if ((is_single() OR is_page()) && $wordstrap_theme_options['article_social'] == 1) : ?>
+        <?php get_template_part('partials/part_article_footer'); ?>
     <?php endif; ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

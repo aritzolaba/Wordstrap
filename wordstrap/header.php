@@ -22,8 +22,7 @@
         <meta name="description" content="<?php $site_description= get_bloginfo('description', 'display'); echo $site_description; ?>">
         <meta name="author" content="<?php echo get_bloginfo('name'); ?>">
         <title><?php
-        $wordstrap_theme_options = get_option('wordstrap_theme_options');
-        global $page, $paged;
+        global $wordstrap_theme_options, $page, $paged;
 
         // Add wp_title ()
         wp_title( '|', true, 'right' );
@@ -38,8 +37,11 @@
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
+        <?php
+        // Load theme scripts
+        ws_load_theme_scripts(); ?>
+        
         <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
-
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
         <?php wp_head(); ?>
@@ -61,7 +63,7 @@
             <?php endif; ?>
 
             <?php if ($wordstrap_theme_options['hide_wsnavbar'] == 0) : ?>
-                <?php get_template_part('partials/part_navigation'); ?>
+                <?php get_template_part('partials/part_navbar'); ?>
             <?php endif; ?>
 
         </header>

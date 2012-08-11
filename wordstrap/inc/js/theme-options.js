@@ -9,11 +9,11 @@
         );
 
         /* Color pickers */
-        $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8').hide();
-        for (i=1; i<=8; i++) {
+        $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8, #colorpicker-9, #colorpicker-10, #colorpicker-11, #colorpicker-12').hide();
+        for (i=1; i<=12; i++) {
             $('#colorpicker-'+i).farbtastic('#color-'+i);
         }
-        
+
         $('#color-1').click(function() {
             $('#colorpicker-1').fadeIn();
         });
@@ -46,8 +46,24 @@
             $('#colorpicker-8').fadeIn();
         });
 
+        $('#color-9').click(function() {
+            $('#colorpicker-9').fadeIn();
+        });
+
+        $('#color-10').click(function() {
+            $('#colorpicker-10').fadeIn();
+        });
+
+        $('#color-11').click(function() {
+            $('#colorpicker-11').fadeIn();
+        });
+
+        $('#color-12').click(function() {
+            $('#colorpicker-12').fadeIn();
+        });
+
         $(document).mousedown(function() {
-            $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8').each(function() {
+            $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8, #colorpicker-9, #colorpicker-10, #colorpicker-11, #colorpicker-12').each(function() {
                 var display = $(this).css('display');
                 if ( display == 'block' )
                     $(this).fadeOut();

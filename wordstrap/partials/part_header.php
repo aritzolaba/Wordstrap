@@ -7,7 +7,7 @@
 if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 
 // Get Options
-$wordstrap_theme_options = get_option('wordstrap_theme_options');
+global $wordstrap_theme_options;
 ?>
 <div id="ws-header" class="ws-header-container" style="<?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo 'left: 0px; position: fixed; overflow: hidden;'; else echo 'height: auto;'; ?>">
     <div class="container-fluid">

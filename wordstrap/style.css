@@ -4,7 +4,7 @@ Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
 Author URI: http://www.olabaworks.com
 Description: Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons. You can customize the layout in one, two or three columns, and choose the background colors of the header, navbar and widget headers and some other interesting features available in the theme options page.
-Version: 1.7.1
+Version: 1.7.2
 License: GNU General Public License
 License URI: license.txt
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, custom-menu, custom-background, featured-images, threaded-comments, translation-ready, theme-options
@@ -73,6 +73,13 @@ table .label {
     text-decoration: none;
 }
 
+/* Navbar border-radius */
+div.navbar-inner {
+    border-radius: 0px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
 /* END OF BOOTSTRAP OVERRIDES */
 
 /* ****************************************************************************/
@@ -128,6 +135,9 @@ body {
     -webkit-box-shadow: 1px 1px 11px #aaa;
     -box-shadow: 1px 1px 11px #aaa;
     min-height: 220px;
+    position: absolute;
+    width: 100%;
+    left: 0;
 }
 #ws-footer h2 {
     color: #888;
@@ -213,6 +223,13 @@ a.header_title:hover {
 /* pills padding */
 .nav-pills > li > a {
     padding: 0.5em;
+    margin: .2em .1em;
+
+    text-align: center;
+    font-size: .85em;
+}
+.nav-pills > li > a:hover {
+    background: #FFFFFF;
 }
 
 /* dropdown menu */
@@ -294,12 +311,19 @@ div#ws-blog .ws-article h1.entry-title {
     font-size: 1.6em;
     line-height: 1.2em;
     margin-bottom: 0.15em;
-    margin-top: 0.2em;
+    margin-top: 0.1em;
     margin-left: 3.6em;
 }
 .ws-article h2.entry-details {
     line-height: 1.2em;
     margin-left: 5em;
+}
+.ws-article h2.entry-details [class^="icon-awesome-"] {
+    width: auto;
+    margin-left: .1em;
+    margin-right: .32em;
+    margin-top: .05em;
+    color: #888;
 }
 .ws-article h2 small {
     line-height: 1.3em;
@@ -320,6 +344,9 @@ div#ws-blog .ws-article h1.entry-title {
 }
 .ws-article .entry-header h2 small {
     font-size: 1em;
+}
+.ws-article.ws-loop .entry-header h2 small {
+    font-size: .95em;
 }
 .ws-article.ws-page h1, .ws-article.ws-page h2 {
     margin-left: 0px;
@@ -347,11 +374,11 @@ div#ws-blog .ws-article h1.entry-title {
 }
 .ws-article .entry-content p {
     margin-bottom: 10px;
-    font-size: 1.1em;
 }
-#ws-blog .ws-article div.entry-content p,
+.ws-article.ws-loop div.entry-content p,
 #ws-home-tabs .ws-article div.entry-content p {
     font-size: 1em;
+    line-height: 1.4em;
 }
 .ws-article .entry-thumbnail {
     background: #fff;
@@ -385,8 +412,15 @@ div#ws-blog .ws-article h1.entry-title {
 .ws-read-more {
     margin: 0px;
 }
-.ws-read-more a {
+.ws-read-more i {
+    margin-right: .2em;
+    margin-top: .2em;
     font-size: .8em;
+    color: #08c;
+    width: auto;
+}
+.ws-read-more a {
+    font-size: .85em;
 }
 div.ws-search h1.entry-title,
 div.ws-search h2.entry-details {
@@ -626,8 +660,7 @@ h1.ws-featured-title {
     margin: 0px;
     padding: 0px;
     margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
+    text-shadow: 1px 1px 1px #222;
 }
 
 /* article pagination */
@@ -651,6 +684,8 @@ h1.ws-featured-title {
 .ws-tab-icon {
     float: left;
     font-size: 1.8em;
+    margin-top: .1em;
+    width: auto;
 }
 .ws-home-tabs .nav-tabs {
     margin-bottom: 28px;
@@ -668,6 +703,7 @@ h1.ws-featured-title {
     line-height: 1.2em;
     margin-left: 4.8em;
 }
+
 #ws-home-tabs {
     margin-bottom: 20px;
 }
@@ -682,13 +718,13 @@ h1.ws-featured-title {
     border-bottom: 1px solid #fff;
 }
 #ws-home-tabs-ul li a {
-    color: #fafafa;
+    color: #666;
 }
 #ws-home-tabs-ul li.active a {
-    color: #555;
+    color: #333;
 }
 #ws-home-tabs-ul li a:hover {
-    color: #555;
+    color: #333;
 }
 #ws-home-tabs.tab-content {
     background: #fff;
@@ -723,12 +759,10 @@ h1.ws-featured-title {
     margin-top: 2px;
 }
 
-/* breadcrumb */
-div.well.well-breadcrumb {
-    padding-top: 0.6em;
-}
+/* Breadcrumb */
 ul.breadcrumb a {
-    font-weight: bold; color: #08c;
+    font-weight: bold;
+    color: #08c;
 }
 ul.breadcrumb a:hover {
     font-weight: bold;
@@ -755,13 +789,6 @@ ul.breadcrumb li {
     text-shadow: 0px 0px 0px;
     -moz-text-shadow: 0px 0px 0px;
     -webkit-text-shadow: 0px 0px 0px;
-}
-
-/* Remove navbar border-radius */
-div.navbar-inner {
-    border-radius: 0px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
 }
 
 /* Search form */
@@ -799,8 +826,8 @@ div.navbar-inner {
 }
 /* Search form in navbar */
 .navbar-inner form.form-search {
-    padding: 6px;
     margin: 0px;
+    padding: 6px;
 }
 .navbar-inner form.form-search input[type="text"] {
     border: 1px solid #111;
@@ -819,11 +846,11 @@ div.navbar-inner {
     margin-bottom: 15px;
 }
 .ws-widgets-empty {
+    border: 2px dotted #aaa;
+    color: #aaa;
     font-size: 1.2em;
     font-weight: bold;
-    color: #aaa;
     padding: 4px 6px;
-    border: 2px dotted #aaa;
     text-align: center;
 }
 
@@ -869,7 +896,7 @@ div.well-widgets div.ws-widget-title,
 div.well-widgets div.ws-widget-content {
     padding: 0.5em;
 }
-div.well-widgets div.ws-widget-title {
+div.well-widgets .ws-widget-title {
     border-bottom: 1px solid #555;
     -moz-border-radius: 3px 3px 0px 0px;
     -webkit-border-radius: 3px 3px 0px 0px;
@@ -902,11 +929,49 @@ div.well-widgets .ws-widget-content ul li {
     font-weight: bold;
 }
 .well-widgets-header {
-    padding: 10px;
     background: #ddd;
+    padding: 10px;
 }
 .well-widgets-body {
     padding: 10px;
+}
+
+/* slideshow/carousel */
+#slideshow {
+    width: 99%;
+    min-height: 400px;
+}
+#slideshow .carousel-inner {
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px #000;
+}
+#slideshow .item {
+    background: -moz-linear-gradient(center top , #404040, #080808);
+    background: -webkit-gradient(linear, left top, left bottom, from(#404040), to(#080808));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#353535', endColorstr='#080808');
+    min-height: 400px;
+}
+#slideshow img {
+    max-height: 400px;
+    margin: auto;
+    min-height: 100px;
+}
+#slideshow a.carousel-control.ws-carousel-but-left,
+#slideshow a.carousel-control.ws-carousel-but-right {
+    background: none;
+    border: 0em;
+    color: #555;
+    margin: 0em;
+    margin-top: .4em;
+    width: auto;
+    height: auto;
+    padding: 0em;
+}
+#slideshow a.carousel-control.ws-carousel-but-left {
+    left: 8px;
+}
+#slideshow a.carousel-control.ws-carousel-but-right {
+    margin-right: 28px;
 }
 
 /* END SKIN 1 *****************************************************************/
@@ -986,16 +1051,8 @@ table#wp-calendar td#next {
     font-weight: bold;
 }
 
-/* Thickbox: set thickbox z-index higher than fixed nav and header */
-div#TB_window {
-    z-index: 2000;
-}
-
 .wp-caption {
     margin-top: .4em;
-}
-.wp-caption {
-    background: #eee;
     margin-bottom: 1.625em;
     max-width: 96%;
     padding: 9px;
@@ -1117,6 +1174,11 @@ select.postform option {
 /* tagcloud */
 div.tagcloud a {
     word-wrap: break-word;
+}
+
+/* Thickbox: set thickbox z-index higher than fixed nav and header */
+div#TB_window {
+    z-index: 2000;
 }
 /* END WORDPRESS DEFAULT ******************************************************/
 

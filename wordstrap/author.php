@@ -3,15 +3,22 @@
  * The author template file.
  */
 
-get_header(); ?>
+get_header();
 
+// Get theme options
+global $wordstrap_theme_options;
+?>
 <div class="row-fluid">
     <div class="span12">
-        <div class="well well-breadcrumb">
+        <div class="well">
 
             <div class="row-fluid">
                 <div class="span4">
-                    <?php get_template_part('partials/part_breadcrumb'); ?>
+                    <?php
+                    if ($wordstrap_theme_options['hide_wsbreadcrumb'] != 1) :
+                        get_template_part('partials/part_breadcrumb');
+                    endif;
+                    ?>
 
                     <div class="ws-author author-container alert alert-info ws-alert">
                         <?php
@@ -63,7 +70,7 @@ get_header(); ?>
                     <br />
                     <?php rewind_posts(); ?>
                     <?php if (have_posts()) : the_post(); ?>
-                        <?php get_template_part('partials/part_article-loop'); ?>
+                        <?php get_template_part('partials/part_loop_default'); ?>
                     <?php else: ?>
                         <div class="alert alert-message">
                             <?php _e('Sorry, but there are no posts by this author.','wordstrap'); ?>
