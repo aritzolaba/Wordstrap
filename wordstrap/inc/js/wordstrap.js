@@ -27,7 +27,8 @@
             $('table#wp-calendar').removeClass('table-bordered');
 
         // Adds required dropdown classes for hierarchical navigation with wp_navmenu
-        if ($('li.ws-dropdown').length>0) {
+        if ($('ul.sub-menu').length>0) {
+            $('ul.sub-menu').parent().addClass('ws-dropdown');
             $('li.ws-dropdown').addClass('dropdown');
             $('ul.ws-nav li.ws-dropdown>a').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').append(' <b class="caret"></b>');
             $('.ws-dropdown ul').addClass('dropdown-menu');

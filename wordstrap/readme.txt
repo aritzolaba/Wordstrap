@@ -5,7 +5,7 @@ Features
 - Designed using the default Bootstrap markup. Includes all Bootstrap javascript components ready to be used.
 - Includes Font Awesome. (Use icon-awesome-xxx instead of icon-xxx)
 - Theme supports: custom header, custom menu, custom background, featured images, etc.
-- Post Format support. Custom template for Gallery post format, displaying images using Bootstrap carousel. Gallery options are found in the theme options page.
+- Post Format support. Custom template for Gallery post format, displaying images using Bootstrap carousel.
 - Featured images support in posts, displaying images using WordPress's thickbox.
 - A customizable layout supporting full width, 2 columns (right or left sidebar) and three columns, all selectable through the theme options page.
 - A customizable front page. You can choose to display your blog loop as default, or make use of an intro container with customizable background and text colors, to display the page you choose in a more attractive way. You can also make use of the featured items container, to display the posts of a category you choose in a browsable (via AJAX) container with navigation buttons.
@@ -15,6 +15,13 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.3
+
+- Theme now works with PHP 5.2.4 or greater versions
+- Added Bootstrap carousel element to display the items of the galleries
+- Improved the comment form in order to display the (*) of the required fields correctly
+- Other minor code and CSS improvements
+
 v: 1.7.2
 
 - Added post format support to theme

@@ -8,66 +8,29 @@
             {interval: 12500}
         );
 
-        /* Color pickers */
-        $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8, #colorpicker-9, #colorpicker-10, #colorpicker-11, #colorpicker-12').hide();
-        for (i=1; i<=12; i++) {
+        /* Color Pickers */
+        var numcol = 12;
+        for (i=1; i<=numcol; i++) {
             $('#colorpicker-'+i).farbtastic('#color-'+i);
+            $('#colorpicker-'+i).hide();
         }
 
-        $('#color-1').click(function() {
-            $('#colorpicker-1').fadeIn();
+        /* Color pickers input click */
+        $('.colorpicker').click(function() {
+            var id = $(this).attr('id').replace('color-', '');
+            $('#colorpicker-'+i).hide();
+            if ( $('#colorpicker-'+id).css('display') == 'block' )
+                $('#colorpicker-'+id).fadeOut();
+            else
+                $('#colorpicker-'+id).fadeIn();
         });
 
-        $('#color-2').click(function() {
-            $('#colorpicker-2').fadeIn();
-        });
-
-        $('#color-3').click(function() {
-            $('#colorpicker-3').fadeIn();
-        });
-
-        $('#color-4').click(function() {
-            $('#colorpicker-4').fadeIn();
-        });
-
-        $('#color-5').click(function() {
-            $('#colorpicker-5').fadeIn();
-        });
-
-        $('#color-6').click(function() {
-            $('#colorpicker-6').fadeIn();
-        });
-
-        $('#color-7').click(function() {
-            $('#colorpicker-7').fadeIn();
-        });
-
-        $('#color-8').click(function() {
-            $('#colorpicker-8').fadeIn();
-        });
-
-        $('#color-9').click(function() {
-            $('#colorpicker-9').fadeIn();
-        });
-
-        $('#color-10').click(function() {
-            $('#colorpicker-10').fadeIn();
-        });
-
-        $('#color-11').click(function() {
-            $('#colorpicker-11').fadeIn();
-        });
-
-        $('#color-12').click(function() {
-            $('#colorpicker-12').fadeIn();
-        });
-
+        /* Color pickers fadeout on mousedown */
         $(document).mousedown(function() {
-            $('#colorpicker-1, #colorpicker-2, #colorpicker-3, #colorpicker-4, #colorpicker-5, #colorpicker-6, #colorpicker-7, #colorpicker-8, #colorpicker-9, #colorpicker-10, #colorpicker-11, #colorpicker-12').each(function() {
-                var display = $(this).css('display');
-                if ( display == 'block' )
-                    $(this).fadeOut();
-            });
+            for (i=1; i<=numcol; i++) {
+                if ( $('#colorpicker-'+i).css('display') == 'block' )
+                    $('#colorpicker-'+i).fadeOut();
+            }
         });
         /* END Color pickers */
 

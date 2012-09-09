@@ -107,6 +107,9 @@ if (function_exists('register_sidebar')) {
     register_nav_menu( 'primary', 'Wordstrap nav menu' );
 }
 
+/*******************************************************************************
+ * Add custom image size for thumbnails in loops
+ */
 if ( function_exists( 'add_image_size' ) ) {
     add_image_size( 'loop-thumb', 80, 80, true );
 }
@@ -123,8 +126,6 @@ if (!function_exists('wordstrap_commentlist')) :
      * simply create your own wordstrap_commentlist(), and that function will be used instead.
      *
      * Used as a callback by wp_list_comments() for displaying the comments.
-     *
- * @since Wordstrap 1.6.5
      */
     function wordstrap_commentlist($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
@@ -182,27 +183,6 @@ if (!function_exists('wordstrap_commentlist')) :
     <?php }
 
 endif; // ends check for wordstrap_comment()
-
-/*******************************************************************************
-* Add hierarchy support to wp_nav_menu
-*/
-add_filter('wp_nav_menu_objects', function ($items) {
-    $hasSub = function ($menu_item_id, &$items) {
-        foreach ($items as $item) {
-            if ($item->menu_item_parent && $item->menu_item_parent==$menu_item_id) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    foreach ($items as &$item) {
-        if ($hasSub($item->ID, &$items)) {
-            $item->classes[] = 'ws-dropdown'; // all elements of field "classes" of a menu item get join together and render to class attribute of <li> element in HTML
-        }
-    }
-    return $items;
-});
 
 /*******************************************************************************
 * Handle posts with no title

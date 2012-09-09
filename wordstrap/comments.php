@@ -19,7 +19,7 @@
     <?php
     if (comments_open()) :
         $ncomments = get_comments_number();
-        echo '<h2 style="margin: 0px; margin-bottom: 5px; overflow: hidden;"><small><i class="icon-awesome-comments ws-comments-icon"></i> ';
+        echo '<h2 style="margin: 0px; margin-bottom: 5px; overflow: hidden;"><small style="color: #333;"><i class="icon-awesome-comments ws-comments-icon"></i> ';
         if ($ncomments == 1)
             echo sprintf ( __('There is %d comment','wordstrap'), $ncomments);
         elseif ($ncomments > 1)
@@ -50,9 +50,17 @@
     <?php endif; ?>
 
     <?php
+    $aria_req = ( $req ? " aria-required='true'" : '' );
+    $fields =  array(
+        'author' => '<p class="comment-form-author">' . '<label for="author">' . ( $req ? '<span class="required">*</span> ' : '' ) . __( 'Name', 'wordstrap' ) . '</label> ',
+                    '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></p>',
+        'email'  => '<p class="comment-form-email"><label for="email">' . ( $req ? '<span class="required">*</span> ' : '' ) . __( 'Email', 'wordstrap' ) . '</label> ',
+                    '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></p>'
+    );
     $args = array (
         'id_submit' => 'ws-comment-submit',
-        'title_reply' => '<i class="icon-awesome-pencil" style="float: left; margin-top: .35em; margin-right: .5em;"></i> '. __('Leave a Reply','wordstrap')
+        'title_reply' => '<i class="icon-awesome-pencil" style="float: left; margin-top: .35em; margin-right: .5em;"></i> '. __('Leave a Reply','wordstrap'),
+        'fields' => apply_filters( 'comment_form_default_fields', $fields )
     );
     comment_form($args);
     ?>

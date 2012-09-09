@@ -256,21 +256,21 @@ class wordstrap_theme_options_page {
                                                 <p class="help-block">
                                                     <?php _e('Start Color','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini" type="text" name="widget_header_bg1" id="color-1" value="<?php if ($wordstrap_theme_options['widget_header_bg1']) echo $wordstrap_theme_options['widget_header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-1"></div>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg1" id="color-1" value="<?php if ($wordstrap_theme_options['widget_header_bg1']) echo $wordstrap_theme_options['widget_header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-1"></div>
                                             </div>
 
                                             <div class="span4">
                                                 <p class="help-block">
                                                     <?php _e('Ending Color','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini" type="text" name="widget_header_bg2" id="color-2" value="<?php if ($wordstrap_theme_options['widget_header_bg2']) echo $wordstrap_theme_options['widget_header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-2"></div>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg2" id="color-2" value="<?php if ($wordstrap_theme_options['widget_header_bg2']) echo $wordstrap_theme_options['widget_header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-2"></div>
                                             </div>
 
                                             <div class="span4">
                                                 <p class="help-block">
                                                     <?php _e('Text Color','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini" type="text" name="widget_header_color" id="color-9" value="<?php if ($wordstrap_theme_options['widget_header_color']) echo $wordstrap_theme_options['widget_header_color']; ?>" /><div style="position: absolute;" id="colorpicker-9"></div>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_color" id="color-9" value="<?php if ($wordstrap_theme_options['widget_header_color']) echo $wordstrap_theme_options['widget_header_color']; ?>" /><div style="position: absolute;" id="colorpicker-9"></div>
                                             </div>
                                         </div>
 
@@ -317,21 +317,21 @@ class wordstrap_theme_options_page {
                                                             <p class="help-block">
                                                                 <?php _e('Start Color','wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="header_bg1" id="color-5" value="<?php if ($wordstrap_theme_options['header_bg1']) echo $wordstrap_theme_options['header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-5"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="header_bg1" id="color-5" value="<?php if ($wordstrap_theme_options['header_bg1']) echo $wordstrap_theme_options['header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-5"></div>
                                                         </div>
 
                                                         <div class="span3">
                                                             <p class="help-block">
                                                                 <?php _e('Ending Color','wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="header_bg2" id="color-6" value="<?php if ($wordstrap_theme_options['header_bg2']) echo $wordstrap_theme_options['header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-6"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="header_bg2" id="color-6" value="<?php if ($wordstrap_theme_options['header_bg2']) echo $wordstrap_theme_options['header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-6"></div>
                                                         </div>
 
                                                         <div class="span6">
                                                             <p class="help-block">
                                                                 <?php _e('Text Color', 'wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="header_color" id="color-10" value="<?php if ($wordstrap_theme_options['header_color']) echo $wordstrap_theme_options['header_color']; ?>" /><div style="position: absolute;" id="colorpicker-10"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="header_color" id="color-10" value="<?php if ($wordstrap_theme_options['header_color']) echo $wordstrap_theme_options['header_color']; ?>" /><div style="position: absolute;" id="colorpicker-10"></div>
                                                         </div>
                                                     </div>
 
@@ -366,21 +366,21 @@ class wordstrap_theme_options_page {
                                                             <p class="help-block">
                                                                 <?php _e('Start Color','wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="navbar_bg1" id="color-7" value="<?php if ($wordstrap_theme_options['navbar_bg1']) echo $wordstrap_theme_options['navbar_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-7"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="navbar_bg1" id="color-7" value="<?php if ($wordstrap_theme_options['navbar_bg1']) echo $wordstrap_theme_options['navbar_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-7"></div>
                                                         </div>
 
                                                         <div class="span3">
                                                             <p class="help-block">
                                                                 <?php _e('Ending Color','wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="navbar_bg2" id="color-8" value="<?php if ($wordstrap_theme_options['navbar_bg2']) echo $wordstrap_theme_options['navbar_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-8"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="navbar_bg2" id="color-8" value="<?php if ($wordstrap_theme_options['navbar_bg2']) echo $wordstrap_theme_options['navbar_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-8"></div>
                                                         </div>
 
                                                         <div class="span6">
                                                             <p class="help-block">
                                                                 <?php _e('Text Color', 'wordstrap'); ?>
                                                             </p>
-                                                            <input class="input-mini" type="text" name="navbar_color" id="color-11" value="<?php if ($wordstrap_theme_options['navbar_color']) echo $wordstrap_theme_options['navbar_color']; ?>" /><div style="position: absolute;" id="colorpicker-11"></div>
+                                                            <input class="input-mini colorpicker" type="text" name="navbar_color" id="color-11" value="<?php if ($wordstrap_theme_options['navbar_color']) echo $wordstrap_theme_options['navbar_color']; ?>" /><div style="position: absolute;" id="colorpicker-11"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -575,13 +575,13 @@ class wordstrap_theme_options_page {
                                                 <p class="help-block">
                                                     <?php _e('Background','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini" type="text" name="intro_bg" id="color-3" value="<?php if ($wordstrap_theme_options['intro_bg']) echo $wordstrap_theme_options['intro_bg']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-3"></div>
+                                                <input class="input-mini colorpicker" type="text" name="intro_bg" id="color-3" value="<?php if ($wordstrap_theme_options['intro_bg']) echo $wordstrap_theme_options['intro_bg']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-3"></div>
                                             </div>
                                             <div class="span6">
                                                 <p class="help-block">
                                                     <?php _e('Text','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini" type="text" name="intro_color" id="color-4" value="<?php if ($wordstrap_theme_options['intro_color']) echo $wordstrap_theme_options['intro_color']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-4"></div>
+                                                <input class="input-mini colorpicker" type="text" name="intro_color" id="color-4" value="<?php if ($wordstrap_theme_options['intro_color']) echo $wordstrap_theme_options['intro_color']; else echo '#dadada'; ?>" /><div style="position: absolute;" id="colorpicker-4"></div>
                                             </div>
                                         </div>
 
@@ -622,11 +622,11 @@ class wordstrap_theme_options_page {
                                     </div>
                                     <div class="span2">
                                         <label for="landing_page_featured_title_color"><?php _e('Title color','wordstrap'); ?></label>
-                                        <input class="input-mini" type="text" name="landing_page_featured_title_color" id="color-12" value="<?php if ($wordstrap_theme_options['landing_page_featured_title_color']) echo $wordstrap_theme_options['landing_page_featured_title_color']; ?>" /><div style="position: absolute;" id="colorpicker-12"></div>
+                                        <input class="input-mini colorpicker" type="text" name="landing_page_featured_title_color" id="color-12" value="<?php if ($wordstrap_theme_options['landing_page_featured_title_color']) echo $wordstrap_theme_options['landing_page_featured_title_color']; ?>" /><div style="position: absolute;" id="colorpicker-12"></div>
                                     </div>
                                     <div class="span4">
                                         <label><?php _e('Number','wordstrap'); ?></label>
-                                        <input class="input-mini" type="text" name="featured_num" value="<?php echo $wordstrap_theme_options['featured_num']; ?>" maxlength="2">
+                                        <input class="input-mini colorpicker" type="text" name="featured_num" value="<?php echo $wordstrap_theme_options['featured_num']; ?>" maxlength="2">
                                     </div>
                                 </div>
                             </div>
