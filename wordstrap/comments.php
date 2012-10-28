@@ -19,7 +19,7 @@
     <?php
     if (comments_open()) :
         $ncomments = get_comments_number();
-        echo '<h2 style="margin: 0px; margin-bottom: 5px; overflow: hidden;"><small style="color: #333;"><i class="icon-awesome-comments ws-comments-icon"></i> ';
+        echo '<h2 class="ws-comments-title"><small><i class="icon-awesome-comments ws-comments-icon"></i> ';
         if ($ncomments == 1)
             echo sprintf ( __('There is %d comment','wordstrap'), $ncomments);
         elseif ($ncomments > 1)

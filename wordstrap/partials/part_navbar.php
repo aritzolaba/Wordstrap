@@ -32,7 +32,7 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
             // Wordpress wp_nav_menu
             $add_items_wrap = '';
             if ($wordstrap_theme_options['show_home_nav'] == 1) :
-                $add_items_wrap = '<li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> '. __('Home', 'wordstrap') .'</a></li>';
+                $add_items_wrap = '<li><a href="'. get_site_url() .'"><i class="icon-awesome-home" style="line-height: 1em; font-size: 1.2em;"></i> '. __('Home', 'wordstrap') .'</a></li>';
             endif;
 
             $args = array (
@@ -40,14 +40,9 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
                 'container_class' => 'nav-collapse first-nav',
                 'container' => false,
                 'items_wrap' => '<div class="nav-collapse first-nav"><ul class="nav ws-nav">'.$add_items_wrap.'%3$s</ul>',
-                'fallback_cb' => function () {
-                    $link = '<b>custom menu</b> !';
-                    echo '<div class="nav-collapse first-nav"><ul class="nav ws-nav"><li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> Home</a></li><li class="divider-vertical"></li></ul>';
-                    echo '<div style="float: left; margin-top: 10px; color: #666; font-style: italic;">';
-                    echo sprintf ( __('You should customize a %s', 'wordstrap'), $link);
-                    echo '</div>';
-                }
+                'fallback_cb' => 'ws_no_menu'
             );
+
             wp_nav_menu($args);
             ?>
         </div>

@@ -11,6 +11,7 @@ class wordstrap_theme_options_page {
 
         // Initialize default options
         $def_theme_options = array();
+        $def_theme_options['style'] = 'default';
         $def_theme_options['header_height'] = 32;
         $def_theme_options['hide_wsheader'] = 0;
         $def_theme_options['hide_wsnavbar'] = 0;
@@ -187,7 +188,7 @@ class wordstrap_theme_options_page {
 
             <br />
 
-            <form method="post" action="">
+            <form style="margin-bottom: 0px;" method="post" action="">
 
                 <div class="ws-special-tabs tabbable tabs-left">
                     <ul class="nav nav-tabs">
@@ -278,12 +279,54 @@ class wordstrap_theme_options_page {
                                     <br />
                                     <div class="clearfix">
 
+                                        <label for="Styles"><h4><?php _e('Style','wordstrap'); ?></h4></label>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <p class="help-block">
+                                                    <?php _e('Select a style from the "inc/styles" folder','wordstrap'); ?>
+                                                </p>
+                                                <?php
+                                                // Browse available styles (folders inside inc/styles)
+                                                $location = str_replace('\\','/',get_template_directory()).'/inc/styles/*';
+                                                $styles = glob($location, GLOB_ONLYDIR );
+
+                                                if (!empty($styles[0])) :
+
+                                                    echo '<select id="style" name="style">';
+
+                                                        foreach ($styles as $style) :
+                                                            $style = explode('/',$style);
+                                                            $style = $style[count($style)-1];
+                                                            if ($style == $wordstrap_theme_options['style'])
+                                                                $sel = 'selected="selected"';
+                                                            else
+                                                                $sel = '';
+
+                                                            echo '<option '.$sel.' value="'.$style.'">'.$style.'</option>';
+
+                                                        endforeach;
+
+                                                    echo '</select>';
+
+                                                else :
+
+                                                    __('There are no styles available !','wordstrap');
+
+                                                endif;
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="clearfix">
+
                                         <label for="Breadcrumb"><h4><?php _e('Breadcrumb','wordstrap'); ?></h4></label>
                                         <label class="checkbox" for="hide_wsbreadcrumb" style="font-weight: normal;"><?php _e('Hide Breadcrumb','wordstrap'); ?>
                                             <input type="checkbox" id="hide_wsbreadcrumb" name="hide_wsbreadcrumb" <?php if ($wordstrap_theme_options['hide_wsbreadcrumb'] == 1) echo 'checked="checked"'; ?> value="1">
                                         </label>
 
                                     </div>
+                                    <br />
                                 </div>
                                 <div class="span7">
                                     <div class="clearfix">

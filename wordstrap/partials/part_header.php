@@ -41,6 +41,7 @@ global $wordstrap_theme_options;
 
                     <h1 id="site-title">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+                        <h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
                     </h1>
 
                 <?php endif; ?>

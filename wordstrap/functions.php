@@ -10,11 +10,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
 // Set some CONSTANTS and WordPress $content_width required var
-if ($wordstrap_theme_options['ws_layout'] == 'full-width') {
-    define('WS_SPANCOL_CENTER', 'span12');
-    if (!isset($content_width)) $content_width = 960;
-}
-elseif ($wordstrap_theme_options['ws_layout'] == '2cols-left') {
+if ($wordstrap_theme_options['ws_layout'] == '2cols-left') {
     define('WS_SPANCOL_LEFT', 'span3');
     define('WS_SPANCOL_CENTER', 'span9');
     if (!isset($content_width)) $content_width = 860;
@@ -32,7 +28,7 @@ elseif ($wordstrap_theme_options['ws_layout'] == '3cols') {
 }
 else {
     define('WS_SPANCOL_CENTER', 'span12');
-    if (!isset($content_width)) $content_width = 800;
+    if (!isset($content_width)) $content_width = 960;
 }
 
 /*******************************************************************************
@@ -318,11 +314,13 @@ function ws_nothing_found() { ?>
 * Function called from header.php to load all theme scripts and styles
 */
 function ws_load_theme_scripts () {
+    global $wordstrap_theme_options;
     // Enqueue bootstrap and font-awesome css styles
     wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
     wp_enqueue_style( 'bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
     wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.css', array() );
     wp_enqueue_style( 'wordstrap-css', get_template_directory_uri() . '/style.css', array() );
+    wp_enqueue_style( 'wordstrap-style-css', get_template_directory_uri() . '/inc/styles/'.$wordstrap_theme_options['style'].'/style.css', array() );
 
     // Enqueue wordstrap and bootstrap js scripts
     wp_enqueue_script( 'wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
@@ -353,7 +351,16 @@ function ws_theme_options_styles () {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['header_bg1'].', '.$wordstrap_theme_options['header_bg2'].');
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['header_bg2'].'\');
-    }
+    }';
+    /*
+    if (get_header_image()) :
+        $addstyle .= '
+        div#ws-header.ws-header-container {
+            background: url(\''.get_header_image().'\') repeat;
+        }';
+    endif;
+    */
+    $addstyle .= '
     div#ws-header h1,
     div#ws-header h2 {
         color: '.$wordstrap_theme_options['header_color'].';
@@ -401,6 +408,8 @@ function ws_theme_options_styles () {
 
         if ($wordstrap_theme_options['use_googlefonts_widgets'] == 1) :
             $addstyle .= '
+            h1#site-title a,
+            h2#site-description,
             .ws-widget-title,
             .well-intro h1,
             .well-intro h2,
@@ -450,8 +459,22 @@ function ws_theme_options_styles () {
 add_action ('wp_head', 'ws_theme_options_styles');
 
 /*******************************************************************************
- * Hook into wp_title()
- */
+* Function for "fallback_cb" in part_navbar (wp_nav_menu)
+*/
+function ws_no_menu () {
+
+    $link = '<b>custom menu</b> !';
+    $output = '<div class="nav-collapse first-nav"><ul class="nav ws-nav"><li><a href="'. get_site_url() .'"><i class="icon-home icon-white"></i> Home</a></li><li class="divider-vertical"></li></ul>';
+    $output .= '<div style="float: left; margin-top: 10px; color: #666; font-style: italic;">';
+    $output .= sprintf ( __('You should customize a %s', 'wordstrap'), $link);
+    $output .= '</div>';
+
+    echo $output;
+}
+
+/*******************************************************************************
+* Hook into wp_title()
+*/
 function ws_wp_title( $title, $sep ) {
 	$title .= get_bloginfo( 'name' );
 
@@ -465,8 +488,7 @@ add_filter( 'wp_title', 'ws_wp_title', 1, 2 );
 * AJAX IN FRONT-END AREA: Featured posts
 */
 function WsAjaxFeatured() {
-    get_template_part('partials/part_featured');
-    die();
+    die(get_template_part('partials/part_featured'));
 }
 // Hook to wp_ajax_nopriv_WsAjaxFunction (for non logged users)
 // and to wp_ajax_WsAjaxFunction (for logged users)
@@ -475,13 +497,14 @@ add_action( 'wp_ajax_WsAjaxFeatured', 'WsAjaxFeatured' );
 
 // Add .js file inc/js/ws-ajax.js
 function add_ws_ajax_script() {
-    wp_enqueue_script( 'ws-ajax', get_template_directory_uri() ."/inc/js/ws-ajax.js", array ('jquery') );
+    wp_enqueue_script( 'ws-ajax', get_template_directory_uri() .'/inc/js/ws-ajax.js', array ('jquery') );
 
     // Whith this function we have JS vars set globally
     // in order to be used in the ws-ajax script, as "WsAjax.ajaxurl", etc.
     wp_localize_script( 'ws-ajax', 'WsAjax', array(
         // URL to wp-admin/admin-ajax.php to process the request
-        'ajaxurl'   => admin_url( 'admin-ajax.php' )
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'ajaxloadingimg' => get_template_directory_uri() . '/inc/imgs/loading.gif'
         )
     );
 }

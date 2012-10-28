@@ -15,6 +15,13 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.4
+
+- Improved the "Featured" section in the front page, adding a loading animation during queries and controlling success/error states properly.
+- Added the "Style" option in the appearance tab of the theme options page. Now you can choose between 2 different styles, and you can also make your own, by creating a folder inside "inc/styles/yourstyle" with a "style.css" file inside. Then you will see it listed in the theme options page.
+- Added three different page templates: tpl-onecolumn.php, tpl-twocolumn-left.php and tpl-twocolumn-right.php. You can use them to create pages with left/right sidebar, or no sidebars.
+- Improved the wp_nav_menu() function call in order to avoid the "Parse error: syntax error, unexpected T_FUNCTION in ..." error in php versions prior to 5.2.4.
+
 v: 1.7.3
 
 - Theme now works with PHP 5.2.4 or greater versions
