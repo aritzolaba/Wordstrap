@@ -12,6 +12,8 @@ class wordstrap_theme_options_page {
         // Initialize default options
         $def_theme_options = array();
         $def_theme_options['style'] = 'default';
+        $def_theme_options['ws_spancol_left'] = 3;
+        $def_theme_options['ws_spancol_right'] = 3;
         $def_theme_options['header_height'] = 32;
         $def_theme_options['hide_wsheader'] = 0;
         $def_theme_options['hide_wsnavbar'] = 0;
@@ -211,7 +213,7 @@ class wordstrap_theme_options_page {
                                         <label for="WsLayout"><h4><?php _e('Layout','wordstrap'); ?></h4></label>
                                         <div class="row-fluid">
                                             <div class="span6">
-                                                <label for="ws_layout_1" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == 'full-width') echo 'active'; ?>">
+                                                <label for="ws_layout_1" rel="SidebarWidths" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == 'full-width') echo 'active'; ?>">
                                                     <p style="text-align: center; margin-bottom: 0px;">
                                                         <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/full-width.png'; ?>" >
                                                     </p>
@@ -220,7 +222,7 @@ class wordstrap_theme_options_page {
                                             </div>
 
                                             <div class="span6">
-                                                <label for="ws_layout_2" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-left') echo 'active'; ?>"">
+                                                <label for="ws_layout_2" rel="SidebarWidths" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-left') echo 'active'; ?>"">
                                                     <p style="text-align: center; margin-bottom: 0px;">
                                                         <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-left.png'; ?>" >
                                                     </p>
@@ -230,7 +232,7 @@ class wordstrap_theme_options_page {
                                         </div>
                                         <div class="row-fluid" style="margin-top: 10px;">
                                             <div class="span6">
-                                                <label for="ws_layout_3" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-right') echo 'active'; ?>"">
+                                                <label for="ws_layout_3" rel="SidebarWidths" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '2cols-right') echo 'active'; ?>"">
                                                     <p style="text-align: center; margin-bottom: 0px;">
                                                         <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/2cols-right.png'; ?>" >
                                                     </p>
@@ -239,7 +241,7 @@ class wordstrap_theme_options_page {
                                             </div>
 
                                             <div class="span6">
-                                                <label for="ws_layout_4" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '3cols') echo 'active'; ?>"">
+                                                <label for="ws_layout_4" rel="SidebarWidths" class="checkbox ws-check <?php if ($wordstrap_theme_options['ws_layout'] == '3cols') echo 'active'; ?>"">
                                                     <p style="text-align: center; margin-bottom: 0px;">
                                                         <img src="<?php echo get_stylesheet_directory_uri() .'/inc/imgs/3cols.png'; ?>" >
                                                     </p>
@@ -249,29 +251,28 @@ class wordstrap_theme_options_page {
                                         </div>
                                     </div>
                                     <br />
-                                    <div class="clearfix">
+                                    <div id="SidebarWidths" class="clearfix" <?php if ($wordstrap_theme_options['ws_layout']=='full-width') echo 'style="display: none;"'; ?>>
 
-                                        <label for="WidgetHeaders"><h4><?php _e('Background gradient for widget headers','wordstrap'); ?></h4></label>
+                                        <label for="SidebarWidths"><h4><?php _e('Sidebar widths','wordstrap'); ?></h4></label>
+                                        <p class="help-block" style="font-style: italic; color: #777; font-size: .85em;">
+                                            <?php _e('Sidebar widths are given in Bootstrap\'s grid system "units". Maximum size is 12. The width of the center column is automatically calculated.','wordstrap'); ?>
+                                        </p>
                                         <div class="row-fluid">
-                                            <div class="span4">
+                                            <div class="span3" id="ws_spancol_left" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-right' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
                                                 <p class="help-block">
-                                                    <?php _e('Start Color','wordstrap'); ?>
+                                                    <?php _e('Left sidebar','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg1" id="color-1" value="<?php if ($wordstrap_theme_options['widget_header_bg1']) echo $wordstrap_theme_options['widget_header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-1"></div>
+                                                <div class="input-prepend">
+                                                    <span class="add-on" style="line-height: 1em; padding-bottom: .06em;">span</span><input style="width: 30px; text-align: center;" type="text" id="prependedInput" name="ws_spancol_left" value="<?php if ($wordstrap_theme_options['ws_spancol_left']) echo $wordstrap_theme_options['ws_spancol_left']; ?>" />
+                                                </div>
                                             </div>
-
-                                            <div class="span4">
+                                            <div class="span9" id="ws_spancol_right" style="margin-left: 0px;" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-left' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
                                                 <p class="help-block">
-                                                    <?php _e('Ending Color','wordstrap'); ?>
+                                                    <?php _e('Right sidebar','wordstrap'); ?>
                                                 </p>
-                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg2" id="color-2" value="<?php if ($wordstrap_theme_options['widget_header_bg2']) echo $wordstrap_theme_options['widget_header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-2"></div>
-                                            </div>
-
-                                            <div class="span4">
-                                                <p class="help-block">
-                                                    <?php _e('Text Color','wordstrap'); ?>
-                                                </p>
-                                                <input class="input-mini colorpicker" type="text" name="widget_header_color" id="color-9" value="<?php if ($wordstrap_theme_options['widget_header_color']) echo $wordstrap_theme_options['widget_header_color']; ?>" /><div style="position: absolute;" id="colorpicker-9"></div>
+                                                <div class="input-prepend">
+                                                    <span class="add-on" style="line-height: 1em; padding-bottom: .06em;">span</span><input style="width: 30px; text-align: center;" type="text" name="ws_spancol_right" value="<?php if ($wordstrap_theme_options['ws_spancol_right']) echo $wordstrap_theme_options['ws_spancol_right']; ?>" />
+                                                </div>
                                             </div>
                                         </div>
 
@@ -316,6 +317,34 @@ class wordstrap_theme_options_page {
                                                 ?>
                                             </div>
                                         </div>
+                                    </div>
+                                    <br />
+                                    <div class="clearfix">
+
+                                        <label for="WidgetHeaders"><h4><?php _e('Background gradient for widget headers','wordstrap'); ?></h4></label>
+                                        <div class="row-fluid">
+                                            <div class="span4">
+                                                <p class="help-block">
+                                                    <?php _e('Start Color','wordstrap'); ?>
+                                                </p>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg1" id="color-1" value="<?php if ($wordstrap_theme_options['widget_header_bg1']) echo $wordstrap_theme_options['widget_header_bg1']; ?>" /><div style="position: absolute;" id="colorpicker-1"></div>
+                                            </div>
+
+                                            <div class="span4">
+                                                <p class="help-block">
+                                                    <?php _e('Ending Color','wordstrap'); ?>
+                                                </p>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_bg2" id="color-2" value="<?php if ($wordstrap_theme_options['widget_header_bg2']) echo $wordstrap_theme_options['widget_header_bg2']; ?>" /><div style="position: absolute;" id="colorpicker-2"></div>
+                                            </div>
+
+                                            <div class="span4">
+                                                <p class="help-block">
+                                                    <?php _e('Text Color','wordstrap'); ?>
+                                                </p>
+                                                <input class="input-mini colorpicker" type="text" name="widget_header_color" id="color-9" value="<?php if ($wordstrap_theme_options['widget_header_color']) echo $wordstrap_theme_options['widget_header_color']; ?>" /><div style="position: absolute;" id="colorpicker-9"></div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <br />
                                     <div class="clearfix">

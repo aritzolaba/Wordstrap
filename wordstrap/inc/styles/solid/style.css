@@ -290,6 +290,8 @@ div#ws-blog .ws-article h1.entry-title {
 }
 .ws-article .entry-content p {
     margin-bottom: 10px;
+    font-size: 1.2em;
+    font-family: Tahoma;
 }
 .ws-article.ws-loop div.entry-content p,
 #ws-home-tabs .ws-article div.entry-content p {

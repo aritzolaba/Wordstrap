@@ -10,24 +10,31 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 $wordstrap_theme_options = get_option('wordstrap_theme_options');
 
 // Set some CONSTANTS and WordPress $content_width required var
+$ws_spancol_center = 12;
 if ($wordstrap_theme_options['ws_layout'] == '2cols-left') {
-    define('WS_SPANCOL_LEFT', 'span3');
-    define('WS_SPANCOL_CENTER', 'span9');
+    // Calculate width for center container
+    $ws_spancol_center = $ws_spancol_center - $wordstrap_theme_options['ws_spancol_left'];
+    define('WS_SPANCOL_LEFT', 'span'.$wordstrap_theme_options['ws_spancol_left']);
+    define('WS_SPANCOL_CENTER', 'span'.$ws_spancol_center);
     if (!isset($content_width)) $content_width = 860;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '2cols-right') {
-    define('WS_SPANCOL_RIGHT', 'span3');
-    define('WS_SPANCOL_CENTER', 'span9');
+    // Calculate width for center container
+    $ws_spancol_center = $ws_spancol_center - $wordstrap_theme_options['ws_spancol_right'];
+    define('WS_SPANCOL_RIGHT', 'span'.$wordstrap_theme_options['ws_spancol_right']);
+    define('WS_SPANCOL_CENTER', 'span'.$ws_spancol_center);
     if (!isset($content_width)) $content_width = 860;
 }
 elseif ($wordstrap_theme_options['ws_layout'] == '3cols') {
-    define('WS_SPANCOL_LEFT', 'span3');
-    define('WS_SPANCOL_RIGHT', 'span3');
-    define('WS_SPANCOL_CENTER', 'span6');
+    // Calculate width for center container
+    $ws_spancol_center = $ws_spancol_center - ($wordstrap_theme_options['ws_spancol_left'] + $wordstrap_theme_options['ws_spancol_right']);
+    define('WS_SPANCOL_LEFT', 'span'.$wordstrap_theme_options['ws_spancol_left']);
+    define('WS_SPANCOL_RIGHT', 'span'.$wordstrap_theme_options['ws_spancol_right']);
+    define('WS_SPANCOL_CENTER', 'span'.$ws_spancol_center);
     if (!isset($content_width)) $content_width = 520;
 }
 else {
-    define('WS_SPANCOL_CENTER', 'span12');
+    define('WS_SPANCOL_CENTER', 'span'.$ws_spancol_center);
     if (!isset($content_width)) $content_width = 960;
 }
 
@@ -352,14 +359,20 @@ function ws_theme_options_styles () {
         background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['header_bg2'].'\');
     }';
-    /*
-    if (get_header_image()) :
+
+    // SPECIAL OPTIONS FOR THE "SOLID" STYLE
+    if ($wordstrap_theme_options['style'] == 'solid') {
         $addstyle .= '
         div#ws-header.ws-header-container {
-            background: url(\''.get_header_image().'\') repeat;
+            background: url(\''. get_stylesheet_directory_uri() .'/inc/imgs/bedge_grunge.png\') repeat;
         }';
-    endif;
-    */
+
+        $addstyle .= '
+        div.well-widgets div.ws-widget-title {
+            background: transparent;
+        }';
+    }
+
     $addstyle .= '
     div#ws-header h1,
     div#ws-header h2 {

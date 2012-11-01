@@ -15,6 +15,11 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.4[Available only from Github repo]
+
+- Added the possibility to change sidebar widths from the theme options page.
+- Some css fixes in the default WordPress calendar widget.
+
 v: 1.7.4
 
 - Improved the "Featured" section in the front page, adding a loading animation during queries and controlling success/error states properly.

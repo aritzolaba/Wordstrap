@@ -86,6 +86,7 @@ div.navbar-inner {
 
 /* default WordPress calendar widget */
 table#wp-calendar {
+    border-collapse: separate;
     margin: 0px;
     margin: auto;
     padding: 0px;
@@ -98,12 +99,14 @@ table#wp-calendar caption {
 }
 table#wp-calendar td {
     font-size: .8em;
-    padding: .2em;
+    padding: .1em;
     text-align: center;
 }
 table#wp-calendar thead th {
-    background: #555;
-    color: #fff;
+    background-image: -moz-linear-gradient(center top , #333333, #555555);
+    background: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#555555));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#555555');
+    color: #f0f0f0;
     font-size: .8em;
     font-weight: bold;
     text-align: center;

@@ -36,8 +36,30 @@
 
         /* Theme Options Controls */
         $('.ws-check').click(function() {
+            var ele = '#'+$(this).attr('rel');
             $('.ws-check').removeClass('active');
             $(this).addClass('active');
+
+            if ($(this).attr('for') == 'ws_layout_2' || $(this).attr('for') == 'ws_layout_3' || $(this).attr('for') == 'ws_layout_4') {
+                $(ele).css('display','block');
+
+                if ($(this).attr('for') == 'ws_layout_2') {
+                    $('#ws_spancol_left').css('display','block');
+                    $('#ws_spancol_right').css('display','none');
+                }
+                else if ($(this).attr('for') == 'ws_layout_3') {
+                    $('#ws_spancol_left').css('display','none');
+                    $('#ws_spancol_right').css('display','block');
+                }
+                else if ($(this).attr('for') == 'ws_layout_4') {
+                    $('#ws_spancol_left').css('display','block');
+                    $('#ws_spancol_right').css('display','block');
+                }
+            }
+            else if ($(this).attr('for') == 'ws_layout_1') {
+                $(ele).css('display','none');
+            }
+
         });
 
         $('#googlefonts_check').click(function() {
