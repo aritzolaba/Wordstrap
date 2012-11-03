@@ -9,7 +9,7 @@
 body {
     background: #222;
     padding-top: 0px;
-    color: #f0f0f0;
+    color: #f5f5f5;
 }
 
 /* header */
@@ -302,13 +302,16 @@ div#ws-blog .ws-article h1.entry-title {
     background: #fff;
     text-align: center;
     float: right;
-    padding: 5px;
-    border: 6px solid #eaeaea;
-    border-radius: 12px;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
+    padding: 3px;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
     margin: 0em 0em .6em .6em;
     overflow: hidden;
+}
+.ws-article .entry-thumbnail img {
+    border-radius: 4px;
 }
 .ws-article .entry-meta {
     padding: 10px;
@@ -527,9 +530,9 @@ article .calendar {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    -moz-box-shadow: 0px 0px 2px #333333;
-    -webkit-box-shadow: 1px 1px 2px #333333;
-    box-shadow: 1px 1px 2px #333333;
+    -moz-box-shadow: 1px 1px 3px #000000;
+    -webkit-box-shadow: 1px 1px 3px #000000;
+    box-shadow: 1px 1px 3px #000000;
     float: left;
     font-size: 0.7em;
     margin: 0.4em;
@@ -911,6 +914,15 @@ div.well-widgets .ws-widget-content ul li {
 }
 #slideshow a.carousel-control.ws-carousel-but-right {
     margin-right: 28px;
+}
+
+/* SOLID THEME NEW */
+div.well{
+    border-radius: 4px;
+    background: transparent url('imgs/light_toast_trans15.png') repeat;
+}
+div.well-widgets{
+    background: transparent;
 }
 
 /* END SKIN 2 *****************************************************************/

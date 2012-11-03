@@ -32,10 +32,15 @@ global $wordstrap_theme_options;
 
                     <?php endif; ?>
 
-                    <hgroup class="ws-site-title">
-                        <h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
-                        <h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
-                    </hgroup>
+                    <?php if (get_header_textcolor() != 'blank') : ?>
+
+                        <hgroup class="ws-site-title">
+                            <h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
+                            <h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
+                        </hgroup>
+
+                    <?php endif; ?>
+
 
                 <?php else : ?>
 

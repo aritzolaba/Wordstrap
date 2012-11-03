@@ -11,6 +11,14 @@ class wordstrap_theme_options_page {
 
         // Initialize default options
         $def_theme_options = array();
+        $def_theme_options['tabs_first'] = 'latest';
+        $def_theme_options['tabs_second'] = '';
+        $def_theme_options['tabs_third'] = '';
+        $def_theme_options['tabs_fourth'] = '';
+        $def_theme_options['tabs_first_cat'] = '';
+        $def_theme_options['tabs_second_cat'] = '';
+        $def_theme_options['tabs_third_cat'] = '';
+        $def_theme_options['tabs_fourth_cat'] = '';
         $def_theme_options['style'] = 'default';
         $def_theme_options['ws_spancol_left'] = 3;
         $def_theme_options['ws_spancol_right'] = 3;
@@ -258,7 +266,7 @@ class wordstrap_theme_options_page {
                                             <?php _e('Sidebar widths are given in Bootstrap\'s grid system "units". Maximum size is 12. The width of the center column is automatically calculated.','wordstrap'); ?>
                                         </p>
                                         <div class="row-fluid">
-                                            <div class="span3" id="ws_spancol_left" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-right' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
+                                            <div class="span4" id="ws_spancol_left" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-right' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
                                                 <p class="help-block">
                                                     <?php _e('Left sidebar','wordstrap'); ?>
                                                 </p>
@@ -266,7 +274,7 @@ class wordstrap_theme_options_page {
                                                     <span class="add-on" style="line-height: 1em; padding-bottom: .06em;">span</span><input style="width: 30px; text-align: center;" type="text" id="prependedInput" name="ws_spancol_left" value="<?php if ($wordstrap_theme_options['ws_spancol_left']) echo $wordstrap_theme_options['ws_spancol_left']; ?>" />
                                                 </div>
                                             </div>
-                                            <div class="span9" id="ws_spancol_right" style="margin-left: 0px;" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-left' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
+                                            <div class="span8" id="ws_spancol_right" style="margin-left: 0px;" <?php if ($wordstrap_theme_options['ws_layout']=='2cols-left' AND $wordstrap_theme_options['ws_layout']!='3cols') echo 'style="display: none;"'; ?>>
                                                 <p class="help-block">
                                                     <?php _e('Right sidebar','wordstrap'); ?>
                                                 </p>
@@ -344,15 +352,6 @@ class wordstrap_theme_options_page {
                                                 <input class="input-mini colorpicker" type="text" name="widget_header_color" id="color-9" value="<?php if ($wordstrap_theme_options['widget_header_color']) echo $wordstrap_theme_options['widget_header_color']; ?>" /><div style="position: absolute;" id="colorpicker-9"></div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <br />
-                                    <div class="clearfix">
-
-                                        <label for="Breadcrumb"><h4><?php _e('Breadcrumb','wordstrap'); ?></h4></label>
-                                        <label class="checkbox" for="hide_wsbreadcrumb" style="font-weight: normal;"><?php _e('Hide Breadcrumb','wordstrap'); ?>
-                                            <input type="checkbox" id="hide_wsbreadcrumb" name="hide_wsbreadcrumb" <?php if ($wordstrap_theme_options['hide_wsbreadcrumb'] == 1) echo 'checked="checked"'; ?> value="1">
-                                        </label>
 
                                     </div>
                                     <br />
@@ -459,6 +458,13 @@ class wordstrap_theme_options_page {
 
                                                 <br />
 
+                                                <label for="Breadcrumb"><h4><?php _e('Breadcrumb','wordstrap'); ?></h4></label>
+                                                <label class="checkbox" for="hide_wsbreadcrumb" style="font-weight: normal;"><?php _e('Hide Breadcrumb','wordstrap'); ?>
+                                                    <input type="checkbox" id="hide_wsbreadcrumb" name="hide_wsbreadcrumb" <?php if ($wordstrap_theme_options['hide_wsbreadcrumb'] == 1) echo 'checked="checked"'; ?> value="1">
+                                                </label>
+
+                                                <br />
+
                                                 <label for="WsHeader"><h4><?php _e('Misc.','wordstrap'); ?></h4></label>
                                                 <label class="checkbox" style="font-weight: normal;" for="nav_fixed"><?php _e('Fixed Header/Nav bar','wordstrap'); ?>
                                                     <input type="checkbox" id="nav_fixed" name="nav_fixed" <?php if ($wordstrap_theme_options['nav_fixed'] == 1) echo 'checked="checked"'; ?> value="1">
@@ -466,6 +472,8 @@ class wordstrap_theme_options_page {
                                                         <?php _e('This will make the Header, Nav bar or both of them stick to the top.','wordstrap'); ?>
                                                     </p>
                                                 </label>
+
+                                                <br />
                                             </div>
                                         </div>
 
@@ -702,14 +710,107 @@ class wordstrap_theme_options_page {
                                     </div>
                                 </div>
                             </div>
-                            <label class="checkbox" for="landing_page_tabs">
-                                <input type="checkbox" id="landing_page_tabs" name="landing_page_tabs" <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Tabs','wordstrap'); ?>
+                            <label class="checkbox" for="landing_page_tabs_check">
+                                <input type="checkbox" id="landing_page_tabs_check" name="landing_page_tabs" <?php if ($wordstrap_theme_options['landing_page_tabs'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Tabs','wordstrap'); ?>
                             </label>
+                            <div id="landing_page_tabs_box" class="alert alert-message ws-alert" <?php if ($wordstrap_theme_options['landing_page_tabs'] != 1) echo 'style="display: none; margin-top: 10px;"'; else echo 'style="margin-top: 10px;"'; ?>>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <label><?php _e('First tab','wordstrap'); ?></label>
+                                        <select name="tabs_first" id="tabs_first" class="tabs_select">
+                                            <option value="categorized" <?php if ($wordstrap_theme_options['tabs_first'] == 'categorized') echo 'selected="selected"'; ?>><?php _e('Categorized posts','wordstrap'); ?></option>
+                                            <option value="latest" <?php if ($wordstrap_theme_options['tabs_first'] == 'latest') echo 'selected="selected"'; ?>><?php _e('Latest posts','wordstrap'); ?></option>
+                                            <option value="popular" <?php if ($wordstrap_theme_options['tabs_first'] == 'popular') echo 'selected="selected"'; ?>><?php _e('Popular posts','wordstrap'); ?></option>
+                                        </select>
+                                        <div id="tabs_first_cat_box" <?php if ($wordstrap_theme_options['tabs_first'] != 'categorized') echo 'style="display: none;"'; ?>>
+                                            <div class="input-prepend" style="font-weight: normal;"><?php _e('category','wordstrap'); ?>
+                                            <select name="tabs_first_cat" class="input-medium">
+                                                <option value="" style="font-style: italic;"><?php _e('Select a category...','wordstrap'); ?></option>
+                                                <?php
+                                                $cats = get_all_category_ids();
+                                                foreach ($cats as $cat) :
+                                                    $term = get_term($cat, 'category');
+                                                    $sel=''; if ($term->slug == $wordstrap_theme_options['tabs_first_cat']) $sel='selected="selected"';
+                                                    echo '<option value="'.$term->slug.'" '.$sel.'>'.$term->name.'</option>';
+                                                endforeach;
+                                                ?>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label><?php _e('Second tab','wordstrap'); ?></label>
+                                        <select name="tabs_second" id="tabs_second" class="tabs_select">
+                                            <option value="" selected><?php _e('Unused','wordstrap'); ?></option>
+                                            <option value="categorized" <?php if ($wordstrap_theme_options['tabs_second'] == 'categorized') echo 'selected="selected"'; ?>><?php _e('Categorized posts','wordstrap'); ?></option>
+                                            <option value="latest" <?php if ($wordstrap_theme_options['tabs_second'] == 'latest') echo 'selected="selected"'; ?>><?php _e('Latest posts','wordstrap'); ?></option>
+                                            <option value="popular" <?php if ($wordstrap_theme_options['tabs_second'] == 'popular') echo 'selected="selected"'; ?>><?php _e('Popular posts','wordstrap'); ?></option>
+                                        </select>
+                                        <div id="tabs_second_cat_box" <?php if ($wordstrap_theme_options['tabs_second'] != 'categorized') echo 'style="display: none;"'; ?>>
+                                            <div class="input-prepend" style="font-weight: normal;"><?php _e('category','wordstrap'); ?>
+                                            <select name="tabs_second_cat" class="input-medium">
+                                                <option value="" style="font-style: italic;"><?php _e('Select a category...','wordstrap'); ?></option>
+                                                <?php
+                                                $cats = get_all_category_ids();
+                                                foreach ($cats as $cat) :
+                                                    $term = get_term($cat, 'category');
+                                                    $sel=''; if ($term->slug == $wordstrap_theme_options['tabs_second_cat']) $sel='selected="selected"';
+                                                    echo '<option value="'.$term->slug.'" '.$sel.'>'.$term->name.'</option>';
+                                                endforeach;
+                                                ?>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label><?php _e('Third tab','wordstrap'); ?></label>
+                                        <select name="tabs_third" id="tabs_third" class="tabs_select">
+                                            <option value="" selected><?php _e('Unused','wordstrap'); ?></option>
+                                            <option value="categorized" <?php if ($wordstrap_theme_options['tabs_third'] == 'categorized') echo 'selected="selected"'; ?>><?php _e('Categorized posts','wordstrap'); ?></option>
+                                            <option value="latest" <?php if ($wordstrap_theme_options['tabs_third'] == 'latest') echo 'selected="selected"'; ?>><?php _e('Latest posts','wordstrap'); ?></option>
+                                            <option value="popular" <?php if ($wordstrap_theme_options['tabs_third'] == 'popular') echo 'selected="selected"'; ?>><?php _e('Popular posts','wordstrap'); ?></option>
+                                        </select>
+                                        <div id="tabs_third_cat_box" <?php if ($wordstrap_theme_options['tabs_third'] != 'categorized') echo 'style="display: none;"'; ?>>
+                                            <div class="input-prepend" style="font-weight: normal;"><?php _e('category','wordstrap'); ?>
+                                            <select name="tabs_third_cat" class="input-medium">
+                                                <option value="" style="font-style: italic;"><?php _e('Select a category...','wordstrap'); ?></option>
+                                                <?php
+                                                $cats = get_all_category_ids();
+                                                foreach ($cats as $cat) :
+                                                    $term = get_term($cat, 'category');
+                                                    $sel=''; if ($term->slug == $wordstrap_theme_options['tabs_third_cat']) $sel='selected="selected"';
+                                                    echo '<option value="'.$term->slug.'" '.$sel.'>'.$term->name.'</option>';
+                                                endforeach;
+                                                ?>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label><?php _e('Fourth tab','wordstrap'); ?></label>
+                                        <select name="tabs_fourth" id="tabs_fourth" class="tabs_select">
+                                            <option value="" selected><?php _e('Unused','wordstrap'); ?></option>
+                                            <option value="categorized" <?php if ($wordstrap_theme_options['tabs_fourth'] == 'categorized') echo 'selected="selected"'; ?>><?php _e('Categorized posts','wordstrap'); ?></option>
+                                            <option value="latest" <?php if ($wordstrap_theme_options['tabs_fourth'] == 'latest') echo 'selected="selected"'; ?>><?php _e('Latest posts','wordstrap'); ?></option>
+                                            <option value="popular" <?php if ($wordstrap_theme_options['tabs_fourth'] == 'popular') echo 'selected="selected"'; ?>><?php _e('Popular posts','wordstrap'); ?></option>
+                                        </select>
+                                        <div id="tabs_fourth_cat_box" <?php if ($wordstrap_theme_options['tabs_fourth'] != 'categorized') echo 'style="display: none;"'; ?>>
+                                            <div class="input-prepend" style="font-weight: normal;"><?php _e('category','wordstrap'); ?>
+                                            <select name="tabs_fourth_cat" class="input-medium">
+                                                <option value="" style="font-style: italic;"><?php _e('Select a category...','wordstrap'); ?></option>
+                                                <?php
+                                                $cats = get_all_category_ids();
+                                                foreach ($cats as $cat) :
+                                                    $term = get_term($cat, 'category');
+                                                    $sel=''; if ($term->slug == $wordstrap_theme_options['tabs_fourth_cat']) $sel='selected="selected"';
+                                                    echo '<option value="'.$term->slug.'" '.$sel.'>'.$term->name.'</option>';
+                                                endforeach;
+                                                ?>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <label class="checkbox" for="landing_page_blog">
                                 <input type="checkbox" id="landing_page_blog" name="landing_page_blog" <?php if ($wordstrap_theme_options['landing_page_blog'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Blog loop','wordstrap'); ?>
                             </label>
                         </div>
-
+                        <br />
                     </div><!-- .tab-content -->
                 </div><!-- .tabbable -->
 

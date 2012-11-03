@@ -13,7 +13,7 @@ global $wordstrap_theme_options;
 
     <?php get_sidebar('left'); ?>
 
-    <div class="span9">
+    <div class="<?php echo WS_SPANCOL_CENTER; ?>">
         <div class="well">
 
             <?php

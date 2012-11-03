@@ -76,6 +76,22 @@
                 $('#landing_page_featured_box').slideUp('fast');
         });
 
+        $('#landing_page_tabs_check').click(function(){
+            if ($(this).attr('checked')== 'checked')
+                $('#landing_page_tabs_box').slideDown('fast');
+            else
+                $('#landing_page_tabs_box').slideUp('fast');
+        });
+
+        $('.tabs_select').change(function() {
+            //alert ('hey'+$(this).val());
+            var ele = $(this).attr('id');
+            if ($(this).val() == 'categorized')
+                $('#'+ele+'_cat_box').slideDown('fast');
+            else
+                $('#'+ele+'_cat_box').slideUp('fast');
+        });
+
         $('#landing_page_intro_check').click(function(){
             if ($(this).attr('checked')== 'checked')
                 $('#landing_page_intro_box').slideDown('fast');

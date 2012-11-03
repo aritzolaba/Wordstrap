@@ -218,7 +218,7 @@ add_filter('excerpt_more', 'ws_excerpt_more');
 * Excerpt for titles
 */
 function ws_title_excerpt ($title) {
-    if (strlen($title)>35) $title=substr($title,0,35).'<i>...</i>';
+    if (strlen($title)>30) $title=substr($title,0,30).'<i>...</i>';
     return $title;
 }
 
@@ -364,7 +364,7 @@ function ws_theme_options_styles () {
     if ($wordstrap_theme_options['style'] == 'solid') {
         $addstyle .= '
         div#ws-header.ws-header-container {
-            background: url(\''. get_stylesheet_directory_uri() .'/inc/imgs/bedge_grunge.png\') repeat;
+            background: '.$wordstrap_theme_options['header_bg1'].' url(\''. get_stylesheet_directory_uri() .'/inc/styles/solid/imgs/light_toast_trans15.png\') repeat;
         }';
 
         $addstyle .= '

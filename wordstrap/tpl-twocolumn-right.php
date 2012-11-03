@@ -11,7 +11,7 @@ global $wordstrap_theme_options;
 ?>
 <div class="row-fluid">
 
-    <div class="span9">
+    <div class="<?php echo WS_SPANCOL_CENTER; ?>">
         <div class="well">
 
             <?php

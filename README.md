@@ -15,6 +15,14 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.5
+
+- Theme options/Front page/Tabs: Added the possibility to choose the posts you want to list in each of the 4 tabs available.
+- Added the possibility to change sidebar widths from the theme options page.
+- Some css fixes in the default WordPress calendar widget.
+- Improved the "solid" style. Works best with a dark background.
+- Fixed the option to display the site title along with the custom header image.
+
 v: 1.7.4[Available only from Github repo]
 
 - Added the possibility to change sidebar widths from the theme options page.

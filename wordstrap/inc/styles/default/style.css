@@ -300,13 +300,16 @@ div#ws-blog .ws-article h1.entry-title {
     background: #fff;
     text-align: center;
     float: right;
-    padding: 5px;
-    border: 6px solid #eaeaea;
-    border-radius: 12px;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
+    padding: 3px;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
     margin: 0em 0em .6em .6em;
     overflow: hidden;
+}
+.ws-article .entry-thumbnail img {
+    border-radius: 4px;
 }
 .ws-article .entry-meta {
     padding: 10px;
