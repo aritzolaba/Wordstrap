@@ -15,6 +15,10 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.6
+
+- Fixed submenu dropdowns issue by updating bootstrap.min.js file
+
 v: 1.7.5
 
 - Theme options/Front page/Tabs: Added the possibility to choose the posts you want to list in each of the 4 tabs available.
