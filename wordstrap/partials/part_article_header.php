@@ -36,21 +36,21 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
                 $author_name = ws_get_authorfullname();
                 ?>
 
-                <i class="icon-awesome-user" <?php echo 'title="'. __('Author','wordstrap') .'"'; ?>></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo $author_name; ?></a>
+                <i class="icon-user" <?php echo 'title="'. __('Author','wordstrap') .'"'; ?>></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo $author_name; ?></a>
 
             <?php endif; ?>
 
             <?php
             // Post categories
             $cats = get_the_category_list( ', ' );
-            if ($cats) echo '<i title="'. __('Categories','wordstrap') .'" class="icon-awesome-bookmark"></i>'.$cats;
+            if ($cats) echo '<i title="'. __('Categories','wordstrap') .'" class="icon-bookmark"></i>'.$cats;
             ?>
 
             <?php // Comment number
             if (!is_single() AND !is_page()) : ?>
                 <?php if (comments_open()) : ?>
                     <?php $ncom=get_comments_number(); if ($ncom==0) $ncom= __('no', 'wordstrap'); ?>
-                    <br /><i class="icon-awesome-comment"></i><a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
+                    <br /><i class="icon-comment"></i><a href="<?php the_permalink(); ?>"><?php echo sprintf(__('%s comments', 'wordstrap'), $ncom); ?></a>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -61,7 +61,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
     // Post tags
     if (is_single() && get_the_tag_list()) :
         echo '<div class="ws-tag-container">';
-        echo '<i title="'. __('Tags','wordstrap') .'" class="icon-awesome-tag" style="font-size: 1.3em;"></i>';
+        echo '<i title="'. __('Tags','wordstrap') .'" class="icon-tag" style="font-size: 1.3em;"></i>';
         the_tags();
         echo '</div>';
     endif;

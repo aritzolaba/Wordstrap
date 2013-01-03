@@ -11,12 +11,12 @@ global $wordstrap_theme_options;
 
     <?php
     if ($wordstrap_theme_options['tabs_first'] == 'latest')
-        $linktext = '<i class="icon-awesome-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
+        $linktext = '<i class="icon-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
     elseif ($wordstrap_theme_options['tabs_first'] == 'popular')
-        $linktext = '<i class="icon-awesome-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
+        $linktext = '<i class="icon-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
     elseif ($wordstrap_theme_options['tabs_first'] == 'categorized') {
         $tabs_category = ucfirst($wordstrap_theme_options['tabs_first_cat']);
-        $linktext = '<i class="icon-awesome-tag ws-tab-icon"></i>'. $tabs_category;
+        $linktext = '<i class="icon-tag ws-tab-icon"></i>'. $tabs_category;
     }
     ?>
     <li class="active"><a href="#1" data-toggle="tab"><span class="ws-tab-trigger"><?php echo $linktext; ?></span></a></li>
@@ -24,12 +24,12 @@ global $wordstrap_theme_options;
     <?php
     if ($wordstrap_theme_options['tabs_second'] != '') {
         if ($wordstrap_theme_options['tabs_second'] == 'latest')
-            $linktext = '<i class="icon-awesome-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
+            $linktext = '<i class="icon-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_second'] == 'popular')
-            $linktext = '<i class="icon-awesome-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
+            $linktext = '<i class="icon-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_second'] == 'categorized') {
             $tabs_category = ucfirst($wordstrap_theme_options['tabs_second_cat']);
-            $linktext = '<i class="icon-awesome-tag ws-tab-icon"></i>'. $tabs_category;
+            $linktext = '<i class="icon-tag ws-tab-icon"></i>'. $tabs_category;
         }
         ?>
         <li><a href="#2" data-toggle="tab"><span class="ws-tab-trigger"><?php echo $linktext; ?></span></a></li>
@@ -38,12 +38,12 @@ global $wordstrap_theme_options;
     <?php
     if ($wordstrap_theme_options['tabs_third'] != '') {
         if ($wordstrap_theme_options['tabs_third'] == 'latest')
-            $linktext = '<i class="icon-awesome-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
+            $linktext = '<i class="icon-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_third'] == 'popular')
-            $linktext = '<i class="icon-awesome-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
+            $linktext = '<i class="icon-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_third'] == 'categorized') {
             $tabs_category = ucfirst($wordstrap_theme_options['tabs_third_cat']);
-            $linktext = '<i class="icon-awesome-tag ws-tab-icon"></i>'. $tabs_category;
+            $linktext = '<i class="icon-tag ws-tab-icon"></i>'. $tabs_category;
         }
         ?>
         <li><a href="#3" data-toggle="tab"><span class="ws-tab-trigger"><?php echo $linktext; ?></span></a></li>
@@ -52,12 +52,12 @@ global $wordstrap_theme_options;
     <?php
     if ($wordstrap_theme_options['tabs_fourth'] != '') {
         if ($wordstrap_theme_options['tabs_fourth'] == 'latest')
-            $linktext = '<i class="icon-awesome-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
+            $linktext = '<i class="icon-calendar ws-tab-icon"></i>'. __('Latest posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_fourth'] == 'popular')
-            $linktext = '<i class="icon-awesome-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
+            $linktext = '<i class="icon-fire ws-tab-icon"></i>'. __('Popular posts', 'wordstrap');
         elseif ($wordstrap_theme_options['tabs_fourth'] == 'categorized') {
             $tabs_category = ucfirst($wordstrap_theme_options['tabs_fourth_cat']);
-            $linktext = '<i class="icon-awesome-tag ws-tab-icon"></i>'. $tabs_category;
+            $linktext = '<i class="icon-tag ws-tab-icon"></i>'. $tabs_category;
         }
         ?>
         <li><a href="#4" data-toggle="tab"><span class="ws-tab-trigger"><?php echo $linktext; ?></span></a></li>

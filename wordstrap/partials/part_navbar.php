@@ -32,7 +32,7 @@ $nav_top = intval($wordstrap_theme_options['header_height'])+20;
             // Wordpress wp_nav_menu
             $add_items_wrap = '';
             if ($wordstrap_theme_options['show_home_nav'] == 1) :
-                $add_items_wrap = '<li><a href="'. get_site_url() .'"><i class="icon-awesome-home" style="line-height: 1em; font-size: 1.2em;"></i> '. __('Home', 'wordstrap') .'</a></li>';
+                $add_items_wrap = '<li><a href="'. get_site_url() .'"><i class="icon-home" style="line-height: 1em; font-size: 1.2em;"></i> '. __('Home', 'wordstrap') .'</a></li>';
             endif;
 
             $args = array (

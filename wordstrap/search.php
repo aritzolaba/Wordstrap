@@ -23,7 +23,7 @@ global $wordstrap_theme_options;
 
             <?php if (have_posts()) : ?>
 
-                <h1><i class="icon-awesome-search" style="font-size: 1.4em; float: left; margin-top: .3em; margin-right: .6em;"></i><?php _e('Search results', 'wordstrap'); ?></h1>
+                <h1><i class="icon-search"></i> <?php _e('Search results', 'wordstrap'); ?></h1>
                 <h2><small><?php echo sprintf (__('%d result(s) found for the term', 'wordstrap'), $wp_query->post_count);?>&nbsp;<em>&QUOT;<?php echo get_search_query(); ?>&QUOT;</em></small></h2>
 
                 <hr style="margin: 5px 0px; margin-bottom: 20px;">

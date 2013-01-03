@@ -210,7 +210,7 @@ add_filter( 'excerpt_length', 'ws_excerpt_length');
 */
 function ws_excerpt_more($more) {
     global $post;
-    return '...<br /><span class="ws-read-more"><i class="icon-awesome-arrow-right"></i><a href="'. get_permalink($post->ID) .'" title="'.__('Read the rest...','wordstrap').'">'.__('Read the rest...','wordstrap').'</a></span>';
+    return '...<br /><br /><a class="btn btn-mini btn-info" href="'. get_permalink($post->ID) .'" title="'.__('Read the rest of the article','wordstrap').'"><i class="icon-arrow-right"></i> '.__('Read the rest','wordstrap').'</a>';
 }
 add_filter('excerpt_more', 'ws_excerpt_more');
 
@@ -259,8 +259,8 @@ function ws_posts_navigation ($nav_id) {
 
         $xtra='btn-small';
 
-        $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-awesome-circle-arrow-left" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i> <span style="font-size: .9em; font-weight: bold;">OLDER POSTS</span>', 'wordstrap')));
-        $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('<span style="font-size: .9em; font-weight: bold;">NEWER POSTS</span> <i class="icon-awesome-circle-arrow-right" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i>', 'wordstrap')));
+        $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-circle-arrow-left"></i> OLDER POSTS', 'wordstrap')));
+        $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('NEWER POSTS <i class="icon-circle-arrow-right"></i>', 'wordstrap')));
         ?>
 
         <nav id="<?php echo $nav_id; ?>" class="post-nav-pagination">
@@ -325,7 +325,7 @@ function ws_load_theme_scripts () {
     // Enqueue bootstrap and font-awesome css styles
     wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
     wp_enqueue_style( 'bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
-    wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.css', array() );
+    wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.min.css', array() );
     wp_enqueue_style( 'wordstrap-css', get_template_directory_uri() . '/style.css', array() );
     wp_enqueue_style( 'wordstrap-style-css', get_template_directory_uri() . '/inc/styles/'.$wordstrap_theme_options['style'].'/style.css', array() );
 

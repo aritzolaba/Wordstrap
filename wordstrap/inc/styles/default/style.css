@@ -9,6 +9,19 @@
 body {
     background: #222;
     padding-top: 0px;
+    color: inherit;
+}
+
+/* word-wrap and margin in headers */
+h1,h2,h3,h4,h5,h6 {
+    margin: 2px 0px;
+    word-wrap: break-word;
+}
+
+/* code tag fix for wrapping text */
+code {
+    line-height: 1.4em;
+    white-space: normal;
 }
 
 /* header */
@@ -71,16 +84,6 @@ body {
     margin-top: 0.5em;
 }
 
-/* word-wrap in headers */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    word-wrap: break-word;
-}
-
 /* site title and site-description */
 .ws-site-title {
     margin: 0em .6em;
@@ -127,20 +130,21 @@ a.header_title:hover {
     text-shadow: none;
     text-shadow: 1px 1px 2px #000;
 }
-
-/* no custommenu message in nav */
-.ws-nav-nocustommenu {
-    color: #666;
-    float: left;
-    font-style: italic;
-    margin-top: 10px;
+.navbar ul.ws-nav.nav > li > a {
+    text-shadow: none;
+}
+#ws-navbar div.navbar-inner {
+    border: 0px;
+}
+.navbar .nav li.dropdown.open > .dropdown-toggle {
+    color: #eaeaea;
+    background: none;
 }
 
 /* pills padding */
 .nav-pills > li > a {
     padding: 0.5em;
     margin: .2em .1em;
-
     text-align: center;
     font-size: .85em;
 }
@@ -213,6 +217,11 @@ a.header_title:hover {
     padding-top: 10px;
 }
 
+/* blog nav icons */
+#ws-blog-nav div a.btn i {
+    font-size: 1.2em;
+}
+
 /* articles */
 .ws-article {
     border-bottom: 1px solid #eeeeee;
@@ -220,21 +229,20 @@ a.header_title:hover {
     overflow: hidden;
 }
 div#ws-blog .ws-article h1.entry-title {
-    font-size: 1.3em;
-    margin-left: 4.45em;
+    margin-left: 2.9em;
 }
 .ws-article h1.entry-title {
-    font-size: 1.6em;
+    font-size: 2em;
     line-height: 1.2em;
+    margin-top: 0px;
     margin-bottom: 0.15em;
-    margin-top: 0.1em;
-    margin-left: 3.6em;
+    margin-left: 2.9em;
 }
 .ws-article h2.entry-details {
     line-height: 1.2em;
     margin-left: 5em;
 }
-.ws-article h2.entry-details [class^="icon-awesome-"] {
+.ws-article h2.entry-details [class^="icon-"] {
     width: auto;
     margin-left: .1em;
     margin-right: .32em;
@@ -328,19 +336,7 @@ div#ws-blog .ws-article h1.entry-title {
     font-weight: bold;
     font-style: italic;
 }
-.ws-read-more {
-    margin: 0px;
-}
-.ws-read-more i {
-    margin-right: .2em;
-    margin-top: .2em;
-    font-size: .8em;
-    color: #08c;
-    width: auto;
-}
-.ws-read-more a {
-    font-size: .85em;
-}
+
 div.ws-search h1.entry-title,
 div.ws-search h2.entry-details {
     margin-left: 10px;
@@ -352,8 +348,12 @@ div.ws-search h2.entry-details {
     height: 24px;
 }
 .ws-tag-container {
+    color: #999;
     margin-left: 5.7em;
     margin-top: 2px;
+}
+.ws-tag-container i {
+    font-size: 1.3; color: #999; margin-right: 4px;
 }
 .entry-content iframe {
     max-width: 100%;
@@ -418,9 +418,7 @@ div#ws-comment-list p {
 #comment-nav-below {
     font-size: .8em;
     padding: 6px 0px;
-    overflow: hidden;
     margin: 20px 0px;
-    overflow: hidden;
 }
 #comment-nav-above .page-numbers,
 #comment-nav-below .page-numbers {
@@ -506,10 +504,10 @@ a.comment-reply-link:active {
 }
 .ws-comments-icon {
     float: left;
-    font-size: 1.6em;
+    font-size: 1.4em;
     margin-left: 0.2em;
-    margin-right: 0.6em;
-    margin-top: 0.5em;
+    margin-right: 0.2em;
+    margin-top: 0.3em;
 }
 
 /* article calendar */
@@ -524,7 +522,7 @@ article .calendar {
     font-size: 0.7em;
     margin: 0.4em;
     margin-right: 1em;
-    width: 48px;
+    width: 54px;
 }
 article .calendar > span {
     display: block;
@@ -582,7 +580,9 @@ h1.ws-featured-title {
     margin-bottom: 10px;
     text-shadow: 1px 1px 1px #222;
 }
-
+.ws-featured-change-page i {
+    font-size: 1.2em;
+}
 /* article pagination */
 .post-nav-pagination {
     margin: 12px 0px;
@@ -598,25 +598,24 @@ h1.ws-featured-title {
 
 /* Front page tabs */
 .ws-tab-trigger {
-    font-size: 14px;
+    font-size: .9em;
     font-weight: bold;
 }
 .ws-tab-icon {
     float: left;
-    font-size: 1.8em;
-    margin-top: .1em;
-    width: auto;
+    font-size: 1.2em;
+    margin-top: .2em;
+    margin-right: .3em;
 }
 .ws-home-tabs .nav-tabs {
     margin-bottom: 28px;
 }
 .ws-home-tabs h1.entry-title,
 .ws-loop h1.entry-title {
-    font-size: 1.3em;
+    font-size: 2em;
     line-height: 1.2em;
     margin-bottom: 0.1em;
-    margin-left: 4.2em;
-    margin-top: 0.2em;
+    margin-left: 2.9em;
 }
 .ws-home-tabs h2.entry-details,
 .ws-loop h2.entry-details {
@@ -639,6 +638,7 @@ h1.ws-featured-title {
 }
 #ws-home-tabs-ul li a {
     color: #666;
+    padding: 6px 10px;
 }
 #ws-home-tabs-ul li.active a {
     color: #333;
@@ -737,7 +737,7 @@ ul.breadcrumb li {
 }
 .ws-search-icon {
     color: #ddd;
-    font-size: 1.4em;
+    font-size: 1.1em;
     font-weight: normal;
 }
 /* Search form in widgets */

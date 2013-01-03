@@ -45,8 +45,8 @@ if ( $images ) : ?>
                 <?php endforeach; ?>
 
                 </div>
-                <a class="left carousel-control ws-carousel-but-left" href="#slideshow" data-slide="prev"><i class="icon-awesome-circle-arrow-left"></i></a>
-                <a class="right carousel-control ws-carousel-but-right" href="#slideshow" data-slide="next"><i class="icon-awesome-circle-arrow-right"></i></a>
+                <a class="left carousel-control ws-carousel-but-left" href="#slideshow" data-slide="prev"><i class="icon-circle-arrow-left"></i></a>
+                <a class="right carousel-control ws-carousel-but-right" href="#slideshow" data-slide="next"><i class="icon-circle-arrow-right"></i></a>
             </div>
         </div>
     </div>

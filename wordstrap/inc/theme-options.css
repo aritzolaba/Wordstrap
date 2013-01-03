@@ -19,8 +19,14 @@ input[type="button"]:focus {
     outline: none;
 }
 
+h1,
+h2,
+h3 {
+    line-height: inherit;
+}
+
 input[type="text"] {
-    height: 24px;
+    height: 27px;
 }
 select option {
     margin: 2px;

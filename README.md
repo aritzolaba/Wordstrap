@@ -15,6 +15,13 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.7
+
+- Updated Bootstrap to version 2.2.2.
+- Updated Font Awesome to version 3.0.
+- Cleaned up and fixed theme styles. The style called "solid" is a preview, you may use it to override the css you don't like with your own. The css file is located in "inc/styles/solid/style.css".
+- Updated language files
+
 v: 1.7.6
 
 - Fixed submenu dropdowns issue by updating bootstrap.min.js file

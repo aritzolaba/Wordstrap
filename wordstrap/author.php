@@ -50,7 +50,7 @@ global $wordstrap_theme_options;
                             </p>
                             <?php if (!empty($author_url)) : ?>
                                 <p>
-                                    <i class="icon-awesome-share"></i> <a href="<?php echo $author_url; ?>" target="_blank"><?php echo $author_url; ?></a>
+                                    <i class="icon-share"></i> <a href="<?php echo $author_url; ?>" target="_blank"><?php echo $author_url; ?></a>
                                 </p>
                             <?php endif; ?>
                         </div>

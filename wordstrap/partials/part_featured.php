@@ -66,7 +66,7 @@ if ($page == $maxpages) {
                 </h4>
                 <br />
                 <div style="text-align: right;">
-                    <i class="icon-plus-sign"></i> <a href="<?php the_permalink(); ?>"><?php _e('Read article','wordstrap'); ?></a>
+                    <a class="btn btn-mini btn-info" href="<?php the_permalink(); ?>"><i class="icon-plus"></i> <?php _e('Read article','wordstrap'); ?></a>
                 </div>
 
             </div>
@@ -90,8 +90,8 @@ if ($page == $maxpages) {
 
 <?php if ($maxpages>1) : ?>
     <p>
-        <button class="ws-featured-change-page btn btn-small <?php echo $prev_class; ?>" <?php echo $prev_attr; ?> value="<?php echo $prev; ?>"><i class="icon-awesome-circle-arrow-left" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i> <span style="font-size: .9em; font-weight: bold;"><?php _e('PREV','wordstrap'); ?></span></button>
-        <button class="ws-featured-change-page btn btn-small <?php echo $next_class; ?>" <?php echo $next_attr; ?> value="<?php echo $next; ?>"><span style="font-size: .9em; font-weight: bold;"><?php _e('NEXT','wordstrap'); ?></span> <i class="icon-awesome-circle-arrow-right" style="font-weight: bold; font-size: 1.5em; margin-top: .05em;"></i></button>
+        <button class="ws-featured-change-page btn btn-small <?php echo $prev_class; ?>" <?php echo $prev_attr; ?> value="<?php echo $prev; ?>"><i class="icon-circle-arrow-left"></i> <?php _e('PREV','wordstrap'); ?></button>
+        <button class="ws-featured-change-page btn btn-small <?php echo $next_class; ?>" <?php echo $next_attr; ?> value="<?php echo $next; ?>"><?php _e('NEXT','wordstrap'); ?> <i class="icon-circle-arrow-right"></i></button>
     </p>
 <?php endif; ?>
 
