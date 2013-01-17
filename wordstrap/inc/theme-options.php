@@ -134,19 +134,26 @@ class wordstrap_theme_options_page {
 
         // GOOGLE FONT LIST
         $googlefonts = array (
-            'Averia Libre'  => 'Averia+Libre',
-            'Capriola'      => 'Capriola',
-            'Chivo'         => 'Chivo',
-            'Days One'      => 'Days+One',
-            'Electrolize'   => 'Electrolize',
-            'Iceberg'       => 'Iceberg',
-            'Karla'         => 'Karla',
-            'Metamorphous'  => 'Metamorphous',
-            'Nova Square'   => 'Nova+Square',
-            'Oxygen'        => 'Oxygen',
-            'Russo One'     => 'Russo+One',
-            'Share'         => 'Share',
-            'Quando'        => 'Quando',
+            'Averia Libre',
+            'Capriola',
+            'Chivo',
+            'Days One',
+            'Domine',
+            'Dosis',
+            'Electrolize',
+            'Iceberg',
+            'Karla',
+            'Maven Pro',
+            'Metamorphous',
+            'Monda',
+            'Noticia Text',
+            'Nova Square',
+            'Oxygen',
+            'Pirata One',
+            'Raleway',
+            'Russo One',
+            'Share',
+            'Quando',
         );
 
         // SAVE OPTIONS
@@ -187,6 +194,20 @@ class wordstrap_theme_options_page {
         <?php endif; ?>
 
         <div class="wrap">
+
+            <?php /* DONATE BUTTON */ ?>
+            <div style="float: right; font-size: .8em; margin-top: 6px; line-height: 1em;">
+                <form class="alert alert-info" style="margin: 0px; padding: 5px;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                    <?php _e('Like this theme? Support my work','wordstrap'); ?>
+
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="YG8XUQ6XE4ZW4">
+                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet.">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+
 
             <?php screen_icon(); ?>
 
@@ -515,17 +536,14 @@ class wordstrap_theme_options_page {
                             <div class="row-fluid" <?php if ($wordstrap_theme_options['use_googlefonts'] != 1) echo 'style="display: none;"'; ?> id="googlefonts_box">
                                 <div class="span3">
                                     <p class="help-block">
-                                        <?php _e('Choose a font','wordstrap'); ?>
+                                        <?php _e('Type the name of a font','wordstrap'); ?>
                                     </p>
-                                    <select name="google_font" style="width: 160px;">
-                                        <?php foreach ($googlefonts as $font_name => $font_val) : ?>
-                                            <?php $sel= '';
-                                            if ($font_val == $wordstrap_theme_options['google_font']) $sel='selected="selected"';
-                                            echo '<option value="'.$font_val.'" '.$sel.'>'.$font_name.'</option>';
-                                            ?>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <?php $font_list = ''; foreach ($googlefonts as $font_name) : ?>
+                                        <?php $font_list .= '&quot;'.$font_name.'&quot;,'; ?>
+                                    <?php endforeach; $font_list=substr($font_list,0,-1); ?>
+                                    <input type="text" name="google_font" data-provide="typeahead" value="<?php if (isset($wordstrap_theme_options['google_font'])) echo $wordstrap_theme_options['google_font']; ?>" data-items="5" data-source="[<?php echo $font_list; ?>]">
                                     <br />
+                                    <p class="muted"><small><?php _e('Find more fonts at', 'wordstrap'); ?> <a href="http://www.google.com/webfonts" title="Google Web Fonts" target="_blank">Google Web Fonts</a></small></p>
                                 </div>
 
                                 <div class="span9">

@@ -428,8 +428,9 @@ function ws_theme_options_styles () {
             .well-intro h2,
             .well-intro h3,
             .well-intro h4,
-            .well-intro h5 {
-                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+            .well-intro h5,
+            .navbar a.brand {
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\';
             }
             ';
         endif;
@@ -437,7 +438,7 @@ function ws_theme_options_styles () {
         if ($wordstrap_theme_options['use_googlefonts_posts'] == 1) :
             $addstyle .= '
             h1.entry-title {
-                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\';
             }
             ';
         endif;
@@ -446,7 +447,7 @@ function ws_theme_options_styles () {
             $addstyle .= '
             .ws-widget-title,
             .well-intro h1 {
-                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\'; letter-spacing: 0.1em;
+                font-family: \''.str_replace('+', ' ', $wordstrap_theme_options['google_font']).'\';
             }
             ';
         endif;

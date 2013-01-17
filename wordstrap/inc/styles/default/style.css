@@ -123,6 +123,7 @@ a.header_title:hover {
     transition: all .2s linear;
     -webkit-transition: all .2s linear;
     -moz-transition: all .2s linear;
+    text-shadow: none;
 }
 .navbar a.brand:hover {
     color: #4798ED;
@@ -139,6 +140,10 @@ a.header_title:hover {
 .navbar .nav li.dropdown.open > .dropdown-toggle {
     color: #eaeaea;
     background: none;
+}
+.navbar .divider-vertical {
+    border-left: 1px solid #111;
+    border-right: 0px;
 }
 
 /* pills padding */
@@ -168,6 +173,7 @@ a.header_title:hover {
 /* author details */
 .ws-author {
     overflow: hidden;
+    padding: 5px;
 }
 .ws-author-avatar {
     background: #fff;
@@ -488,20 +494,11 @@ a.comment-reply-link {
     font-size: .8em;
     float: left;
     padding: 2px 6px;
-    background: #ccc;
     border-radius: 5px;
-    color: #555;
     text-decoration: none;
-    margin-top: 20px;
+    margin-top: 15px;
 }
-a.comment-reply-link:hover,
-a.comment-reply-link:focus,
-a.comment-reply-link:active {
-    text-decoration: none;
-    box-shadow: 1px 1px 1px #111;
-    background: #ddd;
-    color: #111;
-}
+
 .ws-comments-icon {
     float: left;
     font-size: 1.4em;
@@ -682,10 +679,6 @@ h1.ws-featured-title {
 /* Breadcrumb */
 ul.breadcrumb a {
     font-weight: bold;
-    color: #08c;
-}
-ul.breadcrumb a:hover {
-    font-weight: bold;
 }
 ul.breadcrumb {
     background-color: transparent;
@@ -823,7 +816,8 @@ div.well-widgets .ws-widget-title {
     border-radius: 3px 3px 0px 0px;
     color: #f2f2f2;
     font-size: 1.2em;
-    margin-bottom: 0.1em;
+    font-weight: bold;
+    margin-bottom: .1em;
     text-shadow: 1px 1px 1px #333;
     word-wrap: break-word;
 }

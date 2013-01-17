@@ -26,6 +26,16 @@
         if ($('table#wp-calendar').length>0)
             $('table#wp-calendar').removeClass('table-bordered');
 
+        // Cancel comment button
+        if ($('#cancel-comment-reply-link').length>0)
+            $('#cancel-comment-reply-link').addClass('btn btn-mini').css('margin-top', '-5px').css('margin-left', '2px');
+
+        // Comment reply button
+        if ($('.comment-reply-link').length>0)
+            $('.comment-reply-link').addClass('btn btn-mini');
+
+
+
         // Adds required dropdown classes for hierarchical navigation with wp_navmenu
         if ($('ul.sub-menu').length>0) {
             $('ul.sub-menu').parent().addClass('ws-dropdown');

@@ -2,19 +2,25 @@ Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework
 
 Features
 ======================================================================
-- Designed using the default Bootstrap markup. Includes all Bootstrap javascript components ready to be used.
-- Includes Font Awesome. (Use icon-awesome-xxx instead of icon-xxx)
-- Theme supports: custom header, custom menu, custom background, featured images, etc.
-- Post Format support. Custom template for Gallery post format, displaying images using Bootstrap carousel.
-- Featured images support in posts, displaying images using WordPress's thickbox.
-- A customizable layout supporting full width, 2 columns (right or left sidebar) and three columns, all selectable through the theme options page.
-- A customizable front page. You can choose to display your blog loop as default, or make use of an intro container with customizable background and text colors, to display the page you choose in a more attractive way. You can also make use of the featured items container, to display the posts of a category you choose in a browsable (via AJAX) container with navigation buttons.
-- A customizable footer. Choose the information you want to be displayed in the footer of your site, and make use of the included social buttons for Facebook, Google+, Twitter, LinkedIn, GitHub and YouTube.
-- Extras like Google API Fonts usage for displaying titles, an option to include your Google Analytics shortcode in an easy way, social share buttons in posts and pages, etc.
-- Browse categories and tags using Bootstrap's pills system.
+
+- Designed using the default Bootstrap markup. Responsive.
+- Includes Font Awesome.
+- Custom header and background support, post-thumbnails, post format support.
+- Choose between a full width, two (right or left sidebar) or three columns layout.
+- A customizable front page. You can choose to display your blog loop as default, or make use of an intro container with customizable background and text colors, displaying the page you choose in an attractive way. You can also make use of the featured items container, to display the posts of the categories you choose in an AJAX powered navigation system.
+- Support for galleries using Bootstrap’s carousel component, and displaying of the images using WordPress’s thickbox
+- A customizable footer. Choose the information you want to display in the footer of your site, and use the included social icons for the most common sites.
+- Extras like Google API Fonts usage for selectable elements like page titles, widget titles, etc.
 
 Changelog
 ======================================================================
+v: 1.7.8
+
+- Changed Google Font selection to a Bootstrap typeahead control, where you can type the name of any font from the extense list in google.com/webfonts
+- Deleted some duplicated files in /partials
+- Some CSS improvements
+- Included a PayPal donate button in the theme options page
+
 v: 1.7.7
 
 - Updated Bootstrap to version 2.2.2.
