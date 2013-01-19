@@ -34,8 +34,6 @@
         if ($('.comment-reply-link').length>0)
             $('.comment-reply-link').addClass('btn btn-mini');
 
-
-
         // Adds required dropdown classes for hierarchical navigation with wp_navmenu
         if ($('ul.sub-menu').length>0) {
             $('ul.sub-menu').parent().addClass('ws-dropdown');

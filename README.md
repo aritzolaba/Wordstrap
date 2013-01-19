@@ -1,7 +1,11 @@
+Wordstrap
+======================================================================
+
 Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons. You can customize the layout in one, two or three columns, and choose the background colors of the header, navbar and widget headers and some other interesting features available in the theme options page.
 
 Features
 ======================================================================
+
 - Designed using the default Bootstrap markup. Responsive.
 - Includes Font Awesome.
 - Custom header and background support, post-thumbnails, post format support.
@@ -15,9 +19,11 @@ Changelog
 ======================================================================
 v: 1.7.8
 
+- Added thickbox gallery support for gallery images. Now you can see all images of a gallery inside thickbox
+- Added attachment.php template file
 - Changed Google Font selection to a Bootstrap typeahead control, where you can type the name of any font from the extense list in google.com/webfonts
-- Deleted some duplicated files in /partials
 - Some CSS improvements
+- Deleted some duplicated files in /partials
 - Included a PayPal donate button in the theme options page
 
 v: 1.7.7

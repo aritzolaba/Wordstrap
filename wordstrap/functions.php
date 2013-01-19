@@ -336,6 +336,19 @@ function ws_load_theme_scripts () {
     // Enqueue Wordpress Thickbox
     wp_enqueue_script('thickbox');
     wp_enqueue_style('thickbox');
+    // Thickbox Gallery support
+    function add_rel_attribute_to_attachment_link( $anchor_tag, $image_id ) {
+        $image = get_post( $image_id );
+        $rel = '';
+        if( isset( $image->post_parent ) ) {
+            $rel = ' rel="attached-to-' . (int) $image->post_parent . '"';
+        }
+        if( !empty( $rel ) ) {
+            $anchor_tag = str_replace( '<a', '<a' . $rel, $anchor_tag );
+        }
+        return $anchor_tag;
+    }
+    add_filter( 'wp_get_attachment_link', 'add_rel_attribute_to_attachment_link', 1, 2);
 }
 
 /*******************************************************************************
