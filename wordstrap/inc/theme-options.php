@@ -39,7 +39,6 @@ class wordstrap_theme_options_page {
         $def_theme_options['google_font'] = 'Oxygen';
         $def_theme_options['ws_layout'] = '2cols-right';
         $def_theme_options['article_social'] = 0;
-        $def_theme_options['excerpt_length'] = 40;
         $def_theme_options['widget_header_bg1'] = '#333333';
         $def_theme_options['widget_header_bg2'] = '#222222';
         $def_theme_options['widget_header_color'] = '#FAFAFA';
@@ -124,6 +123,7 @@ class wordstrap_theme_options_page {
     function page() {
         wp_enqueue_style ('bootstrap-css', get_stylesheet_directory_uri().'/inc/bootstrap/css/bootstrap.min.css');
         wp_enqueue_script ('bootstrap-js', get_stylesheet_directory_uri().'/inc/bootstrap/js/bootstrap.min.js');
+        wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.min.css', array() );
         wp_enqueue_script ('theme-options-js', get_stylesheet_directory_uri().'/inc/js/theme-options.js');
         wp_enqueue_style ('theme-options-css', get_stylesheet_directory_uri().'/inc/theme-options.css');
         wp_enqueue_script ('farbtastic'); // colorpicker
@@ -195,19 +195,7 @@ class wordstrap_theme_options_page {
 
         <div class="wrap">
 
-            <?php /* DONATE BUTTON */ ?>
-            <div style="float: right; font-size: .8em; margin-top: 6px; line-height: 1em;">
-                <form class="alert alert-info" style="margin: 0px; padding: 5px;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-
-                    <?php _e('Like this theme? Support my work','wordstrap'); ?>
-
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="YG8XUQ6XE4ZW4">
-                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet.">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
-                </form>
-            </div>
-
+            <?php ws_print_donate_button(); ?>
 
             <?php screen_icon(); ?>
 
@@ -223,11 +211,10 @@ class wordstrap_theme_options_page {
 
                 <div class="ws-special-tabs tabbable tabs-left">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#lA"><i class="icon-tint"></i> <?php _e('Appearance','wordstrap'); ?></a></li>
-                        <li><a data-toggle="tab" href="#lB"><i class="icon-list-alt"></i> <?php _e('Articles','wordstrap'); ?></a></li>
-                        <li><a data-toggle="tab" href="#lC"><i class="icon-gift"></i> <?php _e('Extras','wordstrap'); ?></a></li>
-                        <li><a data-toggle="tab" href="#lD"><i class="icon-arrow-down"></i> <?php _e('Footer','wordstrap'); ?></a></li>
-                        <li><a data-toggle="tab" href="#lE"><i class="icon-home"></i> <?php _e('Front page','wordstrap'); ?></a></li>
+                        <li class="active"><a data-toggle="tab" href="#lA"><i class="icon-tint" style="display:inline-block;"></i> <?php _e('Appearance','wordstrap'); ?></a></li>
+                        <li><a data-toggle="tab" href="#lB"><i class="icon-gift" style="display:inline-block;"></i> <?php _e('Extras','wordstrap'); ?></a></li>
+                        <li><a data-toggle="tab" href="#lC"><i class="icon-arrow-down" style="display:inline-block;"></i> <?php _e('Footer','wordstrap'); ?></a></li>
+                        <li><a data-toggle="tab" href="#lD"><i class="icon-home" style="display:inline-block;"></i> <?php _e('Front page','wordstrap'); ?></a></li>
                     </ul>
                     <div class="tab-content">
 
@@ -505,21 +492,6 @@ class wordstrap_theme_options_page {
                         </div>
 
                         <div id="lB" class="tab-pane">
-                            <h3><?php _e('Article settings','wordstrap'); ?></h3>
-                            <h3><small><?php _e('Select how to display posts and article loops','wordstrap'); ?></small></h3>
-                            <hr>
-                            <p class="help-block">
-                            <label for="ArticleSocial"><?php _e('Excerpt length in loops (number of words)','wordstrap'); ?></label>
-                            <input type="text" name="excerpt_length" value="<?php echo $wordstrap_theme_options['excerpt_length']; ?>" maxlength="4" style="width: 40px;">
-                            </p>
-
-                            <p class="help-block">
-                                <label for="article_social"><?php _e('Display social share buttons in posts ?','wordstrap'); ?></label>
-                                <input type="checkbox" id="article_social" name="article_social" <?php if ($wordstrap_theme_options['article_social'] == 1) echo 'checked="checked"'; ?> value="1"> <?php _e('Display Facebook, Google+ and Twitter like buttons','wordstrap'); ?>
-                            </p>
-                        </div>
-
-                        <div id="lC" class="tab-pane">
                             <h3><?php _e('Extras','wordstrap'); ?></h3>
                             <h3><small><?php _e('Some extra functionalities','wordstrap'); ?></small></h3>
                             <hr>
@@ -563,13 +535,18 @@ class wordstrap_theme_options_page {
                             </div>
                             <br />
 
+                            <label class="checkbox" for="article_social"><?php _e('Display social share buttons in ALL posts?','wordstrap'); ?>
+                                <input type="checkbox" id="article_social" name="article_social" <?php if ($wordstrap_theme_options['article_social'] == 1) echo 'checked="checked"'; ?> value="1">
+                            </label>
+                            <p class="help-block"><?php _e('or uncheck this and use the shortcode <b>[social_share]</b> for displaying social share buttons only where you want posts or pages','wordstrap'); ?></p>
+
                             <label for="google_analytics"><?php _e('Google Analytics code','wordstrap'); ?></label>
                             <p class="help-block"><?php _e('Here you can paste the full Google Analytics script for your site, including the <b>&lt;script&gt;</b> tags.','wordstrap'); ?></p>
                             <textarea name="google_analytics" style="width: 350px; height: 100px;"><?php if ($wordstrap_theme_options['google_analytics'] != '') echo str_replace('\\','',$wordstrap_theme_options['google_analytics']); ?></textarea>
                             <br />
                         </div>
 
-                        <div id="lD" class="tab-pane">
+                        <div id="lC" class="tab-pane">
                             <h3><?php _e('Footer Elements settings','wordstrap'); ?></h3>
                             <h3><small><?php _e('Customize the footer of your site','wordstrap'); ?></small></h3>
                             <hr>
@@ -645,7 +622,7 @@ class wordstrap_theme_options_page {
 
                         </div>
 
-                        <div id="lE" class="tab-pane">
+                        <div id="lD" class="tab-pane">
                             <h3><?php _e('Front page settings','wordstrap'); ?></h3>
                             <h3><small><?php _e('Select which elements will be displayed in the front page.','wordstrap'); ?></small></h3>
                             <hr>
@@ -834,7 +811,7 @@ class wordstrap_theme_options_page {
 
                 <br />
 
-                <button type="submit" class="btn btn-primary btn-large pull-left" id="submit" name="submit"><i class="icon-ok-sign icon-white"></i> <?php _e('Save Changes','wordstrap'); ?></button>
+                <button type="submit" class="btn btn-success btn-large pull-left" id="submit" name="submit"><i class="icon-save"></i> <?php _e('Save Changes','wordstrap'); ?></button>
                 <?php if (isset($updated) && $updated==1) : ?>
                     <div class="pull-left alert alert-success" style="margin-left: 20px; margin-top: 2px;"><a class="close" data-dismiss="alert">&times;</a><i class="icon-ok-sign"></i> <strong><?php _e('Theme options have been succesfully updated.', 'wordstrap'); ?></strong></div>
                 <?php endif; ?>

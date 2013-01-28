@@ -350,9 +350,6 @@ div.ws-search h2.entry-details {
 .ws-social-buttons {
     display: none;
 }
-.ws-social-buttons-container {
-    height: 24px;
-}
 .ws-tag-container {
     color: #999;
     margin-left: 5.7em;
@@ -876,16 +873,15 @@ div.well-widgets .ws-widget-content ul li {
     border: 0em;
     color: #555;
     margin: 0em;
-    margin-top: .4em;
     width: auto;
     height: auto;
     padding: 0em;
 }
 #slideshow a.carousel-control.ws-carousel-but-left {
-    left: 8px;
+    left: 10px;
 }
 #slideshow a.carousel-control.ws-carousel-but-right {
-    margin-right: 28px;
+    right: 10px;
 }
 
 /* END SKIN 1 *****************************************************************/

@@ -34,16 +34,10 @@ global $wordstrap_theme_options;
 
     <?php get_template_part('partials/part_article_header'); ?>
 
-    <?php
-    // Post format: Gallery
-    if ((is_single() OR is_page()) && function_exists('get_post_format') && get_post_format(get_the_ID()) == 'gallery') :
-        //get_template_part('partials/part_pf_gallery');
-    endif; ?>
-
     <?php get_template_part('partials/part_article_content'); ?>
 
-    <?php if ((is_single() OR is_page()) && $wordstrap_theme_options['article_social'] == 1) : ?>
-        <?php get_template_part('partials/part_article_footer'); ?>
-    <?php endif; ?>
+    <?php if ($wordstrap_theme_options['article_social'] == 1) :
+        echo ws_social_share();
+    endif; ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

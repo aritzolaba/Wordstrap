@@ -197,15 +197,6 @@ function ws_title ($title) {
 add_filter('the_title', 'ws_title', 10, 1);
 
 /*******************************************************************************
-* Excerpt length
-*/
-function ws_excerpt_length( $length ) {
-    global $wordstrap_theme_options;
-    return $wordstrap_theme_options['excerpt_length'];
-}
-add_filter( 'excerpt_length', 'ws_excerpt_length');
-
-/*******************************************************************************
 * Excerpt more link (read more link)
 */
 function ws_excerpt_more($more) {
@@ -257,7 +248,7 @@ function ws_posts_navigation ($nav_id) {
 
     if ($wp_query->max_num_pages > 1) :
 
-        $xtra='btn-small';
+        $xtra='btn-large';
 
         $next_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_next_posts_link(__('<i class="icon-circle-arrow-left"></i> OLDER POSTS', 'wordstrap')));
         $prev_posts_link = str_replace('<a', '<a class="btn '.$xtra.'"',get_previous_posts_link(__('NEWER POSTS <i class="icon-circle-arrow-right"></i>', 'wordstrap')));
@@ -336,19 +327,6 @@ function ws_load_theme_scripts () {
     // Enqueue Wordpress Thickbox
     wp_enqueue_script('thickbox');
     wp_enqueue_style('thickbox');
-    // Thickbox Gallery support
-    function add_rel_attribute_to_attachment_link( $anchor_tag, $image_id ) {
-        $image = get_post( $image_id );
-        $rel = '';
-        if( isset( $image->post_parent ) ) {
-            $rel = ' rel="attached-to-' . (int) $image->post_parent . '"';
-        }
-        if( !empty( $rel ) ) {
-            $anchor_tag = str_replace( '<a', '<a' . $rel, $anchor_tag );
-        }
-        return $anchor_tag;
-    }
-    add_filter( 'wp_get_attachment_link', 'add_rel_attribute_to_attachment_link', 1, 2);
 }
 
 /*******************************************************************************
@@ -536,3 +514,145 @@ function add_ws_ajax_script() {
     );
 }
 add_action( 'init', 'add_ws_ajax_script' );
+
+// PRINT DONATE BUTTON
+function ws_print_donate_button() {
+    ?>
+    <div style="float: right; font-size: .9em; margin-top: 6px; line-height: 1em;">
+        <form class="alert alert-info" style="margin: 0px; padding: 5px; padding-left: 15px;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <i class="icon-info-sign"></i>&nbsp;
+            <?php _e('Like this theme? Support my work','wordstrap'); ?>
+
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="YG8XUQ6XE4ZW4">
+            <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma r&aacute;pida y segura de pagar en Internet.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+        </form>
+    </div>
+<?php }
+
+// Thickbox Gallery support
+function add_rel_attribute_to_attachment_link( $anchor_tag, $image_id ) {
+    $image = get_post( $image_id );
+    $rel = '';
+    if( isset( $image->post_parent ) ) {
+        $rel = ' rel="attached-to-' . (int) $image->post_parent . '"';
+    }
+    if( !empty( $rel ) ) {
+        $anchor_tag = str_replace( '<a', '<a' . $rel, $anchor_tag );
+    }
+    return $anchor_tag;
+}
+add_filter( 'wp_get_attachment_link', 'add_rel_attribute_to_attachment_link', 1, 2);
+
+// GALLERY SHORTCODE FILTER FOR CAROUSEL
+add_action('post_gallery', 'ws_gallery_carousel', 10, 2);
+function ws_gallery_carousel ($output, $attr) {
+    global $post;
+
+    // OrderBy
+    $orderby = 'menu_order';
+    if (isset($attr['orderby']) && !empty($attr['orderby']))
+        $orderby = sanitize_sql_orderby ($attr['orderby']);
+
+    // If we got an include attr
+    if (isset($attr['include']))
+        $images = get_posts( array('include' => $attr['include'], 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => $orderby) );
+
+    // If we do not have images yet...
+    if (!isset($images) OR empty($images)) :
+        // Get Post Images
+        $images = get_children( array(
+            'post_parent' => $post->ID,
+            'post_type' => 'attachment',
+            'post_mime_type' => 'image',
+            'numberposts' => 100,
+            'orderby' => $orderby,
+            'order' => 'DESC'
+        ));
+    endif;
+
+    // If images are found, proceed
+    if ( $images ) :
+
+        $output = '<div class="clearfix"></div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="slideshow" class="carousel slide">
+                    <div class="carousel-inner">';
+
+                    $i=0;
+                    foreach ($images as $image) :
+                        $i++;
+                        $act = '';
+                        if ($i==1) $act = 'active';
+
+                        $output .= '<div class="item '.$act.'" style="text-align: center;">
+                            <a rel="attached-to-'.$image->post_parent.'" class="thickbox" href="'.$image->guid.'" title="'. get_the_title($image->ID).'">
+                                <img src="'. $image->guid.'" alt="'.get_the_title($image->ID).'"/>
+                            </a>
+                            <div class="carousel-caption">
+                                <h4>'. get_the_title($image->ID).'</h4>
+                                <br />
+                            </div>
+                        </div>';
+
+                    endforeach;
+
+                    $output .= '</div>
+                    <a class="left carousel-control ws-carousel-but-left" href="#slideshow" data-slide="prev"><i class="icon-circle-arrow-left"></i></a>
+                    <a class="right carousel-control ws-carousel-but-right" href="#slideshow" data-slide="next"><i class="icon-circle-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        ';
+
+        return $output;
+
+    endif;
+
+    // Return nothing
+    return;
+}
+
+// SHORTCODES
+add_shortcode('social_share', 'ws_social_share');
+
+// Display social share buttons shortcode
+function ws_social_share ($atts=array()) {
+
+    extract(shortcode_atts(array(
+        "link" => get_permalink()
+    ), $atts));
+
+    global $post;
+
+    $output = '
+    <div class="ws-social-buttons">
+
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="'. $link.'" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <div class="g-plusone" data-size="medium" data-href="'.$link.'"></div>
+        <iframe src="http://www.facebook.com/plugins/like.php?app_id=124765724272783&amp;href='. $link .'&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+
+        <script type="text/javascript">
+            (function() {
+                var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;
+                po.src = \'https://apis.google.com/js/plusone.js\';
+                var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);
+            })();
+
+            (function($) {
+                $(document).ready( function() {
+                    $(".ws-social-buttons").delay(1000).fadeIn();
+                });
+
+            })(jQuery);
+        </script>
+
+    </div>';
+
+    return $output;
+}

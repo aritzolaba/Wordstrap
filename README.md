@@ -19,11 +19,14 @@ Changelog
 ======================================================================
 v: 1.7.8
 
+- Fixed Bootstrap "carousel" display for galleries
 - Added thickbox gallery support for gallery images. Now you can see all images of a gallery inside thickbox
+- Added a shortcode for displaying social share buttons anywhere inside a post or a page. Use the shortcode [social_share] in a post or page. Additionally you can use the "link" attribute to set manually the link you want to share, example: [social_share link="http://www.site.com"]
 - Added attachment.php template file
 - Changed Google Font selection to a Bootstrap typeahead control, where you can type the name of any font from the extense list in google.com/webfonts
-- Some CSS improvements
+- Some CSS improvements in style.css and in theme-options.css
 - Deleted some duplicated files in /partials
+- Updated language files
 - Included a PayPal donate button in the theme options page
 
 v: 1.7.7
