@@ -30,6 +30,7 @@ code {
     background: -moz-linear-gradient(center top , #fff, #aaa);
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#aaa));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#aaaaaa');
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #aaaaaa 100%);
     z-index: 1050;
 }
 #ws-header h1,
@@ -800,7 +801,7 @@ div.well-intro h2 {
 /* well-widgets */
 div.well-widgets {
     border: 0px;
-    padding: 0px;
+    padding: 5px;
 }
 div.well-widgets div.ws-widget-title,
 div.well-widgets div.ws-widget-content {

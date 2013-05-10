@@ -17,6 +17,12 @@ Features
 
 Changelog
 ======================================================================
+v: 1.7.9
+
+- Fixed gradients for IE9 and IE10.
+- Fixed the broken layout issue when adding widgets with no title.
+- The breadcrumb now displays the full hierarchy when a page has parents.
+
 v: 1.7.8
 
 - Fixed Bootstrap "carousel" display for galleries

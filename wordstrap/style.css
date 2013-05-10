@@ -4,7 +4,7 @@ Theme URI: http://www.olabaworks.com/wordstrap/
 Author: Aritz Olabarrieta
 Author URI: http://www.olabaworks.com
 Description: Wordstrap is a WordPress theme designed with the popular Bootstrap CSS Framework, and using Font Awesome for the lightweight usage of icons. You can customize the layout in one, two or three columns, and choose the background colors of the header, navbar and widget headers and some other interesting features available in the theme options page.
-Version: 1.7.8
+Version: 1.7.9
 License: GNU General Public License
 License URI: license.txt
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-header, custom-menu, custom-background, featured-images, threaded-comments, translation-ready, theme-options
@@ -156,7 +156,7 @@ table#wp-calendar td#next {
     text-align: right;
 }
 
-/* default WordPress recent comments widget */
+/* well widgets */
 .well-widgets .ws-widget-content ul li.recentcomments {
     font-size: .7em;
     font-weight: normal;
@@ -166,6 +166,13 @@ table#wp-calendar td#next {
 .well-widgets .ws-widget-content ul li.recentcomments a {
     font-size: 1em;
     font-weight: bold;
+}
+div.well-widgets div.ws-widget-title {
+    margin: -5px;
+    margin-bottom: 10px;
+}
+div.well-widgets .ws-widget-container {
+    padding: 5px;
 }
 
 .wp-caption {

@@ -89,8 +89,8 @@ if (function_exists('register_sidebar')) {
             'description' => __('Wordstrap widgetized area', 'wordstrap'),
             'before_widget' => '<div class="ws-widget-container well well-widgets">',
             'before_title' => '<div class="ws-widget-title">',
-            'after_title' => '</div><div class="ws-widget-content">',
-            'after_widget' => '</div></div>'
+            'after_title' => '</div>',
+            'after_widget' => '</div>'
         ));
     endif;
 
@@ -101,8 +101,8 @@ if (function_exists('register_sidebar')) {
             'description' => __('Wordstrap widgetized area', 'wordstrap'),
             'before_widget' => '<div class="ws-widget-container well well-widgets">',
             'before_title' => '<div class="ws-widget-title">',
-            'after_title' => '</div><div class="ws-widget-content">',
-            'after_widget' => '</div></div>'
+            'after_title' => '</div>',
+            'after_widget' => '</div>'
         ));
     endif;
 
@@ -314,15 +314,15 @@ function ws_nothing_found() { ?>
 function ws_load_theme_scripts () {
     global $wordstrap_theme_options;
     // Enqueue bootstrap and font-awesome css styles
-    wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
-    wp_enqueue_style( 'bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
-    wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.min.css', array() );
-    wp_enqueue_style( 'wordstrap-css', get_template_directory_uri() . '/style.css', array() );
-    wp_enqueue_style( 'wordstrap-style-css', get_template_directory_uri() . '/inc/styles/'.$wordstrap_theme_options['style'].'/style.css', array() );
+    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
+    wp_enqueue_style('bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
+    wp_enqueue_style('font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.min.css', array() );
+    wp_enqueue_style('wordstrap-css', get_template_directory_uri() . '/style.css', array() );
+    wp_enqueue_style('wordstrap-style-css', get_template_directory_uri() . '/inc/styles/'.$wordstrap_theme_options['style'].'/style.css', array() );
 
     // Enqueue wordstrap and bootstrap js scripts
-    wp_enqueue_script( 'wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
-    wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
+    wp_enqueue_script('wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
+    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
 
     // Enqueue Wordpress Thickbox
     wp_enqueue_script('thickbox');
@@ -342,13 +342,15 @@ function ws_theme_options_styles () {
     article .calendar > .month {
         color: '.$wordstrap_theme_options['widget_header_color'].';
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['widget_header_bg1'].', '.$wordstrap_theme_options['widget_header_bg2'].');
-        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
+        background: -webkit-gradient(linear, center top, center bottom, from('.$wordstrap_theme_options['widget_header_bg1'].'), to('.$wordstrap_theme_options['widget_header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['widget_header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['widget_header_bg2'].'\');
+        background-image: -ms-linear-gradient(top, '.$wordstrap_theme_options['widget_header_bg1'].' 0%, '.$wordstrap_theme_options['widget_header_bg2'].' 100%);
     }
     div#ws-header.ws-header-container {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['header_bg1'].', '.$wordstrap_theme_options['header_bg2'].');
-        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
+        background: -webkit-gradient(linear, center top, center bottom, from('.$wordstrap_theme_options['header_bg1'].'), to('.$wordstrap_theme_options['header_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['header_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['header_bg2'].'\');
+        background-image: -ms-linear-gradient(top, '.$wordstrap_theme_options['header_bg1'].' 0%, '.$wordstrap_theme_options['header_bg2'].' 100%);
     }';
 
     // SPECIAL OPTIONS FOR THE "SOLID" STYLE
@@ -374,19 +376,23 @@ function ws_theme_options_styles () {
     }
     .navbar ul.ws-nav.nav > li > a:hover {
         color: #fafafa;
+        background: transparent;
     }
     div.navbar-inner,
     div.navbar-inner div.divider-vertical,
     .navbar a.btn-navbar {
         background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['navbar_bg1'].', '.$wordstrap_theme_options['navbar_bg2'].');
-        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['navbar_bg1'].'), to('.$wordstrap_theme_options['navbar_bg2'].'));
+        background: -webkit-gradient(linear, center top, center bottom, from('.$wordstrap_theme_options['navbar_bg1'].'), to('.$wordstrap_theme_options['navbar_bg2'].'));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['navbar_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['navbar_bg2'].'\');
+        background-image: linear-gradient(to top bottom, '.$wordstrap_theme_options['navbar_bg1'].' 0%, '.$wordstrap_theme_options['navbar_bg2'].' 100%);
+        background-image: -ms-linear-gradient(top, '.$wordstrap_theme_options['navbar_bg1'].' 0%, '.$wordstrap_theme_options['navbar_bg2'].' 100%);
+    }
+    .navbar a.btn-navbar {
+        opacity: .3;
     }
     .navbar a.btn-navbar:hover {
-        background-image: -moz-linear-gradient(center top , '.$wordstrap_theme_options['navbar_bg1'].', '.$wordstrap_theme_options['navbar_bg2'].');
-        background: -webkit-gradient(linear, left top, left bottom, from('.$wordstrap_theme_options['navbar_bg1'].'), to('.$wordstrap_theme_options['navbar_bg2'].'));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\''.$wordstrap_theme_options['navbar_bg1'].'\', endColorstr=\''.$wordstrap_theme_options['navbar_bg2'].'\');
-        opacity: .5;
+        background: transparent;
+        opacity: 1;
     }
     div.well.well-intro {
         background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise.png\') repeat;
