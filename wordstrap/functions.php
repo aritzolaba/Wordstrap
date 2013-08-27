@@ -58,7 +58,7 @@ if (!function_exists('wordstrap_setup')) :
         require( get_template_directory() . '/inc/theme-options.php' );
 
         // Theme supports
-        add_theme_support( 'post-thumbnails', array( 'post' ) );
+        add_theme_support( 'post-thumbnails' );
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'menus' );
         $defaults = array(
@@ -67,7 +67,7 @@ if (!function_exists('wordstrap_setup')) :
         add_theme_support( 'custom-header', $defaults );
 
         $defaults = array(
-            'default-color' => '4E6C84'
+            'default-color' => '83A3BF'
         );
         add_theme_support( 'custom-background', $defaults );
         add_theme_support('post-formats', array( 'aside', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video', 'audio'));
@@ -234,7 +234,7 @@ function ws_get_authorfullname ($author_id=NULL) {
 function ws_get_thumbnail ($html, $post_id, $post_image_id) {
 
     if (!$html)
-        return '<img src="'. get_stylesheet_directory_uri() .'/inc/imgs/noimage.png">';
+        return '<img src="'. get_template_directory_uri() .'/inc/imgs/noimage.png">';
     else
         return $html;
 }
@@ -265,8 +265,9 @@ function ws_posts_navigation ($nav_id) {
 /*******************************************************************************
 * Category pills
 */
-function ws_category_pills ($taxonomy=NULL) {
+function ws_category_pills ($taxonomy=NULL, $return=FALSE) {
     $args = array();
+    $output = '';
     $query_object = get_queried_object();
     $tax = get_taxonomy($query_object->taxonomy);
     $tax_slug = $tax->rewrite['slug'];
@@ -278,18 +279,21 @@ function ws_category_pills ($taxonomy=NULL) {
     }
 
     $cat_list = get_categories($args);
-    if (sizeof($cat_list)>0) : ?>
-        <ul class="nav nav-pills">
-            <?php foreach ($cat_list as $cat) :
-
+    if (sizeof($cat_list)>0) :
+        $output .= '<ul class="nav nav-pills">';
+            foreach ($cat_list as $cat) :
                 if ($cat->name == $query_object->name) $active='class="active"'; else $active='';
-                ?>
-            <li <?php echo $active; ?>><a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->name; ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-        <hr>
-    <?php endif; ?>
-<?php }
+                $output .= '<li '. $active.'><a href="'. get_category_link($cat->term_id).'">'.$cat->name.'</a></li>';
+            endforeach;
+        $output .= '</ul>';
+        $output .= '<hr>';
+    endif;
+
+    if ($return === TRUE)
+        return $output;
+    else
+        echo $output;
+}
 
 /*******************************************************************************
 * Function for displaying a "Nothing found" partial
@@ -313,16 +317,27 @@ function ws_nothing_found() { ?>
 */
 function ws_load_theme_scripts () {
     global $wordstrap_theme_options;
-    // Enqueue bootstrap and font-awesome css styles
-    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap.min.css', array() );
-    wp_enqueue_style('bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/css/bootstrap-responsive.min.css', array() );
+
+    // Load IE7 compatibility for font-awesome
+    echo '
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="'. get_template_directory_uri() .'/inc/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    ';
+
+    // Enqueue bootstrap 232
+    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/inc/bootstrap/232/css/bootstrap.min.css', array() );
+    if ($wordstrap_theme_options['responsive'] == 1)
+        wp_enqueue_style('bootstrap-resp-css', get_template_directory_uri() . '/inc/bootstrap/232/css/bootstrap-responsive.min.css', array() );
+    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/232/js/bootstrap.min.js', array( 'jquery' ) );
+
+    // Enqueue font-awesome
     wp_enqueue_style('font-awesome-css', get_template_directory_uri() . '/inc/font-awesome/css/font-awesome.min.css', array() );
+
+    // Enqueue wordstrap main css and style
     wp_enqueue_style('wordstrap-css', get_template_directory_uri() . '/style.css', array() );
     wp_enqueue_style('wordstrap-style-css', get_template_directory_uri() . '/inc/styles/'.$wordstrap_theme_options['style'].'/style.css', array() );
-
-    // Enqueue wordstrap and bootstrap js scripts
     wp_enqueue_script('wordstrap-js', get_template_directory_uri() . '/inc/js/wordstrap.js', array( 'jquery' ) );
-    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/inc/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
 
     // Enqueue Wordpress Thickbox
     wp_enqueue_script('thickbox');
@@ -357,7 +372,7 @@ function ws_theme_options_styles () {
     if ($wordstrap_theme_options['style'] == 'solid') {
         $addstyle .= '
         div#ws-header.ws-header-container {
-            background: '.$wordstrap_theme_options['header_bg1'].' url(\''. get_stylesheet_directory_uri() .'/inc/styles/solid/imgs/light_toast_trans15.png\') repeat;
+            background: '.$wordstrap_theme_options['header_bg1'].' url(\''. get_template_directory_uri() .'/inc/styles/solid/imgs/light_toast_trans15.png\') repeat;
         }';
 
         $addstyle .= '
@@ -372,10 +387,11 @@ function ws_theme_options_styles () {
         color: '.$wordstrap_theme_options['header_color'].';
     }
     .navbar ul.ws-nav.nav > li > a {
+        opacity: .7;
         color: '.$wordstrap_theme_options['navbar_color'].';
     }
-    .navbar ul.ws-nav.nav > li > a:hover {
-        color: #fafafa;
+    .navbar ul.ws-nav.nav > li > a:hover,.navbar ul.ws-nav.nav > li.current-menu-item > a {
+        opacity: 1;
         background: transparent;
     }
     div.navbar-inner,
@@ -395,7 +411,7 @@ function ws_theme_options_styles () {
         opacity: 1;
     }
     div.well.well-intro {
-        background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_stylesheet_directory_uri() .'/inc/imgs/noise.png\') repeat;
+        background: '.$wordstrap_theme_options['intro_bg'].' url(\''. get_template_directory_uri() .'/inc/imgs/noise.png\') repeat;
         color: '.$wordstrap_theme_options['intro_color'].';
     }
     div.well.well-intro h1,
@@ -606,10 +622,12 @@ function ws_gallery_carousel ($output, $attr) {
 
                     endforeach;
 
-                    $output .= '</div>
-                    <a class="left carousel-control ws-carousel-but-left" href="#slideshow" data-slide="prev"><i class="icon-circle-arrow-left"></i></a>
-                    <a class="right carousel-control ws-carousel-but-right" href="#slideshow" data-slide="next"><i class="icon-circle-arrow-right"></i></a>
-                </div>
+                    $output .= '</div>';
+                    $output .= '
+                    <a class="left carousel-control ws-carousel-but-left" href="#slideshow" data-slide="prev"><i class="icon-angle-left"></i></a>
+                    <a class="right carousel-control ws-carousel-but-right" href="#slideshow" data-slide="next"><i class="icon-angle-right"></i></a>
+                    ';
+                $output .= '</div>
             </div>
         </div>
 

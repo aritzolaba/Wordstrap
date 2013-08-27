@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {echo '<h1>Forbidden</h1>'; exit();}
 // Get theme options
 global $wordstrap_theme_options;
 ?>
-<article class="ws-article <?php if (is_page()) echo 'ws-page'; ?> <?php if (is_search() OR is_author() OR is_category() OR is_archive()) echo 'ws-loop'; ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article class="ws-article <?php if (is_page()) echo 'ws-page'; ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <?php
     // Article featured Image

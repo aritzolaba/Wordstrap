@@ -93,7 +93,7 @@ h1#site-title {
     font-size: 2em;
     line-height: 1.2em;
     margin-bottom: 0.1em;
-    text-shadow: 1px 1px 1px #333;
+    text-shadow: none;
 }
 h1#site-title a:hover {
     text-decoration: none;
@@ -143,7 +143,8 @@ a.header_title:hover {
     background: none;
 }
 .navbar .divider-vertical {
-    border-left: 1px solid #111;
+    border-left: 1px solid #000;
+    opacity: .15;
     border-right: 0px;
 }
 
@@ -235,15 +236,10 @@ a.header_title:hover {
     margin-bottom: 10px;
     overflow: hidden;
 }
-div#ws-blog .ws-article h1.entry-title {
-    margin-left: 2.9em;
-}
 .ws-article h1.entry-title {
     font-size: 2em;
-    line-height: 1.2em;
-    margin-top: 0px;
-    margin-bottom: 0.15em;
-    margin-left: 2.9em;
+    line-height: 1.25em;
+    margin: 0em 0em 0em 2.9em;
 }
 .ws-article h2.entry-details {
     line-height: 1.2em;
@@ -275,9 +271,6 @@ div#ws-blog .ws-article h1.entry-title {
 }
 .ws-article .entry-header h2 small {
     font-size: 1em;
-}
-.ws-article.ws-loop .entry-header h2 small {
-    font-size: .95em;
 }
 .ws-article.ws-page h1, .ws-article.ws-page h2 {
     margin-left: 0px;
@@ -530,7 +523,7 @@ article .calendar > .month {
     line-height: 1.2em;
     font-weight: bold;
     text-align: center;
-    text-shadow: 0 1px #000000;
+    text-shadow: none;
     padding: 0.2em;
 }
 article .calendar > .day {
@@ -573,7 +566,7 @@ h1.ws-featured-title {
     margin: 0px;
     padding: 0px;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 1px #222;
+    text-shadow: none;
 }
 .ws-featured-change-page i {
     font-size: 1.2em;
@@ -605,19 +598,17 @@ h1.ws-featured-title {
 .ws-home-tabs .nav-tabs {
     margin-bottom: 28px;
 }
-.ws-home-tabs h1.entry-title,
-.ws-loop h1.entry-title {
-    font-size: 2em;
-    line-height: 1.2em;
-    margin-bottom: 0.1em;
-    margin-left: 2.9em;
+.ws-home-tabs h1.entry-title {
+    font-size: 1.6em;
+    line-height: 1.25em;
+    margin-bottom: 0.2em;
+    margin-left: 3.5em;
+    margin-top: 0em;
 }
-.ws-home-tabs h2.entry-details,
-.ws-loop h2.entry-details {
+.ws-home-tabs h2.entry-details {
     line-height: 1.2em;
     margin-left: 4.8em;
 }
-
 #ws-home-tabs {
     margin-bottom: 20px;
 }
@@ -738,7 +729,7 @@ ul.breadcrumb li {
 /* Search form in navbar */
 .navbar-inner form.form-search {
     margin: 0px;
-    padding: 6px;
+    padding: 5px;
 }
 .navbar-inner form.form-search input[type="text"] {
     border: 1px solid #111;
@@ -816,7 +807,7 @@ div.well-widgets .ws-widget-title {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: .1em;
-    text-shadow: 1px 1px 1px #333;
+    text-shadow: none;
     word-wrap: break-word;
 }
 div.well-widgets .ws-widget-content ul {
@@ -850,8 +841,8 @@ div.well-widgets .ws-widget-content ul li {
 
 /* slideshow/carousel */
 #slideshow {
-    width: 99%;
-    min-height: 400px;
+    width: 100%;
+    height: 400px;
 }
 #slideshow .carousel-inner {
     border-radius: 3px;
@@ -861,12 +852,11 @@ div.well-widgets .ws-widget-content ul li {
     background: -moz-linear-gradient(center top , #404040, #080808);
     background: -webkit-gradient(linear, left top, left bottom, from(#404040), to(#080808));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#353535', endColorstr='#080808');
-    min-height: 400px;
+    height: 400px;
 }
 #slideshow img {
-    max-height: 400px;
+    width: 85%;
     margin: auto;
-    min-height: 100px;
 }
 #slideshow a.carousel-control.ws-carousel-but-left,
 #slideshow a.carousel-control.ws-carousel-but-right {

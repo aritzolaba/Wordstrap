@@ -13,29 +13,37 @@ $wp_page_for_posts = get_option('page_for_posts');
 // Intro
 if ($wordstrap_theme_options['landing_page_intro'] == 1) : ?>
 
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="well well-intro">
+    <?php if ($wordstrap_theme_options['landing_page_intro_box'] == 1) : ?>
 
-                <?php
-                $args = array(
-                    'p'        => $wordstrap_theme_options['landing_page_intro_id'],
-                    'post_type'=> 'page',
-                    );
-                $intro_page = new WP_Query( $args );
-                $intro_page->the_post();
-                ?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="well well-intro">
 
-                <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) : ?>
-                    <h1><?php the_title(); ?></h1>
-                    <br />
-                <?php endif; ?>
+    <?php endif; ?>
 
-                <p><?php the_content(); ?></p>
+    <?php
+    $args = array(
+        'p'        => $wordstrap_theme_options['landing_page_intro_id'],
+        'post_type'=> 'page',
+        );
+    $intro_page = new WP_Query( $args );
+    $intro_page->the_post();
+    ?>
 
+    <?php if ($wordstrap_theme_options['landing_page_intro_title'] == 1) : ?>
+        <h1><?php the_title(); ?></h1>
+        <br />
+    <?php endif; ?>
+
+    <?php the_content(); ?>
+
+    <?php if ($wordstrap_theme_options['landing_page_intro_box'] == 1) : ?>
+
+                </div>
             </div>
         </div>
-    </div>
+
+    <?php endif; ?>
 
 <?php endif; ?>
 

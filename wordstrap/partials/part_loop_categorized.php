@@ -15,7 +15,7 @@ $args = array(
     'term' => $wordstrap_theme_options['tabs_category'],
     'orderby' => 'post_date',
     'order' => 'DESC',
-    'posts_per_page' => 4
+    'posts_per_page' => 5
 );
 $categorized = new WP_Query( $args );
 ?>

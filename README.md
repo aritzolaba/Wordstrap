@@ -17,6 +17,17 @@ Features
 
 Changelog
 ======================================================================
+v: 1.8.1
+
+- Updated Bootstrap to version 2.3.2
+- Added the possibility to activate/deactivate responsiveness from the theme options page.
+- Various style fixes.
+
+v: 1.8
+
+- Updated Bootstrap to version 2.3.1
+- Added an option in front page options to display the intro container inside a box or without a box
+
 v: 1.7.9
 
 - Fixed gradients for IE9 and IE10.

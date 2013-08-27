@@ -11,9 +11,11 @@
             selector: '[rel=popover]',
             placement:'top'
         });
-        $('.carousel').carousel({
-            interval: 10000
-        });
+        if ($('.carousel').length>0) {
+            $('.carousel').carousel({
+                interval: 5000
+            });
+        }
         /* END Initialize elements */
 
         /* Add some css classes dinamically */
@@ -47,10 +49,21 @@
             $('div.navbar-inner div.container-fluid').css('display','block');
         }
 
-        // Adds thickbox class to gallery images in gallery post-formats
+        // Adds thickbox class to gallery images
         if ($('div.gallery .gallery-icon a').length>0) {
             $('div.gallery .gallery-icon a').addClass('thickbox');
         }
+        // Adds thickbox class to post images
+        if ($('div.entry-content a > img').length>0) {
+            $('div.entry-content a > img').parent().addClass('thickbox');
+        }
 
+        // If WP Admin bar is present, and nav is fixed, add top px to nav
+        if ($('#wpadminbar').length>0) {
+            if ($('.navbar-fixed-top').length>0) {
+                var top = $('#wpadminbar').height();
+                $('#ws-navbar').css('top',top+'px');
+            }
+        }
     });
 })(jQuery);

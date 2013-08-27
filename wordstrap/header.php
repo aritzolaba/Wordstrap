@@ -40,7 +40,7 @@
         <?php
         // Load theme scripts
         ws_load_theme_scripts(); ?>
-        
+
         <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
@@ -68,4 +68,4 @@
 
         </header>
 
-        <div id="ws-wrapper" class="container-fluid">
+        <div id="ws-wrapper" class="container">
